@@ -48,54 +48,54 @@
 
 		if ($tumble->contarRegistros()>0) {				
 			while($register = mysql_fetch_array($rs)) {			
-
+				$formatedDate = date("M d", strtotime($register["date"]));
 				$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
 				switch ($tumble->getType($register["id_post"])) {
 					case "1":
 						$input = array("{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}");
-						$output = array($register["date"], $permalink, $register["title"], $register["description"], $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $register["title"], $register["description"], $conf->urlGelato);
 											
 						$template->cargarPlantilla($input, $output, "template_regular_post");
 						$template->mostrarPlantilla();
 						break;
 					case "2":
 						$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{URL_Tumble}");
-						$output = array($register["date"], $permalink, $register["url"], "", $register["description"], $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $register["url"], "", $register["description"], $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_photo");
 						$template->mostrarPlantilla();							   
 						break;
 					case "3":
 						$input = array("{Date_Added}", "{Permalink}", "{Quote}", "{Source}", "{URL_Tumble}");
-						$output = array($register["date"], $permalink, $register["description"], $register["title"], $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $register["description"], $register["title"], $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_quote");
 						$template->mostrarPlantilla();
 						break;
 					case "4":
 						$input = array("{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
-						$output = array($register["date"], $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_url");
 						$template->mostrarPlantilla();
 						break;
 					case "5":
 						$input = array("{Date_Added}", "{Permalink}", "{Title}", "{Conversation}", "{URL_Tumble}");
-						$output = array($register["date"], $permalink, $register["title"], $tumble->formatConversation($register["description"]), $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $register["title"], $tumble->formatConversation($register["description"]), $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_conversation");
 						$template->mostrarPlantilla();
 						break;
 					case "6":
 						$input = array("{Date_Added}", "{Permalink}", "{Video}", "{Caption}", "{URL_Tumble}");
-						$output = array($register["date"], $permalink, $tumble->getVideoPlayer($register["url"]), $register["description"], $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $tumble->getVideoPlayer($register["url"]), $register["description"], $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_video");
 						$template->mostrarPlantilla();
 						break;
 					case "7":
 						$input = array("{Date_Added}", "{Permalink}", "{Mp3}", "{Caption}", "{URL_Tumble}");
-						$output = array($register["date"], $permalink, $tumble->getMp3Player($register["url"]), $register["description"], $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $tumble->getMp3Player($register["url"]), $register["description"], $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_mp3");
 						$template->mostrarPlantilla();
