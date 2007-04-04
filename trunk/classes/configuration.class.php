@@ -10,7 +10,7 @@
 ?>
 <?
 
-include "config.php";
+include dirname(__FILE__)."/../config.php";
 
 class configuration extends Conexion_Mysql {
 	

@@ -168,20 +168,7 @@ if ($user->isAdmin()) {
 								<p>
 									<label for="website">website:</label>
 										<input class="input-text" name="website" id="website" type="text" value="<?=isset($register["website"])?$register["website"]:"";?>" />
-								</p>
-								<p>
-									<label for="template">template:</label>
-									<select name="template" id="template">
-<?
-									$themes = getThemes();
-									$num_elements = count($themes);
-									
-									for ($i=0; $i < $num_elements; $i++) {
-										echo "<option value=\"".$themes[$i]."\">".$themes[$i]."</option>\n";											
-									}
-?>
-									</select>
-								</p>
+								</p>								
 								<p>
 									<label for="about">about:</label><br />
 										<textarea rows="5" cols="50" name="about" id="about" tabindex="7"><?=isset($register["about"])?$register["about"]:"";?></textarea>
