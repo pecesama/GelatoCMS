@@ -1,0 +1,18 @@
+									<legend>Add a Regular Post</legend>
+									<p>
+										<label for="title"><strong>Title</strong>&nbsp;<em>(optional)</em></label>
+											<input class="input-text" type="text" name="title" id="title" size="80" />
+									</p>
+									<input class="input-text" type="hidden" name="url" id="url" value="" />
+									<p>
+										<label for="description"><strong>Body</strong></label><br />
+											<textarea rows="12" cols="84" name="description" id="description"></textarea>
+											<script type="text/javascript">
+												//<!--
+												init_tynimce('description', 'title');
+												//-->
+											</script>
+									</p>
+									<input type="hidden" name="type" id="type" value="{type}" />
+									<input type="hidden" name="date" id="date" value="{date}" />
+									<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
