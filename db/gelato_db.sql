@@ -1,8 +1,8 @@
 CREATE TABLE `gel_data` (
   `id_post` int(11) NOT NULL auto_increment,
-  `title` text collate latin1_general_ci,
-  `url` varchar(250) collate latin1_general_ci default NULL,
-  `description` text collate latin1_general_ci,
+  `title` text NULL,
+  `url` varchar(250)  default NULL,
+  `description` text NULL,
   `type` tinyint(4) NOT NULL default '1',
   `date` datetime NOT NULL,
   `id_user` int(10) NOT NULL,
@@ -22,11 +22,11 @@ CREATE TABLE `gel_users` (
 
 CREATE TABLE `gel_config` (
   `posts_limit` int(3) NOT NULL,
-  `title` varchar(250) collate latin1_general_ci NOT NULL,
-  `description` text collate latin1_general_ci NOT NULL,
-  `lang` varchar(10) collate latin1_general_ci NOT NULL,
-  `template` varchar(100) collate latin1_general_ci NOT NULL,
-  `url_installation` varchar(250) collate latin1_general_ci NOT NULL,
+  `title` varchar(250) NOT NULL,
+  `description` text NOT NULL,
+  `lang` varchar(10) NOT NULL,
+  `template` varchar(100) NOT NULL,
+  `url_installation` varchar(250) NOT NULL,
   `url_friendly` tinyint(1) NOT NULL,
   `rich_text` tinyint(1) NOT NULL,
   PRIMARY KEY  (`title`)
