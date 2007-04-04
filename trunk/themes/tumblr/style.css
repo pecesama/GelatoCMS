@@ -1,0 +1,263 @@
+body {        
+			background-color: #222;
+			background-image: url(img/bg.gif);
+	        margin: 0px 0px 50px 60px;
+	        font: Normal 13px Arial, Helvetica, sans-serif;
+	        color: #555;
+	    }
+
+	    #container {
+	        width: 500px;
+	        padding: 25px;
+	        background-color: #fff;
+	        border-bottom: solid 8px #aaa;
+	    }
+	    
+        img#rss {
+            width: 36px;
+            height: 19px;
+            border-width: 0px;
+            float: right;
+            margin-left: 30px;
+            margin-bottom: 10px;
+        }
+
+	    h1 {
+	        color: #666;
+	        margin: 0px 0px 10px 0px;
+	        font-weight: normal;
+	        font-size: 40px;
+	        letter-spacing: -1px;
+	    }
+
+	    h1 a {
+	        color: #666;
+            text-decoration: none;
+        }
+	    
+	    #description {
+	        color: #777;
+	        font-size: 11px;
+	        line-height: 18px;
+	        padding-right: 70px;
+	        margin-bottom: 30px;
+	    }
+	    
+	    .date {
+	        margin: 30px 0px 10px 0px;
+	        color: #ccc;
+	        font-size: 24px;
+	        text-align: right;
+	        letter-spacing: -1px;
+	        text-transform: uppercase;
+	        border-bottom: solid 1px #ccc;
+	    }
+	    
+	    div.post {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+	    div.post img.permalink {
+            border-width: 0px;
+            width: 23px;
+            height: 9px;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            display: none;
+        }
+
+            div.post:hover img.permalink {
+                display: block;
+            }
+
+        div.post h2 {
+            font-size: 14px;
+            color: #444;
+            margin: 0px 0px 5px 0px;
+        }
+
+        div.post h2 a {
+            color: #444;
+            text-decoration: none;
+        }
+        
+        a {
+            color: #111;
+        }
+        
+        /* Regular Post */
+        div.post div.regular {
+            font: Normal 11px 'Lucida Grande', Verdana, Arial, sans-serif;
+            line-height: 17px;
+        }
+
+            div.post div.regular blockquote {
+                font-style: italic;
+            }
+        
+        /* Photo Post */
+        div.post div.photo img {
+            border-width: 0px;
+        }
+
+        div.post div.photo div.caption {
+            font-size: 11px;
+            margin-top: 5px;
+            color: #888;
+        }
+        
+            div.post div.photo div.caption a {
+                color: #888;
+            }
+        
+        /* Quote Post */
+        div.post div.quote {
+            padding: 0px 30px 0px 30px;
+        }
+        
+            div.post div.quote span.quote {
+                font-size: 24px;
+                color: #444;
+            }
+
+                div.post div.quote span.quote a {
+                    color: #444;
+                }
+
+                div.post div.quote span.quote big.quote {
+                    font: Bold 60px Georgia, serif;
+                    line-height: 1px;
+                    vertical-align: -23px;
+                    opacity: 0.4;
+                    -moz-opacity: 0.4;
+                    filter: alpha(opacity=40);
+                }
+
+                    div.post div.quote span.quote big.quote a {
+                        text-decoration: none;
+                    }
+        
+            div.post div.quote div.source {
+                font-size: 16px;
+                color: #666;
+            }
+
+                div.post div.quote div.source a {
+                    color: #666;
+                }
+        
+        /* Link Post */
+        div.post div.link {
+            color: #666;
+            font-size: 24px;
+            letter-spacing: -1px;
+        }
+        
+            div.post div.link a {
+                color: #666;
+                text-decoration: none;
+                border-bottom: dotted 1px #666;
+            }
+
+            div.post div.link div.description {
+                font-size: 15px;
+                letter-spacing: 0px;
+                line-height: 20px;
+            }
+        
+        /* Conversation Post */
+        div.post div.conversation ul {
+            list-style-type: none;
+            margin: 0px;
+            padding: 0px 0px 0px 1px;
+            border-left: solid 5px #555;
+        }
+        
+            div.post div.conversation ul li {
+                font-size: 12px;
+                padding: 4px 0px 4px 8px;
+                color: #000;
+                margin-bottom: 1px;
+            }
+        
+                div.post div.conversation ul li span.label {
+                    font-weight: bold;
+                }
+        
+                div.post div.conversation ul li.odd {
+                    background-color: #f4f4f4;
+                }
+        
+                div.post div.conversation ul li.even {
+                    background-color: #e8e8e8;
+                }
+        
+        /* Video Post */
+        div.post div.video div.caption {
+            margin-top: 5px;
+            color: #888;
+            font-size: 11px;
+        }
+        
+            div.post div.video div.caption a {
+                color: #888;
+            }
+	    
+	    #navigation {
+	        font-size: 11px;
+            font-weight: bold;
+	    }
+	    
+	        #navigation a {
+                color: #555;
+	            text-decoration: none;
+	        }
+	        
+	        #navigation a:hover {
+	            text-decoration: underline;
+	        }
+	    
+	    #footer {
+	        margin-top: 11px;
+	        font-size: 10px;
+	        color: #eee;
+	    }
+	    
+	        #footer a {
+	            color: #eee;
+	        }
+			
+div.pagination {
+	padding:3px;
+	margin:3px;
+}
+
+div.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #ddd;
+	
+	text-decoration: none; 
+	color: #88AF3F;
+}
+div.pagination a:hover, div.pagination a:active {
+	border:1px solid #85BD1E;
+	color: #638425;
+	background-color: #F1FFD6;
+}
+div.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #B2E05D;
+	font-weight: bold;
+	background-color: #B2E05D;
+	color: #FFF;
+}
+div.pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #f3f3f3;
+	color: #ccc;
+}
