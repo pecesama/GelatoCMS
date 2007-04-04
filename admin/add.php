@@ -30,7 +30,7 @@ if ($user->isAdmin()) {
 			if (isset($_POST["url"]) && $_POST["url"]!="")  {			
 				$photoName = getFileName($_POST["url"]);
 				if (!$tumble->savePhoto($_POST["url"])) {
-					header("Location: ".$this->conf->urlGelato."/admin/index.php?photo=false");
+					header("Location: ".$conf->urlGelato."/admin/index.php?photo=false");
 					die();
 				}
 				$_POST["url"] = $conf->urlGelato."/uploads/".$photoName;
@@ -48,7 +48,7 @@ if ($user->isAdmin()) {
 			set_time_limit(300);
 			$mp3Name = getFileName($_POST["url"]);
 			if (!$tumble->saveMP3($_POST["url"])) {
-				header("Location: ".$this->conf->urlGelato."/admin/index.php?mp3=false");
+				header("Location: ".$conf->urlGelato."/admin/index.php?mp3=false");
 				die();
 			}
 			$_POST["url"] = $conf->urlGelato."/uploads/".$mp3Name;
@@ -59,10 +59,10 @@ if ($user->isAdmin()) {
 			//$tumble->modifyPost($_POST, $_POST["id_post"]);
 		} else {			
 			if ($tumble->addPost($_POST)) {
-				header("Location: ".$this->conf->urlGelato."/admin/index.php?added=true");
+				header("Location: ".$conf->urlGelato."/admin/index.php?added=true");
 				die();
 			} else {
-				header("Location: ".$this->conf->urlGelato."/admin/index.php?error=2&des=".$this->merror);
+				header("Location: ".$conf->urlGelato."/admin/index.php?error=2&des=".$this->merror);
 				die();
 			}
 		}	
