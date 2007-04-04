@@ -103,7 +103,9 @@ class Conexion_Mysql {
 			$sqlValues .= "$valor,";
 		 }
 		 elseif (substr_count(MYSQL_TYPES_DATE, "$tipo_col ")) {
+		 	echo "<h2>$valor | $tipo_col</h2>";
 			$valor = $this->formatearFecha($valor, $tipo_col); // formatea las fechas
+			
 			$sqlValues .= "'$valor',";
 		 }
 		 elseif (substr_count(MYSQL_TYPES_STRING, "$tipo_col ")) {
@@ -115,7 +117,8 @@ class Conexion_Mysql {
 	  $sqlValues = rtrim($sqlValues, ',').')';     
 	  
 	  // inserta los valores en la DB	  
-	  $sql = "INSERT INTO $tabla $cols VALUES $sqlValues";	  
+	  $sql = "INSERT INTO $tabla $cols VALUES $sqlValues";	
+	  echo $sql;  
 	  return $this->ejecutarConsulta($sql);	  
 	}
 	
@@ -199,10 +202,19 @@ class Conexion_Mysql {
 	 * @return date Fecha para insertar en la BD.
 	 */
 	function formatearFecha($valor) {
-	  
-	  if (gettype($valor) == 'string') $valor = strtotime($valor);
+	  	if(!eregi("^.{4}\-.{2}\-.{2}\ .{2}\:.{2}\:.{2}$",$valor)){
+			if(eregi("^([0-9]+)$",$valor)){
+				$valor = date("Y-m-d H:i:s",$valor);
+			}else{
+				// Estariá en el formato strtotime()
+				$valor = date("Y-m-d H:i:s",strtotime($valor));
+			}
+		}
+		echo "<h4>($valor)</h4>";
+		return $valor;
+	/*  if (gettype($valor) == 'string') $valor = strtotime($valor);
 	  return date('Y-m-d H:i:s', $valor);
-	
+	*/
 	}
 	
 	/**
