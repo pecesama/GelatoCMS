@@ -103,7 +103,6 @@ class Conexion_Mysql {
 			$sqlValues .= "$valor,";
 		 }
 		 elseif (substr_count(MYSQL_TYPES_DATE, "$tipo_col ")) {
-		 	echo "<h2>$valor | $tipo_col</h2>";
 			$valor = $this->formatearFecha($valor, $tipo_col); // formatea las fechas
 			
 			$sqlValues .= "'$valor',";
@@ -117,8 +116,7 @@ class Conexion_Mysql {
 	  $sqlValues = rtrim($sqlValues, ',').')';     
 	  
 	  // inserta los valores en la DB	  
-	  $sql = "INSERT INTO $tabla $cols VALUES $sqlValues";	
-	  echo $sql;  
+	  $sql = "INSERT INTO $tabla $cols VALUES $sqlValues";
 	  return $this->ejecutarConsulta($sql);	  
 	}
 	
@@ -210,7 +208,6 @@ class Conexion_Mysql {
 				$valor = date("Y-m-d H:i:s",strtotime($valor));
 			}
 		}
-		echo "<h4>($valor)</h4>";
 		return $valor;
 	/*  if (gettype($valor) == 'string') $valor = strtotime($valor);
 	  return date('Y-m-d H:i:s', $valor);
