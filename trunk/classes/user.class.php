@@ -22,9 +22,9 @@ class user extends Conexion_Mysql {
 	function isAdmin() {
 		if(isset($_COOKIE["gelato_cookie"]) && $_COOKIE["gelato_cookie"] && $_COOKIE["gelato_cookie"]!="") {
 			$galleta = explode(",",$_COOKIE["gelato_cookie"]);
-			if ($this->validaUsuario($galleta[1],$galleta[2])) {
+			if ($this->validateUser($galleta[1],$galleta[2])) {
 				$_SESSION["user_id"]=$galleta[0];
-				$_SESSION["usuario_login"]=$galleta[1];
+				$_SESSION["user_login"]=$galleta[1];
 			} else {
 				$_SESSION["user_id"]="";
 				$_SESSION["user_login"]="";

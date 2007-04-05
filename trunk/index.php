@@ -15,7 +15,9 @@
 	include("classes/gelato.class.php");	
 	include("classes/templates.class.php");
 	include("classes/pagination.php");
+	include("classes/user.class.php");
 		
+	$user = new user();
 	$conf = new configuration();
 	$tumble = new gelato();
 	$template = new plantillas($conf->template);
@@ -47,6 +49,14 @@
 	
 	$template->cargarPlantilla($input, $output, "template_header");
 	$template->mostrarPlantilla();
+	
+	if ($user->isAdmin()) {	
+		$input = array("{User}", "{URL_Tumble}");
+		$output = array($_SESSION["user_login"], $conf->urlGelato);
+		
+		$template->cargarPlantilla($input, $output, "template_isadmin");
+		$template->mostrarPlantilla();
+	}
 	
 	if (!$id_post) {
 
