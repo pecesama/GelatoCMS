@@ -50,6 +50,11 @@ class gelato extends Conexion_Mysql {
 		return $this->mid_consulta;
 	}
 	
+	function getPost($id="") {
+		$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."data WHERE id_post=".$id);
+		return mysql_fetch_array($this->mid_consulta);
+	}
+	
 	function getType($id) {
 		if ($this->ejecutarConsulta("select type from ".$this->conf->tablePrefix."data WHERE id_post=".$id)) {	
 			if ($this->contarRegistros()>0) {	
