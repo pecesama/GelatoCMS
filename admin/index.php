@@ -65,7 +65,8 @@ if ($user->isAdmin()) {
 						<li id="subactive"><a href="#" id="subcurrent">Manage</a></li>
 					</ul>
 				</li>
-				<li><a href="admin.php">Manage users</a></li>
+				<li><a href="<?=$conf->urlGelato;?>/admin/admin.php">Manage users</a></li>
+				<li><a href="<?=$conf->urlGelato;?>/">Take me to the tumblelog</a></li>				
 				<li><a href="close.php" onclick="return exit('div-process','<?=$conf->urlGelato;?>/admin/ajax.php?action=close');">Logoff</a></li>
 			</ul>
 		</div>
