@@ -95,10 +95,10 @@ class gelato extends Conexion_Mysql {
 	function getVideoPlayer($url) {
 		if (isYoutubeVideo($url)) {
 			$id_video = getYoutubeVideoUrl($url);
-			return "\t\t\t<div class=\"enlacevideo\"><object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.youtube.com/v/".$id_video."\"><param name=\"movie\" value=\"http://www.youtube.com/v/".$id_video."\" /></object></div>\n";
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.youtube.com/v/".$id_video."\"><param name=\"movie\" value=\"http://www.youtube.com/v/".$id_video."\" /></object>\n";
 		} elseif (isVimeoVideo($url)) {
 			$id_video = getVimeoVideoUrl($url);
-			return "\t\t\t<div class=\"enlacevideo\"><object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\"><param name=\"movie\" value=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\" /></object></div>\n";
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\"><param name=\"movie\" value=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\" /></object>\n";
 		} else {
 			return "This URL is not a supported video (YouTube or Vimeo)";
 		}		
@@ -107,7 +107,7 @@ class gelato extends Conexion_Mysql {
 	function getMp3Player($url) {
 		if (isMP3($url)) {
 			$playerUrl = $this->conf->urlGelato."/admin/scripts/player.swf?soundFile=".$url;
-			return "\t\t\t<div class=\"enlacemp3\"><object type=\"application/x-shockwave-flash\" data=\"" . $playerUrl . "\" width=\"290\" height=\"24\"><param name=\"movie\" value=\"" . $playerUrl . "\" /><param name=\"quality\" value=\"high\" /><param name=\"menu\" value=\"false\" /><param name=\"wmode\" value=\"transparent\" /></object></div>\n";
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"" . $playerUrl . "\" width=\"290\" height=\"24\"><param name=\"movie\" value=\"" . $playerUrl . "\" /><param name=\"quality\" value=\"high\" /><param name=\"menu\" value=\"false\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} else {
 			return "This URL is not a supported video (YouTube or Vimeo)";
 		}		

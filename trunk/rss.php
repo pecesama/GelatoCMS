@@ -27,8 +27,6 @@
 		<title><?=htmlspecialchars(replaceAccents($conf->title));?></title>
 		<link><?=$conf->urlGelato;?></link>
 		<description><?=htmlspecialchars(replaceAccents($conf->description));?></description>
-		<language>EN</language>
-		<docs>http://blogs.law.harvard.edu/tech/rss</docs>
 		<generator>gelato CMS</generator>
 		<image>
 			<url><?=$conf->urlGelato;?>/images/information.png</url>
@@ -37,19 +35,50 @@
 		</image>
 <?
 		while($register = mysql_fetch_array($rs)) {
-			$tit = ($register["title"]=="") ? htmlspecialchars($register["url"]) : htmlspecialchars($register["title"]);
-			$desc = htmlspecialchars($register["description"]);
+			switch ($register["type"]) {
+				case "1":
+					$tit = ($register["title"]=="") ? htmlspecialchars(strip_tags($register["description"])) : htmlspecialchars($register["title"]);
+					$desc = htmlspecialchars($register["description"]);
+					break;
+				case "2":
+					$tit = ($register["description"]=="") ? "Photo" : htmlspecialchars(strip_tags($register["description"]));
+					$desc = "<img src=\"".$register["url"]."\"/>";
+					break;
+				case "3":
+					$tit = "\"".htmlspecialchars(strip_tags($register["description"]))."\"";
+					$tmpStr = ($register["title"]!="") ? "<br /><br /> - <em>".htmlspecialchars($register["title"])."</em>" : "";
+					$desc = "\"".htmlspecialchars($register["description"])."\"".$tmpStr;
+					break;
+				case "4":
+					$tit = ($register["title"]=="") ? htmlspecialchars($register["url"]) : htmlspecialchars($register["title"]);
+					$tmpStr = ($register["description"]!="") ? "<br /><br /> - <em>".htmlspecialchars($register["description"])."</em>" : "";
+					$desc = "<a href=\"".htmlspecialchars($register["url"])."\">".$tit."</a>".$tmpStr;
+					break;
+				case "5":
+					$lines = explode("\n", $register["description"]);
+					$line = htmlspecialchars($lines[0]);
+					$tit = ($register["title"]=="") ? $line : htmlspecialchars($register["title"]);
+					$desc = $tumble->formatConversation(htmlspecialchars($register["description"]));
+					break;
+				case "6":
+					$tit = ($register["description"]=="") ? "Video" : htmlspecialchars(strip_tags($register["description"]));
+					$desc = $tumble->getVideoPlayer(htmlspecialchars($register["url"]));
+					break;
+				case "7":
+					$tit = ($register["description"]=="") ? "MP3" : htmlspecialchars(strip_tags($register["description"]));
+					$desc = $tumble->getMp3Player(htmlspecialchars($register["url"]));
+					break;
+			}
 			$url = htmlspecialchars($conf->urlGelato."/index.php/post/".$register["id_post"]."/");
 			$formatedDate = gmdate("D, d M Y H:i:s \G\M\T", strtotime($register["date"]));
 			?>
 
 			<item>
-				<title><?=$tit;?></title>
+				<title><?=replaceAccentsWithAmp($tit);?></title>
+				<description><![CDATA[<?=replaceAccentsWithAmp($desc);?>]]></description>
 				<link><?=$url;?></link>
-				<description><?=$desc;?></description>
-				<pubDate><?=$formatedDate;?></pubDate>
-				<category>system:unfiled</category>
-				<guid isPermaLink="true"><?=$conf->urlGelato."/index.php/post/".$register["id_post"]."/";?></guid>
+				<guid isPermaLink="true"><?=$conf->urlGelato."/index.php/post/".$register["id_post"]."/";?></guid>				
+				<pubDate><?=$formatedDate;?></pubDate>				
 			</item>
 
 <?		
@@ -71,6 +100,21 @@
 		$texto = str_replace("&iacute;","i", $texto);
 		$texto = str_replace("&oacute;","o", $texto);
 		$texto = str_replace("&uacute;","u", $texto);
+		return $texto;
+	}
+	
+	function replaceAccentsWithAmp($texto="") {
+		$texto = str_replace("&amp;Aacute;","A", $texto);
+		$texto = str_replace("&amp;Eacute;","E", $texto);
+		$texto = str_replace("&amp;Iacute;","I", $texto);
+		$texto = str_replace("&amp;Oacute;","O", $texto);
+		$texto = str_replace("&amp;Uacute;","U", $texto);
+		$texto = str_replace("&amp;aacute;","a", $texto);
+		$texto = str_replace("&amp;eacute;","e", $texto);
+		$texto = str_replace("&amp;iacute;","i", $texto);
+		$texto = str_replace("&amp;oacute;","o", $texto);
+		$texto = str_replace("&amp;uacute;","u", $texto);
+		$texto = str_replace("&amp;#39;"," ", $texto);
 		return $texto;
 	}
 ?>
