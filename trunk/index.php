@@ -26,7 +26,19 @@
 		$id_post = $_GET["post"];
 	} else {
 		if (isset($param_url[1]) && $param_url[1]=="post") {
-			$id_post = (isset($param_url[2])) ? ((is_numeric($param_url[2])) ? $param_url[2] : null) : null;
+			$id_post = (isset($param_url[2])) ? ((is_numeric($param_url[2])) ? $param_url[2] : NULL) : NULL;
+		} else {
+			$id_post = NULL;
+		}
+	}
+	
+	if (isset($_GET["page"])) {
+		$page_num = $_GET["page"];
+	} else {
+		if (isset($param_url[1]) && $param_url[1]=="page") {
+			$page_num = (isset($param_url[2])) ? ((is_numeric($param_url[2])) ? $param_url[2] : NULL) : NULL;
+		} else {
+			$page_num = NULL;
 		}
 	}
 	
@@ -40,8 +52,8 @@
 
 		$limit=$conf->postLimit;
 	
-		if(isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page']>0) { // Is defined the page and is numeric?
-			$from = (($_GET['page']-1) * $limit);
+		if(isset($page_num) && is_numeric($page_num) && $page_num>0) { // Is defined the page and is numeric?
+			$from = (($page_num-1) * $limit);
 		} else {
 			$from = 0;
 		}
@@ -105,7 +117,8 @@
 				}
 			}
 
-			echo pagination($tumble->getPostsNumber(), $limit, isset($_GET['page']) ? $_GET['page'] : 1, "index.php", 2); // Shows the pagination
+			echo pagination($tumble->getPostsNumber(), $limit, isset($page_num) ? $page_num : 1, array($conf->urlGelato."/index.php/page/[...]/","[...]"), 2);
+
 
 		} else {
 			$template->renderizaEtiqueta("No posts in this tumblelog.", "div","error");
