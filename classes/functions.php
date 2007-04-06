@@ -98,9 +98,17 @@
 		return $params2[0];
 	}
 	
+	function isGoogleVideo($videoUrl) {
+		if (beginsWith($videoUrl, "http://video.google.com/videoplay?docid="))
+			return true;
+		else
+			return false;
+	}
+	
 	function isVideo($url) {
 		if (isYoutubeVideo($url)) { return true; }
 		elseif (isVimeoVideo($url)) { return true; }
+		elseif (isGoogleVideo($url)) { return true; }
 		else { return false; }
 	}
 	
