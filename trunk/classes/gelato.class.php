@@ -26,23 +26,7 @@ class gelato extends Conexion_Mysql {
 		} else {
 			return false;
 		}		
-	}
-	
-	function saveMP3($remoteFileName) {
-		if (getMP3File($remoteFileName)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	function savePhoto($remoteFileName) {		
-		if (getPhotoFile($remoteFileName)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	}	
 	
 	function getPosts($limit="10", $from="0") {
 		$sqlStr = "select * from ".$this->conf->tablePrefix."data ORDER BY date DESC LIMIT $from,$limit";
@@ -53,6 +37,12 @@ class gelato extends Conexion_Mysql {
 	function getPost($id="") {
 		$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."data WHERE id_post=".$id);
 		return mysql_fetch_array($this->mid_consulta);
+	}
+	
+	function getPostsNumber() {
+		$this->ejecutarConsulta("select count(*) as total from ".$this->conf->tablePrefix."data");
+		$row = mysql_fetch_assoc($this->mid_consulta);
+		return $row['total'];
 	}
 	
 	function getType($id) {
@@ -97,6 +87,22 @@ class gelato extends Conexion_Mysql {
 		return $formatedText;
 	}
 	
+	function saveMP3($remoteFileName) {
+		if (getMP3File($remoteFileName)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function savePhoto($remoteFileName) {		
+		if (getPhotoFile($remoteFileName)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	function getVideoPlayer($url) {
 		if (isYoutubeVideo($url)) {
 			$id_video = getYoutubeVideoUrl($url);
@@ -104,8 +110,33 @@ class gelato extends Conexion_Mysql {
 		} elseif (isVimeoVideo($url)) {
 			$id_video = getVimeoVideoUrl($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\"><param name=\"movie\" value=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\" /></object>\n";
+		} elseif (isGoogleVideo($url)) {
+			$html = trim(file_get_contents($url));
+			$start_code = strpos($html, "var flashObj =\n    \"");
+			$end_code = strpos($html, "\";\n  flashObj = flashObj.replace");
+			$start_code = $start_code + strlen("var flashObj =\n    \"");
+			$video_code = substr($html, $start_code, $end_code - $start_code);	
+			$video_code = str_replace("\u003c", "<", $video_code);
+			$video_code = str_replace("\u003d", "=", $video_code);
+			$video_code = str_replace("\\\"", "\"", $video_code);
+			$video_code = str_replace("width:100%;height:100%;", "width:500px;height:393px", $video_code);
+			$video_code = str_replace("/googleplayer.swf", "http://video.google.com/googleplayer.swf", $video_code);
+			$video_code = str_replace("embed", "object", $video_code);
+			$video_code = str_replace("src=", "data=", $video_code);
+			$video_code = str_replace('align="middle"', "", $video_code);
+			$video_code = str_replace('allowScriptAccess="always"', "", $video_code);
+			$video_code = str_replace('quality="best"', "", $video_code);
+			$video_code = str_replace('bgcolor="#ffffff"', "", $video_code);
+			$video_code = str_replace('scale="noScale"', "", $video_code);
+			$video_code = str_replace('salign="TL"', "", $video_code);	
+			$video_code = str_replace('FlashVars="playerMode=normal&autoPlay=true&docid=-2519555829449987448&clickUrl="', "", $video_code);
+			$video_code = str_replace('          \\', " /", $video_code);
+			$video_code = str_replace('\></object\>', ' ></object>', $video_code);
+			$video_code = str_replace("id=\"VideoPlayback\"", "", $video_code);
+			$video_code = str_replace("&", "&amp;", $video_code);
+			return $video_code;
 		} else {
-			return "This URL is not a supported video (YouTube or Vimeo)";
+			return "This URL is not a supported video (YouTube, Vimeo or Google Video)";
 		}		
 	}
 	
@@ -116,12 +147,6 @@ class gelato extends Conexion_Mysql {
 		} else {
 			return "This URL is not a supported video (YouTube or Vimeo)";
 		}		
-	}
-	
-	function getPostsNumber() {
-		$this->ejecutarConsulta("select count(*) as total from ".$this->conf->tablePrefix."data");
-		$row = mysql_fetch_assoc($this->mid_consulta);
-		return $row['total'];
-	}
+	}	
 } 
 ?>
