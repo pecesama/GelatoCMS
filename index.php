@@ -82,9 +82,18 @@
 						$template->cargarPlantilla($input, $output, "template_regular_post");
 						$template->mostrarPlantilla();
 						break;
-					case "2":
+					case "2":						
+						$fileName = "uploads/".getFileName($register["url"]);
+						
+						$x = @getimagesize($fileName);						
+						if ($x[0] > 500) {							
+							$photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
+						} else {
+							$photoPath = $register["url"];
+						}
+						
 						$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{URL_Tumble}");
-						$output = array($formatedDate, $permalink, $register["url"], "", $register["description"], $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $photoPath, "", $register["description"], $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_photo");
 						$template->mostrarPlantilla();							   
@@ -147,8 +156,17 @@
 				$template->mostrarPlantilla();
 				break;
 			case "2":
+				$fileName = "uploads/".getFileName($register["url"]);
+						
+				$x = @getimagesize($fileName);						
+				if ($x[0] > 500) {					
+					$photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
+				} else {
+					$photoPath = $register["url"];
+				}
+				
 				$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{URL_Tumble}");
-				$output = array($formatedDate, $permalink, $register["url"], "", $register["description"], $conf->urlGelato);
+				$output = array($formatedDate, $permalink, $photoPath, "", $register["description"], $conf->urlGelato);
 				
 				$template->cargarPlantilla($input, $output, "template_photo");
 				$template->mostrarPlantilla();							   
