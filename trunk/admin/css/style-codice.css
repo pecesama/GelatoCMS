@@ -314,6 +314,13 @@ input.submit:hover
 	right: 0;
 }
 
+.imgmenu img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			border: 0;
+		}
+
 #menu {
 	display:block;
 	top:50px;
