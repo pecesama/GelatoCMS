@@ -113,30 +113,23 @@ if ($user->isAdmin()) {
 							}
 						}
 ?>
-						<div id="menu">
-							<h2>&nbsp;</h2>
-							<div class="opcion">
-								<a href="<?=$conf->urlGelato;?>/admin/add.php?new=post"><img alt="New regular post" src="../images/post.gif" /></a>
-							</div>
-							<div class="opcion">
-								<a href="<?=$conf->urlGelato;?>/admin/add.php?new=photo"><img alt="New photo" src="../images/foto.gif" /></a>
-							</div>
-							<div class="opcion">
-								<a href="<?=$conf->urlGelato;?>/admin/add.php?new=quote"><img alt="New quote" src="../images/cita.gif" /></a>
-							</div>
-							<div class="opcion">
-								<a href="<?=$conf->urlGelato;?>/admin/add.php?new=url"><img alt="New link" src="../images/enlace.gif" /></a>
-							</div>							
-							<div class="opcion">
-								<a href="<?=$conf->urlGelato;?>/admin/add.php?new=conversation"><img alt="New conversation" src="../images/conversacion.gif" /></a>
-							</div>
-							<div class="opcion">
-								<a href="<?=$conf->urlGelato;?>/admin/add.php?new=video"><img alt="New video" src="../images/video.gif" /></a>
-							</div>
-							<div class="opcion">
-								<a href="<?=$conf->urlGelato;?>/admin/add.php?new=mp3"><img alt="New MP3" src="../images/mp3.gif" /></a>
-							</div>
-						</div>
+						
+						<h2>Add a new...</h2>
+						<table class="imgmenu" width="550px" border="0" align="center" cellpadding="5" cellspacing="5">
+						  <tr> 
+							<td><div align="center"><a href="<?=$conf->urlGelato;?>/admin/add.php?new=post"><img alt="New regular post" src="../images/post.gif" /></a></div></td>
+							<td><div align="center"><a href="<?=$conf->urlGelato;?>/admin/add.php?new=photo"><img alt="New photo" src="../images/foto.gif" /></a></div></td>
+							<td><div align="center"><a href="<?=$conf->urlGelato;?>/admin/add.php?new=quote"><img alt="New quote" src="../images/cita.gif" /></a></div></td>
+						  </tr>
+						  <tr> 
+							<td><div align="center"><a href="<?=$conf->urlGelato;?>/admin/add.php?new=url"><img alt="New link" src="../images/enlace.gif" /></a></div></td>
+							<td><div align="center"><a href="<?=$conf->urlGelato;?>/admin/add.php?new=conversation"><img alt="New conversation" src="../images/conversacion.gif" /></a></div></td>
+							<td><div align="center"><a href="<?=$conf->urlGelato;?>/admin/add.php?new=video"><img alt="New video" src="../images/video.gif" /></a></div></td>
+						  </tr>
+						  <tr> 
+							<td colspan="3"><div align="center"><a href="<?=$conf->urlGelato;?>/admin/add.php?new=mp3"><img alt="New MP3" src="../images/mp3.gif" /></a></div></td>
+						  </tr>
+						</table>						
 						<p>&nbsp;</p>
 						<h2>Title 1</h2>
 						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas facilisis scelerisque ligula. Aliquam accumsan. In hac habitasse platea dictumst. Nulla ut urna eget felis tempor pellentesque. Fusce sollicitudin ultricies lacus. Duis felis. Mauris posuere enim ac tortor scelerisque tempus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Fusce porta. Integer odio purus, semper malesuada, eleifend in, volutpat non, quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Aliquam pellentesque aliquet turpis. Quisque non enim sed enim ullamcorper aliquet. Integer sit amet arcu.</p>
