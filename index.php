@@ -44,8 +44,13 @@
 		}
 	}
 	
-	$input = array("{Title}", "{Description}", "{URL_Tumble}");
-	$output = array($conf->title, $conf->description, $conf->urlGelato);
+	$gelato_includes = "<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/mootools.js\"></script>\n";
+	$gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/slimbox.js\"></script>\n";
+	$gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/slimbox.css\" />\n";
+	$gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />";
+	
+	$input = array("{Gelato_includes}","{Title}", "{Description}", "{URL_Tumble}");
+	$output = array($gelato_includes, $conf->title, $conf->description, $conf->urlGelato);
 	
 	$template->cargarPlantilla($input, $output, "template_header");
 	$template->mostrarPlantilla();
@@ -92,8 +97,10 @@
 							$photoPath = $register["url"];
 						}
 						
-						$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{URL_Tumble}");
-						$output = array($formatedDate, $permalink, $photoPath, "", $register["description"], $conf->urlGelato);
+						$effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags(htmlentities($register["description"]))."');\" ";
+						
+						$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
+						$output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_photo");
 						$template->mostrarPlantilla();							   
