@@ -100,7 +100,7 @@
 						$effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags(htmlentities($register["description"]))."');\" ";
 						
 						$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
-						$output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $photoPath, strip_tags(htmlentities($register["description"])), $register["description"], $effect, $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_photo");
 						$template->mostrarPlantilla();							   
@@ -172,8 +172,10 @@
 					$photoPath = $register["url"];
 				}
 				
-				$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{URL_Tumble}");
-				$output = array($formatedDate, $permalink, $photoPath, "", $register["description"], $conf->urlGelato);
+				$effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags(htmlentities($register["description"]))."');\" ";
+						
+				$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
+				$output = array($formatedDate, $permalink, $photoPath, strip_tags(htmlentities($register["description"])), $register["description"], $effect, $conf->urlGelato);
 				
 				$template->cargarPlantilla($input, $output, "template_photo");
 				$template->mostrarPlantilla();							   
