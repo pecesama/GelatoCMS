@@ -54,6 +54,17 @@ if ($user->isAdmin()) {
 			$_POST["url"] = $conf->urlGelato."/uploads/".$mp3Name;
 		}
 		
+		if (get_magic_quotes_gpc()) {
+			$_POST["title"] = htmlspecialchars(stripslashes($_POST["title"]));
+			$_POST["description"] = htmlspecialchars(stripslashes($_POST["description"]));
+		} else {
+			$_POST["title"] = htmlspecialchars($_POST["title"]);
+			$_POST["description"] = htmlspecialchars($_POST["description"]);
+		}
+		
+		$_POST["title"] = strip_tags($_POST["title"]);
+		$_POST["description"] = strip_tags($_POST["description"]);
+		
 		
 		if (isset($_POST["id_post"])) {
 			//$tumble->modifyPost($_POST, $_POST["id_post"]);
