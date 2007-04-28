@@ -84,8 +84,7 @@ if ($user->isAdmin()) {
 		<head>
 			<title>gelato</title>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			<link rel="shortcut icon" href="<?=$conf->urlGelato;?>/images/favicon.ico" />
-			<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/tiny_mce/tiny_mce.js"></script>
+			<link rel="shortcut icon" href="<?=$conf->urlGelato;?>/images/favicon.ico" />			
 			<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/tools.js"></script>
 			<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/mootools.js"></script>			
 			<style type="text/css" media="screen">	
