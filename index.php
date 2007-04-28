@@ -79,6 +79,7 @@
 			while($register = mysql_fetch_array($rs)) {			
 				$formatedDate = date("M d", strtotime($register["date"]));
 				$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
+				
 				switch ($tumble->getType($register["id_post"])) {
 					case "1":
 						$input = array("{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}");
@@ -97,10 +98,10 @@
 							$photoPath = $register["url"];
 						}
 						
-						$effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags(htmlentities($register["description"]))."');\" ";
+						$effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags($register["description"])."');\" ";
 						
 						$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
-						$output = array($formatedDate, $permalink, $photoPath, strip_tags(htmlentities($register["description"])), $register["description"], $effect, $conf->urlGelato);
+						$output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
 						
 						$template->cargarPlantilla($input, $output, "template_photo");
 						$template->mostrarPlantilla();							   
@@ -172,10 +173,10 @@
 					$photoPath = $register["url"];
 				}
 				
-				$effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags(htmlentities($register["description"]))."');\" ";
+				$effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags($register["description"])."');\" ";
 						
 				$input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
-				$output = array($formatedDate, $permalink, $photoPath, strip_tags(htmlentities($register["description"])), $register["description"], $effect, $conf->urlGelato);
+				$output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
 				
 				$template->cargarPlantilla($input, $output, "template_photo");
 				$template->mostrarPlantilla();							   
