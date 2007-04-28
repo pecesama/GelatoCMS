@@ -12,6 +12,7 @@
 	// My approach to MVC
 	require(dirname(__FILE__)."/config.php");
 	include("classes/configuration.class.php");
+	include("classes/textile.class.php");
 	include("classes/gelato.class.php");	
 	include("classes/templates.class.php");
 	include("classes/pagination.php");
@@ -79,6 +80,9 @@
 			while($register = mysql_fetch_array($rs)) {			
 				$formatedDate = date("M d", strtotime($register["date"]));
 				$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
+				
+				$textile = new Textile;
+ 				$register["description"] = $textile->process(str_replace("&quot;", "\"", $register["description"]));
 				
 				switch ($tumble->getType($register["id_post"])) {
 					case "1":
@@ -155,6 +159,10 @@
 		
 		$formatedDate = date("M d", strtotime($register["date"]));
 		$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
+		
+		$textile = new Textile;
+		$register["description"] = $textile->process(str_replace("&quot;", "\"", $register["description"]));
+		
 		switch ($tumble->getType($register["id_post"])) {
 			case "1":
 				$input = array("{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}");
