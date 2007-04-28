@@ -54,15 +54,8 @@ if ($user->isAdmin()) {
 			<title>gelato :: Add user</title>
 			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 			<link rel="shortcut icon" href="<?=$conf->urlGelato;?>/images/favicon.ico" />
-			<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/tiny_mce/tiny_mce.js"></script>
 			<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/mootools.js"></script>
-			<script language="javascript" type="text/javascript">
-				tinyMCE.init({
-					width : "100%",
-					mode : "textareas",
-					theme : "simple"
-				});
-				
+			<script language="javascript" type="text/javascript">								
 				function validateFrmAddUser() {
 					if ($('login').value == "") {
 					   alert("The username field cannot be left blank.");
@@ -171,43 +164,7 @@ if ($user->isAdmin()) {
 								</p>								
 								<p>
 									<label for="about">about:</label><br />
-										<textarea rows="5" cols="50" name="about" id="about" tabindex="7"><?=isset($register["about"])?$register["about"]:"";?></textarea>
-									<script type="text/javascript">
-										//<!--
-										edCanvas = document.getElementById('about');
-											// This code is meant to allow tabbing from website to about (TinyMCE).
-										if ( tinyMCE.isMSIE )
-											document.getElementById('website').onkeydown = function (e)
-												{
-													e = e ? e : window.event;
-													if (e.keyCode == 9 && !e.shiftKey && !e.controlKey && !e.altKey) {
-														var i = tinyMCE.selectedInstance;
-														if(typeof i ==  'undefined')
-															return true;
-																		tinyMCE.execCommand("mceStartTyping");
-														this.blur();
-														i.contentWindow.focus();
-														e.returnValue = false;
-														return false;
-													}
-												}
-										else
-											document.getElementById('website').onkeypress = function (e)
-												{
-													e = e ? e : window.event;
-													if (e.keyCode == 9 && !e.shiftKey && !e.controlKey && !e.altKey) {
-														var i = tinyMCE.selectedInstance;
-														if(typeof i ==  'undefined')
-															return true;
-																		tinyMCE.execCommand("mceStartTyping");
-														this.blur();
-														i.contentWindow.focus();
-														e.returnValue = false;
-														return false;
-													}
-												}
-											//-->
-									</script>
+										<textarea rows="5" cols="50" name="about" id="about" tabindex="7"><?=isset($register["about"])?$register["about"]:"";?></textarea>									
 								</p>								
 								<p>
 									<input class="submit" name="btnAdd" type="submit" value="<? echo ($isEdition) ? "Modify" : "Add"; ?> user" />
