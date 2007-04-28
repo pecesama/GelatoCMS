@@ -111,7 +111,7 @@ class gelato extends Conexion_Mysql {
 			$id_video = getVimeoVideoUrl($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\"><param name=\"movie\" value=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\" /></object>\n";
 		} elseif (isGoogleVideo($url)) {
-			$html = trim(file_get_contents($url));
+			$html = trim(_file_get_contents($url));
 			$start_code = strpos($html, "var flashObj =\n    \"");
 			$end_code = strpos($html, "\";\n  flashObj = flashObj.replace");
 			$start_code = $start_code + strlen("var flashObj =\n    \"");
