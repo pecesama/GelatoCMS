@@ -218,7 +218,7 @@ class Conexion_Mysql {
 	 * Obtiene el registro obtenido de una consulta.
 	 */
 	function obtenerRegistro() {				
-		return mysql_fetch_array($this->mid_consulta);	  	
+		return mysql_fetch_assoc($this->mid_consulta);	  	
 	}	
 	
 	/**
