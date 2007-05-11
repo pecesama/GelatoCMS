@@ -31,6 +31,10 @@ class configuration extends Conexion_Mysql {
 				$register=$this->obtenerRegistro();
 				$this->tablePrefix = Table_prefix;
 				$this->urlGelato = $register['url_installation'];				
+				echo "<pre style='background-color:white;'>";
+				print_r($register);
+				echo" </pre>";
+			
 				$this->idUser = $register['id_user'];
 				$this->postLimit = $register['posts_limit'];
 				$this->title = $register['title'];
