@@ -22,9 +22,9 @@
 	$conf = new configuration();
 	$tumble = new gelato();
 	$template = new plantillas($conf->template);
-	
-	$param_url = explode("/",$_SERVER['PATH_INFO']);
-	
+
+	if(isset($_SERVER['PATH_INFO'])) $param_url = explode("/",$_SERVER['PATH_INFO']);
+
 	if (isset($_GET["post"])) {
 		$id_post = $_GET["post"];
 	} else {
