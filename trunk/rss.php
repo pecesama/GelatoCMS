@@ -9,7 +9,7 @@
   =========================== */
 ?>
 <?
-	//header("Content-type: text/xml; charset=utf-8");
+	header("Content-type: text/xml; charset=utf-8");
 		
 	require(dirname(__FILE__)."/config.php");
 	include("classes/configuration.class.php");
