@@ -11,7 +11,9 @@
 <?
 require_once('../config.php');
 include("../classes/user.class.php");
+include("../classes/pagination.php");
 include("../classes/gelato.class.php");
+include("../classes/textile.class.php");
 include("../classes/templates.class.php");
 require_once("../classes/configuration.class.php");
 
@@ -88,6 +90,7 @@ if ($user->isAdmin()) {
 		<link rel="shortcut icon" href="<?=$conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/tools.js"></script>
 		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/mootools.js"></script>
+		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/slimbox.js"></script>
 		<script type="text/javascript">
 		<!--
 			function exit(el, path) {
@@ -107,7 +110,6 @@ if ($user->isAdmin()) {
 				contenedor = new Fx.Style('divMessages', 'opacity', {duration: 5000, onComplete:
 					function() {
 						document.getElementById('divMessages').style.display="none";
-						document.getElementById('pMessages').style.display="none";
 					}
 				});
 				contenedor.custom(1,0);
@@ -116,6 +118,7 @@ if ($user->isAdmin()) {
 		</script>
 		<style type="text/css" media="screen">	
 			@import "<?=$conf->urlGelato;?>/admin/css/style.css";
+			@import "<?=$conf->urlGelato;?>/admin/css/slimbox.css";
 		</style>
 	</head>
 	
@@ -126,56 +129,56 @@ if ($user->isAdmin()) {
 				<h1><a href="<?=$conf->urlGelato;?>/admin/index.php" title="gelato :: home">gelato cms</a></h1>
 				<ul id="nav">
 					<li><a href="<?=$conf->urlGelato;?>/" title="Take me to the tumblelog">View Tumblelog</a></li>
-					<li><a href="close.php" onclick="return exit('div-process','<?=$conf->urlGelato;?>/admin/ajax.php?action=close');">Log out</a></li>
-			  </ul>
+					<li><a href="close.php" title="Log off" onclick="return exit('div-process','<?=$conf->urlGelato;?>/admin/ajax.php?action=close');">Log out</a></li>
+			  	</ul>
 			</div>
 			<div id="main">
 				<div class="box">
 					<ul class="menu">
-					<h3>New Post</h3>
-					<li><a href="<?=$conf->urlGelato;?>/admin/index.php?new=conversation"><img src="css/images/comments.png" alt="New chat" /> Chat</a></li>
-					<li><a href="<?=$conf->urlGelato;?>/admin/index.php?new=quote"><img src="css/images/comments.png" alt="New qoute" /> Quote</a></li>
-					<li><a href="<?=$conf->urlGelato;?>/admin/index.php?new=url"><img src="css/images/world.png" alt="New link" /> Link</a></li>
-					<li><a href="<?=$conf->urlGelato;?>/admin/index.php?new=mp3"><img src="css/images/music.png" alt="New audio" /> Audio</a></li>
-					<li><a href="<?=$conf->urlGelato;?>/admin/index.php?new=video"><img src="css/images/film.png" alt="New video" /> Video</a></li>
-					<li><a href="<?=$conf->urlGelato;?>/admin/index.php?new=photo"><img src="css/images/image.png" alt="New picture" /> Picture</a></li>
-					<li class="selected"><a href="<?=$conf->urlGelato;?>/admin/index.php?new=post"><img src="css/images/page_white_text.png" alt="New post" /> Regular</a></li>
+					<h3>New Post</h3>					
+					<li <? echo ($_GET["new"]=="conversation") ? "class=\"selected\"" : ""; ?>><a href="<?=$conf->urlGelato;?>/admin/index.php?new=conversation"><img src="css/images/comments.png" alt="New chat" /> Chat</a></li>
+					<li <? echo ($_GET["new"]=="quote") ? "class=\"selected\"" : ""; ?>><a href="<?=$conf->urlGelato;?>/admin/index.php?new=quote"><img src="css/images/quote.png" alt="New qoute" /> Quote</a></li>
+					<li <? echo ($_GET["new"]=="url") ? "class=\"selected\"" : ""; ?>><a href="<?=$conf->urlGelato;?>/admin/index.php?new=url"><img src="css/images/world.png" alt="New link" /> Link</a></li>
+					<li <? echo ($_GET["new"]=="mp3") ? "class=\"selected\"" : ""; ?>><a href="<?=$conf->urlGelato;?>/admin/index.php?new=mp3"><img src="css/images/music.png" alt="New audio" /> Audio</a></li>
+					<li <? echo ($_GET["new"]=="video") ? "class=\"selected\"" : ""; ?>><a href="<?=$conf->urlGelato;?>/admin/index.php?new=video"><img src="css/images/film.png" alt="New video" /> Video</a></li>
+					<li <? echo ($_GET["new"]=="photo") ? "class=\"selected\"" : ""; ?>><a href="<?=$conf->urlGelato;?>/admin/index.php?new=photo"><img src="css/images/image.png" alt="New picture" /> Picture</a></li>
+					<li <? echo ($_GET["new"]=="post") ? "class=\"selected\"" : ""; echo (!isset($_GET["new"])) ? "class=\"selected\"" : ""; ?>><a href="<?=$conf->urlGelato;?>/admin/index.php?new=post"><img src="css/images/page.png" alt="New post" /> Regular</a></li>
 					</ul>
-					
+					<p>&nbsp;</p>					
 <?					
 					if (isset($_GET["deleted"])) {
 						if ($_GET["deleted"]=="true") {
-							echo "<p id=\"pMessages\">&nbsp;</p><div class=\"exito\" id=\"divMessages\">The article has been eliminated successfully.</div>";
+							echo "<div class=\"exito\" id=\"divMessages\">The article has been eliminated successfully.</div>";
 						}
 					}
 					
 					if (isset($_GET["modified"])) {
 						if ($_GET["modified"]=="true") {
-							echo "<p id=\"pMessages\">&nbsp;</p><div class=\"exito\" id=\"divMessages\">The article has been modified successfully.</div>";
+							echo "<div class=\"exito\" id=\"divMessages\">The article has been modified successfully.</div>";
 						}
 					}
 					
 					if (isset($_GET["added"])) {
 						if ($_GET["added"]=="true") {
-							echo "<p id=\"pMessages\">&nbsp;</p><div class=\"exito\" id=\"divMessages\">The article has been added successfully.</div>";
+							echo "<div class=\"exito\" id=\"divMessages\">The article has been added successfully.</div>";
 						}
 					}
 					
 					if (isset($_GET["error"])) {
 						if ($_GET["error"]==2) {
-							echo "<p id=\"pMessages\">&nbsp;</p><div class=\"error\"><strong>Error on the database server: </strong>".$_GET["des"]."</div>";
+							echo "<div class=\"error\"><strong>Error on the database server: </strong>".$_GET["des"]."</div>";
 						}
 					}
 					
 					if (isset($_GET["mp3"])) {
 						if ($_GET["mp3"]=="false") {
-							echo "<p id=\"pMessages\">&nbsp;</p><div class=\"error\" id=\"divMessages\">Not an MP3 file or an upload problem.</div>";
+							echo "<div class=\"error\" id=\"divMessages\">Not an MP3 file or an upload problem.</div>";
 						}
 					}
 					
 					if (isset($_GET["photo"])) {
 						if ($_GET["photo"]=="false") {
-							echo "<p id=\"pMessages\">&nbsp;</p><div class=\"error\" id=\"divMessages\">Not a photo file or an upload problem.</div>";
+							echo "<div class=\"error\" id=\"divMessages\">Not a photo file or an upload problem.</div>";
 						}
 					}
 ?>					
@@ -242,9 +245,7 @@ if ($user->isAdmin()) {
 							}
 ?>
 								<p>
-									<input class="btn" type="submit" name="btnAdd" value="Create post" />&nbsp;&nbsp;
-									<a href="#" onclick="if (confirm('Cancel editing this post?  All changes will be lost.'))
-	{location.href='index.php';}; return false;">Cancel</a>
+									<input class="btn" type="submit" name="btnAdd" value="Create post" />
 								</p>
 						</fieldset>
 					</form>
@@ -259,28 +260,104 @@ if ($user->isAdmin()) {
 					<li><a href="<?=$conf->urlGelato;?>/admin/admin.php">Users</a></li>
 					<li class="selected"><a href="#">Posts</a></li>
 					</ul>
+
+<?
+					if (isset($_GET["page"])) {
+						$page_num = $_GET["page"];
+					} else {
+						$page_num = NULL;
+					}
 					
-					<div class="entry">
-						<div class="info"><form class="compact"><input type="submit" value="Edit" /> <input type="submit" value="Delete" /></form>
-							<p>25/05    Regular Post   (0 Comments) </p>
-						</div>
-						<div class="post">
-							<span class="option">(no title)</span>
-							<p>I just discovered Gelato</p>
-						</div>
-					</div>
-	
-					<div class="entry">
-						<div class="info"><form class="compact"><input type="submit" value="Edit" /> <input type="submit" value="Delete" /></form>
-							<p>25/05    Regular Post   (0 Comments) </p>
-						</div>
-						<div class="post">
-							<h4>One with a title</h4>
-							<p>Another entry, this one has some varations in the content, even dares
-							to be in two lines.</p>
-						</div>
-					</div>
+					$limit=$conf->postLimit;
 					
+					if(isset($page_num) && is_numeric($page_num) && $page_num>0) { // Is defined the page and is numeric?
+						$from = (($page_num-1) * $limit);
+					} else {
+						$from = 0;
+					}
+					
+					$rs = $tumble->getPosts($limit, $from);
+					
+					if ($tumble->contarRegistros()>0) {				
+						while($register = mysql_fetch_array($rs)) {			
+							$formatedDate = date("M d", strtotime($register["date"]));
+							$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
+							
+							$textile = new Textile;
+							$register["description"] = $textile->process(str_replace("&quot;", "\"", $register["description"]));
+							
+							switch ($tumble->getType($register["id_post"])) {
+								case "1":
+									$input = array("{Id_Post}", "{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}");
+									$output = array($register["id_post"], $formatedDate, $permalink, $register["title"], $register["description"], $conf->urlGelato);
+														
+									$template->cargarPlantilla($input, $output, "template_regular_post");
+									$template->mostrarPlantilla();
+									break;
+								case "2":						
+									$fileName = "../uploads/".getFileName($register["url"]);
+									
+									$x = @getimagesize($fileName);						
+									if ($x[0] > 100) {							
+										$photoPath = $conf->urlGelato."/classes/imgsize.php?w=100&img=".$register["url"];
+									} else {
+										$photoPath = $register["url"];
+									}
+
+									$effect = " style=\"cursor: pointer;\" onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags($register["description"])."');\" ";
+									
+									$input = array("{Id_Post}", "{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
+									$output = array($register["id_post"], $formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
+									
+									$template->cargarPlantilla($input, $output, "template_photo");
+									$template->mostrarPlantilla();							   
+									break;
+								case "3":
+									$input = array("{Id_Post}", "{Date_Added}", "{Permalink}", "{Quote}", "{Source}", "{URL_Tumble}");
+									$output = array($register["id_post"], $formatedDate, $permalink, $register["description"], $register["title"], $conf->urlGelato);
+									
+									$template->cargarPlantilla($input, $output, "template_quote");
+									$template->mostrarPlantilla();
+									break;
+								case "4":
+									$input = array("{Id_Post}", "{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
+									$output = array($register["id_post"], $formatedDate, $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
+									
+									$template->cargarPlantilla($input, $output, "template_url");
+									$template->mostrarPlantilla();
+									break;
+								case "5":
+									$input = array("{Id_Post}", "{Date_Added}", "{Permalink}", "{Title}", "{Conversation}", "{URL_Tumble}");
+									$output = array($register["id_post"], $formatedDate, $permalink, $register["title"], $tumble->formatConversation($register["description"]), $conf->urlGelato);
+									
+									$template->cargarPlantilla($input, $output, "template_conversation");
+									$template->mostrarPlantilla();
+									break;
+								case "6":
+									$input = array("{Id_Post}", "{Date_Added}", "{Permalink}", "{Video}", "{Caption}", "{URL_Tumble}");
+									$output = array($register["id_post"], $formatedDate, $permalink, $tumble->getVideoPlayer($register["url"]), $register["description"], $conf->urlGelato);
+									
+									$template->cargarPlantilla($input, $output, "template_video");
+									$template->mostrarPlantilla();
+									break;
+								case "7":
+									$input = array("{Id_Post}", "{Date_Added}", "{Permalink}", "{Mp3}", "{Caption}", "{URL_Tumble}");
+									$output = array($register["id_post"], $formatedDate, $permalink, $tumble->getMp3Player($register["url"]), $register["description"], $conf->urlGelato);
+									
+									$template->cargarPlantilla($input, $output, "template_mp3");
+									$template->mostrarPlantilla();
+									break;
+							}
+						}
+			
+						echo pagination($tumble->getPostsNumber(), $limit, isset($page_num) ? $page_num : 1, "index.php", 2);
+			
+			
+					} else {
+						$template->renderizaEtiqueta("No posts in this tumblelog.", "div","error");
+					}			
+					
+?>				
 					<div class="footer-box">&nbsp;</div>
 				</div>
 			</div>
