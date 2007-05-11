@@ -1,4 +1,11 @@
-/* CSS Document created by Jorge Condomi */
+/* ===========================
+
+  gelato CMS development version
+  http://www.gelatocms.com/
+
+  gelato CMS is a free software licensed under GPL (General public license)
+
+  =========================== */
 
 
 /************ BASICS *************/
@@ -62,8 +69,14 @@ form.newpost textarea{background: #fff url(images/grad-big.png) top left repeat-
 .entry{ background-color:#efefef; border:1px solid #ccc; margin:20px 15px;}
 .info{ border-bottom:1px solid #aaa; position:relative; display:block; padding:4px 10px; height:20px; }
 .info p{font-size:0.8em; color:#297aab; display:inline;}
-form.compact{ float:right; margin:-2px 0 0 0; padding:0;}
 
+.compact{ float:right; margin:-2px 0 0 0; padding:0;}
+.compact img{ border:0px; }
+.compact a { color:#297aab; font-size:0.8em; }
+.compact a:link { color:#297aab; font-size:0.8em; }
+.compact a:visited { color:#297aab; font-size:0.8em; }
+.compact a:active { color:#297aab; font-size:0.8em; }
+.compact a:hover { color:#297aab;  font-size:0.8em; }
 
 .post{ padding:10px;}
 .post h4{ font-style:italic; font-weight:bold; }
@@ -98,7 +111,10 @@ form.compact{ float:right; margin:-2px 0 0 0; padding:0;}
 	color:#011940;
 }
 
-/* Mensajes para el usuario */
+a.linkFrm, a.linkFrm:link, a.linkFrm:visited, a.linkFrm:active{ color:#297aab; text-decoration:none; outline:none;}
+a.linkFrm:hover{ text-decoration:underline; color:#297aab;  outline:none;}
+
+/* User messages */
 
 .error {
 	width:80%;
@@ -126,3 +142,69 @@ form.compact{ float:right; margin:-2px 0 0 0; padding:0;}
 	margin: 0 auto;
 	padding: 5px 20px 5px 45px;
 }
+
+/* Pagination */
+
+div.pagination {
+	text-align:center;
+	padding:3px;
+	margin:3px;
+}
+
+div.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #ddd;
+	
+	text-decoration: none;
+	color: #aaa;
+}
+
+div.pagination a:hover, div.pagination a:active {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #a0a0a0;
+}
+
+div.pagination span.current {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #e0e0e0;
+	font-weight: bold;
+	background-color: #f0f0f0;
+	color: #aaa;
+}
+
+div.pagination span.disabled {
+	padding: 2px 5px 2px 5px;
+	margin-right: 2px;
+	border: 1px solid #f3f3f3;
+	color: #ccc;
+}
+
+/* Conversation Post */
+div.conversation ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px 0px 0px 1px;
+	border-left: solid 5px #555;
+}
+
+	div.conversation ul li {
+		font-size: 12px;
+		padding: 4px 0px 4px 8px;
+		color: #000;
+		margin-bottom: 1px;
+	}
+
+		div.conversation ul li span.label {
+			font-weight: bold;
+		}
+
+		div.conversation ul li.odd {
+			background-color: #f4f4f4;
+		}
+
+		div.conversation ul li.even {
+			background-color: #e8e8e8;
+		}

@@ -1,21 +1,20 @@
-									<legend>Upload a Photo</legend>
-									<input class="input-text" type="hidden" name="title" id="title" value="" />
+									<input class="txt" type="hidden" name="title" id="title" value="" />
 									<p>
 										<div id="photo_upload">
-											<label for="description"><strong>Photo</strong></label>												
+											<label for="description">Photo</label>												
 												<input type="file" name="photo" accept="image/gif,image/jpeg,image/jpg,image/png"/>
 											<div style="font-size:11px; color:#666; margin-top:5px;">
-												Supports JPEG, GIF and PNG.&nbsp; <b>Max size is 10 MB.</b>
+												Supports JPEG, GIF and PNG.&nbsp; <strong>Max size is 10 MB.</strong>
 											</div>
 											<div style="font-size:11px; color:#666; margin-top:5px;">
-												<a href="#" onclick="document.getElementById('photo_upload').style.display = 'none';
+												<a class="linkFrm" href="#" onclick="document.getElementById('photo_upload').style.display = 'none';
 												document.getElementById('photo_url').style.display = 'block';
 												return false;">Use a URL instead</a>								
 											</div>
 										</div>
 									
 										<div id="photo_url" style="display:none;">
-											<label for="description"><strong>Photo URL</strong></label>
+											<label for="description">Photo URL</label>
 												<input class="input-text" type="text" name="url" id="url" size="80" />
 											<div style="font-size:11px; color:#666; margin-top:5px;">
 												The photo URL.</b>
@@ -23,7 +22,7 @@
 										</div>
 									</p>
 									<p>
-										<label for="description"><strong>Caption</strong>&nbsp;<em>(optional)</em></label><br />
+										<label for="description">Caption <span class="option">(optional)</span></label><br />
 											<textarea rows="12" cols="84" name="description" id="description"></textarea>											
 									</p>
 									<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
