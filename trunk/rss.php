@@ -9,9 +9,10 @@
   =========================== */
 ?>
 <?
-	header("Content-type: text/xml; charset=utf-8");
+	//header("Content-type: text/xml; charset=utf-8");
 		
-	require_once("classes/configuration.class.php");
+	require(dirname(__FILE__)."/config.php");
+	include("classes/configuration.class.php");
 	$conf = new configuration();
 	
 	echo "<?xml version=\"1.0\""." encoding=\"UTF-8\"?>\n";
