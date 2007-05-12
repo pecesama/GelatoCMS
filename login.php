@@ -28,48 +28,49 @@ if ($user->isAdmin()) {
 	}
 	else {
 ?>
-		<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-		<head>
-			<title>gelato :: Login screen</title>
-			<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-			<link rel="shortcut icon" href="<?=$conf->urlGelato;?>/images/favicon.ico" />
-			<script src="<?=$conf->urlGelato;?>/admin/scripts/mootools.js" type="text/javascript"></script>
-			<style type="text/css" media="screen">	
-				@import "<?=$conf->urlGelato;?>/admin/css/style-codice.css";
-			</style>
-		</head>
-		<body>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>gelato :: login screen</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" href="<?=$conf->urlGelato;?>/images/favicon.ico" />
+		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/mootools.js"></script>
+		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/sortable.js"></script>
+		<style type="text/css" media="screen">	
+			@import "<?=$conf->urlGelato;?>/admin/css/style.css";
+		</style>
+	</head>
 	
-			<div id="titulo">
-				<img src="<?=$conf->urlGelato;?>/images/logo.jpg" alt="gelato CMS" title="gelato CMS" />	
+	<body>
+		<div id="div-process" style="display:none;">Processing request...</div>
+		<div id="cont">
+			<div id="head">
+				<h1><a href="<?=$conf->urlGelato;?>/" title="gelato :: home">gelato cms</a></h1>
+				<ul id="nav">
+					<li><a href="<?=$conf->urlGelato;?>/" title="Take me to the tumblelog">Back to the Tumblelog</a></li>
+			  	</ul>
 			</div>
+			<div id="main">				
 				
-			 <div id="menuContenedor">
-				<ul>
-					<li id="active"><a href="<?=$conf->urlGelato;?>/login.php" id="current">Session</a></li>
-						<ul>
-							<li id="subactive"><a href="#" id="subcurrent">Begin session</a></li>
-						</ul>
-					</li>
-					<li><a href="index.php">Back to the tumblelog</a></li>
-				</ul>
-			</div>
-			
-			<div id="contenido">		
-				<div class="piccola">
-					<div  class="ventana">
-						<p class="titulo"><span class="handle" style="cursor:move;">Ingresar al sistema</span></p>
-						<div id="formulario">
-								<form action="login.php" method="post" id="valida" autocomplete="off">
+				<div class="box">
+					<ul class="menu manage">
+					<h3>Start session</h3>
+					<li class="selected"><a href="#">Login</a></li>
+					</ul>
+				
+					<div class="tabla">
+
+								<form action="login.php" method="post" id="valida" autocomplete="off" class="newpost">
 									<fieldset>
-										<p><label for="login">User:</label>
-											<input id="login" name="login" type="text" class="input-corto" /></p>
-										<p><label for="pass">Password:</label>
-											<input id="pass" name="pass" type="password" class="input-corto" /></p>
-										<p><label for="save_pass">Remember me:</label>
-											<input id="save_pass" name="save_pass" type="checkbox" class="check" /></p>
-										<p><input class="submit" name="btnLogin" type="submit" value="Login" /></p>
+									<ul>
+										<li><label for="login">User:</label>
+											<input id="login" name="login" type="text" class="txt" /></li>
+										<li><label for="pass">Password:</label>
+											<input id="pass" name="pass" type="password" class="txt" /></li>
+										<li><label for="save_pass">Remember me:</label>
+											<input id="save_pass" name="save_pass" type="checkbox" /></li>
+										<li><input name="btnLogin" type="submit" value="Login" /></li>
+									</ul>
 									</fieldset>
 								</form>
 <?					
@@ -89,19 +90,17 @@ if ($user->isAdmin()) {
 <?
 									}									
 								}
-?>		
-					  </div>
-						</p>  
+?>
 					</div>
+
+					<div class="footer-box">&nbsp;</div>
 				</div>
-				<div id="pie">
-					<p>
-						<a href="http://www.gelatocms.com/" title="gelato CMS" target="_blank">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
-					</p>
-				</div>		
 			</div>
-			
-		</body>
+			<div id="foot">
+				<a href="http://www.gelatocms.com/" title="gelato CMS" target="_blank">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
+			</div>
+		</div>
+	</body>
 	</html>
 <?
 	}
