@@ -27,6 +27,18 @@ if ($user->isAdmin()) {
 		<link rel="shortcut icon" href="<?=$conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/mootools.js"></script>
 		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/sortable.js"></script>
+		<script type="text/javascript">
+		<!--
+			window.onload = function() {
+				contenedor = new Fx.Style('divMessages', 'opacity', {duration: 5000, onComplete:
+					function() {
+						document.getElementById('divMessages').style.display="none";
+					}
+				});
+				contenedor.custom(1,0);
+			}
+		-->
+		</script>
 		<style type="text/css" media="screen">	
 			@import "<?=$conf->urlGelato;?>/admin/css/style.css";
 		</style>
@@ -52,31 +64,31 @@ if ($user->isAdmin()) {
 					<li><a href="<?=$conf->urlGelato;?>/admin/user.php">Add user</a></li>
 					<li class="selected"><a href="#">Users</a></li>
 					</ul>
-
+					<p>&nbsp;</p>
 <?					
 						if (isset($_GET["added"])) {
 							if ($_GET["added"]=="true") {
-								echo "<div class=\"exito\">The user has been added successfully.</div>";
+								echo "<div class=\"exito\" id=\"divMessages\">The user has been added successfully.</div>";
 							}
 						}
 						
 						if (isset($_GET["delete"])) {
 							if ($_GET["delete"]=="true") {
-								echo "<div class=\"exito\">The user has been eliminated successfully.</div>";
+								echo "<div class=\"exito\" id=\"divMessages\">The user has been eliminated successfully.</div>";
 							}
 						}
 						
 						if (isset($_GET["modified"])) {
 							if ($_GET["modified"]=="true") {
-								echo "<div class=\"exito\">The user has been modified successfully.</div>";
+								echo "<div class=\"exito\" id=\"divMessages\">The user has been modified successfully.</div>";
 							}
 						}
 						
 						if (isset($_GET["error"])) {
 							if ($_GET["error"]==1) {
-								echo "<div class=\"error\">The username is not available.</div>";
+								echo "<div class=\"error\" id=\"divMessages\">The username is not available.</div>";
 							} elseif ($_GET["error"]==2) {
-								echo "<div class=\"error\"><strong>Error on the database server: </strong>".$_GET["des"]."</div>";
+								echo "<div class=\"error\" id=\"divMessages\"><strong>Error on the database server: </strong>".$_GET["des"]."</div>";
 							}
 						}
 ?>						
