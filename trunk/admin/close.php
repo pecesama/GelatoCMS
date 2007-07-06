@@ -1,4 +1,4 @@
-<?
+<?php
 /* ===========================
 
   gelato CMS development version
@@ -8,7 +8,7 @@
 
   =========================== */
 ?>
-<?
+<?php
 require_once('../config.php');
 include("../classes/user.class.php");
 
@@ -38,16 +38,16 @@ $user->closeSession()
 			<div  class="ventana">
 				<p class="titulo"><span class="handle" style="cursor:move;">Closing session</span></p>
 				<p>
-<?
+<?php
 if (@session_destroy()) {
 ?>
 		</p>
 				<h3>Ending session...</h3>
-<?	
+<?php
 } else {	
 ?>
 		<h3>Has happened an error when closing the session.</h3>
-<?	
+<?php
 }	
 ?> 
 				</p>
@@ -55,7 +55,7 @@ if (@session_destroy()) {
 		</div>
 		<div id="pie">
 			<p>
-				<a href="http://www.gelatocms.com/" title="gelato CMS" target="_blank">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
+				<a href="http://www.gelatocms.com/" title="gelato CMS">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
 			</p>
 		</div>
 	</div>	

@@ -1,10 +1,10 @@
 									<p>
 										<label for="title">Name <span class="option">(optional)</span></label>			
-											<input class="txt" type="text" name="title" id="title" size="80" />
+											<input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
 									</p>
 									<p>
 										<label for="url">URL</label>			
-											<input class="txt" type="text" name="url" id="url" size="80" />
+											<input class="txt" type="text" name="url" id="url" value="{editUrl}" size="80" />
 									</p>
 									<p>
 									<div id="add_link_description" style="margin-top:5px;">
@@ -12,7 +12,7 @@
 									</div>								
 									<div id="link_description" style="display:none;">
 										<label for="description">Description</label><br />								
-											<textarea rows="12" cols="84" name="description" id="description"></textarea>											
+											<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>											
 									</div>
 									</p>
 									<input type="hidden" name="type" id="type" value="{type}" />

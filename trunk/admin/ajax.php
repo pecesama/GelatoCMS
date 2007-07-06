@@ -1,4 +1,4 @@
-<?
+<?php
 /* ===========================
 
   gelato CMS development version
@@ -8,7 +8,7 @@
 
   =========================== */
 ?>
-<?
+<?php
 	require_once('../config.php');
 	include("../classes/user.class.php");
 	$user = new user();

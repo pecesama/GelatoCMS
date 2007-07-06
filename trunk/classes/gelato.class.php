@@ -1,4 +1,4 @@
-<?
+<?php
 /* ===========================
 
   gelato CMS development version
@@ -8,7 +8,7 @@
 
   =========================== */
 ?>
-<?
+<?php
 require_once("configuration.class.php");
 require_once("functions.php");
 
@@ -20,12 +20,36 @@ class gelato extends Conexion_Mysql {
 		$this->conf = new configuration();		
 	}
 	
+	function saveSettings($fieldsArray) {
+		if ($this->modificarDeFormulario($this->conf->tablePrefix."config", $fieldsArray)) {
+			header("Location: ".$this->conf->urlGelato."/admin/settings.php?modified=true");
+			die();
+		} else {
+			header("Location: ".$this->conf->urlGelato."/admin/settings.php?error=1&des=".$this->merror);
+			die();
+		}
+	}
+	
 	function addPost($fieldsArray) {		
 		if ($this->insertarDeFormulario($this->conf->tablePrefix."data", $fieldsArray)) {
 			return true;
 		} else {
 			return false;
 		}		
+	}
+	
+	function modifyPost($fieldsArray, $id_post) {
+		if ($this->modificarDeFormulario($this->conf->tablePrefix."data", $fieldsArray, "id_post=$id_post")) {
+			header("Location: ".$this->conf->urlGelato."/admin/index.php?modified=true");
+			die();
+		} else {
+			header("Location: ".$this->conf->urlGelato."/admin/index.php?error=2&des=".$this->merror);
+			die();
+		}
+	}
+	
+	function deletePost($idPost) {
+		$this->ejecutarConsulta("DELETE FROM ".$this->conf->tablePrefix."data WHERE id_post=".$idPost);
 	}	
 	
 	function getPosts($limit="10", $from="0") {
@@ -90,6 +114,8 @@ class gelato extends Conexion_Mysql {
 	function saveMP3($remoteFileName) {
 		if (getMP3File($remoteFileName)) {
 			return true;
+		} elseif (isGoEar($remoteFileName)) {
+			return true;
 		} else {
 			return false;
 		}
@@ -110,33 +136,8 @@ class gelato extends Conexion_Mysql {
 		} elseif (isVimeoVideo($url)) {
 			$id_video = getVimeoVideoUrl($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\"><param name=\"movie\" value=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\" /></object>\n";
-		} elseif (isGoogleVideo($url)) {
-			$html = trim(_file_get_contents($url));
-			$start_code = strpos($html, "var flashObj =\n    \"");
-			$end_code = strpos($html, "\";\n  flashObj = flashObj.replace");
-			$start_code = $start_code + strlen("var flashObj =\n    \"");
-			$video_code = substr($html, $start_code, $end_code - $start_code);	
-			$video_code = str_replace("\u003c", "<", $video_code);
-			$video_code = str_replace("\u003d", "=", $video_code);
-			$video_code = str_replace("\\\"", "\"", $video_code);
-			$video_code = str_replace("width:100%;height:100%;", "width:500px;height:393px", $video_code);
-			$video_code = str_replace("/googleplayer.swf", "http://video.google.com/googleplayer.swf", $video_code);
-			$video_code = str_replace("embed", "object", $video_code);
-			$video_code = str_replace("src=", "data=", $video_code);
-			$video_code = str_replace('align="middle"', "", $video_code);
-			$video_code = str_replace('allowScriptAccess="always"', "", $video_code);
-			$video_code = str_replace('quality="best"', "", $video_code);
-			$video_code = str_replace('bgcolor="#ffffff"', "", $video_code);
-			$video_code = str_replace('scale="noScale"', "", $video_code);
-			$video_code = str_replace('salign="TL"', "", $video_code);	
-			$video_code = str_replace('FlashVars="playerMode=normal&autoPlay=true&docid=-2519555829449987448&clickUrl="', "", $video_code);
-			$video_code = str_replace('          \\', " /", $video_code);
-			$video_code = str_replace('\></object\>', ' ></object>', $video_code);
-			$video_code = str_replace("id=\"VideoPlayback\"", "", $video_code);
-			$video_code = str_replace("&", "&amp;", $video_code);
-			return $video_code;
 		} else {
-			return "This URL is not a supported video (YouTube, Vimeo or Google Video)";
+			return "This URL is not a supported video (YouTube or Vimeo)";
 		}		
 	}
 	
@@ -144,8 +145,10 @@ class gelato extends Conexion_Mysql {
 		if (isMP3($url)) {
 			$playerUrl = $this->conf->urlGelato."/admin/scripts/player.swf?soundFile=".$url;
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"" . $playerUrl . "\" width=\"290\" height=\"24\"><param name=\"movie\" value=\"" . $playerUrl . "\" /><param name=\"quality\" value=\"high\" /><param name=\"menu\" value=\"false\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
+		} elseif (isGoEar($url)) {
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://www.goear.com/files/localplayer.swf\" width=\"366\" height=\"75\"><param name=\"movie\" value=\"http://www.goear.com/files/localautoplayer.swf\" /><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"file=c0a2c85\" /></object>\n";
 		} else {
-			return "This URL is not a supported video (YouTube or Vimeo)";
+			return "This URL is not an MP3 file.";
 		}		
 	}	
 } 

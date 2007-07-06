@@ -1,4 +1,4 @@
-<?
+<?php
 /* ===========================
 
   gelato CMS development version
@@ -8,7 +8,11 @@
 
   =========================== */
 ?>
-<?
+<?php
+	function version() {
+		return "0.8";
+	}
+	
 	function beginsWith($str, $sub) {
 		return (strpos($str, $sub) === 0);
 	}
@@ -28,7 +32,7 @@
 		} else {
 			return false;
 		}
-	}
+	}	
 	
 	function getMP3File($remoteFileName) {
 		if (isMP3($remoteFileName)) {
@@ -37,9 +41,18 @@
 			} else {
 				return false;
 			}
+		} elseif (isGoEar($remoteFileName)) {
+			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	function isGoEar($songUrl) {
+		if (beginsWith($songUrl, "http://www.goear.com/listen.php?v="))
+			return true;
+		else
+			return false;
 	}
 	
 	function isImageFile($photoUrl) {
@@ -96,19 +109,11 @@
 		$params = explode("?v=", $videoUrl);
 		$params2 = explode("&",$params[1]);
 		return $params2[0];
-	}
-	
-	function isGoogleVideo($videoUrl) {
-		if (beginsWith($videoUrl, "http://video.google.com/videoplay?docid="))
-			return true;
-		else
-			return false;
-	}
+	}	
 	
 	function isVideo($url) {
 		if (isYoutubeVideo($url)) { return true; }
 		elseif (isVimeoVideo($url)) { return true; }
-		elseif (isGoogleVideo($url)) { return true; }
 		else { return false; }
 	}
 	
@@ -151,7 +156,7 @@
  		}
  		closedir($handle);
  		return $dirs;
- 	}
+ 	}	
 	
 	function _file_get_contents($path) {
 		// Modified function from: 

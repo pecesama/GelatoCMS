@@ -1,4 +1,4 @@
-<?
+<?php
 /* ===========================
 
   gelato CMS development version
@@ -8,9 +8,21 @@
 
   =========================== */
 ?>
-<?
+<?php
 	// My approach to MVC
-	require(dirname(__FILE__)."/config.php");
+	
+	$configFile = dirname(__FILE__).DIRECTORY_SEPARATOR."config.php";
+	
+	if (!file_exists($configFile)) {
+		$mensaje = "
+			<h3 class=\"important\">Error reading configuration file</h3>			
+			<p>There doesn't seem to be a <code>config.php</code> file. I need this before we can get started.</p>
+			<p>This either means that you did not rename the <code>config-sample.php</code> file to <code>config.php</code>.</p>";
+		die($mensaje);	
+	} else {
+		require(dirname(__FILE__).DIRECTORY_SEPARATOR."config.php");
+	}	
+	
 	include("classes/configuration.class.php");
 	include("classes/textile.class.php");
 	include("classes/gelato.class.php");	
@@ -76,13 +88,15 @@
 	
 		$rs = $tumble->getPosts($limit, $from);
 
-		if ($tumble->contarRegistros()>0) {				
+		if ($tumble->contarRegistros()>0) {
+			$fecha = null;		
 			while($register = mysql_fetch_array($rs)) {			
 				$formatedDate = date("M d", strtotime($register["date"]));
+				if ( $fecha != null && $formatedDate == $fecha ) { $formatedDate = ""; } else { $fecha = $formatedDate; }
 				$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
 				
-				$textile = new Textile;
- 				$register["description"] = $textile->process(str_replace("&quot;", "\"", $register["description"]));
+				$textile = new Textile; 				
+				$register["description"] = $textile->process($register["description"]);
 				
 				switch ($tumble->getType($register["id_post"])) {
 					case "1":
@@ -161,7 +175,7 @@
 		$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
 		
 		$textile = new Textile;
-		$register["description"] = $textile->process(str_replace("&quot;", "\"", $register["description"]));
+		$register["description"] = $textile->process($register["description"]);
 		
 		switch ($tumble->getType($register["id_post"])) {
 			case "1":

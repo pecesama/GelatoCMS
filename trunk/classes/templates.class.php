@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * version 0.0.1
  *
@@ -11,7 +11,7 @@
  * @author Pedro Santana [pecesama]
  */
 ?>
-<?
+<?php
 class plantillas {
 
 	var $plantilla;

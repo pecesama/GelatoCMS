@@ -186,7 +186,7 @@ class Textile {
   function Textile($options = array()) {
     $this->options = $options;
     $this->options['filters'] = ($this->options['filters'] ? $this->options['filters'] : array());
-    $this->options['charset'] = ($this->options['charset'] ? $this->options['charset'] : 'iso-8859-1');
+    $this->options['charset'] = ($this->options['charset'] ? $this->options['charset'] : 'utf-8');
     $this->options['char_encoding'] = (isset($this->options['char_encoding']) ? $this->options['char_encoding'] : 1);
     $this->options['do_quotes'] = (isset($this->options['do_quotes']) ? $this->options['do_quotes'] : 1);
     $this->options['trim_spaces'] = (isset($this->options['trim_spaces']) ? $this->options['trim_spaces'] : 0);
@@ -556,7 +556,7 @@ class Textile {
    * @public
    */
   function char_encoding($char_encoding = NULL) {
-    if ($char_encoding != NULL) {
+    if ($char_encoding !== NULL) {
       $this->options['char_encoding'] = $char_encoding;
     }
     return $this->options['char_encoding'];
@@ -755,6 +755,7 @@ class Textile {
      * function textile($str) {
      */
 
+	$this->charset('utf8');
     // quick translator for abbreviated block names
     // to their tag
     $macros = array('bq' => 'blockquote');
