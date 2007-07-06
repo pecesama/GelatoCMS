@@ -146,6 +146,7 @@
 		$path = getcwd();
  		$dir = (substr(PHP_OS, 0, 3) == 'WIN') ? $path."\\".$themes_dir : $path."/".$themes_dir;
 		$dir = str_replace("admin\\", "", $dir);
+		$dir = str_replace("admin/", "", $dir);
  		$handle = opendir($dir);
  		$i=0;
  		while($filename = readdir($handle)) {
