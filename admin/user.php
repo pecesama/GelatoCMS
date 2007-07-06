@@ -1,4 +1,4 @@
-<?
+<?php
 /* ===========================
 
   gelato CMS development version
@@ -8,7 +8,7 @@
 
   =========================== */
 ?>
-<?
+<?php
 require_once('../config.php');
 include("../classes/functions.php");
 include("../classes/user.class.php");
@@ -53,8 +53,8 @@ if ($user->isAdmin()) {
 	<head>
 		<title>gelato :: add user</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="shortcut icon" href="<?=$conf->urlGelato;?>/images/favicon.ico" />
-		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/mootools.js"></script>
+		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/mootools.js"></script>
 		<script language="javascript" type="text/javascript">								
 			function validateFrmAddUser() {
 				if ($('login').value == "") {
@@ -90,7 +90,7 @@ if ($user->isAdmin()) {
 			}
 		</script>
 		<style type="text/css" media="screen">	
-			@import "<?=$conf->urlGelato;?>/admin/css/style.css";
+			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
 		</style>
 	</head>
 	
@@ -98,9 +98,9 @@ if ($user->isAdmin()) {
 		<div id="div-process" style="display:none;">Processing request...</div>
 		<div id="cont">
 			<div id="head">
-				<h1><a href="<?=$conf->urlGelato;?>/" title="gelato :: home">gelato cms</a></h1>
+				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: home">gelato cms</a></h1>
 				<ul id="nav">
-					<li><a href="<?=$conf->urlGelato;?>/" title="Take me to the tumblelog">Back to the Tumblelog</a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/" title="Take me to the tumblelog">Back to the Tumblelog</a></li>
 			  	</ul>
 			</div>
 			<div id="main">				
@@ -110,7 +110,7 @@ if ($user->isAdmin()) {
 					<h3>Start session</h3>
 					<li><a href="index.php">Post</a></li>
 					<li><a href="admin.php">Users</a></li>
-					<li class="selected"><a href="#"><? echo ($isEdition) ? "Edit" : "Add"; ?></a></li>
+					<li class="selected"><a><?php echo ($isEdition) ? "Edit" : "Add"; ?></a></li>
 					</ul>
 				
 					<div class="tabla">
@@ -118,23 +118,23 @@ if ($user->isAdmin()) {
 						<form action="user.php" method="post" onSubmit="return validateFrmAddUser();" name="frm_add" class="newpost">
 						<fieldset>
 						<ul>
-<?
+<?php
 							if ($isEdition) {
 ?>
-							<input type="hidden" name="id_user" id="id_user" value="<?=$userId;?>" />
-<?
+							<input type="hidden" name="id_user" id="id_user" value="<?php echo $userId;?>" />
+<?php
 							}
 ?>
 							<li>
 								<label for="login">user:</label>
-									<input class="txt" name="login" id="login" type="text" autocomplete="off" value="<?=isset($register["login"])?$register["login"]:"";?>" />
-<?
+									<input class="txt" name="login" id="login" type="text" autocomplete="off" value="<?php echo isset($register["login"])?$register["login"]:"";?>" />
+<?php
 							if (!$isEdition) {
 ?>
 									<script language="javascript" type="text/javascript">						
 										document.write("<br /><input class='submit_normal_azul' name='btnVerifyUser' id='btnVerifyUser' type='button' value='Check availability' onclick='verifyExistingUser()' />");
 									</script>
-<?
+<?php
 							}
 ?>
 							</li>
@@ -151,22 +151,22 @@ if ($user->isAdmin()) {
 							</li>
 							<li>
 								<label for="name">name:</label>
-									<input class="txt" name="name" id="name" type="text" value="<?=isset($register["name"])?$register["name"]:"";?>" />
+									<input class="txt" name="name" id="name" type="text" value="<?php echo isset($register["name"])?$register["name"]:"";?>" />
 							</li>
 							<li>
 								<label for="email">e-mail:</label>
-									<input class="txt" name="email" id="email" type="text" value="<?=isset($register["email"])?$register["email"]:"";?>" />
+									<input class="txt" name="email" id="email" type="text" value="<?php echo isset($register["email"])?$register["email"]:"";?>" />
 							</li>
 							<li>
 								<label for="website">website:</label>
-									<input class="txt" name="website" id="website" type="text" value="<?=isset($register["website"])?$register["website"]:"";?>" />
+									<input class="txt" name="website" id="website" type="text" value="<?php echo isset($register["website"])?$register["website"]:"";?>" />
 							</li>								
 							<li>
 								<label for="about">about:</label><br />
-									<textarea rows="5" cols="50" name="about" id="about" tabindex="7"><?=isset($register["about"])?$register["about"]:"";?></textarea>									
+									<textarea rows="5" cols="50" name="about" id="about" tabindex="7"><?php echo isset($register["about"])?$register["about"]:"";?></textarea>									
 							</li>								
 							<li>
-								<input name="btnAdd" type="submit" value="<? echo ($isEdition) ? "Modify" : "Add"; ?> user" />
+								<input name="btnAdd" type="submit" value="<?php echo ($isEdition) ? "Modify" : "Add"; ?> user" />
 							</li>
 						</ul>
 						</fieldset>
@@ -178,12 +178,12 @@ if ($user->isAdmin()) {
 				</div>
 			</div>
 			<div id="foot">
-				<a href="http://www.gelatocms.com/" title="gelato CMS" target="_blank">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
+				<a href="http://www.gelatocms.com/" title="gelato CMS">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
 			</div>
 		</div>
 	</body>
 	</html>
-<?
+<?php
 	}
 } else {
 	header("Location: ".$conf->urlGelato."/login.php");

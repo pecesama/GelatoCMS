@@ -34,13 +34,23 @@ class Conexion_Mysql {
 		$this->musuario = $user;	
 		$this->mclave = $pass;
 		
-		$this->conectar();	
+		if (!$this->conectar()) {
+			$mensaje = "
+				<h3 class=\"important\">Error establishing a database connection</h3>
+				<p>This either means that the username and password information in your <code>config.php</code> file is incorrect or we can't contact the database server at localhost. This could mean your host's database server is down.</p>
+				<ul>
+					<li>Are you sure you have the correct username and password?</li>
+					<li>Are you sure that you have typed the correct hostname?</li>
+					<li>Are you sure that the database server is running?</li>
+				</ul>";
+			die($mensaje);			
+		}
 	}
 	
 	/** Conectar a la base de datos */	
 	function conectar() {		
 		// Conectamos al servidor		
-		$this->mid_conexion = mysql_connect($this->mservidor, $this->musuario, $this->mclave);		
+		$this->mid_conexion = @mysql_connect($this->mservidor, $this->musuario, $this->mclave);		
 		if (!$this->mid_conexion) {		
 			$this->merror = "No se logró realizar la conexión.";		
 			return false;
@@ -154,7 +164,7 @@ class Conexion_Mysql {
 			$sql .= "$valor,";
 			}
 			elseif (substr_count(MYSQL_TYPES_DATE, "$tipo_col ")) {
-			$valor = $this->sql_date_format($valor, $tipo_col); /// formatea las fechas
+			$valor = $this->formatearFecha($valor, $tipo_col); /// formatea las fechas
 			$sql .= "'$valor',";
 			}
 			elseif (substr_count(MYSQL_TYPES_STRING, "$tipo_col ")) {
@@ -212,7 +222,8 @@ class Conexion_Mysql {
 	/*  if (gettype($valor) == 'string') $valor = strtotime($valor);
 	  return date('Y-m-d H:i:s', $valor);
 	*/
-	}
+	}	
+	
 	
 	/**
 	 * Obtiene el registro obtenido de una consulta.

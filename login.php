@@ -1,4 +1,4 @@
-<?
+<?php
 /* ===========================
 
   gelato CMS development version
@@ -8,7 +8,7 @@
 
   =========================== */
 ?>
-<?
+<?php
 header("Cache-Control: no-cache, must-revalidate");
 require( dirname(__FILE__) . '/config.php' );
 include(dirname(__FILE__)."/classes/user.class.php");
@@ -33,11 +33,11 @@ if ($user->isAdmin()) {
 	<head>
 		<title>gelato :: login screen</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="shortcut icon" href="<?=$conf->urlGelato;?>/images/favicon.ico" />
-		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/mootools.js"></script>
-		<script language="javascript" type="text/javascript" src="<?=$conf->urlGelato;?>/admin/scripts/sortable.js"></script>
+		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/mootools.js"></script>
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/sortable.js"></script>
 		<style type="text/css" media="screen">	
-			@import "<?=$conf->urlGelato;?>/admin/css/style.css";
+			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
 		</style>
 	</head>
 	
@@ -45,9 +45,9 @@ if ($user->isAdmin()) {
 		<div id="div-process" style="display:none;">Processing request...</div>
 		<div id="cont">
 			<div id="head">
-				<h1><a href="<?=$conf->urlGelato;?>/" title="gelato :: home">gelato cms</a></h1>
+				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: home">gelato cms</a></h1>
 				<ul id="nav">
-					<li><a href="<?=$conf->urlGelato;?>/" title="Take me to the tumblelog">Back to the Tumblelog</a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/" title="Take me to the tumblelog">Back to the Tumblelog</a></li>
 			  	</ul>
 			</div>
 			<div id="main">				
@@ -73,21 +73,21 @@ if ($user->isAdmin()) {
 									</ul>
 									</fieldset>
 								</form>
-<?					
+<?php				
 								if (isset($_GET["error"])) {
 									if ($_GET["error"]==1) {
 ?>
 								<div class="error">
 									&nbsp;You must be registered to use gelato.
 								</div>
-<?
+<?php
 									}
 									elseif ($_GET["error"]==2) {
 ?>
 								<div class="error">
 									&nbsp;You must be logged on the system.
 								</div>
-<?
+<?php
 									}									
 								}
 ?>
@@ -97,12 +97,12 @@ if ($user->isAdmin()) {
 				</div>
 			</div>
 			<div id="foot">
-				<a href="http://www.gelatocms.com/" title="gelato CMS" target="_blank">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
+				<a href="http://www.gelatocms.com/" title="gelato CMS">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
 			</div>
 		</div>
 	</body>
 	</html>
-<?
+<?php
 	}
 }
 ?>
