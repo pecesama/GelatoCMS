@@ -23,15 +23,15 @@ $conf = new configuration();
 if ($user->isAdmin()) {
 	
 	if(isset($_POST["btnsubmit"]))	{		
-		unset($_POST["btnsubmit"]);
-		$_POST["url_installation"] = (endsWith($_POST["url_installation"], "/")) ? substr($_POST["url_installation"], 0, strlen($_POST["url_installation"])-1) : $_POST["url_installation"] ;
-		$tumble->saveSettings($_POST);
+		unset($_POST["btnsubmit"]);		
+		$tumble->saveOption($_POST["rich_text"], "rich_text");
+		$tumble->saveOption($_POST["urlFriendly"], "rich_text");
 	} else {
 ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>gelato :: settings</title>
+		<title>gelato :: options</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
@@ -66,11 +66,11 @@ if ($user->isAdmin()) {
 				
 				<div class="box">
 					<ul class="menu manage">
-					<h3>Tumblelog configuration</h3>
+					<h3>Tumblelog options</h3>
 					<li><a href="index.php">Post</a></li>
 					<li><a href="admin.php">Users</a></li>
-					<li><a href="options.php">Options</a></li>
-					<li class="selected"><a>Settings</a></li>
+					<li><a href="settings.php">Settings</a></li>
+					<li class="selected"><a>Options</a></li>
 					</ul>
 					<p>&nbsp;</p>
 <?php
@@ -87,34 +87,21 @@ if ($user->isAdmin()) {
 ?>
 					<div class="tabla">
 
-						<form action="settings.php" method="post" id="settings_form" autocomplete="off" class="newpost">							
+						<form action="options.php" method="post" id="options_form" autocomplete="off" class="newpost">							
 							<fieldset>								
-								<ul>							
-									<li><label for="title">Title:</label>
-										<input type="text" name="title" id="title" value="<?php echo $conf->title;?>" class="txt"/></li>
-									<li><label for="description">Description:</label>
-										<input type="text" name="description" id="description" value="<?php echo $conf->description;?>" class="txt"/></li>
-									<li><label for="url_installation">Installation URL</label>
-										<input type="text" name="url_installation" id="url_installation" value="<?php echo $conf->urlGelato;?>" class="txt"/></li>
-									<li><label for="posts_limit">Post limit:</label>
-										<input type="text" name="posts_limit" id="posts_limit" value="<?php echo $conf->postLimit;?>" class="txt"/></li>
-									<li><label for="lang">Language:</label>
-										<select id="lang" name="lang">
-											<option value="en" selected="selected">english</option>
+								<ul>																	
+									<li><label for="rich_text">Rich text editor:</label>
+										<select name="rich_text" id="rich_text">										
+											<option value="1" <?php if($conf->richText) echo "selected"; ?>>Active</option>
+											<option value="0" <?php if(!$conf->richText) echo "selected"; ?>>Deactive</option>
 										</select>
 									</li>
-									<li><label for="template">Template:</label>
-										<select id="template" name="template">
-<?php
-										$themes = getThemes();
-										foreach ($themes as $theme) {
-											$active = ($conf->template) ? "selected" : "";
-											echo "<option value=\"".$theme."\" ".$active.">".$theme."</option>\n";
-											
-										}
-?>
+									<li><label for="rich_text">URL friendly:</label>
+										<select name="url_friendly" id="url_friendly">
+											<option value="1" <?php if($conf->urlFriendly) echo "selected"; ?>>Active</option>
+											<option value="0" <?php if(!$conf->urlFriendly) echo "selected"; ?>>Deactive</option>
 										</select>
-									</li>									
+									</li>
 								</ul>
 							</fieldset>
 							<p>

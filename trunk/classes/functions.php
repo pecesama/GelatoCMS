@@ -1,7 +1,8 @@
 <?php
 /* ===========================
 
-  gelato CMS development version
+  gelato CMS - A PHP based tumblelog CMS
+  development version
   http://www.gelatocms.com/
 
   gelato CMS is a free software licensed under GPL (General public license)
@@ -10,7 +11,7 @@
 ?>
 <?php
 	function version() {
-		return "0.8";
+		return "0.85";
 	}
 	
 	function beginsWith($str, $sub) {

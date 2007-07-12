@@ -1,7 +1,8 @@
 <?php
 /* ===========================
 
-  gelato CMS development version
+  gelato CMS - A PHP based tumblelog CMS
+  development version
   http://www.gelatocms.com/
 
   gelato CMS is a free software licensed under GPL (General public license)
@@ -27,7 +28,7 @@
 	include("classes/textile.class.php");
 	include("classes/gelato.class.php");	
 	include("classes/templates.class.php");
-	include("classes/pagination.php");
+	include("classes/pagination.class.php");
 	include("classes/user.class.php");
 		
 	$user = new user();
@@ -57,12 +58,14 @@
 		}
 	}
 	
-	$gelato_includes = "<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/mootools.js\"></script>\n";
-	$gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/slimbox.js\"></script>\n";
-	$gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/slimbox.css\" />\n";
+	$gelato_includes = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n";
+	$gelato_includes .= "\t<meta name=\"generator\" content=\"gelato cms ".version()."\" />\n";
 	$gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />\n";
+	$gelato_includes .= "\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$conf->urlGelato."/rss.php\"/>\n";
 	$gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/themes/".$conf->template."/style.css\"/>\n";
-	$gelato_includes .= "\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$conf->urlGelato."/rss.php\"/>";
+	$gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/slimbox.css\" />\n";	
+	$gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/mootools.js\"></script>\n";
+	$gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/slimbox.js\"></script>";
 	
 	$input = array("{Gelato_includes}","{Title}", "{Description}", "{URL_Tumble}", "{Template_name}");
 	$output = array($gelato_includes, $conf->title, $conf->description, $conf->urlGelato, $conf->template);
@@ -164,7 +167,15 @@
 				}
 			}
 
-			echo pagination($tumble->getPostsNumber(), $limit, isset($page_num) ? $page_num : 1, array($conf->urlGelato."/index.php/page/[...]/","[...]"), 2);
+			$p = new pagination;
+			$p->Items($tumble->getPostsNumber());
+			$p->limit($limit);
+			
+			$p->urlFriendly('[...]');
+			$p->target($conf->urlGelato."/index.php/page/[...]/");
+			
+			$p->currentPage(isset($page_num) ? $page_num : 1);
+			$p->show();
 
 
 		} else {

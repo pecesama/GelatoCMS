@@ -1,7 +1,8 @@
 <?php
 /* ===========================
 
-  gelato CMS development version
+  gelato CMS - A PHP based tumblelog CMS
+  development version
   http://www.gelatocms.com/
 
   gelato CMS is a free software licensed under GPL (General public license)
@@ -10,55 +11,65 @@
 ?>
 <?php
 require_once('../config.php');
+include("../classes/functions.php");
 include("../classes/user.class.php");
+require_once("../classes/configuration.class.php");
 
 session_start();
 $user = new user();
+$conf = new configuration();
 $user->closeSession()
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<title>gelato</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="shortcut icon" href="../images/favicon.ico" />
-	<meta http-equiv="Refresh" content="3;URL=../login.php" />
-	<style type="text/css" media="screen">	
-		@import "css/style-codice.css";
-	</style>
-</head>	
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>gelato :: logout</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="gelato cms <?php echo version();?>" />
+		<meta http-equiv="Refresh" content="3;URL=../login.php" />
+		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
+		<style type="text/css" media="screen">	
+			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
+		</style>
+	</head>
 <body>
-
-	<div id="titulo">
-		<img src="../images/logo.jpg" alt="gelato CMS" title="gelato CMS" />	
-	</div>
-
-	<div id="contenido">
-		<div class="piccola">
-			<div  class="ventana">
-				<p class="titulo"><span class="handle" style="cursor:move;">Closing session</span></p>
-				<p>
+<div id="cont">
+			<div id="head">
+				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: home">gelato cms</a></h1>
+				<ul id="nav">
+					<li><a href="<?php echo $conf->urlGelato;?>/" title="Take me to the tumblelog">Back to the Tumblelog</a></li>
+			  	</ul>
+			</div>
+			<div id="main">				
+				
+				<div class="box">
+					<ul class="menu manage">
+					<h3>Closing session</h3>
+					<li class="selected"><a>logoff</a></li>
+					</ul>
+				
+					<div class="tabla">
+						<p>
 <?php
-if (@session_destroy()) {
+						if (@session_destroy()) {
+?>		
+							<h2>Ending session...</h2>
+<?php
+						} else {	
 ?>
-		</p>
-				<h3>Ending session...</h3>
+							<h2>Has happened an error when closing the session.</h2>
 <?php
-} else {	
-?>
-		<h3>Has happened an error when closing the session.</h3>
-<?php
-}	
+						}	
 ?> 
-				</p>
+						</p>
+					</div>
+
+					<div class="footer-box">&nbsp;</div>
+				</div>
+			</div>
+			<div id="foot">
+				<a href="http://www.gelatocms.com/" title="gelato CMS">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
 			</div>
 		</div>
-		<div id="pie">
-			<p>
-				<a href="http://www.gelatocms.com/" title="gelato CMS">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
-			</p>
-		</div>
-	</div>	
-</div>
 </body>
 </html>
