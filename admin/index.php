@@ -1,7 +1,8 @@
 <?php
 /* ===========================
 
-  gelato CMS development version
+  gelato CMS - A PHP based tumblelog CMS
+  development version
   http://www.gelatocms.com/
 
   gelato CMS is a free software licensed under GPL (General public license)
@@ -12,7 +13,7 @@
 require_once('../config.php');
 include("../classes/functions.php");
 include("../classes/user.class.php");
-include("../classes/pagination.php");
+include("../classes/pagination.class.php");
 include("../classes/gelato.class.php");
 include("../classes/textile.class.php");
 include("../classes/templates.class.php");
@@ -98,6 +99,7 @@ if ($user->isAdmin()) {
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<title>gelato :: control panel</title>
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
@@ -315,6 +317,7 @@ if ($user->isAdmin()) {
 					<ul class="menu manage">
 					<h3>Manage</h3>
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/settings.php">Settings</a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/options.php">Options</a></li>
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/admin.php">Users</a></li>
 					<li class="selected"><a>Posts</a></li>
 					</ul>
@@ -407,8 +410,12 @@ if ($user->isAdmin()) {
 									break;
 							}
 						}
-			
-						echo pagination($tumble->getPostsNumber(), $limit, isset($page_num) ? $page_num : 1, "index.php", 2);
+
+						$p = new pagination;
+						$p->items($tumble->getPostsNumber());
+						$p->limit($limit);
+						$p->currentPage(isset($page_num) ? $page_num : 1);
+						$p->show();
 			
 			
 					} else {

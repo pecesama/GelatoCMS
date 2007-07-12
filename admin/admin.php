@@ -1,7 +1,8 @@
 <?php
 /* ===========================
 
-  gelato CMS development version
+  gelato CMS - A PHP based tumblelog CMS
+  development version
   http://www.gelatocms.com/
 
   gelato CMS is a free software licensed under GPL (General public license)
@@ -11,6 +12,7 @@
 <?php
 require_once('../config.php');
 include("../classes/user.class.php");
+include("../classes/functions.php");
 require_once("../classes/configuration.class.php");
 
 $user = new user();
@@ -24,6 +26,7 @@ if ($user->isAdmin()) {
 	<head>
 		<title>gelato :: admin users</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/mootools.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/sortable.js"></script>

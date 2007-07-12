@@ -1,7 +1,8 @@
 <?php
 /* ===========================
 
-  gelato CMS development version
+  gelato CMS - A PHP based tumblelog CMS
+  development version
   http://www.gelatocms.com/
 
   gelato CMS is a free software licensed under GPL (General public license)
@@ -26,6 +27,17 @@ class gelato extends Conexion_Mysql {
 			die();
 		} else {
 			header("Location: ".$this->conf->urlGelato."/admin/settings.php?error=1&des=".$this->merror);
+			die();
+		}
+	}
+	
+	function saveOption($value, $name) {
+		$sqlStr = "UPDATE ".$this->conf->tablePrefix."options SET val='".$value."' WHERE name='".$name."' LIMIT 1";		
+		if ($this->ejecutarConsulta($sqlStr)) {
+			header("Location: ".$this->conf->urlGelato."/admin/options.php?modified=true");
+			die();
+		} else {
+			header("Location: ".$this->conf->urlGelato."/admin/options.php?error=1&des=".$this->merror);
 			die();
 		}
 	}

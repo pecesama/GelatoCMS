@@ -1,7 +1,8 @@
 <?php
 /* ===========================
 
-  gelato CMS development version
+  gelato CMS - A PHP based tumblelog CMS
+  development version
   http://www.gelatocms.com/
 
   gelato CMS is a free software licensed under GPL (General public license)
@@ -9,10 +10,11 @@
   =========================== */
 ?>
 <?php
-	header("Content-type: text/xml; charset=utf-8");
-		
+	header("Content-type: text/xml; charset=utf-8");	
+	
 	require(dirname(__FILE__)."/config.php");
 	include("classes/configuration.class.php");
+	$isFeed = true;
 	$conf = new configuration();
 	
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";

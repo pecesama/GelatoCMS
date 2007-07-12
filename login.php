@@ -1,7 +1,8 @@
 <?php
 /* ===========================
 
-  gelato CMS development version
+  gelato CMS - A PHP based tumblelog CMS
+  development version
   http://www.gelatocms.com/
 
   gelato CMS is a free software licensed under GPL (General public license)
@@ -11,6 +12,7 @@
 <?php
 header("Cache-Control: no-cache, must-revalidate");
 require( dirname(__FILE__) . '/config.php' );
+include(dirname(__FILE__)."/classes/functions.php");
 include(dirname(__FILE__)."/classes/user.class.php");
 require_once(dirname(__FILE__)."/classes/configuration.class.php");
 
@@ -33,6 +35,7 @@ if ($user->isAdmin()) {
 	<head>
 		<title>gelato :: login screen</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/mootools.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/sortable.js"></script>
@@ -55,7 +58,7 @@ if ($user->isAdmin()) {
 				<div class="box">
 					<ul class="menu manage">
 					<h3>Start session</h3>
-					<li class="selected"><a href="#">Login</a></li>
+					<li class="selected"><a>Login</a></li>
 					</ul>
 				
 					<div class="tabla">

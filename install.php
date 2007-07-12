@@ -1,7 +1,8 @@
 <?php
 /* ===========================
 
-  gelato CMS development version
+  gelato CMS - A PHP based tumblelog CMS
+  development version
   http://www.gelatocms.com/
 
   gelato CMS is a free software licensed under GPL (General public license)
@@ -67,8 +68,7 @@ if ($action=="config") {
 	
 	
 	if (!$errors) {		
-		
-		if (installdb($_POST['login'], $_POST['password'], $_POST['email'], $_POST['title'], $_POST['description'], $_POST['url_installation'], $_POST['posts_limit'], $_POST['lang'], $_POST['template'], $_POST['website'], $_POST['about'], $_POST['url_friendly'], $_POST['rich_text'])) {
+		if (install_db($_POST['login'], $_POST['password'], $_POST['email'], $_POST['title'], $_POST['description'], $_POST['url_installation'], $_POST['posts_limit'], $_POST['lang'], $_POST['template'], $_POST['website'], $_POST['about'])) {
 			$showForm=false;
 		} else {
 			$errors=$errors.$sep_err."6";
@@ -85,8 +85,8 @@ if ($action=="config") {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>gelato :: installation</title>
-	<meta name="generator" content="sabros.us <?php echo version();?>" />	
+	<meta name="generator" content="gelato cms <?php echo version();?>" />
+	<title>gelato :: installation</title>	
 	<link rel="shortcut icon" href="images/favicon.ico" />
 	<style type="text/css" media="screen">	
 		@import "admin/css/style.css";		
@@ -159,8 +159,6 @@ if ($action=="config") {
 				<p>	
 					<input type="hidden" name="website" id="website" value="" />
 					<input type="hidden" name="about" id="about" value="" />
-					<input type="hidden" name="url_friendly" id="url_friendly" value="0" />
-					<input type="hidden" name="rich_text" id="rich_text" value="0" />		
 					<input type="hidden" name="action" id="action" value="config" />
 					<input type="submit" name="btnsubmit" id="btnsubmit" value="<< Install >>" class="submit"/>
 				</p>
@@ -186,7 +184,7 @@ if ($action=="config") {
 </html>
 
 <?php
-function installdb($login, $password, $email, $title, $description, $url_installation, $posts_limit, $lang, $template, $website, $about, $url_friendly, $rich_text){
+function install_db($login, $password, $email, $title, $description, $url_installation, $posts_limit, $lang, $template, $website, $about){
 
 		$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);		
 		
@@ -223,37 +221,68 @@ function installdb($login, $password, $email, $title, $description, $url_install
 			  `lang` varchar(10) NOT NULL,
 			  `template` varchar(100) NOT NULL,
 			  `url_installation` varchar(250) NOT NULL,
-			  `url_friendly` tinyint(1) NOT NULL,
-			  `rich_text` tinyint(1) NOT NULL,
 			  PRIMARY KEY  (`title`)
 			) ENGINE = MYISAM ;";
 			
 		$db->ejecutarConsulta($sqlStr);
+		
+		$sqlStr = "CREATE TABLE `".Table_prefix."options` (
+		  `name` varchar(100) NOT NULL,
+		  `val` varchar(255) NOT NULL,
+		  PRIMARY KEY  (`name`)
+		) ENGINE = MYISAM ;";
+		
+		$db->ejecutarConsulta($sqlStr);
+		
+		$sqlStr = "CREATE TABLE `".Table_prefix."comments` (
+		  `id_comment` int(11) NOT NULL auto_increment,
+		  `id_post` int(11) NOT NULL,
+		  `username` varchar(50) NOT NULL,
+		  `email` varchar(100) NOT NULL,
+		  `web` varchar(250) default NULL,
+		  `content` text NOT NULL,
+		  `ip_user` varchar(50) NOT NULL,
+		  `comment_date` datetime NOT NULL,
+		  `spam` tinyint(4) NOT NULL,
+		  PRIMARY KEY  (`id_comment`)
+		) ENGINE = MYISAM ;";
+		
+		$db->ejecutarConsulta($sqlStr);
 				
 		$url_installation = (endsWith($url_installation, "/")) ? substr($url_installation, 0, strlen($url_installation)-1) : $url_installation ;
 		
-		$sqlStr = "INSERT INTO `".Table_prefix."config` VALUES (".$posts_limit.", '".$title."', '".$description."', '".$lang."', '".$template."', '".$url_installation."', ".$url_friendly.", ".$rich_text.");";		
+		$sqlStr = "INSERT INTO `".Table_prefix."config` VALUES (".$posts_limit.", '".$title."', '".$description."', '".$lang."', '".$template."', '".$url_installation."');";		
 			
 		$db->ejecutarConsulta($sqlStr);
 		
 		$sqlStr = "INSERT INTO `".Table_prefix."users` VALUES ('', '', '".$login."', '".md5($password)."', '".$email."', '".$website."', '".$about."');";
 			
 		$db->ejecutarConsulta($sqlStr);
+		
+		$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('url_friendly', '1');";
+		
+		$db->ejecutarConsulta($sqlStr);
+		
+		$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('rich_text', '0');";
+		
+		$db->ejecutarConsulta($sqlStr);
 
 		return true;
 }
 
 function inerrors($errors,$n) {
-	if (strpos($errors,$n)===false)
+	if (strpos($errors,$n)===false) {
 		return false;
-	else
+	} else {
 		return true;
+	}
 }
 
 function mostrarerror($errors,$errors_d,$n) {
-	if (inerrors($errors,$n))
+	if (inerrors($errors,$n)) {
 		return '<span class="error">'.$errors_d[$n].'</span>';
-	else
+	} else {
 		return "";
+	}
 }
 ?>
