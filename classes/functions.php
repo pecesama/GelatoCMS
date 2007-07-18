@@ -82,8 +82,8 @@
 		}
 	}
 	
-	function getFile($remoteFileName) {		
-		$fileName = "../uploads/".getFileName($remoteFileName);
+	function getFile($remoteFileName) {
+		$fileName = sanitizeName("../uploads/".$remoteFileName);
 		$str = _file_get_contents($remoteFileName);
 		if (!$handle = fopen($fileName, 'w')) {
 			return false;
@@ -165,7 +165,21 @@
  		}
  		closedir($handle);
  		return $dirs;
- 	}	
+ 	}
+
+	function sanitizeName($name) {
+		$name = preg_replace('/[\'"]/', '', $name);
+		$name = preg_replace('/[^a-zA-Z0-9]+/', '-', $name);
+		$name = trim($name, '-');
+		$name = strtolower($name);
+		//HACK: We need to rework the regular expression to allow the dot
+		$ext = substr($name, strlen($name)-3, strlen($name));
+		$body = substr($name, 0, strlen($name)-4);
+		
+		$name = $body.".".$ext;
+		
+		return $name;
+	}
 	
 	function _file_get_contents($path) {
 		// Modified function from: 

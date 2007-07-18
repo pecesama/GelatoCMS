@@ -49,8 +49,8 @@ if ($user->isAdmin()) {
 				$_POST["url"] = $conf->urlGelato."/uploads/".$photoName;
 			}
 			
-			if ( move_uploaded_file( $_FILES['photo']['tmp_name'], "../uploads/".$_FILES['photo']['name'] ) ) {
-				$_POST["url"] = $conf->urlGelato."/uploads/".$_FILES['photo']['name'];
+			if ( move_uploaded_file( $_FILES['photo']['tmp_name'], "../uploads/".sanitizeName($_FILES['photo']['name']) ) ) {
+				$_POST["url"] = $conf->urlGelato."/uploads/".sanitizeName($_FILES['photo']['name']);
 			}
 			
 			unset($_POST["photo"]);
@@ -359,7 +359,7 @@ if ($user->isAdmin()) {
 									$template->cargarPlantilla($input, $output, "template_regular_post");
 									$template->mostrarPlantilla();
 									break;
-								case "2":						
+								case "2":
 									$fileName = "../uploads/".getFileName($register["url"]);
 									
 									$x = @getimagesize($fileName);						
