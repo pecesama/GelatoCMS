@@ -49,6 +49,13 @@
 		}
 	}
 	
+	function getGoEarCode($songUrl) {
+		$pos = strpos($songUrl, "?v=");
+		$lon = strlen($songUrl);
+		$str = substr($songUrl, $pos + 3, $lon);
+		return $str;
+	}
+	
 	function isGoEar($songUrl) {
 		if (beginsWith($songUrl, "http://www.goear.com/listen.php?v="))
 			return true;

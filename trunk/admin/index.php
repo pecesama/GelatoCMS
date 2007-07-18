@@ -68,11 +68,11 @@ if ($user->isAdmin()) {
 				$_POST["url"] = $conf->urlGelato."/uploads/".$mp3Name;
 			}
 		}		
-		
-		if (get_magic_quotes_gpc()) {
-			$_POST["title"] = stripslashes($_POST["title"]);
-			$_POST["description"] = stripslashes($_POST["description"]);
-		}
+				
+		if (!get_magic_quotes_gpc()) {	
+			$_POST["title"] = addslashes($_POST["title"]);
+			$_POST["description"] = addslashes($_POST["description"]);
+		}	
 		
 		$_POST["title"] = strip_tags($_POST["title"]);
 		$_POST["description"] = strip_tags($_POST["description"]);
@@ -163,7 +163,7 @@ if ($user->isAdmin()) {
 					$present = version();
 					$lastest = _file_get_contents("http://www.gelatocms.com/vgel.txt");
 					if ($present < $lastest) {
-						echo "<div class=\"information\" id=\"update\">A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>.</div>";
+						echo "<div class=\"information\" id=\"update\">A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>.</div><br />";
 					}
 					
 					if (isset($_GET["deleted"])) {

@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, h6, h7{ font-weight:normal;}
 a, a:link, a:visited, a:active{ color:#000000; text-decoration:none; outline:none;}
 a:hover{ text-decoration:underline; color:#000000;  outline:none;}
 
-.inslnl { text-decoration:underline; }
+.inslnl a{ text-decoration:underline; }
 
 acronym{ border-bottom: 1px dotted #666; cursor:help;}
 fieldset{ border:none; margin:0; padding:0;}
@@ -118,11 +118,12 @@ a.linkFrm:hover{ text-decoration:underline; color:#297aab;  outline:none;}
 .exito { width:80%; background: #F4FBF5 url('../../images/information.png') 15px center no-repeat; border-top: 2px solid #006600; border-bottom: 2px solid #006600; margin: 0 auto; padding: 5px 20px 5px 45px; }
 .information { width:80%; background: #FFF6BF url('../../images/icon_info.gif') 15px center no-repeat; border-top: 2px solid #FFD324; border-bottom: 2px solid #FFD324; margin: 0 auto;padding: 5px 20px 5px 45px; }
 
+
 #update { text-align:center; font-size: 10px; color: #000; }
-	#update a { color: #000; text-decoration:none; }
-	#update a:visited { color: #000; text-decoration:none; }
-	#update a:active { color: #000; text-decoration:none; }
-	#update a:hover { color: #000; text-decoration:underline; }
+	#update a { color: #000; text-decoration:underline; }
+	#update a:visited { color: #000; text-decoration:underline; }
+	#update a:active { color: #000; text-decoration:underline; }
+	#update a:hover { color: #F00; text-decoration:underline; }
 
 /* Pagination */
 
