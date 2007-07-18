@@ -158,7 +158,7 @@ class gelato extends Conexion_Mysql {
 			$playerUrl = $this->conf->urlGelato."/admin/scripts/player.swf?soundFile=".$url;
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"" . $playerUrl . "\" width=\"290\" height=\"24\"><param name=\"movie\" value=\"" . $playerUrl . "\" /><param name=\"quality\" value=\"high\" /><param name=\"menu\" value=\"false\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} elseif (isGoEar($url)) {
-			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://www.goear.com/files/localplayer.swf\" width=\"366\" height=\"75\"><param name=\"movie\" value=\"http://www.goear.com/files/localautoplayer.swf\" /><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"file=c0a2c85\" /></object>\n";
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://www.goear.com/files/localplayer.swf\" width=\"366\" height=\"75\"><param name=\"movie\" value=\"http://www.goear.com/files/localautoplayer.swf\" /><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"file=".getGoEarCode($url)."\" /></object>\n";
 		} else {
 			return "This URL is not an MP3 file.";
 		}		

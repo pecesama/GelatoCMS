@@ -108,7 +108,7 @@ if ($user->isAdmin()) {
 <?php
 										$themes = getThemes();
 										foreach ($themes as $theme) {
-											$active = ($conf->template) ? "selected" : "";
+											$active = ($conf->template==$theme) ? "selected" : "";
 											echo "<option value=\"".$theme."\" ".$active.">".$theme."</option>\n";
 											
 										}
