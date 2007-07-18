@@ -197,7 +197,7 @@
 					return false;
 				}
 		
-				$f = fsockopen($data['host'], ($data['port']) ? $data['port'] : 80, $e1, $e2, 3);
+				$f = @fsockopen($data['host'], ($data['port']) ? $data['port'] : 80, $e1, $e2, 3);
 				if (!$f) {
 					return false;
 				}
