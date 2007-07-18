@@ -236,8 +236,8 @@ if ($user->isAdmin()) {
 							}
 							
 							$date = ($isEdition) ? strtotime($post["date"]) : time();
-							$title = ($isEdition) ? $post["title"] : "";
-							$body = ($isEdition) ? $post["description"] : "";
+							$title = ($isEdition) ? stripslashes($post["title"]) : "";
+							$body = ($isEdition) ? stripslashes($post["description"]) : "";
 							$url = ($isEdition) ? $post["url"] : "";
 							
 							switch ($_GET["new"]) {
@@ -346,6 +346,9 @@ if ($user->isAdmin()) {
 							
 							$textile = new Textile;
 							$register["description"] = $textile->process($register["description"]);
+							
+							$register["title"] = stripslashes($register["title"]);
+							$register["description"] = stripslashes($register["description"]);
 							
 							switch ($tumble->getType($register["id_post"])) {
 								case "1":
