@@ -236,9 +236,10 @@ if ($user->isAdmin()) {
 							}
 							
 							$date = ($isEdition) ? strtotime($post["date"]) : time();
-							$title = ($isEdition) ? stripslashes($post["title"]) : "";
+							$title = ($isEdition) ? htmlentities(stripslashes($post["title"])) : "";
 							$body = ($isEdition) ? stripslashes($post["description"]) : "";
 							$url = ($isEdition) ? $post["url"] : "";
+							
 							
 							switch ($_GET["new"]) {
 								case "post":
