@@ -237,7 +237,7 @@ if ($user->isAdmin()) {
 							}
 							
 							$date = ($isEdition) ? strtotime($post["date"]) : time();
-							$title = ($isEdition) ? htmlentities(stripslashes($post["title"])) : "";
+							$title = ($isEdition) ? htmlspecialchars(stripslashes($post["title"])) : "";
 							$body = ($isEdition) ? stripslashes($post["description"]) : "";
 							$url = ($isEdition) ? $post["url"] : "";
 							
