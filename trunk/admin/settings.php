@@ -104,7 +104,7 @@ if ($user->isAdmin()) {
 											<option value="en" selected="selected">english</option>
 										</select>
 									</li>
-									<li><label for="template"><?=__("Template:"?></label>
+									<li><label for="template"><?=__("Template:")?></label>
 										<select id="template" name="template">
 <?php
 										$themes = getThemes();
