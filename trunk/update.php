@@ -65,6 +65,13 @@ $sqlStr = "ALTER TABLE ".Table_prefix."config DROP rich_text";
 
 $db->ejecutarConsulta($sqlStr);
 
+$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', 'Mexico/General');";
+		
+$db->ejecutarConsulta($sqlStr);
+		
+$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_time', '-6');";
+		
+$db->ejecutarConsulta($sqlStr);
 
 echo "<p><em>Finished!</em></p>";
 echo "<p>Now you are running on the new version!!!</p>";
