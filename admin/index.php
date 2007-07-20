@@ -101,7 +101,7 @@ if ($user->isAdmin()) {
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="gelato cms <?php echo version();?>" />
-		<title>gelato :: control panel</title>
+		<title>gelato :: <?=__("control panel")?></title>
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/mootools.js"></script>
@@ -138,68 +138,68 @@ if ($user->isAdmin()) {
 	</head>
 	
 	<body>
-		<div id="div-process" style="display:none;">Processing request...</div>
+		<div id="div-process" style="display:none;"><?=__("Processing request...")?></div>
 		<div id="cont">
 			<div id="head">
-				<h1><a href="<?php echo $conf->urlGelato;?>/admin/index.php" title="gelato :: home">gelato cms</a></h1>
+				<h1><a href="<?php echo $conf->urlGelato;?>/admin/index.php" title="gelato :: <?=__("home")?>">gelato cms</a></h1>
 				<ul id="nav">
-					<li><a href="<?php echo $conf->urlGelato;?>/" title="Take me to the tumblelog">View Tumblelog</a></li>
-					<li><a href="close.php" title="Log off" onclick="return exit('div-process','<?php echo $conf->urlGelato;?>/admin/ajax.php?action=close');">Log out</a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?=__("Take me to the tumblelog")?>"><?=__("View Tumblelog")?></a></li>
+					<li><a href="close.php" title="Log off" onclick="return exit('div-process','<?php echo $conf->urlGelato;?>/admin/ajax.php?action=close');"><?=__("Log out")?></a></li>
 			  	</ul>
 			</div>
 			<div id="main">
 				<div class="box">
 					<ul class="menu">
-					<h3>New Post</h3>					
-					<li<?php echo ($_GET["new"]=="conversation") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=conversation"><img src="css/images/comments.png" alt="New chat" /> Chat</a></li>
-					<li<?php echo ($_GET["new"]=="quote") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=quote"><img src="css/images/quote.png" alt="New qoute" /> Quote</a></li>
-					<li<?php echo ($_GET["new"]=="url") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=url"><img src="css/images/world.png" alt="New link" /> Link</a></li>
-					<li<?php echo ($_GET["new"]=="mp3") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=mp3"><img src="css/images/music.png" alt="New audio" /> Audio</a></li>
-					<li<?php echo ($_GET["new"]=="video") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=video"><img src="css/images/film.png" alt="New video" /> Video</a></li>
-					<li<?php echo ($_GET["new"]=="photo") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=photo"><img src="css/images/image.png" alt="New picture" /> Picture</a></li>
-					<li<?php echo ($_GET["new"]=="post") ? " class=\"selected\"" : ""; echo (!isset($_GET["new"])) ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=post"><img src="css/images/page.png" alt="New post" /> Regular</a></li>
+					<h3><?=__("New Post")?></h3>					
+					<li<?php echo ($_GET["new"]=="conversation") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=conversation"><img src="css/images/comments.png" alt="New chat" /> <?=__("Chat")?></a></li>
+					<li<?php echo ($_GET["new"]=="quote") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=quote"><img src="css/images/quote.png" alt="New qoute" /> <?=__("Quote")?></a></li>
+					<li<?php echo ($_GET["new"]=="url") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=url"><img src="css/images/world.png" alt="New link" /> <?=__("Link")?></a></li>
+					<li<?php echo ($_GET["new"]=="mp3") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=mp3"><img src="css/images/music.png" alt="New audio" /> <?=__("Audio")?></a></li>
+					<li<?php echo ($_GET["new"]=="video") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=video"><img src="css/images/film.png" alt="New video" /> <?=__("Video")?></a></li>
+					<li<?php echo ($_GET["new"]=="photo") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=photo"><img src="css/images/image.png" alt="New picture" /> <?=__("Picture")?></a></li>
+					<li<?php echo ($_GET["new"]=="post") ? " class=\"selected\"" : ""; echo (!isset($_GET["new"])) ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=post"><img src="css/images/page.png" alt="New post" /> <?=__("Regular")?></a></li>
 					</ul>
 					<p>&nbsp;</p>					
 <?php			
 					$present = version();
 					$lastest = _file_get_contents("http://www.gelatocms.com/vgel.txt");
 					if ($present < $lastest) {
-						echo "<div class=\"information\" id=\"update\">A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>.</div><br />";
+						echo "<div class=\"information\" id=\"update\">".__("A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>.")."</div><br />";
 					}
 					
 					if (isset($_GET["deleted"])) {
 						if ($_GET["deleted"]=="true") {
-							echo "<div class=\"exito\" id=\"divMessages\">The post has been eliminated successfully.</div>";
+							echo "<div class=\"exito\" id=\"divMessages\">".__("The post has been eliminated successfully.")."</div>";
 						}
 					}
 					
 					if (isset($_GET["modified"])) {
 						if ($_GET["modified"]=="true") {
-							echo "<div class=\"exito\" id=\"divMessages\">The post has been modified successfully.</div>";
+							echo "<div class=\"exito\" id=\"divMessages\">".__("The post has been modified successfully.")."</div>";
 						}
 					}
 					
 					if (isset($_GET["added"])) {
 						if ($_GET["added"]=="true") {
-							echo "<div class=\"exito\" id=\"divMessages\">The post has been added successfully.</div>";
+							echo "<div class=\"exito\" id=\"divMessages\">".__("The post has been added successfully.")."</div>";
 						}
 					}
 					
 					if (isset($_GET["error"])) {
 						if ($_GET["error"]==2) {
-							echo "<div class=\"error\"><strong>Error on the database server: </strong>".$_GET["des"]."</div>";
+							echo "<div class=\"error\"><strong>".__("Error on the database server:")." </strong>".$_GET["des"]."</div>";
 						}
 					}
 					
 					if (isset($_GET["mp3"])) {
 						if ($_GET["mp3"]=="false") {
-							echo "<div class=\"error\" id=\"divMessages\">Not an MP3 file or an upload problem.</div>";
+							echo "<div class=\"error\" id=\"divMessages\">".__("Not an MP3 file or an upload problem.")."</div>";
 						}
 					}
 					
 					if (isset($_GET["photo"])) {
 						if ($_GET["photo"]=="false") {
-							echo "<div class=\"error\" id=\"divMessages\">Not a photo file or an upload problem.</div>";
+							echo "<div class=\"error\" id=\"divMessages\">".__("Not a photo file or an upload problem.")."</div>";
 						}
 					}					
 ?>					
@@ -302,7 +302,7 @@ if ($user->isAdmin()) {
 							}
 ?>
 								<p>
-									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;"><a href="http://hobix.com/textile/">Textile</a> syntax is supported.</span>
+									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;"><a href="http://hobix.com/textile/">Textile</a> <?=__("syntax is supported.")?></span>
 								</p>
 								<p>
 									<input class="btn" type="submit" name="btnAdd" value="<?php echo ($isEdition) ? "Modify" : "Create"; ?> post" />
@@ -318,10 +318,10 @@ if ($user->isAdmin()) {
 				<div class="box">
 					<ul class="menu manage">
 					<h3>Manage</h3>
-					<li><a href="<?php echo $conf->urlGelato;?>/admin/settings.php">Settings</a></li>
-					<li><a href="<?php echo $conf->urlGelato;?>/admin/options.php">Options</a></li>
-					<li><a href="<?php echo $conf->urlGelato;?>/admin/admin.php">Users</a></li>
-					<li class="selected"><a>Posts</a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/settings.php"><?=__("Settings")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/options.php"><?=__("Options")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/admin.php"><?=__("Users")?></a></li>
+					<li class="selected"><a><?=__("Posts")?></a></li>
 					</ul>
 
 <?php
@@ -424,7 +424,7 @@ if ($user->isAdmin()) {
 			
 			
 					} else {
-						$template->renderizaEtiqueta("No posts in this tumblelog.", "div","error");
+						$template->renderizaEtiqueta(__("No posts in this tumblelog."), "div","error");
 					}			
 					
 ?>				
