@@ -5,7 +5,8 @@
   development version
   http://www.gelatocms.com/
 
-  gelato CMS is a free software licensed under GPL (General public license)
+  gelato CMS is a free software licensed under the GPL 2.0
+  Copyright (C) 2007 by Pedro Santana <pecesama at gmail dot com>
 
   =========================== */
 ?>
@@ -24,7 +25,7 @@ $tumble = new gelato();
 $conf = new configuration();
 $template = new plantillas("admin");
 
-$isEdition = isset($_GET["edit"]);
+$isEdition = (isset($_GET["edit"])) ? true : false;
 $postId = ($isEdition) ? $_GET["edit"] : NULL;
 
 if ($user->isAdmin()) {
@@ -46,11 +47,11 @@ if ($user->isAdmin()) {
 					header("Location: ".$conf->urlGelato."/admin/index.php?photo=false");
 					die();
 				}
-				$_POST["url"] = $conf->urlGelato."/uploads/".$photoName;
+				$_POST["url"] = "../uploads/".$photoName;
 			}
 			
 			if ( move_uploaded_file( $_FILES['photo']['tmp_name'], "../uploads/".sanitizeName($_FILES['photo']['name']) ) ) {
-				$_POST["url"] = $conf->urlGelato."/uploads/".sanitizeName($_FILES['photo']['name']);
+				$_POST["url"] = "../uploads/".sanitizeName($_FILES['photo']['name']);
 			}
 			
 			unset($_POST["photo"]);
@@ -303,7 +304,7 @@ if ($user->isAdmin()) {
 								<p>
 									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;"><a href="http://hobix.com/textile/">Textile</a> syntax is supported.</span>
 								</p>
-								<p>									
+								<p>
 									<input class="btn" type="submit" name="btnAdd" value="<?php echo ($isEdition) ? "Modify" : "Create"; ?> post" />
 								</p>
 						</fieldset>
