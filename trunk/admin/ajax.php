@@ -20,20 +20,20 @@
 			if ($_GET["action"] == "close") {
 				session_start();
 				if ($user->closeSession()) {
-					echo "&nbsp;ending session...";
+					echo __("&nbsp;ending session...");
 				} else {
-					echo "&nbsp;failure ending session...";
+					echo __("&nbsp;failure ending session...");
 				}
 			}	// $_GET["action"] == "close"
 			
 			if ($_GET["action"] == "verify") {
 				if ($_GET["login"]=="") {
-					echo "<div class=\"error\">Required field cannot be left blank.</div>";
+					echo "<div class=\"error\">".__("Required field cannot be left blank.")."</div>";
 				} else {
 					if (!$user->userExist($_GET["login"])) {
-						echo "<div class=\"exito\">Username available.</div>";
+						echo "<div class=\"exito\">".__("Username available.")."</div>";
 					} else {
-						echo "<div class=\"error\">The username is not available.</div>";
+						echo "<div class=\"error\">".__("The username is not available.")."</div>";
 					}
 				}
 			}	// $_GET["action"] == "verify"			

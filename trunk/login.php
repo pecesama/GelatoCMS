@@ -16,7 +16,7 @@ require( dirname(__FILE__) . '/config.php' );
 include(dirname(__FILE__)."/classes/functions.php");
 include(dirname(__FILE__)."/classes/user.class.php");
 require_once(dirname(__FILE__)."/classes/configuration.class.php");
-
+ 
 $user = new user();
 $conf = new configuration();
 if ($user->isAdmin()) {
@@ -34,7 +34,7 @@ if ($user->isAdmin()) {
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>gelato :: login screen</title>
+		<title>gelato :: <?=__("login screen")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
@@ -46,20 +46,20 @@ if ($user->isAdmin()) {
 	</head>
 	
 	<body>
-		<div id="div-process" style="display:none;">Processing request...</div>
+		<div id="div-process" style="display:none;"><?=__("Processing request...")?></div>
 		<div id="cont">
 			<div id="head">
-				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: home">gelato cms</a></h1>
+				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: <?=__("home")?>">gelato cms</a></h1>
 				<ul id="nav">
-					<li><a href="<?php echo $conf->urlGelato;?>/" title="Take me to the tumblelog">Back to the Tumblelog</a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?=__("Take me to the tumblelog")?>"><?=__("Back to the Tumblelog")?></a></li>
 			  	</ul>
 			</div>
 			<div id="main">				
 				
 				<div class="box">
 					<ul class="menu manage">
-					<h3>Start session</h3>
-					<li class="selected"><a>Login</a></li>
+					<h3><?=__("Start session")?></h3>
+					<li class="selected"><a><?=__("Login")?></a></li>
 					</ul>
 				
 					<div class="tabla">
@@ -67,11 +67,11 @@ if ($user->isAdmin()) {
 								<form action="login.php" method="post" id="valida" autocomplete="off" class="newpost">
 									<fieldset>
 									<ul>
-										<li><label for="login">User:</label>
+										<li><label for="login"><?=__("User:")?></label>
 											<input id="login" name="login" type="text" class="txt" /></li>
-										<li><label for="pass">Password:</label>
+										<li><label for="pass"><?=__("Password:")?></label>
 											<input id="pass" name="pass" type="password" class="txt" /></li>
-										<li><label for="save_pass">Remember me:</label>
+										<li><label for="save_pass"><?=__("Remember me:")?></label>
 											<input id="save_pass" name="save_pass" type="checkbox" /></li>
 										<li><input name="btnLogin" type="submit" value="Login" /></li>
 									</ul>
@@ -82,14 +82,14 @@ if ($user->isAdmin()) {
 									if ($_GET["error"]==1) {
 ?>
 								<div class="error">
-									&nbsp;You must be registered to use gelato.
+									<?=__("&nbsp;You must be registered to use gelato.")?>
 								</div>
 <?php
 									}
 									elseif ($_GET["error"]==2) {
 ?>
 								<div class="error">
-									&nbsp;You must be logged on the system.
+									<?=__("&nbsp;You must be logged on the system.")?>
 								</div>
 <?php
 									}									
