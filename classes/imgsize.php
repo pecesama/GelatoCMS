@@ -1,5 +1,7 @@
 <?php
 header ("Content-type: image/jpeg");
+header('Cache-Control: max-age=172800, must-revalidate');
+header('Expires: ' . date('r', time()+120));
 /*
 JPEG / PNG Image Resizer
 Parameters (passed via URL):

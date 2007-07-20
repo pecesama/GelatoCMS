@@ -12,6 +12,8 @@
  */
 ?>
 <?php
+require_once("functions.php");
+
 class plantillas {
 
 	var $plantilla;
@@ -46,8 +48,8 @@ class plantillas {
 				$this->plantilla_cargada = $salida_xhtml;
 			} 
 		}
-	}
-	
+	}	
+		
 	function precargarPlantillaConBloque($entrada, $salida, $plantilla_usar) {		
 		$plantilla_usar = "themes/".$this->plantilla."/".$plantilla_usar.".htm";
 		
@@ -71,6 +73,7 @@ class plantillas {
 		}
 	}
 	
+	
 	function cargarPlantillaConBloque($entrada, $salida, $plantilla_usar, $nombreBloque) {		
 		$plantilla_usar = "themes/".$this->plantilla."/".$plantilla_usar.".htm";
 		
@@ -91,6 +94,7 @@ class plantillas {
 			} 
 		}
 	}
+	
 	
 	function procesaBloque($entrada, $salida, $bloque) {
 		for ($i = 0; $i < count($entrada); $i++) {
