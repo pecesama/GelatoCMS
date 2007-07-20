@@ -23,10 +23,17 @@ $conf = new configuration();
 
 if ($user->isAdmin()) {
 	
-	if(isset($_POST["btnsubmit"]))	{		
-		unset($_POST["btnsubmit"]);		
-		$tumble->saveOption($_POST["rich_text"], "rich_text");
-		$tumble->saveOption($_POST["urlFriendly"], "rich_text");
+	if(isset($_POST["btnsubmit"]))	{
+		if (!$tumble->saveOption($_POST["rich_text"], "rich_text")) {
+			header("Location: ".$conf->urlGelato."/admin/options.php?error=1&des=".$conf->merror);
+			die();
+		}
+		if (!$tumble->saveOption($_POST["url_friendly"], "url_friendly")) {
+			header("Location: ".$conf->urlGelato."/admin/options.php?error=1&des=".$conf->merror);
+			die();
+		}
+		header("Location: ".$conf->urlGelato."/admin/options.php?modified=true");
+		die();
 	} else {
 ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -92,12 +99,12 @@ if ($user->isAdmin()) {
 							<fieldset>								
 								<ul>																	
 									<li><label for="rich_text"><?=__("Rich text editor:")?></label>
-										<select name="rich_text" id="rich_text">										
+										<select name="rich_text" id="rich_text">
 											<option value="1" <?php if($conf->richText) echo "selected"; ?>><?=__("Active")?></option>
 											<option value="0" <?php if(!$conf->richText) echo "selected"; ?>><?=__("Deactive")?></option>
 										</select>
 									</li>
-									<li><label for="rich_text">URL friendly:</label>
+									<li><label for="url_friendly">URL friendly:</label>
 										<select name="url_friendly" id="url_friendly">
 											<option value="1" <?php if($conf->urlFriendly) echo "selected"; ?>><?=__("Active")?></option>
 											<option value="0" <?php if(!$conf->urlFriendly) echo "selected"; ?>><?=__("Deactive")?></option>

@@ -35,11 +35,9 @@ class gelato extends Conexion_Mysql {
 	function saveOption($value, $name) {
 		$sqlStr = "UPDATE ".$this->conf->tablePrefix."options SET val='".$value."' WHERE name='".$name."' LIMIT 1";		
 		if ($this->ejecutarConsulta($sqlStr)) {
-			header("Location: ".$this->conf->urlGelato."/admin/options.php?modified=true");
-			die();
+			return true;
 		} else {
-			header("Location: ".$this->conf->urlGelato."/admin/options.php?error=1&des=".$this->merror);
-			die();
+			return true;
 		}
 	}
 	
