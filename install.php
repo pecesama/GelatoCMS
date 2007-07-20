@@ -66,10 +66,13 @@ if ($action=="config") {
 		$errors=$errors.$sep_err."3";
 		$sep_err="|";
 	}
-	
+	$off_r= split("," , $_POST['time_offsets']);
+	$_POST['offset_time'] = $off_r[0];
+	$_POST['offset_city'] = $off_r[1];
+	unset($_POST['time_offsets']);
 	
 	if (!$errors) {		
-		if (install_db($_POST['login'], $_POST['password'], $_POST['email'], $_POST['title'], $_POST['description'], $_POST['url_installation'], $_POST['posts_limit'], $_POST['lang'], $_POST['template'], $_POST['website'], $_POST['about'])) {
+		if (install_db($_POST['login'], $_POST['password'], $_POST['email'], $_POST['title'], $_POST['description'], $_POST['url_installation'], $_POST['posts_limit'], $_POST['lang'], $_POST['template'], $_POST['website'], $_POST['about'], $_POST['offset_city'], $_POST['offset_time'])) {
 			$showForm=false;
 		} else {
 			$errors=$errors.$sep_err."6";
@@ -152,7 +155,71 @@ if ($action=="config") {
 								echo "<option value=\"".$theme."\" selected=\"true\">".$theme."</option>\n";
 								
 							}
-?>
+?>							</select>
+						<li>
+						<li><label for="time_offsets">Time Offset:</label>
+							<select id="time_offsets" name="time_offsets">
+								<option value="-12,Pacific/Kwajalein">(GMT -12:00) International Date Line West</option>
+								<option value="-11,Pacific/Samoa">(GMT -11:00) Midway Island, Samoa</option>
+								<option value="-10,Pacific/Honolulu">(GMT -10:00) Hawaii</option>
+								<option value="-9,US/Alaska">(GMT -9:00) Alaska</option>
+								<option value="-8,US/Pacific">(GMT -8:00) Pacific Time (US &amp; Canada); Tijuana</option>
+								<option value="-7,US/Mountain">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+								<option value="-7,US/Arizona">(GMT -7:00) Arizona</option>
+								<option value="-7,Mexico/BajaNorte">(GMT -7:00) Chihuahua, La Paz, Mazatlan</option>
+								<option value="-6,US/Central">(GMT -6:00) Central Time (US &amp; Canada)</option>
+								<option value="-6,America/Costa_Rica">(GMT -6:00) Central America</option>
+								<option value="-6,Mexico/General" selected="selected">(GMT -6:00) Guadalajara, Mexico City, Monterrey</option>
+								<option value="-6,Canada/Saskatchewan">(GMT -6:00) Saskatchewan</option>
+								<option value="-5,US/Eastern">(GMT -5:00) Eastern Time (US &amp; Canada)</option>
+								<option value="-5,America/Bogota">(GMT -5:00) Bogota, Lima, Quito</option>
+								<option value="-5,US/East-Indiana">(GMT -5:00) Indiana (East)</option>
+								<option value="-4,Canada/Eastern">(GMT -4:00) Atlantic Time (Canada)</option>
+								<option value="-4,America/Caracas">(GMT -4:00) Caracas, La Paz</option>
+								<option value="-4,America/Santiago">(GMT -4:00) Santiago</option>
+								<option value="-3.50,Canada/Newfoundland">(GMT -3:30) Newfoundland</option>
+								<option value="-3,Canada/Atlantic">(GMT -3:00) Brasilia, Greenland</option>
+								<option value="-3,America/Buenos_Aires">(GMT -3:00) Buenos Aires, Georgetown</option>
+								<option value="-1,Atlantic/Cape_Verde">(GMT -1:00) Cape Verde Is.</option>
+								<option value="-1,Atlantic/Azores">(GMT -1:00) Azores</option>
+								<option value="0,Africa/Casablanca">(GMT) Casablanca, Monrovia</option>
+								<option value="0,Europe/Dublin">(GMT) Greenwich Mean Time : Dublin, Edinburgh, London</option>
+								<option value="1,Europe/Amsterdam">(GMT +1:00) Amsterdam, Berlin, Rome, Stockholm, Vienna</option>
+								<option value="1,Europe/Prague">(GMT +1:00) Belgrade, Bratislava, Budapest, Prague</option>
+								<option value="1,Europe/Paris">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
+								<option value="1,Europe/Warsaw">(GMT +1:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+								<option value="1,Africa/Bangui">(GMT +1:00) West Central Africa</option>
+								<option value="2,Europe/Istanbul">(GMT +2:00) Athens, Beirut, Bucharest, Cairo, Istanbul	</option>
+								<option value="2,Asia/Jerusalem">(GMT +2:00) Harare, Jerusalem, Pretoria</option>
+								<option value="2,Europe/Kiev">(GMT +2:00) Helsinki, Kiev, Riga, Sofia, Tallinn, Vilnius</option>
+								<option value="3,Asia/Riyadh">(GMT +3:00) Kuwait, Nairobi, Riyadh</option>
+								<option value="3,Europe/Moscow">(GMT +3:00) Baghdad, Moscow, St. Petersburg, Volgograd</option>
+								<option value="3.50,Asia/Tehran">(GMT +3:30) Tehran</option>
+								<option value="4,Asia/Muscat">(GMT +4:00) Abu Dhabi, Muscat</option>
+								<option value="4,Asia/Baku">(GMT +4:00) Baku, Tbilsi, Yerevan</option>
+								<option value="4.50,Asia/Kabul">(GMT +4:30) Kabul</option>
+								<option value="5,Asia/Yekaterinburg">(GMT +5:00) Yekaterinburg</option>
+								<option value="5,Asia/Karachi">(GMT +5:00) Islamabad, Karachi, Tashkent</option>
+								<option value="5.50,Asia/Calcutta">(GMT +5:30) Chennai, Calcutta, Mumbai, New Delhi</option>
+								<option value="5.75,Asia/Katmandu">(GMT +5:45) Katmandu</option>
+								<option value="6,Asia/Almaty">(GMT +6:00) Almaty, Novosibirsk</option>
+								<option value="6,Asia/Dhaka">(GMT +6:00) Astana, Dhaka, Sri Jayawardenepura</option>
+								<option value="6.50,Asia/Rangoon">(GMT +6:30) Rangoon</option>
+								<option value="7,Asia/Bangkok">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+								<option value="7,Asia/Krasnoyarsk">(GMT +7:00) Krasnoyarsk</option>
+								<option value="8,Asia/Hong_Kong">(GMT +8:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+								<option value="8,Asia/Irkutsk">(GMT +8:00) Irkutsk, Ulaan Bataar</option>
+								<option value="8,Asia/Singapore">(GMT +8:00) Kuala Lumpar, Perth, Singapore, Taipei</option>
+								<option value="9,Asia/Tokyo">(GMT +9:00) Osaka, Sapporo, Tokyo</option>
+								<option value="9,Asia/Seoul">(GMT +9:00) Seoul</option>
+								<option value="9,Asia/Yakutsk">(GMT +9:00) Yakutsk</option>
+								<option value="9.50,Australia/Adelaide">(GMT +9:30) Adelaide</option>
+								<option value="9.50Australia/Darwin">(GMT +9:30) Darwin</option>
+								<option value="10,Australia/Brisbane">(GMT +10:00) Brisbane, Guam, Port Moresby</option>
+								<option value="10,Australia/Canberra">(GMT +10:00) Canberra, Hobart, Melbourne, Sydney, Vladivostok</option>
+								<option value="11,Asia/Magadan">(GMT +11:00) Magadan, Soloman Is., New Caledonia</option>
+								<option value="12,Pacific/Auckland">(GMT +12:00) Auckland, Wellington</option>
+								<option value="12,Pacific/Fiji">(GMT +12:00) Fiji, Kamchatka, Marshall Is.</option>
 							</select>
 						</li>
 					</ul>
@@ -185,7 +252,7 @@ if ($action=="config") {
 </html>
 
 <?php
-function install_db($login, $password, $email, $title, $description, $url_installation, $posts_limit, $lang, $template, $website, $about){
+function install_db($login, $password, $email, $title, $description, $url_installation, $posts_limit, $lang, $template, $website, $about, $offset_city, $offset_time){
 
 		$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);		
 		
@@ -265,6 +332,14 @@ function install_db($login, $password, $email, $title, $description, $url_instal
 		$db->ejecutarConsulta($sqlStr);
 		
 		$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('rich_text', '0');";
+		
+		$db->ejecutarConsulta($sqlStr);
+		
+		$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', '".$offset_city."');";
+		
+		$db->ejecutarConsulta($sqlStr);
+		
+		$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_time', '".$offset_time."');";
 		
 		$db->ejecutarConsulta($sqlStr);
 
