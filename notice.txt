@@ -44,3 +44,8 @@ Clase plantillas available under MIT license.
 = Textile class =
 Copyright (c) Jim Riggs, http://jimandlissa.com/project/textilephp
 Textile class available under GNU General Public License.
+
+= PHP-gettext =
+Copyright (c) 2003 Danilo Segan, http://savannah.nongnu.org/projects/php-gettext/
+Copyright (c) 2005 Nico Kaiser
+PHP-gettext available under GNU General Public License.

@@ -27,6 +27,7 @@
 	header("Cache-Control: no-store, no-cache, must-revalidate");
 	header("Cache-Control: post-check=0, pre-check=0", false);
 	header("Pragma: no-cache");
+	ini_set('pcre.backtrack_limit', '10000');
 	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'mysql_connection.class.php');
 	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'streams.class.php');
 	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gettext.class.php');
