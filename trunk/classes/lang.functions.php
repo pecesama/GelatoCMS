@@ -11,10 +11,10 @@
   =========================== */
 ?>
 <?php
-function initIdioma($lang = "en") {
+function initLang($lang = "en") {
 	global $locale, $l10n;
 
-	$input = new FileReader(dirname(__FILE__)."/../idiomas/". $locale ."/lang.mo");
+	$input = new FileReader(dirname(__FILE__)."/../languages/". $locale ."/lang.mo");
 	$l10n = new gettext_reader($input);
 }
 
