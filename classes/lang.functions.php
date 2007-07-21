@@ -12,9 +12,9 @@
 ?>
 <?php
 function initLang($lang = "en") {
-	global $locale, $l10n;
+	global $l10n;
 
-	$input = new FileReader(dirname(__FILE__)."/../languages/". $locale ."/lang.mo");
+	$input = new FileReader(dirname(__FILE__).DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."languages".DIRECTORY_SEPARATOR.$lang.DIRECTORY_SEPARATOR."messages.mo");	
 	$l10n = new gettext_reader($input);
 }
 
