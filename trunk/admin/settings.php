@@ -101,7 +101,14 @@ if ($user->isAdmin()) {
 										<input type="text" name="posts_limit" id="posts_limit" value="<?php echo $conf->postLimit;?>" class="txt"/></li>
 									<li><label for="lang"><?=__("Language:")?></label>
 										<select id="lang" name="lang">
-											<option value="en" selected="selected">english</option>
+<?php									
+										$langs = getLangs();
+										foreach ($langs as $lang) {
+											$active = ($conf->lang==$lang) ? "selected" : "";
+											echo "<option value=\"".$lang."\" ".$active.">".$lang."</option>\n";
+											
+										}
+?>
 										</select>
 									</li>
 									<li><label for="template"><?=__("Template:")?></label>
