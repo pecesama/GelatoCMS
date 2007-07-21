@@ -32,5 +32,4 @@
 	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'streams.class.php');
 	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gettext.class.php');
 	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'lang.functions.php');
-	initLang('en');
 ?>

@@ -65,7 +65,7 @@ if ($user->isAdmin()) {
 					<h3>Manage</h3>
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/settings.php"><?=__("Settings")?></a></li>
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/index.php"><?=__("Posts")?></a></li>
-					<li><a href="<?php echo $conf->urlGelato;?>/admin/user.php"><?=__("Add user"?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/user.php"><?=__("Add user")?></a></li>
 					<li class="selected"><a><?=__("Users")?></a></li>
 					</ul>
 					<p>&nbsp;</p>

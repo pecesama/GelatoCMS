@@ -39,6 +39,8 @@ class configuration extends Conexion_Mysql {
 			$this->description = $row['description'];
 			$this->lang = $row['lang'];				
 			$this->template = $row['template'];
+			
+			initLang($this->lang);
 
 			$this->urlFriendly = $this->get_option("url_friendly");
 			$this->richText = $this->get_option("rich_text");

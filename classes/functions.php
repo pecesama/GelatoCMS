@@ -276,5 +276,46 @@
 			$curl = $curl[1];
 		}
 		return $curl;
-	} 	
+	}
+	
+	function transform_offset($offset){
+		
+	}
+	
+	function getLangs() {
+ 		$langs_dir = "languages";
+ 		$dirs = array();
+		$path = getcwd();
+ 		$dir = (substr(PHP_OS, 0, 3) == 'WIN') ? $path."\\".$langs_dir : $path."/".$langs_dir;
+		$dir = str_replace("admin\\", "", $dir);
+		$dir = str_replace("admin/", "", $dir);
+ 		$i=0;
+		$cls_lang_dir = @ dir($dir);
+		while (($directory = $cls_lang_dir->read()) !== false) {
+			if($directory != "." && $directory != "..") {
+				
+				$dir2 = (substr(PHP_OS, 0, 3) == 'WIN') ? $path."\\".$langs_dir."\\".$directory : $path."/".$langs_dir."/".$directory;
+				$dir2 = str_replace("admin\\", "", $dir2);
+				$dir2 = str_replace("admin/", "", $dir2);
+				if(is_dir($dir2)){
+					$cls_lang_dir2 = @ dir($dir2);
+					while (($directory2 = $cls_lang_dir2->read()) !== false) {
+						if($directory2 != "." && $directory2 != "..") {
+							if (preg_match('|^\.+$|', $directory2)){
+								continue;
+							}
+							if (preg_match('|\.mo$|', $directory2)){
+								if(!in_array($directory2,$dirs)){
+									$dirs[$i]=trim($directory);
+									$i++;
+								}
+							}
+						}
+					}
+				}
+			}
+ 		}
+		$dirs = array_unique($dirs);
+ 		return $dirs;
+ 	}
 ?>
