@@ -23,6 +23,8 @@ class configuration extends Conexion_Mysql {
 	var $template;
 	var $urlFriendly;
 	var $richText;
+	var $offset_city;
+	var $offset_time;
 	
 	
 	function configuration() {
@@ -44,6 +46,8 @@ class configuration extends Conexion_Mysql {
 
 			$this->urlFriendly = $this->get_option("url_friendly");
 			$this->richText = $this->get_option("rich_text");
+			$this->offset_city = $this->get_option("offset_city");
+			$this->offset_time = $this->get_option("offset_time");
 		} else {
 			if($isFeed) {
 				header("HTTP/1.0 503 Service Unavailable"); 
