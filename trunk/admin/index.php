@@ -236,7 +236,7 @@ if ($user->isAdmin()) {
 								
 							}
 							
-							$date = ($isEdition) ? strtotime($post["date"]) : time();
+							$date = ($isEdition) ? strtotime($post["date"]) : gmmktime();
 							$title = ($isEdition) ? htmlspecialchars(stripslashes($post["title"])) : "";
 							$body = ($isEdition) ? stripslashes($post["description"]) : "";
 							$url = ($isEdition) ? $post["url"] : "";
