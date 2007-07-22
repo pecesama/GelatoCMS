@@ -97,7 +97,7 @@
                 if ($tumble->contarRegistros()>0) {
                         $fecha = null;          
                         while($register = mysql_fetch_array($rs)) {
-                                $formatedDate = date("M d", strtotime($register["date"]));
+								$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offset_time));
                                 if ( $fecha != null && $formatedDate == $fecha ) { $formatedDate = ""; } else { $fecha = $formatedDate; }
                                 $permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
                                 

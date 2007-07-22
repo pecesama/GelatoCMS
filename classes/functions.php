@@ -279,7 +279,16 @@
 	}
 	
 	function transform_offset($offset){
-		
+		$sp = strpos($offset , ".")? explode("." , $offset) : false;
+		if(is_array($sp)){
+			$minutes = strval($sp[1]);
+			$off_h = $sp[0]*3600;
+			$off_m = (($minutes*60)/100)*60;
+			$off = $off_h+$off_m;
+		} else {
+			$off = ($offset*3600);
+		}
+		return $off;
 	}
 	
 	function getLangs() {
