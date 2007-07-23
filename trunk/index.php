@@ -95,10 +95,10 @@
                 $rs = $tumble->getPosts($limit, $from);
 
                 if ($tumble->contarRegistros()>0) {
-                        $fecha = null;          
+                        $dateTmp = null;          
                         while($register = mysql_fetch_array($rs)) {
 								$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offset_time));
-                                if ( $fecha != null && $formatedDate == $fecha ) { $formatedDate = ""; } else { $fecha = $formatedDate; }
+                                if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
                                 $permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
                                 
                                 $textile = new Textile;                                 
