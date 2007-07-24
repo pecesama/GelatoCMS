@@ -42,8 +42,8 @@
 	if ($tumble->contarRegistros()>0) {		
 
 		while($register = mysql_fetch_array($rs)) {
-			$textile = new Textile;
-			$register["description"] = $textile->process($register["description"]);
+			$textile = new Textile();				
+			$register["description"] = $textile->TextileThis($register["description"]);
 			
 			switch ($register["type"]) {
 				case "1":
