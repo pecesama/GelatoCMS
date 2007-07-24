@@ -97,12 +97,12 @@
                 if ($tumble->contarRegistros()>0) {
                         $dateTmp = null;          
                         while($register = mysql_fetch_array($rs)) {
-								$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offset_time));
+								$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
                                 if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
                                 $permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
                                 
-                                $textile = new Textile;                                 
-                                $register["description"] = $textile->process($register["description"]);
+								$textile = new Textile();				
+								$register["description"] = $textile->TextileThis($register["description"]);
 
                                 $register["title"] = stripslashes($register["title"]);
                                 $register["description"] = stripslashes($register["description"]);
@@ -188,11 +188,11 @@
         } else {
                 $register = $tumble->getPost($id_post);
                 
-                $formatedDate = date("M d", strtotime($register["date"]));
+				$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
                 $permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
                 
-                $textile = new Textile;
-                $register["description"] = $textile->process($register["description"]);
+				$textile = new Textile();				
+				$register["description"] = $textile->TextileThis($register["description"]);
 				
 				$register["title"] = stripslashes($register["title"]);
                 $register["description"] = stripslashes($register["description"]);
@@ -259,6 +259,18 @@
                                 $template->mostrarPlantilla();
                                 break;
                 }
+				
+				if ($conf->allowComments) {
+					
+					// before the comments form must be the comments on the DB
+										
+					$input = array("{User_Cookie}", "{Email_Cookie}", "{Web_Cookie}", "{Id_Post}", "{Form_Action}", "{Date_Added}");
+					$output = array($_COOKIE['cookie_gel_user'], $_COOKIE['cookie_gel_email'], $_COOKIE['cookie_gel_web'], $register["id_post"], $conf->urlGelato."/comments.php", gmmktime());
+					
+					$template->cargarPlantilla($input, $output, "template_comment_post");
+					$template->mostrarPlantilla(); 
+					
+				}
         }
         
         $input = array("{URL_Tumble}");

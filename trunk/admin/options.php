@@ -45,6 +45,12 @@ if ($user->isAdmin()) {
 			header("Location: ".$conf->urlGelato."/admin/options.php?error=1&des=".$conf->merror);
 			die();
 		}
+		
+		if (!$tumble->saveOption($_POST["allow_comments"], "allow_comments")) {
+			header("Location: ".$conf->urlGelato."/admin/options.php?error=1&des=".$conf->merror);
+			die();
+		}
+		
 		header("Location: ".$conf->urlGelato."/admin/options.php?modified=true");
 		die();
 	} else {
@@ -117,75 +123,81 @@ if ($user->isAdmin()) {
 											<option value="0" <?php if(!$conf->richText) echo "selected"; ?>><?=__("Deactive")?></option>
 										</select>
 									</li>
-									<li><label for="url_friendly"><?__("URL friendly:")?></label>
+									<li><label for="url_friendly"><?=__("URL friendly:")?></label>
 										<select name="url_friendly" id="url_friendly">
 											<option value="1" <?php if($conf->urlFriendly) echo "selected"; ?>><?=__("Active")?></option>
 											<option value="0" <?php if(!$conf->urlFriendly) echo "selected"; ?>><?=__("Deactive")?></option>
 										</select>
 									</li>
+									<li><label for="allow_comments"><?=__("Allow readers comments:")?></label>
+										<select name="allow_comments" id="allow_comments">
+											<option value="1" <?php if($conf->allowComments) echo "selected"; ?>><?=__("Active")?></option>
+											<option value="0" <?php if(!$conf->allowComments) echo "selected"; ?>><?=__("Deactive")?></option>
+										</select>
+									</li>
 									<li><label for="time_offsets"><?=__("Time Offset:")?></label>
 										<select id="time_offsets" name="time_offsets">
-											<option value="-12,Pacific/Kwajalein" <?=($conf->offset_city=="Pacific/Kwajalein")? "selected=\"selected\"":"" ?>>(GMT -12:00) International Date Line West</option>
-											<option value="-11,Pacific/Samoa" <?=($conf->offset_city=="Pacific/Samoa")? "selected=\"selected\"":"" ?>>(GMT -11:00) Midway Island, Samoa</option>
-											<option value="-10,Pacific/Honolulu" <?=($conf->offset_city=="Pacific/Honolulu")? "selected=\"selected\"":"" ?>>(GMT -10:00) Hawaii</option>
-											<option value="-9,US/Alaska" <?=($conf->offset_city=="US/Alaska")? "selected=\"selected\"":"" ?>>(GMT -9:00) Alaska</option>
-											<option value="-8,US/Pacific" <?=($conf->offset_city=="US/Pacific")? "selected=\"selected\"":"" ?>>(GMT -8:00) Pacific Time (US &amp; Canada); Tijuana</option>
-											<option value="-7,US/Mountain" <?=($conf->offset_city=="US/Mountain")? "selected=\"selected\"":"" ?>>(GMT -7:00) Mountain Time (US &amp; Canada)</option>
-											<option value="-7,US/Arizona" <?=($conf->offset_city=="US/Arizona")? "selected=\"selected\"":"" ?>>(GMT -7:00) Arizona</option>
-											<option value="-7,Mexico/BajaNorte" <?=($conf->offset_city=="Mexico/BajaNorte")? "selected=\"selected\"":"" ?>>(GMT -7:00) Chihuahua, La Paz, Mazatlan</option>
-											<option value="-6,US/Central" <?=($conf->offset_city=="US/Central")? "selected=\"selected\"":"" ?>>(GMT -6:00) Central Time (US &amp; Canada)</option>
-											<option value="-6,America/Costa_Rica" <?=($conf->offset_city=="America/Costa_Rica")? "selected=\"selected\"":"" ?>>(GMT -6:00) Central America</option>
-											<option value="-6,Mexico/General" <?=($conf->offset_city=="Mexico/General")? "selected=\"selected\"":"" ?>>(GMT -6:00) Guadalajara, Mexico City, Monterrey</option>
-											<option value="-6,Canada/Saskatchewan" <?=($conf->offset_city=="Canada/Saskatchewan")? "selected=\"selected\"":"" ?>>(GMT -6:00) Saskatchewan</option>
-											<option value="-5,US/Eastern" <?=($conf->offset_city=="US/Eastern")? "selected=\"selected\"":"" ?>>(GMT -5:00) Eastern Time (US &amp; Canada)</option>
-											<option value="-5,America/Bogota" <?=($conf->offset_city=="America/Bogota")? "selected=\"selected\"":"" ?>>(GMT -5:00) Bogota, Lima, Quito</option>
-											<option value="-5,US/East-Indiana" <?=($conf->offset_city=="US/East-Indiana")? "selected=\"selected\"":"" ?>>(GMT -5:00) Indiana (East)</option>
-											<option value="-4,Canada/Eastern" <?=($conf->offset_city=="Canada/Eastern")? "selected=\"selected\"":"" ?>>(GMT -4:00) Atlantic Time (Canada)</option>
-											<option value="-4,America/Caracas" <?=($conf->offset_city=="America/Caracas")? "selected=\"selected\"":"" ?>>(GMT -4:00) Caracas, La Paz</option>
-											<option value="-4,America/Santiago" <?=($conf->offset_city=="America/Santiago")? "selected=\"selected\"":"" ?>>(GMT -4:00) Santiago</option>
-											<option value="-3.50,Canada/Newfoundland" <?=($conf->offset_city=="Canada/Newfoundland")? "selected=\"selected\"":"" ?>>(GMT -3:30) Newfoundland</option>
-											<option value="-3,Canada/Atlantic" <?=($conf->offset_city=="Canada/Atlantic")? "selected=\"selected\"":"" ?>>(GMT -3:00) Brasilia, Greenland</option>
-											<option value="-3,America/Buenos_Aires" <?=($conf->offset_city=="America/Buenos_Aires")? "selected=\"selected\"":"" ?>>(GMT -3:00) Buenos Aires, Georgetown</option>
-											<option value="-1,Atlantic/Cape_Verde" <?=($conf->offset_city=="Atlantic/Cape_Verde")? "selected=\"selected\"":"" ?>>(GMT -1:00) Cape Verde Is.</option>
-											<option value="-1,Atlantic/Azores" <?=($conf->offset_city=="Atlantic/Azores")? "selected=\"selected\"":"" ?>>(GMT -1:00) Azores</option>
-											<option value="0,Africa/Casablanca" <?=($conf->offset_city=="Africa/Casablanca")? "selected=\"selected\"":"" ?>>(GMT) Casablanca, Monrovia</option>
-											<option value="0,Europe/Dublin" <?=($conf->offset_city=="Europe/Dublin")? "selected=\"selected\"":"" ?>>(GMT) Greenwich Mean Time : Dublin, Edinburgh, London</option>
-											<option value="1,Europe/Amsterdam" <?=($conf->offset_city=="Europe/Amsterdam")? "selected=\"selected\"":"" ?>>(GMT +1:00) Amsterdam, Berlin, Rome, Stockholm, Vienna</option>
-											<option value="1,Europe/Prague" <?=($conf->offset_city=="Europe/Pragu")? "selected=\"selected\"":"" ?>>(GMT +1:00) Belgrade, Bratislava, Budapest, Prague</option>
-											<option value="1,Europe/Paris" <?=($conf->offset_city=="Europe/Paris")? "selected=\"selected\"":"" ?>>(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
-											<option value="1,Europe/Warsaw" <?=($conf->offset_city=="Europe/Warsaw")? "selected=\"selected\"":"" ?>>(GMT +1:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
-											<option value="1,Africa/Bangui" <?=($conf->offset_city=="Africa/Bangui")? "selected=\"selected\"":"" ?>>(GMT +1:00) West Central Africa</option>
-											<option value="2,Europe/Istanbul" <?=($conf->offset_city=="Europe/Istanbul")? "selected=\"selected\"":"" ?>>(GMT +2:00) Athens, Beirut, Bucharest, Cairo, Istanbul	</option>
-											<option value="2,Asia/Jerusalem" <?=($conf->offset_city=="Asia/Jerusalem")? "selected=\"selected\"":"" ?>>(GMT +2:00) Harare, Jerusalem, Pretoria</option>
-											<option value="2,Europe/Kiev" <?=($conf->offset_city=="Europe/Kiev")? "selected=\"selected\"":"" ?>>(GMT +2:00) Helsinki, Kiev, Riga, Sofia, Tallinn, Vilnius</option>
-											<option value="3,Asia/Riyadh" <?=($conf->offset_city=="Asia/Riyadh")? "selected=\"selected\"":"" ?>>(GMT +3:00) Kuwait, Nairobi, Riyadh</option>
-											<option value="3,Europe/Moscow" <?=($conf->offset_city=="Europe/Moscow")? "selected=\"selected\"":"" ?>>(GMT +3:00) Baghdad, Moscow, St. Petersburg, Volgograd</option>
-											<option value="3.50,Asia/Tehran" <?=($conf->offset_city=="Asia/Tehran")? "selected=\"selected\"":"" ?>>(GMT +3:30) Tehran</option>
-											<option value="4,Asia/Muscat" <?=($conf->offset_city=="Asia/Muscat")? "selected=\"selected\"":"" ?>>(GMT +4:00) Abu Dhabi, Muscat</option>
-											<option value="4,Asia/Baku" <?=($conf->offset_city=="Asia/Baku")? "selected=\"selected\"":"" ?>>(GMT +4:00) Baku, Tbilsi, Yerevan</option>
-											<option value="4.50,Asia/Kabul" <?=($conf->offset_city=="Asia/Kabul")? "selected=\"selected\"":"" ?>>(GMT +4:30) Kabul</option>
-											<option value="5,Asia/Yekaterinburg" <?=($conf->offset_city=="Asia/Yekaterinburg")? "selected=\"selected\"":"" ?>>(GMT +5:00) Yekaterinburg</option>
-											<option value="5,Asia/Karachi" <?=($conf->offset_city=="Asia/Karachi")? "selected=\"selected\"":"" ?>>(GMT +5:00) Islamabad, Karachi, Tashkent</option>
-											<option value="5.50,Asia/Calcutta" <?=($conf->offset_city=="Asia/Calcutta")? "selected=\"selected\"":"" ?>>(GMT +5:30) Chennai, Calcutta, Mumbai, New Delhi</option>
-											<option value="5.75,Asia/Katmandu" <?=($conf->offset_city=="Asia/Katmandu")? "selected=\"selected\"":"" ?>>(GMT +5:45) Katmandu</option>
-											<option value="6,Asia/Almaty" <?=($conf->offset_city=="Asia/Almaty")? "selected=\"selected\"":"" ?>>(GMT +6:00) Almaty, Novosibirsk</option>
-											<option value="6,Asia/Dhaka" <?=($conf->offset_city=="Asia/Dhaka")? "selected=\"selected\"":"" ?>>(GMT +6:00) Astana, Dhaka, Sri Jayawardenepura</option>
-											<option value="6.50,Asia/Rangoon" <?=($conf->offset_city=="Asia/Rangoo")? "selected=\"selected\"":"" ?>>(GMT +6:30) Rangoon</option>
-											<option value="7,Asia/Bangkok" <?=($conf->offset_city=="Asia/Bangkok")? "selected=\"selected\"":"" ?>>(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
-											<option value="7,Asia/Krasnoyarsk" <?=($conf->offset_city=="Asia/Krasnoyarsk")? "selected=\"selected\"":"" ?>>(GMT +7:00) Krasnoyarsk</option>
-											<option value="8,Asia/Hong_Kong" <?=($conf->offset_city=="Asia/Hong_Kong")? "selected=\"selected\"":"" ?>>(GMT +8:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
-											<option value="8,Asia/Irkutsk" <?=($conf->offset_city=="Asia/Irkutsk")? "selected=\"selected\"":"" ?>>(GMT +8:00) Irkutsk, Ulaan Bataar</option>
-											<option value="8,Asia/Singapore" <?=($conf->offset_city=="Asia/Singapore")? "selected=\"selected\"":"" ?>>(GMT +8:00) Kuala Lumpar, Perth, Singapore, Taipei</option>
-											<option value="9,Asia/Tokyo" <?=($conf->offset_city=="Asia/Tokyo")? "selected=\"selected\"":"" ?>>(GMT +9:00) Osaka, Sapporo, Tokyo</option>
-											<option value="9,Asia/Seoul" <?=($conf->offset_city=="Asia/Seoul")? "selected=\"selected\"":"" ?>>(GMT +9:00) Seoul</option>
-											<option value="9,Asia/Yakutsk" <?=($conf->offset_city=="Asia/Yakutsk")? "selected=\"selected\"":"" ?>>(GMT +9:00) Yakutsk</option>
-											<option value="9.50,Australia/Adelaide" <?=($conf->offset_city=="Australia/Adelaide")? "selected=\"selected\"":"" ?>>(GMT +9:30) Adelaide</option>
-											<option value="9.50,Australia/Darwin" <?=($conf->offset_city=="Australia/Darwin")? "selected=\"selected\"":"" ?>>(GMT +9:30) Darwin</option>
-											<option value="10,Australia/Brisbane" <?=($conf->offset_city=="Australia/Brisbane")? "selected=\"selected\"":"" ?>>(GMT +10:00) Brisbane, Guam, Port Moresby</option>
-											<option value="10,Australia/Canberra" <?=($conf->offset_city=="Australia/Canberra")? "selected=\"selected\"":"" ?>>(GMT +10:00) Canberra, Hobart, Melbourne, Sydney, Vladivostok</option>
-											<option value="11,Asia/Magadan" <?=($conf->offset_city=="Asia/Magadan")? "selected=\"selected\"":"" ?>>(GMT +11:00) Magadan, Soloman Is., New Caledonia</option>
-											<option value="12,Pacific/Auckland" <?=($conf->offset_city=="Pacific/Auckland")? "selected=\"selected\"":"" ?>>(GMT +12:00) Auckland, Wellington</option>
-											<option value="12,Pacific/Fiji" <?=($conf->offset_city=="Pacific/Fiji")? "selected=\"selected\"":"" ?>>(GMT +12:00) Fiji, Kamchatka, Marshall Is.</option>
+											<option value="-12,Pacific/Kwajalein" <?=($conf->offsetCity=="Pacific/Kwajalein")? "selected=\"selected\"":"" ?>>(GMT -12:00) International Date Line West</option>
+											<option value="-11,Pacific/Samoa" <?=($conf->offsetCity=="Pacific/Samoa")? "selected=\"selected\"":"" ?>>(GMT -11:00) Midway Island, Samoa</option>
+											<option value="-10,Pacific/Honolulu" <?=($conf->offsetCity=="Pacific/Honolulu")? "selected=\"selected\"":"" ?>>(GMT -10:00) Hawaii</option>
+											<option value="-9,US/Alaska" <?=($conf->offsetCity=="US/Alaska")? "selected=\"selected\"":"" ?>>(GMT -9:00) Alaska</option>
+											<option value="-8,US/Pacific" <?=($conf->offsetCity=="US/Pacific")? "selected=\"selected\"":"" ?>>(GMT -8:00) Pacific Time (US &amp; Canada); Tijuana</option>
+											<option value="-7,US/Mountain" <?=($conf->offsetCity=="US/Mountain")? "selected=\"selected\"":"" ?>>(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+											<option value="-7,US/Arizona" <?=($conf->offsetCity=="US/Arizona")? "selected=\"selected\"":"" ?>>(GMT -7:00) Arizona</option>
+											<option value="-7,Mexico/BajaNorte" <?=($conf->offsetCity=="Mexico/BajaNorte")? "selected=\"selected\"":"" ?>>(GMT -7:00) Chihuahua, La Paz, Mazatlan</option>
+											<option value="-6,US/Central" <?=($conf->offsetCity=="US/Central")? "selected=\"selected\"":"" ?>>(GMT -6:00) Central Time (US &amp; Canada)</option>
+											<option value="-6,America/Costa_Rica" <?=($conf->offsetCity=="America/Costa_Rica")? "selected=\"selected\"":"" ?>>(GMT -6:00) Central America</option>
+											<option value="-6,Mexico/General" <?=($conf->offsetCity=="Mexico/General")? "selected=\"selected\"":"" ?>>(GMT -6:00) Guadalajara, Mexico City, Monterrey</option>
+											<option value="-6,Canada/Saskatchewan" <?=($conf->offsetCity=="Canada/Saskatchewan")? "selected=\"selected\"":"" ?>>(GMT -6:00) Saskatchewan</option>
+											<option value="-5,US/Eastern" <?=($conf->offsetCity=="US/Eastern")? "selected=\"selected\"":"" ?>>(GMT -5:00) Eastern Time (US &amp; Canada)</option>
+											<option value="-5,America/Bogota" <?=($conf->offsetCity=="America/Bogota")? "selected=\"selected\"":"" ?>>(GMT -5:00) Bogota, Lima, Quito</option>
+											<option value="-5,US/East-Indiana" <?=($conf->offsetCity=="US/East-Indiana")? "selected=\"selected\"":"" ?>>(GMT -5:00) Indiana (East)</option>
+											<option value="-4,Canada/Eastern" <?=($conf->offsetCity=="Canada/Eastern")? "selected=\"selected\"":"" ?>>(GMT -4:00) Atlantic Time (Canada)</option>
+											<option value="-4,America/Caracas" <?=($conf->offsetCity=="America/Caracas")? "selected=\"selected\"":"" ?>>(GMT -4:00) Caracas, La Paz</option>
+											<option value="-4,America/Santiago" <?=($conf->offsetCity=="America/Santiago")? "selected=\"selected\"":"" ?>>(GMT -4:00) Santiago</option>
+											<option value="-3.50,Canada/Newfoundland" <?=($conf->offsetCity=="Canada/Newfoundland")? "selected=\"selected\"":"" ?>>(GMT -3:30) Newfoundland</option>
+											<option value="-3,Canada/Atlantic" <?=($conf->offsetCity=="Canada/Atlantic")? "selected=\"selected\"":"" ?>>(GMT -3:00) Brasilia, Greenland</option>
+											<option value="-3,America/Buenos_Aires" <?=($conf->offsetCity=="America/Buenos_Aires")? "selected=\"selected\"":"" ?>>(GMT -3:00) Buenos Aires, Georgetown</option>
+											<option value="-1,Atlantic/Cape_Verde" <?=($conf->offsetCity=="Atlantic/Cape_Verde")? "selected=\"selected\"":"" ?>>(GMT -1:00) Cape Verde Is.</option>
+											<option value="-1,Atlantic/Azores" <?=($conf->offsetCity=="Atlantic/Azores")? "selected=\"selected\"":"" ?>>(GMT -1:00) Azores</option>
+											<option value="0,Africa/Casablanca" <?=($conf->offsetCity=="Africa/Casablanca")? "selected=\"selected\"":"" ?>>(GMT) Casablanca, Monrovia</option>
+											<option value="0,Europe/Dublin" <?=($conf->offsetCity=="Europe/Dublin")? "selected=\"selected\"":"" ?>>(GMT) Greenwich Mean Time : Dublin, Edinburgh, London</option>
+											<option value="1,Europe/Amsterdam" <?=($conf->offsetCity=="Europe/Amsterdam")? "selected=\"selected\"":"" ?>>(GMT +1:00) Amsterdam, Berlin, Rome, Stockholm, Vienna</option>
+											<option value="1,Europe/Prague" <?=($conf->offsetCity=="Europe/Pragu")? "selected=\"selected\"":"" ?>>(GMT +1:00) Belgrade, Bratislava, Budapest, Prague</option>
+											<option value="1,Europe/Paris" <?=($conf->offsetCity=="Europe/Paris")? "selected=\"selected\"":"" ?>>(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
+											<option value="1,Europe/Warsaw" <?=($conf->offsetCity=="Europe/Warsaw")? "selected=\"selected\"":"" ?>>(GMT +1:00) Sarajevo, Skopje, Warsaw, Zagreb</option>
+											<option value="1,Africa/Bangui" <?=($conf->offsetCity=="Africa/Bangui")? "selected=\"selected\"":"" ?>>(GMT +1:00) West Central Africa</option>
+											<option value="2,Europe/Istanbul" <?=($conf->offsetCity=="Europe/Istanbul")? "selected=\"selected\"":"" ?>>(GMT +2:00) Athens, Beirut, Bucharest, Cairo, Istanbul	</option>
+											<option value="2,Asia/Jerusalem" <?=($conf->offsetCity=="Asia/Jerusalem")? "selected=\"selected\"":"" ?>>(GMT +2:00) Harare, Jerusalem, Pretoria</option>
+											<option value="2,Europe/Kiev" <?=($conf->offsetCity=="Europe/Kiev")? "selected=\"selected\"":"" ?>>(GMT +2:00) Helsinki, Kiev, Riga, Sofia, Tallinn, Vilnius</option>
+											<option value="3,Asia/Riyadh" <?=($conf->offsetCity=="Asia/Riyadh")? "selected=\"selected\"":"" ?>>(GMT +3:00) Kuwait, Nairobi, Riyadh</option>
+											<option value="3,Europe/Moscow" <?=($conf->offsetCity=="Europe/Moscow")? "selected=\"selected\"":"" ?>>(GMT +3:00) Baghdad, Moscow, St. Petersburg, Volgograd</option>
+											<option value="3.50,Asia/Tehran" <?=($conf->offsetCity=="Asia/Tehran")? "selected=\"selected\"":"" ?>>(GMT +3:30) Tehran</option>
+											<option value="4,Asia/Muscat" <?=($conf->offsetCity=="Asia/Muscat")? "selected=\"selected\"":"" ?>>(GMT +4:00) Abu Dhabi, Muscat</option>
+											<option value="4,Asia/Baku" <?=($conf->offsetCity=="Asia/Baku")? "selected=\"selected\"":"" ?>>(GMT +4:00) Baku, Tbilsi, Yerevan</option>
+											<option value="4.50,Asia/Kabul" <?=($conf->offsetCity=="Asia/Kabul")? "selected=\"selected\"":"" ?>>(GMT +4:30) Kabul</option>
+											<option value="5,Asia/Yekaterinburg" <?=($conf->offsetCity=="Asia/Yekaterinburg")? "selected=\"selected\"":"" ?>>(GMT +5:00) Yekaterinburg</option>
+											<option value="5,Asia/Karachi" <?=($conf->offsetCity=="Asia/Karachi")? "selected=\"selected\"":"" ?>>(GMT +5:00) Islamabad, Karachi, Tashkent</option>
+											<option value="5.50,Asia/Calcutta" <?=($conf->offsetCity=="Asia/Calcutta")? "selected=\"selected\"":"" ?>>(GMT +5:30) Chennai, Calcutta, Mumbai, New Delhi</option>
+											<option value="5.75,Asia/Katmandu" <?=($conf->offsetCity=="Asia/Katmandu")? "selected=\"selected\"":"" ?>>(GMT +5:45) Katmandu</option>
+											<option value="6,Asia/Almaty" <?=($conf->offsetCity=="Asia/Almaty")? "selected=\"selected\"":"" ?>>(GMT +6:00) Almaty, Novosibirsk</option>
+											<option value="6,Asia/Dhaka" <?=($conf->offsetCity=="Asia/Dhaka")? "selected=\"selected\"":"" ?>>(GMT +6:00) Astana, Dhaka, Sri Jayawardenepura</option>
+											<option value="6.50,Asia/Rangoon" <?=($conf->offsetCity=="Asia/Rangoo")? "selected=\"selected\"":"" ?>>(GMT +6:30) Rangoon</option>
+											<option value="7,Asia/Bangkok" <?=($conf->offsetCity=="Asia/Bangkok")? "selected=\"selected\"":"" ?>>(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+											<option value="7,Asia/Krasnoyarsk" <?=($conf->offsetCity=="Asia/Krasnoyarsk")? "selected=\"selected\"":"" ?>>(GMT +7:00) Krasnoyarsk</option>
+											<option value="8,Asia/Hong_Kong" <?=($conf->offsetCity=="Asia/Hong_Kong")? "selected=\"selected\"":"" ?>>(GMT +8:00) Beijing, Chongqing, Hong Kong, Urumqi</option>
+											<option value="8,Asia/Irkutsk" <?=($conf->offsetCity=="Asia/Irkutsk")? "selected=\"selected\"":"" ?>>(GMT +8:00) Irkutsk, Ulaan Bataar</option>
+											<option value="8,Asia/Singapore" <?=($conf->offsetCity=="Asia/Singapore")? "selected=\"selected\"":"" ?>>(GMT +8:00) Kuala Lumpar, Perth, Singapore, Taipei</option>
+											<option value="9,Asia/Tokyo" <?=($conf->offsetCity=="Asia/Tokyo")? "selected=\"selected\"":"" ?>>(GMT +9:00) Osaka, Sapporo, Tokyo</option>
+											<option value="9,Asia/Seoul" <?=($conf->offsetCity=="Asia/Seoul")? "selected=\"selected\"":"" ?>>(GMT +9:00) Seoul</option>
+											<option value="9,Asia/Yakutsk" <?=($conf->offsetCity=="Asia/Yakutsk")? "selected=\"selected\"":"" ?>>(GMT +9:00) Yakutsk</option>
+											<option value="9.50,Australia/Adelaide" <?=($conf->offsetCity=="Australia/Adelaide")? "selected=\"selected\"":"" ?>>(GMT +9:30) Adelaide</option>
+											<option value="9.50,Australia/Darwin" <?=($conf->offsetCity=="Australia/Darwin")? "selected=\"selected\"":"" ?>>(GMT +9:30) Darwin</option>
+											<option value="10,Australia/Brisbane" <?=($conf->offsetCity=="Australia/Brisbane")? "selected=\"selected\"":"" ?>>(GMT +10:00) Brisbane, Guam, Port Moresby</option>
+											<option value="10,Australia/Canberra" <?=($conf->offsetCity=="Australia/Canberra")? "selected=\"selected\"":"" ?>>(GMT +10:00) Canberra, Hobart, Melbourne, Sydney, Vladivostok</option>
+											<option value="11,Asia/Magadan" <?=($conf->offsetCity=="Asia/Magadan")? "selected=\"selected\"":"" ?>>(GMT +11:00) Magadan, Soloman Is., New Caledonia</option>
+											<option value="12,Pacific/Auckland" <?=($conf->offsetCity=="Pacific/Auckland")? "selected=\"selected\"":"" ?>>(GMT +12:00) Auckland, Wellington</option>
+											<option value="12,Pacific/Fiji" <?=($conf->offsetCity=="Pacific/Fiji")? "selected=\"selected\"":"" ?>>(GMT +12:00) Fiji, Kamchatka, Marshall Is.</option>
 										</select>
 									</li>
 								</ul>
