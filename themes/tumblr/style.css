@@ -262,3 +262,34 @@ margin-right: 2px;
 border: 1px solid #f3f3f3;
 color: #ccc;
 }
+
+.containerFormComments {
+	margin: 25px 65px 0px 0px;
+	font-family: Verdana;
+	font-size: 0.75em;
+}
+
+#commentForm input, #commentForm textarea {
+	font: 0.9em 'Lucida Grande', Verdana, Arial, Sans-Serif;
+}
+
+#commentForm p {
+	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+	margin: 5px 0;
+}
+
+#commentForm input {
+	width: 170px;
+	padding: 2px;
+	margin: 5px 5px 1px 0;
+}
+
+#commentForm textarea {
+	width: 100%;
+	padding: 2px;
+}
+
+#commentForm #btnAdd {
+	margin: 0;
+	float: right;
+}

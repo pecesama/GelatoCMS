@@ -344,10 +344,10 @@ if ($user->isAdmin()) {
 					if ($tumble->contarRegistros()>0) {				
 						while($register = mysql_fetch_array($rs)) {			
 							$formatedDate = date("M d", strtotime($register["date"]));
-							$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
+							$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";							
 							
-							$textile = new Textile;
-							$register["description"] = $textile->process($register["description"]);
+							$textile = new Textile();				
+							$register["description"] = $textile->TextileThis($register["description"]);
 							
 							$register["title"] = stripslashes($register["title"]);
 							$register["description"] = stripslashes($register["description"]);

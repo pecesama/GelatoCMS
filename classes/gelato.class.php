@@ -19,7 +19,7 @@ class gelato extends Conexion_Mysql {
 	
 	function gelato() {
 		parent::Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
-		$this->conf = new configuration();		
+		$this->conf = new configuration();
 	}
 	
 	function saveSettings($fieldsArray) {

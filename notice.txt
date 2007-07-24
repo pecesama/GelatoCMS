@@ -1,4 +1,4 @@
-== CREDITS= =
+== CREDITS==
 Gelato developers and designers (in chronological order):
 
 Pedro Santana [ http://www.pecesama.net/weblog/ ]
@@ -42,7 +42,7 @@ Copyright (c) Pedro Santana, http://www.pecesama.net/weblog/
 Clase plantillas available under MIT license.
 
 = Textile class =
-Copyright (c) Jim Riggs, http://jimandlissa.com/project/textilephp
+Copyright (c) 2003-2004, Dean Allen, http://textile.thresholdstate.com/
 Textile class available under GNU General Public License.
 
 = PHP-gettext =
