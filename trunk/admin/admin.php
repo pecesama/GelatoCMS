@@ -25,7 +25,7 @@ if ($user->isAdmin()) {
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>gelato :: <?=__("admin users")?></title>
+		<title>gelato :: <?php echo __("admin users")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
@@ -49,13 +49,13 @@ if ($user->isAdmin()) {
 	</head>
 	
 	<body>
-		<div id="div-process" style="display:none;"><?=__("Processing request...")?></div>
+		<div id="div-process" style="display:none;"><?php echo __("Processing request...")?></div>
 		<div id="cont">
 			<div id="head">
-				<h1><a href="<?php echo $conf->urlGelato;?>/admin/index.php" title="gelato :: <?=__("home")?>">gelato cms</a></h1>
+				<h1><a href="<?php echo $conf->urlGelato;?>/admin/index.php" title="gelato :: <?php echo __("home")?>">gelato cms</a></h1>
 				<ul id="nav">
-					<li><a href="<?php echo $conf->urlGelato;?>/" title="Take me to the tumblelog"><?=__("View Tumblelog")?></a></li>
-					<li><a href="close.php" title="Log off" onclick="return exit('div-process','<?php echo $conf->urlGelato;?>/admin/ajax.php?action=close');"><?=__("Log out")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/" title="Take me to the tumblelog"><?php echo __("View Tumblelog")?></a></li>
+					<li><a href="close.php" title="Log off" onclick="return exit('div-process','<?php echo $conf->urlGelato;?>/admin/ajax.php?action=close');"><?php echo __("Log out")?></a></li>
 			  	</ul>
 			</div>
 			<div id="main">				
@@ -63,10 +63,10 @@ if ($user->isAdmin()) {
 				<div class="box">
 					<ul class="menu manage">
 					<h3>Manage</h3>
-					<li><a href="<?php echo $conf->urlGelato;?>/admin/settings.php"><?=__("Settings")?></a></li>
-					<li><a href="<?php echo $conf->urlGelato;?>/admin/index.php"><?=__("Posts")?></a></li>
-					<li><a href="<?php echo $conf->urlGelato;?>/admin/user.php"><?=__("Add user")?></a></li>
-					<li class="selected"><a><?=__("Users")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/settings.php"><?php echo __("Settings")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/index.php"><?php echo __("Posts")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/user.php"><?php echo __("Add user")?></a></li>
+					<li class="selected"><a><?php echo __("Users")?></a></li>
 					</ul>
 					<p>&nbsp;</p>
 <?php				
@@ -100,9 +100,9 @@ if ($user->isAdmin()) {
 						<table class="sortable" id="admin-table">
 							<thead>
 								<tr>
-									<th scope="col"><?=__("Login")?></th>
-									<th scope="col"><?=__("Name")?></th>
-									<th colspan="2" scope="col" class="unsortable"><?=__("Actions")?></th>
+									<th scope="col"><?php echo __("Login")?></th>
+									<th scope="col"><?php echo __("Name")?></th>
+									<th colspan="2" scope="col" class="unsortable"><?php echo __("Actions")?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -120,10 +120,10 @@ if ($user->isAdmin()) {
 									<?php echo $register["name"]."\n"; ?>
 								</td>
 								<td>
-									<a href="user.php?edit=<?php echo $register["id_user"]; ?>"><?=__("Edit")?></a>
+									<a href="user.php?edit=<?php echo $register["id_user"]; ?>"><?php echo __("Edit")?></a>
 								</td>
 								<td>
-									<a href="user.php?delete=<?php echo $register["id_user"]; ?>"><?=__("Delete")?></a>
+									<a href="user.php?delete=<?php echo $register["id_user"]; ?>"><?php echo __("Delete")?></a>
 								</td>
 							</tr>
 <?php
@@ -132,7 +132,7 @@ if ($user->isAdmin()) {
 					else {
 ?>
 						<tr> 
-							<td colspan="4"><div class="exito"><?=__("No users available.")?></div></td>
+							<td colspan="4"><div class="exito"><?php echo __("No users available.")?></div></td>
 						</tr>
 <?php
 					}
