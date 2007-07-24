@@ -24,7 +24,7 @@ $user->closeSession()
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>gelato :: <?=__("logout")?></title>
+		<title>gelato :: <?php echo __("logout")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<meta http-equiv="Refresh" content="3;URL=../login.php" />
@@ -36,17 +36,17 @@ $user->closeSession()
 <body>
 <div id="cont">
 			<div id="head">
-				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: <?=__("home")?>">gelato cms</a></h1>
+				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: <?php echo __("home")?>">gelato cms</a></h1>
 				<ul id="nav">
-					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?=__("Take me to the tumblelog")?>"><?=__("Back to the Tumblelog")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?php echo __("Take me to the tumblelog")?>"><?php echo __("Back to the Tumblelog")?></a></li>
 			  	</ul>
 			</div>
 			<div id="main">				
 				
 				<div class="box">
 					<ul class="menu manage">
-					<h3><?=__("Closing session")?></h3>
-					<li class="selected"><a><?=__("logoff")?></a></li>
+					<h3><?php echo __("Closing session")?></h3>
+					<li class="selected"><a><?php echo __("logoff")?></a></li>
 					</ul>
 				
 					<div class="tabla">
@@ -54,11 +54,11 @@ $user->closeSession()
 <?php
 						if (@session_destroy()) {
 ?>		
-							<h2><?=__("Ending session...")?></h2>
+							<h2><?php echo __("Ending session...")?></h2>
 <?php
 						} else {	
 ?>
-							<h2><?=__("Has happened an error when closing the session.")?></h2>
+							<h2><?php echo __("Has happened an error when closing the session.")?></h2>
 <?php
 						}	
 ?> 

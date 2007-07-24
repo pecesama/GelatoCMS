@@ -65,21 +65,21 @@ if ($user->isAdmin()) {
 	</head>
 	
 	<body>
-		<div id="div-process" style="display:none;"><?=__("Processing request...");?></div>
+		<div id="div-process" style="display:none;"><?php echo __("Processing request...");?></div>
 		<div id="cont">
 			<div id="head">
-				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: <?=__("home")?>">gelato cms</a></h1>
+				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: <?php echo __("home")?>">gelato cms</a></h1>
 				<ul id="nav">
-					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?=__("Take me to the tumblelog")?>"><?=__("Back to the Tumblelog")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?php echo __("Take me to the tumblelog")?>"><?php echo __("Back to the Tumblelog")?></a></li>
 			  	</ul>
 			</div>
 			<div id="main">				
 				
 				<div class="box">
 					<ul class="menu manage">
-					<h3><?=__("Start session")?></h3>
-					<li><a href="index.php"><?=__("Post")?></a></li>
-					<li><a href="admin.php"><?=__("Users")?></a></li>
+					<h3><?php echo __("Start session")?></h3>
+					<li><a href="index.php"><?php echo __("Post")?></a></li>
+					<li><a href="admin.php"><?php echo __("Users")?></a></li>
 					<li class="selected"><a><?php echo ($isEdition) ? __("Edit") : __("Add"); ?></a></li>
 					</ul>
 				
@@ -96,7 +96,7 @@ if ($user->isAdmin()) {
 							}
 ?>
 							<li>
-								<label for="login"><?=__("user:")?></label>
+								<label for="login"><?php echo __("user:")?></label>
 									<input class="txt" name="login" id="login" type="text" autocomplete="off" value="<?php echo isset($register["login"])?$register["login"]:"";?>" />
 <?php
 							if (!$isEdition) {
@@ -112,27 +112,27 @@ if ($user->isAdmin()) {
 								<div id="target" style="display:none;"></div>
 							</li>
 							<li>
-								<label for="pass"><?=__("password:")?></label>
+								<label for="pass"><?php echo __("password:")?></label>
 									<input class="txt" name="password" id="password" type="password" />
 							</li>
 							<li>
-								<label for="repass"><?=__("retype password:")?></label>
+								<label for="repass"><?php echo __("retype password:")?></label>
 									<input class="txt" name="repass" id="repass" type="password" />
 							</li>
 							<li>
-								<label for="name"><?=__("name:")?></label>
+								<label for="name"><?php echo __("name:")?></label>
 									<input class="txt" name="name" id="name" type="text" value="<?php echo isset($register["name"])?$register["name"]:"";?>" />
 							</li>
 							<li>
-								<label for="email"><?=__("e-mail:")?></label>
+								<label for="email"><?php echo __("e-mail:")?></label>
 									<input class="txt" name="email" id="email" type="text" value="<?php echo isset($register["email"])?$register["email"]:"";?>" />
 							</li>
 							<li>
-								<label for="website"><?=__("website:")?></label>
+								<label for="website"><?php echo __("website:")?></label>
 									<input class="txt" name="website" id="website" type="text" value="<?php echo isset($register["website"])?$register["website"]:"";?>" />
 							</li>								
 							<li>
-								<label for="about"><?=__("about:")?></label><br />
+								<label for="about"><?php echo __("about:")?></label><br />
 									<textarea rows="5" cols="50" name="about" id="about" tabindex="7"><?php echo isset($register["about"])?$register["about"]:"";?></textarea>									
 							</li>								
 							<li>

@@ -32,7 +32,7 @@ if ($user->isAdmin()) {
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>gelato :: <?=__("settings")?></title>
+		<title>gelato :: <?php echo __("settings")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
@@ -55,23 +55,23 @@ if ($user->isAdmin()) {
 	</head>
 	
 	<body>
-		<div id="div-process" style="display:none;"><?=__("Processing request...")?></div>
+		<div id="div-process" style="display:none;"><?php echo __("Processing request...")?></div>
 		<div id="cont">
 			<div id="head">
-				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: <?=__("home")?>">gelato cms</a></h1>
+				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: <?php echo __("home")?>">gelato cms</a></h1>
 				<ul id="nav">
-					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?=__("Take me to the tumblelog")?>"><?=__("Back to the Tumblelog")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?php echo __("Take me to the tumblelog")?>"><?php echo __("Back to the Tumblelog")?></a></li>
 			  	</ul>
 			</div>
 			<div id="main">				
 				
 				<div class="box">
 					<ul class="menu manage">
-					<h3><?=__("Tumblelog configuration")?></h3>
-					<li><a href="index.php"><?=__("Post")?></a></li>
-					<li><a href="admin.php"><?=__("Users")?></a></li>
-					<li><a href="options.php"><?=__("Options")?></a></li>
-					<li class="selected"><a><?=__("Settings")?></a></li>
+					<h3><?php echo __("Tumblelog configuration")?></h3>
+					<li><a href="index.php"><?php echo __("Post")?></a></li>
+					<li><a href="admin.php"><?php echo __("Users")?></a></li>
+					<li><a href="options.php"><?php echo __("Options")?></a></li>
+					<li class="selected"><a><?php echo __("Settings")?></a></li>
 					</ul>
 					<p>&nbsp;</p>
 <?php
@@ -91,15 +91,15 @@ if ($user->isAdmin()) {
 						<form action="settings.php" method="post" id="settings_form" autocomplete="off" class="newpost">							
 							<fieldset>								
 								<ul>							
-									<li><label for="title"><?=__("Title:")?></label>
+									<li><label for="title"><?php echo __("Title:")?></label>
 										<input type="text" name="title" id="title" value="<?php echo $conf->title;?>" class="txt"/></li>
-									<li><label for="description"><?=__("Description:")?></label>
+									<li><label for="description"><?php echo __("Description:")?></label>
 										<input type="text" name="description" id="description" value="<?php echo $conf->description;?>" class="txt"/></li>
-									<li><label for="url_installation"><?=__("Installation URL")?></label>
+									<li><label for="url_installation"><?php echo __("Installation URL")?></label>
 										<input type="text" name="url_installation" id="url_installation" value="<?php echo $conf->urlGelato;?>" class="txt"/></li>
-									<li><label for="posts_limit"><?=__("Post limit:")?></label>
+									<li><label for="posts_limit"><?php echo __("Post limit:")?></label>
 										<input type="text" name="posts_limit" id="posts_limit" value="<?php echo $conf->postLimit;?>" class="txt"/></li>
-									<li><label for="lang"><?=__("Language:")?></label>
+									<li><label for="lang"><?php echo __("Language:")?></label>
 										<select id="lang" name="lang">
 <?php									
 										$langs = getLangs();
@@ -111,7 +111,7 @@ if ($user->isAdmin()) {
 ?>
 										</select>
 									</li>
-									<li><label for="template"><?=__("Template:")?></label>
+									<li><label for="template"><?php echo __("Template:")?></label>
 										<select id="template" name="template">
 <?php
 										$themes = getThemes();
@@ -126,7 +126,7 @@ if ($user->isAdmin()) {
 								</ul>
 							</fieldset>
 							<p>
-								<input type="submit" name="btnsubmit" id="btnsubmit" value="<?=__("Modify")?>" class="submit"/>
+								<input type="submit" name="btnsubmit" id="btnsubmit" value="<?php echo __("Modify")?>" class="submit"/>
 							</p>
 						</form>	
 								
