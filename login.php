@@ -20,8 +20,6 @@ require_once(dirname(__FILE__)."/classes/configuration.class.php");
 $user = new user();
 $conf = new configuration();
 
-die($user->validateUser($_POST['login'], md5($_POST['pass']))."<");
-
 if ($user->isAdmin()) {
 	header("Location: ".$conf->urlGelato."/admin/index.php");
 } else {

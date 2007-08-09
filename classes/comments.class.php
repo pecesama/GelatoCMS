@@ -23,7 +23,7 @@ class comments extends Conexion_Mysql {
 	}
 	
 	function addComment($fieldsArray) {		
-		if ($this->insertarDeFormulario($this->conf->tablePrefix."data", $fieldsArray)) {
+		if ($this->insertarDeFormulario($this->conf->tablePrefix."comments", $fieldsArray)) {
 			return true;
 		} else {
 			return false;
@@ -55,35 +55,47 @@ class comments extends Conexion_Mysql {
 		return false;	
 	}
 	
-	function confirmacionEmail($email_autor_post, $tit_blog, $desc_blog, $url_blog, $id_post, $titulo_post, $usuario, $email, $pagina_web, $comentario, $ip_usuario) {
-		$msg =  "<br/><br/><font face=verdana><em><font size=2>Hay un nuevo comentario en el post #".$id_post." \"".$titulo_post."\"</font></em><br/><br/>";
-		$msg .=	"Autor : ".$usuario." (IP: ".$ip_usuario.")<br /><br />";
-		$msg .=	"E-mail : <a href=\"mailto:".$email."\">".$email."</a><br /><br />";
-		$msg .=	"URL &nbsp; &nbsp;: <a href=\"".$pagina_web."\" target=\"_blank\">".$pagina_web."</a><br /><br />";
-		$msg .=	"Whois &nbsp;: <a href=\"http://ws.arin.net/cgi-bin/whois.pl?queryinput=".$ip_usuario."\" target=\"_blank\">http://ws.arin.net/cgi-bin/whois.pl?queryinput=".$ip_usuario."</a><br /><br />";
-		$msg .=	"Comentario:<br /><br />".$comentario;
-		$msg .=	"<br /><br /><a href=\"".$url_blog."/index.php?id=".$id_post."\">".$url_blog."/index.php?id=".$id_post."</a><br /><br />";
-		
-		enviaMail($email_autor_post, "[".$desc_blog."] Nuevo mensaje en: ".$titulo_post."", $msg, EMAIL_ADMIN);
-	}	
-	
-	function obtenerComentarios($idArticulo="") {
-		$this->ejecutarConsulta("select * from ".tabla_prefijo."comentarios WHERE id_post=".$idArticulo." AND spam=0 order by fecha ASC");
+	function getComments($idPost=null, $limit=null, $from=null, $spam=null) {
+		if (isset($idPost)) {
+			$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE id_post=".$idPost." AND spam=0 order by comment_date ASC");
+		} else {			
+			if (isset($limit) && isset($from)) {
+				$limit = " LIMIT $from, $limit";
+			} else { ""; }
+			if (isset($spam)) { $sp = "1"; } else { $sp = "0"; } 
+			$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE spam=".$sp." order by comment_date ASC".$limit);
+		}
 		return $this->mid_consulta;
 	}
 	
-	function contarComentarios($idArticulo="") {
-		$this->ejecutarConsulta("select * from ".tabla_prefijo."comentarios WHERE id_post=".$idArticulo." AND spam=0");
+	function getComment($id="") {
+		$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE id_comment=".$id);
+		return mysql_fetch_array($this->mid_consulta);
+	}
+	
+	function countComments($idPost=null) {
+		if (isset($idPost)) {
+			$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE id_post=".$idPost." AND spam=0");
+		} else {
+			$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE spam=0");
+		}		
 		return $this->contarRegistros();
 	}
 	
-	function mostrarGravatar($email="") {
-		$emailg = $email;
-		$default = URL_CODICE."/images/noGravatar.jpg";
-		$size = 30;
-		$grav_url = "http://www.gravatar.com/avatar.php?gravatar_id=".md5($emailg)."&amp;default=".urlencode($default)."&amp;size=".$size;
-		return "<img src=\"".$grav_url."\" alt=\"Gravatar\" title=\"Gravatar\" />";
+	function deleteComment($idComment) {
+		if ($this->ejecutarConsulta("DELETE FROM ".$this->conf->tablePrefix."comments WHERE id_comment=".$idComment)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
+	function modifyComment($fieldsArray, $id_comment) {
+		if ($this->modificarDeFormulario($this->conf->tablePrefix."comments", $fieldsArray, "id_comment=$id_comment")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 } 
 ?>
