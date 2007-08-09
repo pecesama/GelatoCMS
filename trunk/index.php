@@ -31,6 +31,7 @@
         include("classes/templates.class.php");
         include("classes/pagination.class.php");
         include("classes/user.class.php");
+		include("classes/comments.class.php");
                 
         $user = new user();
         $conf = new configuration();
@@ -47,7 +48,7 @@
                 } else {
                         $id_post = NULL;
                 }
-        }
+        }		
         
         if (isset($_GET["page"])) {
                 $page_num = $_GET["page"];
@@ -262,10 +263,24 @@
 				
 				if ($conf->allowComments) {
 					
-					// before the comments form must be the comments on the DB
+					$comment = new comments();
+					$rsComments = $comment->getComments($register["id_post"]);
+					
+					$input = array("{Comments_Number}", "{Post_Title}");				
+					$output = array($comment->countComments($register["id_post"]), $register["title"]);
+					$template->precargarPlantillaConBloque($input, $output, "template_comments", "comments");
+					while($rowComment = mysql_fetch_array($rsComments)) {
+						
+						$commentAuthor = ($rowComment["web"]=="") ? $rowComment["username"] : "<a href=\"".$rowComment["web"]."\" rel=\"external\">".$rowComment["username"]."</a>";
+						$input = array("{Id_Comment}", "{Comment_Author}", "{Date}", "{Comment}");				
+						$output = array($rowComment["id_comment"], $commentAuthor, date("d.m.y", strtotime($rowComment["comment_date"])), $rowComment["content"]);
+						$template->cargarPlantillaConBloque($input, $output, "template_comments", "comments");
+					}
+					$template->mostrarPlantillaConBloque();
+					
 										
 					$input = array("{User_Cookie}", "{Email_Cookie}", "{Web_Cookie}", "{Id_Post}", "{Form_Action}", "{Date_Added}");
-					$output = array($_COOKIE['cookie_gel_user'], $_COOKIE['cookie_gel_email'], $_COOKIE['cookie_gel_web'], $register["id_post"], $conf->urlGelato."/comments.php", gmmktime());
+					$output = array($_COOKIE['cookie_gel_user'], $_COOKIE['cookie_gel_email'], $_COOKIE['cookie_gel_web'], $register["id_post"], $conf->urlGelato."/admin/comments.php", gmmktime());
 					
 					$template->cargarPlantilla($input, $output, "template_comment_post");
 					$template->mostrarPlantilla(); 

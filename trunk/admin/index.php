@@ -321,6 +321,7 @@ if ($user->isAdmin()) {
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/settings.php"><?php echo __("Settings")?></a></li>
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/options.php"><?php echo __("Options")?></a></li>
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/admin.php"><?php echo __("Users")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/comments.php"><?php echo __("Comments")?></a></li>
 					<li class="selected"><a><?php echo __("Posts")?></a></li>
 					</ul>
 

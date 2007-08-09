@@ -50,7 +50,7 @@ class plantillas {
 		}
 	}	
 		
-	function precargarPlantillaConBloque($entrada, $salida, $plantilla_usar) {		
+	function precargarPlantillaConBloque($entrada, $salida, $plantilla_usar, $nombreBloque) {		
 		$plantilla_usar = "themes/".$this->plantilla."/".$plantilla_usar.".htm";
 		
 		if (!file_exists($plantilla_usar)) {
@@ -64,15 +64,14 @@ class plantillas {
 				$salida_xhtml = stripslashes($salida_xhtml);
 				$this->texto_plantilla = $salida_xhtml;
 				
-				$this->cargaAntesBloque("comentarios");
-				$this->cargaDespuesBloque("comentarios");
+				$this->cargaAntesBloque($nombreBloque);
+				$this->cargaDespuesBloque($nombreBloque);
 				
 				$this->antesBloque = $this->procesaBloque($entrada, $salida, $this->antesBloque);
 				$this->despuesBloque = $this->procesaBloque($entrada, $salida, $this->despuesBloque);
 			} 
 		}
-	}
-	
+	}	
 	
 	function cargarPlantillaConBloque($entrada, $salida, $plantilla_usar, $nombreBloque) {		
 		$plantilla_usar = "themes/".$this->plantilla."/".$plantilla_usar.".htm";
@@ -93,8 +92,7 @@ class plantillas {
 				$this->bloqueFinal .= $this->procesaBloque($entrada, $salida, $this->bloque);
 			} 
 		}
-	}
-	
+	}	
 	
 	function procesaBloque($entrada, $salida, $bloque) {
 		for ($i = 0; $i < count($entrada); $i++) {
@@ -139,5 +137,4 @@ class plantillas {
 		echo $texto;
 	}
 }
-
 ?>
