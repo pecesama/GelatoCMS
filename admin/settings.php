@@ -73,7 +73,6 @@ if ($user->isAdmin()) {
 					<li><a href="options.php"><?php echo __("Options")?></a></li>
 					<li class="selected"><a><?php echo __("Settings")?></a></li>
 					</ul>
-					<p>&nbsp;</p>
 <?php
 					if (isset($_GET["modified"])) {
 						if ($_GET["modified"]=="true") {
