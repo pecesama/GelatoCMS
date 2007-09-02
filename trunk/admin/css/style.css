@@ -63,25 +63,19 @@ body{ background: #fff; text-align:center; font-family:"Trebuchet Ms", Verdana, 
 
 form.newpost{ width:500px; margin:0 auto; padding:0;}
 form.newpost ul{ list-style-type:none; margin:20px 0 10px 0; padding:0;}
-form.newpost li{ margin:4px 0; padding:0;}
+form.newpost li{ margin:4px 0; padding:0; position:relative;}
+form.newpost li.select{ margin:6px 0;}
 form.newpost label{}
 form.newpost input{ margin-bottom:10px;}
 form.newpost input.txt{ background: #fff url(images/grad-small.png) top left repeat-x; height:15px; border:1px solid #999; width:490px; padding:5px;}
 form.newpost input.btn{ }
 form.newpost textarea{background: #fff url(images/grad-big.png) top left repeat-x; height:190px; border:1px solid #999; width:490px; padding:5px; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:0.8em;}
+form.newpost select{ position:absolute; right:10px; top:1px;}
+html > body form.newpost select{min-width:100px;}
 
-legend.install{
-	font: normal 16.5px/17px georgia, "times new roman", serif;
-	border: 0;
-	margin-top: 0px;
-	padding-top:0;
-	margin-bottom: 0;
-	padding-bottom: 0;	
-	color: #c60;
-	margin-bottom: 10px;
-}
+legend.install{font: normal 16.5px/17px georgia, "times new roman", serif; border: 0; margin-top: 0px; padding-top:0; margin-bottom: 0; padding-bottom: 0; color: #c60; margin-bottom: 10px;}
 
-.tabla{ background-color:#FFFBFF; margin:20px 15px; }
+.tabla{  margin:15px 15px; }
 .entry{ background-color:#efefef; border:1px solid #ccc; margin:20px 15px;}
 .info{ border-bottom:1px solid #aaa; position:relative; display:block; padding:4px 10px; height:20px; }
 .info p{font-size:0.8em; color:#297aab; display:inline;}

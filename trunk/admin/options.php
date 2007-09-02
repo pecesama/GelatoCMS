@@ -99,7 +99,6 @@ if ($user->isAdmin()) {
 					<li><a href="settings.php"><?php echo __("Settings")?></a></li>
 					<li class="selected"><a><?php echo __("Options")?></a></li>
 					</ul>
-					<p>&nbsp;</p>
 <?php
 					if (isset($_GET["modified"])) {
 						if ($_GET["modified"]=="true") {
@@ -117,25 +116,25 @@ if ($user->isAdmin()) {
 						<form action="options.php" method="post" id="options_form" autocomplete="off" class="newpost">							
 							<fieldset>								
 								<ul>																	
-									<li><label for="rich_text"><?php echo __("Rich text editor:")?></label>
+									<li class="select"><label for="rich_text"><?php echo __("Rich text editor:")?></label>
 										<select name="rich_text" id="rich_text">
 											<option value="1" <?php if($conf->richText) echo "selected"; ?>><?php echo __("Active")?></option>
 											<option value="0" <?php if(!$conf->richText) echo "selected"; ?>><?php echo __("Deactive")?></option>
 										</select>
 									</li>
-									<li><label for="url_friendly"><?php echo __("URL friendly:")?></label>
+									<li class="select"><label for="url_friendly"><?php echo __("URL friendly:")?></label>
 										<select name="url_friendly" id="url_friendly">
 											<option value="1" <?php if($conf->urlFriendly) echo "selected"; ?>><?php echo __("Active")?></option>
 											<option value="0" <?php if(!$conf->urlFriendly) echo "selected"; ?>><?php echo __("Deactive")?></option>
 										</select>
 									</li>
-									<li><label for="allow_comments"><?php echo __("Allow readers comments:")?></label>
+									<li class="select"><label for="allow_comments"><?php echo __("Allow readers comments:")?></label>
 										<select name="allow_comments" id="allow_comments">
 											<option value="1" <?php if($conf->allowComments) echo "selected"; ?>><?php echo __("Active")?></option>
 											<option value="0" <?php if(!$conf->allowComments) echo "selected"; ?>><?php echo __("Deactive")?></option>
 										</select>
 									</li>
-									<li><label for="time_offsets"><?php echo __("Time Offset:")?></label>
+									<li class="select"><label for="time_offsets"><?php echo __("Time Offset:")?></label>
 										<select id="time_offsets" name="time_offsets">
 											<option value="-12,Pacific/Kwajalein" <?php echo ($conf->offsetCity=="Pacific/Kwajalein")? "selected=\"selected\"":"" ?>>(GMT -12:00) International Date Line West</option>
 											<option value="-11,Pacific/Samoa" <?php echo ($conf->offsetCity=="Pacific/Samoa")? "selected=\"selected\"":"" ?>>(GMT -11:00) Midway Island, Samoa</option>
@@ -194,7 +193,7 @@ if ($user->isAdmin()) {
 											<option value="9.50,Australia/Adelaide" <?php echo ($conf->offsetCity=="Australia/Adelaide")? "selected=\"selected\"":"" ?>>(GMT +9:30) Adelaide</option>
 											<option value="9.50,Australia/Darwin" <?php echo ($conf->offsetCity=="Australia/Darwin")? "selected=\"selected\"":"" ?>>(GMT +9:30) Darwin</option>
 											<option value="10,Australia/Brisbane" <?php echo ($conf->offsetCity=="Australia/Brisbane")? "selected=\"selected\"":"" ?>>(GMT +10:00) Brisbane, Guam, Port Moresby</option>
-											<option value="10,Australia/Canberra" <?php echo ($conf->offsetCity=="Australia/Canberra")? "selected=\"selected\"":"" ?>>(GMT +10:00) Canberra, Hobart, Melbourne, Sydney, Vladivostok</option>
+											<option value="10,Australia/Canberra" <?php echo ($conf->offsetCity=="Australia/Canberra")? "selected=\"selected\"":"" ?>>(GMT +10:00) Canberra,Melbourne, Sydney, Vladivostok</option>
 											<option value="11,Asia/Magadan" <?php echo ($conf->offsetCity=="Asia/Magadan")? "selected=\"selected\"":"" ?>>(GMT +11:00) Magadan, Soloman Is., New Caledonia</option>
 											<option value="12,Pacific/Auckland" <?php echo ($conf->offsetCity=="Pacific/Auckland")? "selected=\"selected\"":"" ?>>(GMT +12:00) Auckland, Wellington</option>
 											<option value="12,Pacific/Fiji" <?php echo ($conf->offsetCity=="Pacific/Fiji")? "selected=\"selected\"":"" ?>>(GMT +12:00) Fiji, Kamchatka, Marshall Is.</option>
