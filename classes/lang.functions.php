@@ -11,6 +11,9 @@
   =========================== */
 ?>
 <?php
+require_once("streams.class.php");
+require_once("gettext.class.php");
+
 function initLang($lang = "en") {
 	global $l10n;
 

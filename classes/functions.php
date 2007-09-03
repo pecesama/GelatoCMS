@@ -12,7 +12,7 @@
 ?>
 <?php
 	function version() {
-		return "0.85";
+		return "0.90";
 	}
 	
 	function beginsWith($str, $sub) {
