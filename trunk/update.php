@@ -26,43 +26,8 @@ if (!file_exists($configFile)) {
 
 $db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 
-$sqlStr = "CREATE TABLE `".Table_prefix."comments` (
-  `id_comment` int(11) NOT NULL auto_increment,
-  `id_post` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `web` varchar(250) default NULL,
-  `content` text NOT NULL,
-  `ip_user` varchar(50) NOT NULL,
-  `comment_date` datetime NOT NULL,
-  `spam` tinyint(4) NOT NULL,
-  PRIMARY KEY  (`id_comment`)
-) ENGINE = MYISAM ;";
-
-$db->ejecutarConsulta($sqlStr);
-
-$sqlStr = "CREATE TABLE `".Table_prefix."options` (
-  `name` varchar(100) NOT NULL,
-  `val` varchar(255) NOT NULL,
-  PRIMARY KEY  (`name`)
-) ENGINE = MYISAM ;";
-
-$db->ejecutarConsulta($sqlStr);
-
-$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('url_friendly', '1');";
+$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('allow_comments', '0');";
 		
-$db->ejecutarConsulta($sqlStr);
-
-$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('rich_text', '0');";
-
-$db->ejecutarConsulta($sqlStr);
-
-$sqlStr = "ALTER TABLE ".Table_prefix."config DROP url_friendly";
-
-$db->ejecutarConsulta($sqlStr);
-
-$sqlStr = "ALTER TABLE ".Table_prefix."config DROP rich_text";
-
 $db->ejecutarConsulta($sqlStr);
 
 $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', 'Mexico/General');";
@@ -74,6 +39,6 @@ $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_time', '-6');";
 $db->ejecutarConsulta($sqlStr);
 
 echo "<p><em>Finished!</em></p>";
-echo "<p>Now you are running on the new version!!!</p>";
+echo "<p>Now you are running on the new <strong>0.90</strong> version!!!</p>";
 
 ?>
