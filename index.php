@@ -213,7 +213,8 @@
                                 if ($x[0] > 500) {                                      
                                         $photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
                                 } else {
-                                        $photoPath = $register["url"];
+                                        //$photoPath = $register["url"];
+										$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
                                 }
                                 
                                 $effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags($register["description"])."');\" ";

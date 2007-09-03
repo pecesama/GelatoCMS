@@ -1,4 +1,4 @@
--- DB Gelato CMS v0.85
+-- DB Gelato CMS v0.90
 
 CREATE TABLE `gel_data` (
   `id_post` int(11) NOT NULL auto_increment,
@@ -64,3 +64,6 @@ INSERT INTO `gel_users` VALUES (1, 'System administrator', 'admin', 'fe01ce2a7fb
 
 INSERT INTO `gel_options` VALUES ('url_friendly', '1');
 INSERT INTO `gel_options` VALUES ('rich_text', '0');
+INSERT INTO `gel_options` VALUES ('allow_comments', '0');
+INSERT INTO `gel_options` VALUES ('offset_city', 'Mexico/General');
+INSERT INTO `gel_options` VALUES ('offset_time', '-6');

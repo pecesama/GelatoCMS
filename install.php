@@ -335,6 +335,10 @@ function install_db($login, $password, $email, $title, $description, $url_instal
 		
 		$db->ejecutarConsulta($sqlStr);
 		
+		$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('allow_comments', '0');";
+		
+		$db->ejecutarConsulta($sqlStr);
+		
 		$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', '".$offset_city."');";
 		
 		$db->ejecutarConsulta($sqlStr);
