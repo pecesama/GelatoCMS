@@ -11,6 +11,7 @@
   =========================== */
 ?>
 <?php
+require_once("lang.functions.php");
 class configuration extends Conexion_Mysql {
 	
 	var $urlGelato;

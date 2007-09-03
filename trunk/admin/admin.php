@@ -122,9 +122,11 @@ if ($user->isAdmin()) {
 								<td>
 									<a href="user.php?edit=<?php echo $register["id_user"]; ?>"><?php echo __("Edit")?></a>
 								</td>
+								<?php if ($_SESSION["user_id"] != $register["id_user"]) { ?>
 								<td>
 									<a href="user.php?delete=<?php echo $register["id_user"]; ?>"><?php echo __("Delete")?></a>
 								</td>
+								<?php } ?>
 							</tr>
 <?php
 						}
