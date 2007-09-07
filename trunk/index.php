@@ -63,7 +63,7 @@
         $gelato_includes = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n";
         $gelato_includes .= "\t<meta name=\"generator\" content=\"gelato cms ".version()."\" />\n";
         $gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />\n";
-        $gelato_includes .= "\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$conf->urlGelato."/rss.php\"/>\n";
+        $gelato_includes .= "\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php")."\"/>\n";
         $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/themes/".$conf->template."/style.css\"/>\n";
         $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/slimbox.css\" />\n";    
         $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/mootools.js\"></script>\n";
@@ -100,7 +100,7 @@
                         while($register = mysql_fetch_array($rs)) {
 								$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
                                 if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
-                                $permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
+								$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php/post/").$register["id_post"]."/";
                                 
 								$textile = new Textile();				
 								$register["description"] = $textile->TextileThis($register["description"]);
@@ -177,7 +177,7 @@
                         $p->limit($limit);
                         
                         $p->urlFriendly('[...]');
-                        $p->target($conf->urlGelato."/index.php/page/[...]/");
+						$p->target($conf->urlGelato.($conf->urlFriendly?"/":"/index.php/")."page/[...]/");
                         
                         $p->currentPage(isset($page_num) ? $page_num : 1);
                         $p->show();
@@ -190,7 +190,7 @@
                 $register = $tumble->getPost($id_post);
                 
 				$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
-                $permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
+				$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php/post/").$register["id_post"]."/";
                 
 				$textile = new Textile();				
 				$register["description"] = $textile->TextileThis($register["description"]);
