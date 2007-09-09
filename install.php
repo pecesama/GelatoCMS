@@ -25,6 +25,7 @@ if (!file_exists($configFile)) {
 	$showForm = true;
 }
 
+
 include("classes/functions.php");
  
 $errors_d=array();
@@ -42,7 +43,7 @@ if (isset($_POST['action'])){
 	$action=$_POST['action'];
 }
 
-if ($action=="config") {
+if ($action=="config" && !is_db_installed()) {
 	
 	$sep_err="";
 	
@@ -83,6 +84,9 @@ if ($action=="config") {
 		$showForm=true;
 	}
 }
+	
+	
+	$showForm = (!is_db_installed());
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -347,6 +351,7 @@ function install_db($login, $password, $email, $title, $description, $url_instal
 		
 		$db->ejecutarConsulta($sqlStr);
 
+		$db->cierraConexion();
 		return true;
 }
 
@@ -364,5 +369,16 @@ function mostrarerror($errors,$errors_d,$n) {
 	} else {
 		return "";
 	}
+}
+
+function is_db_installed(){
+
+		$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);		
+		
+		$sqlStr = "SELECT * FROM `".Table_prefix."config`";	
+		
+		$db->ejecutarConsulta($sqlStr);
+
+		return ($db->contarRegistros() > 0);
 }
 ?>
