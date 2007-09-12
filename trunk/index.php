@@ -121,12 +121,12 @@
                                                 
                                                 $x = @getimagesize($fileName);                                          
                                                 if ($x[0] > 500) {                                                      
-                                                        $photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
-                                                } else {
-                                                        $photoPath = $register["url"];
+													$photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
+                                                } else {													
+													$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
                                                 }
                                                 
-                                                $effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags($register["description"])."');\" ";
+                                                $effect = " onclick=\"Lightbox.show('".str_replace("../", $conf->urlGelato."/", $register["url"])."', '".strip_tags($register["description"])."');\" ";
                                                 
                                                 $input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
                                                 $output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
@@ -213,11 +213,10 @@
                                 if ($x[0] > 500) {                                      
                                         $photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
                                 } else {
-                                        //$photoPath = $register["url"];
 										$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
                                 }
                                 
-                                $effect = " onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags($register["description"])."');\" ";
+                                $effect = " onclick=\"Lightbox.show('".str_replace("../", $conf->urlGelato."/", $register["url"])."', '".strip_tags($register["description"])."');\" ";
                                                 
                                 $input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
                                 $output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
