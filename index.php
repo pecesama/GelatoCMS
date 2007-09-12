@@ -100,7 +100,8 @@
                         while($register = mysql_fetch_array($rs)) {
 								$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
                                 if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
-								$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php/post/").$register["id_post"]."/";
+								$strEnd=($conf->urlFriendly) ? "/" : "";
+								$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
                                 
 								$textile = new Textile();				
 								$register["description"] = $textile->TextileThis($register["description"]);
@@ -177,7 +178,7 @@
                         $p->limit($limit);
                         
                         $p->urlFriendly('[...]');
-						$p->target($conf->urlGelato.($conf->urlFriendly?"/":"/index.php/")."page/[...]/");
+						$p->target($conf->urlGelato.($conf->urlFriendly?"/page/":"/index.php?page=")."[...]");
                         
                         $p->currentPage(isset($page_num) ? $page_num : 1);
                         $p->show();
@@ -190,7 +191,8 @@
                 $register = $tumble->getPost($id_post);
                 
 				$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
-				$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php/post/").$register["id_post"]."/";
+				$strEnd=($conf->urlFriendly) ? "/" : "";
+				$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
                 
 				$textile = new Textile();				
 				$register["description"] = $textile->TextileThis($register["description"]);
