@@ -177,8 +177,11 @@
                         $p->Items($tumble->getPostsNumber());
                         $p->limit($limit);
                         
-                        $p->urlFriendly('[...]');
-						$p->target($conf->urlGelato.($conf->urlFriendly?"/page/":"/index.php?page=")."[...]");
+						if($conf->urlFriendly){
+								$p->urlFriendly('[...]');
+								$p->target($conf->urlGelato."/page/[...]");
+							}else
+								$p->target($conf->urlGelato);
                         
                         $p->currentPage(isset($page_num) ? $page_num : 1);
                         $p->show();
