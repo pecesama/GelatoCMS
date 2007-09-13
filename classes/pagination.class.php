@@ -75,13 +75,15 @@ Author URI: http://www.mis-algoritmos.com
 						echo "<div class=\"$this->className\">$this->pagination</div>";
 			}
 		function get_pagenum_link($id){
-				if(strpos($this->target,'?')===false)
+				//if(strpos($this->target,'?')===false)
 						if($this->urlF)
 								return str_replace($this->urlF,$id,$this->target);
+								
 							else
 								return "$this->target?$this->parameterName=$id";
-					else
-						return "$this->target&$this->parameterName=$id";
+					//else 
+						//return "$this->target&$this->parameterName=$id";
+						
 			}
 		
 		function calculate(){

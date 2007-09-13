@@ -79,15 +79,18 @@
 					$desc = $tumble->getMp3Player($register["url"]);
 					break;
 			}
-			$url = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php/post/").$register["id_post"]."/";
-			$formatedDate = gmdate("D, d M Y H:i:s \G\M\T", strtotime($register["date"]));
+			$tit = htmlspecialchars($tit);
+			$url = htmlspecialchars($url);
+			$strEnd=($conf->urlFriendly) ? "/" : "";
+			$url = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
+			$formatedDate = date("r", strtotime($register["date"])+transform_offset($conf->offsetTime));
 ?>
 
 			<item>
 				<title><?php echo $tit;?></title>
 				<description><![CDATA[<?php echo $desc;?>]]></description>
 				<link><?php echo $url;?></link>
-				<guid isPermaLink="true"><?php echo $conf->urlGelato."/index.php/post/".$register["id_post"]."/";?></guid>				
+				<guid isPermaLink="true"><?php echo $url;?></guid>				
 				<pubDate><?php echo $formatedDate;?></pubDate>				
 			</item>
 
