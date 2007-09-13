@@ -108,7 +108,7 @@ if ($action=="config" && !is_db_installed()) {
 	
 	<div id="main">
 	
-<?
+<?php
 
 	if ($showForm) {
 ?>
