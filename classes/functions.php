@@ -216,8 +216,8 @@
 				if (!$f) {
 					return false;
 				}
-		
-				$q = "GET " . $data['path'] . "?" . $data['query'] . " HTTP/1.1\r\n";
+
+				$q = "GET " . $data['path'] . (isset($data['query'])?'?'.$data['query']:'') . " HTTP/1.1\r\n";
 				$q .= "Host: " . $data['host'] . "\r\n";
 				$q .= "Connection: close\r\n";
 				$q .= "Referer: http://www.gelatocms.com/\r\n\r\n";
