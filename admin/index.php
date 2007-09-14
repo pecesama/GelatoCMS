@@ -151,13 +151,13 @@ if ($user->isAdmin()) {
 				<div class="box">
 					<ul class="menu">
 					<h3><?php echo __("New Post")?></h3>					
-					<li<?php echo ($_GET["new"]=="conversation") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=conversation"><img src="css/images/comments.png" alt="New chat" /> <?php echo __("Chat")?></a></li>
-					<li<?php echo ($_GET["new"]=="quote") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=quote"><img src="css/images/quote.png" alt="New qoute" /> <?php echo __("Quote")?></a></li>
-					<li<?php echo ($_GET["new"]=="url") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=url"><img src="css/images/world.png" alt="New link" /> <?php echo __("Link")?></a></li>
-					<li<?php echo ($_GET["new"]=="mp3") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=mp3"><img src="css/images/music.png" alt="New audio" /> <?php echo __("Audio")?></a></li>
-					<li<?php echo ($_GET["new"]=="video") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=video"><img src="css/images/film.png" alt="New video" /> <?php echo __("Video")?></a></li>
-					<li<?php echo ($_GET["new"]=="photo") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=photo"><img src="css/images/image.png" alt="New picture" /> <?php echo __("Picture")?></a></li>
-					<li<?php echo ($_GET["new"]=="post") ? " class=\"selected\"" : ""; echo (!isset($_GET["new"])) ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=post"><img src="css/images/page.png" alt="New post" /> <?php echo __("Regular")?></a></li>
+					<li<?php echo (isset($_GET["new"]) && $_GET["new"]=="conversation") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=conversation"><img src="css/images/comments.png" alt="New chat" /> <?php echo __("Chat")?></a></li>
+					<li<?php echo (isset($_GET["new"]) && $_GET["new"]=="quote") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=quote"><img src="css/images/quote.png" alt="New qoute" /> <?php echo __("Quote")?></a></li>
+					<li<?php echo (isset($_GET["new"]) && $_GET["new"]=="url") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=url"><img src="css/images/world.png" alt="New link" /> <?php echo __("Link")?></a></li>
+					<li<?php echo (isset($_GET["new"]) && $_GET["new"]=="mp3") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=mp3"><img src="css/images/music.png" alt="New audio" /> <?php echo __("Audio")?></a></li>
+					<li<?php echo (isset($_GET["new"]) && $_GET["new"]=="video") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=video"><img src="css/images/film.png" alt="New video" /> <?php echo __("Video")?></a></li>
+					<li<?php echo (isset($_GET["new"]) && $_GET["new"]=="photo") ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=photo"><img src="css/images/image.png" alt="New picture" /> <?php echo __("Picture")?></a></li>
+					<li<?php echo (isset($_GET["new"]) && $_GET["new"]=="post") ? " class=\"selected\"" : ""; echo (!isset($_GET["new"])) ? " class=\"selected\"" : ""; ?>><a href="<?php echo $conf->urlGelato;?>/admin/index.php?new=post"><img src="css/images/page.png" alt="New post" /> <?php echo __("Regular")?></a></li>
 					</ul>
 					<p>&nbsp;</p>					
 <?php			
@@ -203,7 +203,7 @@ if ($user->isAdmin()) {
 						}
 					}					
 ?>					
-					<form action="index.php" method="post" <?php echo ($_GET["new"]=="photo") ? "enctype=\"multipart/form-data\"" : ""?> name="frmAdd" class="newpost">
+					<form action="index.php" method="post" <?php echo (isset($_GET["new"]) && $_GET["new"]=="photo") ? "enctype=\"multipart/form-data\"" : ""?> name="frmAdd" class="newpost">
 						<fieldset>
 <?php
 							if ($isEdition) {
@@ -242,7 +242,7 @@ if ($user->isAdmin()) {
 							$url = ($isEdition) ? $post["url"] : "";
 							
 							
-							switch ($_GET["new"]) {
+							switch (isset($_GET["new"]) && $_GET["new"]) {
 								case "post":
 									$input = array("{type}", "{date}", "{id_user}", "{editTitle}", "{editBody}");
 									$output = array("1", $date, $_SESSION['user_id'], $title, $body);
