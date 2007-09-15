@@ -42,6 +42,9 @@
 
         if (isset($_GET["post"])) {
                 $id_post = $_GET["post"];
+                if (!is_numeric($id_post) && $id_post < 1 ){
+                	header("Location: index.php");
+                }
         } else {
                 if (isset($param_url[1]) && $param_url[1]=="post") {
                         $id_post = (isset($param_url[2])) ? ((is_numeric($param_url[2])) ? $param_url[2] : NULL) : NULL;
