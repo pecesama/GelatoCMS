@@ -1,5 +1,5 @@
 <?php
-
+ if(!defined('entry') || !entry) die('Not a valid page');
 /**
  * Example: get XHTML from a given Textile-markup string ($string)
  *

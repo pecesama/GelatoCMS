@@ -1,4 +1,5 @@
 <?php
+if(!defined('entry')) define('entry',true);
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -11,17 +12,9 @@
   =========================== */
 ?>
 <?php
-require_once('../config.php');
-include("../classes/functions.php");
-include("../classes/user.class.php");
-include("../classes/comments.class.php");
-include("../classes/templates.class.php");
-include("../classes/pagination.class.php");
-require_once("../classes/configuration.class.php");
+require_once('../entry.php');
 
-$user = new user();
 $comment = new comments();
-$conf = new configuration();
 $template = new plantillas("admin");
 $isAdmin = $user->isAdmin();
 $isEdition = isset($_GET["edit"]);

@@ -1,4 +1,5 @@
 <?php
+if(!defined('entry'))define('entry', true);
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -11,18 +12,10 @@
   =========================== */
 ?>
 <?php
-require_once('../config.php');
-include("../classes/functions.php");
-include("../classes/user.class.php");
-include("../classes/pagination.class.php");
-include("../classes/gelato.class.php");
-include("../classes/textile.class.php");
-include("../classes/templates.class.php");
-require_once("../classes/configuration.class.php");
 
-$user = new user();
-$tumble = new gelato();
-$conf = new configuration();
+
+require('../entry.php');
+global $user, $conf, $tumble;
 $template = new plantillas("admin");
 
 $isEdition = (isset($_GET["edit"])) ? true : false;
@@ -144,7 +137,7 @@ if ($user->isAdmin()) {
 				<h1><a href="<?php echo $conf->urlGelato;?>/admin/index.php" title="gelato :: <?php echo __("home")?>">gelato cms</a></h1>
 				<ul id="nav">
 					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?php echo __("Take me to the tumblelog")?>"><?php echo __("View Tumblelog")?></a></li>
-					<li><a href="close.php" title="Log off" onclick="return exit('div-process','<?php echo $conf->urlGelato;?>/admin/ajax.php?action=close');"><?php echo __("Log out")?></a></li>
+					<li><a href="close.php" title="Log off" ><?php echo __("Log out")?></a></li>
 			  	</ul>
 			</div>
 			<div id="main">
@@ -241,8 +234,8 @@ if ($user->isAdmin()) {
 							$body = ($isEdition) ? stripslashes($post["description"]) : "";
 							$url = ($isEdition) ? $post["url"] : "";
 							
-							
-							switch (isset($_GET["new"]) && $_GET["new"]) {
+							if (!isset($_GET['new'])) $_GET['new'] = 'default';
+							switch ($_GET["new"]) {
 								case "post":
 									$input = array("{type}", "{date}", "{id_user}", "{editTitle}", "{editBody}");
 									$output = array("1", $date, $_SESSION['user_id'], $title, $body);

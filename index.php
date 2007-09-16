@@ -1,5 +1,6 @@
 <?php
-/* ===========================
+if(!defined('entry'))define('entry', true);
+ /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
   development version
@@ -11,32 +12,14 @@
   =========================== */
 ?>
 <?php
+
+// Received a valid request, better start setting globals we'll need throughout the app in entry.php
+require_once('entry.php');
+global $user, $tumble, $conf, $db;
+
+$template = new plantillas($conf->template);
         // My approach to MVC
-        
-        $configFile = dirname(__FILE__).DIRECTORY_SEPARATOR."config.php";
-        
-        if (!file_exists($configFile)) {
-                $mensaje = "
-                        <h3 class=\"important\">Error reading configuration file</h3>                   
-                        <p>There doesn't seem to be a <code>config.php</code> file. I need this before we can get started.</p>
-                        <p>This either means that you did not rename the <code>config-sample.php</code> file to <code>config.php</code>.</p>";
-                die($mensaje);  
-        } else {
-                require(dirname(__FILE__).DIRECTORY_SEPARATOR."config.php");
-        }       
-        
-        include("classes/configuration.class.php");
-        include("classes/textile.class.php");
-        include("classes/gelato.class.php");    
-        include("classes/templates.class.php");
-        include("classes/pagination.class.php");
-        include("classes/user.class.php");
-		include("classes/comments.class.php");
-                
-        $user = new user();
-        $conf = new configuration();
-        $tumble = new gelato();
-        $template = new plantillas($conf->template);
+
 
         if(isset($_SERVER['PATH_INFO'])) $param_url = explode("/",$_SERVER['PATH_INFO']);
 
@@ -78,7 +61,7 @@
         $template->cargarPlantilla($input, $output, "template_header");
         $template->mostrarPlantilla();
         
-        if ($user->isAdmin()) { 
+        if ($user->isAuthenticated()) { 
                 $input = array("{User}", "{URL_Tumble}");
                 $output = array($_SESSION["user_login"], $conf->urlGelato);
                 

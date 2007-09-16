@@ -1,4 +1,5 @@
 <?php
+if(!defined('entry') || !entry) die('Not a valid page'); 
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -15,41 +16,46 @@ require_once("configuration.class.php");
 
 class user extends Conexion_Mysql {
 	var $conf;
+	var $cookieString;
+	var $cookieTime;
+	var $persist = false;
+
 
 	function user() {
 		parent::Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
+		$this->cookie_life = 60*24*3600;
+		$this->cookieTime = time();
 		$this->conf = new configuration();
 	}
 
 	function isAdmin() {
-		if(isset($_COOKIE["gelato_cookie"]) && $_COOKIE["gelato_cookie"] && $_COOKIE["gelato_cookie"]!="") {
-			$galleta = explode(",",$_COOKIE["gelato_cookie"]);
-			if ($this->validateUser($galleta[1],$galleta[2])) {
-				$_SESSION["user_id"]=$galleta[0];
-				$_SESSION["user_login"]=$galleta[1];
-			} else {
-				$_SESSION["user_id"]="";
-				$_SESSION["user_login"]="";
-				unset($_SESSION["user_id"]);
-				unset($_SESSION["user_login"]);
-			}
-		}
-		if (isset($_SESSION["user_id"]) && isset($_SESSION["user_login"])) {
+		
+		if ((!empty($_SESSION["user_id"]) && !empty($_SESSION["user_login"]))  && (isset($_SESSION['authenticated'])  && $_SESSION['authenticated']==true)) {
 			return true;
 		}
+		
+		if(isset($_COOKIE["PHPSESSID"]) && $_COOKIE["PHPSESSID"]!="") {
+			if ((!empty($_SESSION["user_id"]) && !empty($_SESSION["user_login"]))  && (isset($_SESSION['authenticated'])  && $_SESSION['authenticated']==true)) {
+				return true;
+			} 
+		}
+		
 		return false;
+		
 	}
 
-	function validateUser($user="", $password="") {
-		if ($this->ejecutarConsulta("SELECT id_user, login, password  FROM ".$this->conf->tablePrefix."users WHERE login='".sql_escape($user)."' AND password='".$password."'")) {
+	function validateUser($username="", $password="") {
+
+		if ($this->ejecutarConsulta("SELECT id_user, login, password  FROM ".$this->conf->tablePrefix."users WHERE login='".sql_escape($username)."' AND password='".$password."'")) {
 			if ($this->contarRegistros()>0) {
 				$register=$this->obtenerRegistro();
 				$_SESSION['user_id']=$register["id_user"];
 				$_SESSION['user_login']=$register["login"];
+				$_SESSION['authenticated'] = true;
 				if (isset($_POST["save_pass"])) {
-					$cookie_life = 60*24*3600;
-					setcookie("gelato_cookie",$register["id_user"].",".$register["login"].",".$register["password"],time()+$cookie_life);
-				}
+					$this->persist = true;
+					setcookie("PHPSESSID",session_id(),$this->cookieTime+$this->cookie_life);
+				} 
 				return true;
 			} else {
 				return false;
@@ -59,18 +65,9 @@ class user extends Conexion_Mysql {
 		}
 	}
 
-	function closeSession() {
-		$_SESSION = array();
-		$_COOKIE["gelato_cookie"]="";
-		setcookie("gelato_cookie","",time()-3600,'/','',0);
-		setcookie("gelato_cookie","",0);
-		unset($_COOKIE["gelato_cookie"]);
-		unset($_COOKIE[session_name()]);
-		if (session_destroy()) {
-			return true;
-		} else {
-			return false;
-		}
+	function closeSession() {	
+		if (!$this->persist) session_destroy();
+		return true;	
 	}
 
 	function userExist($user="") {
@@ -81,6 +78,10 @@ class user extends Conexion_Mysql {
 				return false;
 			}
 		}
+	}
+	
+	function isAuthenticated(){
+		return $this->isAdmin();
 	}
 
 	function addUser($fieldsArray) {

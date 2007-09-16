@@ -1,4 +1,6 @@
 <?php
+ if(!defined('entry') || !entry) die('Not a valid page');
+ 
 /*
    Copyright (c) 2003 Danilo Segan <danilo@kvota.net>.
    Copyright (c) 2005 Nico Kaiser <nico@siriux.net>

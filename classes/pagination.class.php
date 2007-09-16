@@ -1,4 +1,6 @@
 <?php
+ if(!defined('entry') || !entry) die('Not a valid page');
+
 class pagination{
 /*
 Script Name: *Digg Style Paginator Class
