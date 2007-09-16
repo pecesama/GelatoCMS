@@ -1,4 +1,5 @@
 <?php
+ if(!defined('entry') || !entry) die('Not a valid page');
 /**
  * version 0.0.1
  *

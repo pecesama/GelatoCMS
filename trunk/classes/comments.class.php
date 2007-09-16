@@ -1,4 +1,5 @@
 <?php
+if(!defined('entry') || !entry) die('Not a valid page'); 
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -9,10 +10,6 @@
   Copyright (C) 2007 by Pedro Santana <pecesama at gmail dot com>
 
   =========================== */
-?>
-<?php
-require_once("configuration.class.php");
-require_once("functions.php");
 
 class comments extends Conexion_Mysql {
 	var $conf;

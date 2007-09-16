@@ -1,4 +1,5 @@
 <?php
+if(!defined('entry')) define('entry',true);  
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -9,17 +10,12 @@
   Copyright (C) 2007 by Pedro Santana <pecesama at gmail dot com>
 
   =========================== */
-?>
-<?php
-require_once('../config.php');
+
 include("../classes/functions.php");
 include("../classes/user.class.php");
 include("../classes/gelato.class.php");
 require_once("../classes/configuration.class.php");
-
-$user = new user();
-$tumble = new gelato();
-$conf = new configuration();
+require_once('../entry.php');
 
 if ($user->isAdmin()) {
 	

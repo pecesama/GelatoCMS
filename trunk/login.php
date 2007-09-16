@@ -1,4 +1,5 @@
 <?php
+if(!defined('entry'))define('entry', true);
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -12,25 +13,21 @@
 ?>
 <?php
 header("Cache-Control: no-cache, must-revalidate");
-require( dirname(__FILE__) . '/config.php' );
-include(dirname(__FILE__)."/classes/functions.php");
-include(dirname(__FILE__)."/classes/user.class.php");
-require_once(dirname(__FILE__)."/classes/configuration.class.php");
- 
-$user = new user();
-$conf = new configuration();
 
-if ($user->isAdmin()) {
+require_once('entry.php');
+global $user, $conf;
+
+if ($user->isAuthenticated()) {
 	header("Location: ".$conf->urlGelato."/admin/index.php");
 } else {
 	if (isset($_POST["pass"]) && isset($_POST["login"])) {		
+		//print "<pre>"; print_r($_SESSION); print "</pre>";die();
 		if ($user->validateUser($_POST['login'], md5($_POST['pass']))) {
 			header("Location: ".$conf->urlGelato."/admin/index.php");
 		} else {
 			header("Location: ".$conf->urlGelato."/login.php?error=1");
 		}
-	}
-	else {
+	} else {
 ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 	<html xmlns="http://www.w3.org/1999/xhtml">
