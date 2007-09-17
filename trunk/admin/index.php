@@ -99,6 +99,8 @@ if ($user->isAdmin()) {
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/mootools.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/slimbox.js"></script>
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/prototype.js"></script>
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/form.autosave.js"></script>
 		<script language="javascript" type="text/javascript">
 		<!--
 			function exit(el, path) {
@@ -196,8 +198,9 @@ if ($user->isAdmin()) {
 						}
 					}					
 ?>					
-					<form action="index.php" method="post" <?php echo (isset($_GET["new"]) && $_GET["new"]=="photo") ? "enctype=\"multipart/form-data\"" : ""?> name="frmAdd" class="newpost">
+					<form action="index.php" method="post" <?php echo (isset($_GET["new"]) && $_GET["new"]=="photo") ? "enctype=\"multipart/form-data\"" : ""?> name="frmAdd" id="autosave" class="newpost">
 						<fieldset>
+						<div id="update" style="display:none;" class="exito"></div><br />
 <?php
 							if ($isEdition) {
 ?>
@@ -302,6 +305,13 @@ if ($user->isAdmin()) {
 								</p>
 						</fieldset>
 					</form>
+					<div id="serialize"></div>
+					<script type="text/javascript" language="javascript" charset="utf-8">
+					// <![CDATA[
+						//id: formulario, id: info, options
+						new Form.autoSave('autosave','update',{});
+					// ]]>
+					</script>
 					
 					<div class="footer-box">&nbsp;</div>
 				</div>
