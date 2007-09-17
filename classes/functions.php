@@ -85,7 +85,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 	
 	function getFile($remoteFileName) {
-		$fileName = sanitizeName("../uploads/".$remoteFileName);
+		$fileName = "../uploads/".sanitizeName($remoteFileName);
 		$str = _file_get_contents($remoteFileName);
 		if (!$handle = fopen($fileName, 'w')) {
 			return false;
