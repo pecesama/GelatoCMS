@@ -7,6 +7,8 @@
  * install.php
  * index.php
  * login.php
+ * update.php
+ * rss.php
  * admin/index.php
  * admin/close.php
  * admin/ajax.php
