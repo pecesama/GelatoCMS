@@ -22,7 +22,6 @@ if(!defined('entry') || !entry) die('Not a valid page');
 
 	define('Absolute_Path', dirname(__FILE__).DIRECTORY_SEPARATOR);	
 	
-	session_start();
 	header("Expires: Mon, 26 Jul 1957 05:00:00 GMT");
 	header("Last-Modified: " . gmdate("D, d M Y H:i:s ") . " GMT");
 	header("Cache-Control: no-store, no-cache, must-revalidate");
