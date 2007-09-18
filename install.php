@@ -90,7 +90,7 @@ $install->check_form();
 						<li><label for="description">Description:</label>
 							<input type="text" name="description" id="description" value="" class="txt"/></li>
 						<li><label for="url_installation">Installation URL</label>
-							<input type="text" name="url_installation" id="url_installation" value="<?php print substr($_SERVER["SCRIPT_URI"], '0', '-12'); ?>" class="txt"/><?php echo $install->mostrarerror("5")?></li>
+							<input type="text" name="url_installation" id="url_installation" value="<?php if(isset($_SERVER['SCRIPT_URI']))echo substr($_SERVER["SCRIPT_URI"], '0', '-12'); ?>" class="txt"/><?php echo $install->mostrarerror("5")?></li>
 						<li><label for="posts_limit">Post limit:</label>
 							<input type="text" name="posts_limit" id="posts_limit" value="10" class="txt"/></li>
 						<li><label for="lang">Language:</label>
