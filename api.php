@@ -1,5 +1,5 @@
 <?php
-if(!defined('entry') || !entry) die('Not a valid page'); 
+if(!defined('entry')) define('entry',true);
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS

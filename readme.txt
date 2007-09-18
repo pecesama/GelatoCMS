@@ -1,14 +1,11 @@
 ==== How to install gelato CMS =====
 
 1) Download and unzip the gelato package, if you haven't already.
-2) Create a database for gelato on your web server, as well as a MySQL user who has all privileges for accessing and modifying it.
-3) Rename the config-sample.php file to config.php.
-4) Open config.php in your favorite text editor and fill in your database details.
-5) Place the gelato files in the desired location on your web server.
-6) Run the gelato installation script by accessing install.php in your favorite web browser.
+2) Place the gelato files in the desired location on your web server.
+3) Run the gelato installation script by accessing install.php in your favorite web browser.
 	* If you installed gelato in the root directory, you should visit: http://example.com/install.php
           * If you installed gelato in its own subdirectory called tumblelog, for example, you should visit: http://example.com/tumblelog/install.php 
-7) Set CHMOD / permission ( Chmod 777 ) to the folder 'uploads'
+4) Set CHMOD / permission ( Chmod 777 ) to the folder 'uploads'
 
 That's it! gelato should now be installed.   
 
