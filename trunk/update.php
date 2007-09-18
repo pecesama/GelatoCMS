@@ -36,6 +36,10 @@ $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', 'Mexico/
 $db->ejecutarConsulta($sqlStr);
 		
 $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_time', '-6');";
+
+$db->ejecutarConsulta($sqlStr);
+		
+$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('shorten_links', '0');";
 		
 $db->ejecutarConsulta($sqlStr);
 

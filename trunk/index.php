@@ -129,7 +129,10 @@ $template = new plantillas($conf->template);
                                                 $template->mostrarPlantilla();
                                                 break;
                                         case "4":
-                                                $register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
+                                                if($conf->shorten_links){
+													$register["url"] = _file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
+												}
+												$register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
 												$input = array("{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
                                                 $output = array($formatedDate, $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
                                                 
@@ -224,7 +227,10 @@ $template = new plantillas($conf->template);
                                 $template->mostrarPlantilla();
                                 break;
                         case "4":
-                                $register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
+                                if($conf->shorten_links){
+									$register["url"] = _file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
+								}
+								$register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
 								$input = array("{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
                                 $output = array($formatedDate, $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
                                 
