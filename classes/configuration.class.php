@@ -28,6 +28,7 @@ class configuration extends Conexion_Mysql {
 	var $richText;
 	var $offset_city;
 	var $offset_time;
+	var $shorten_links;
 	
 	
 	function configuration() {
@@ -52,6 +53,7 @@ class configuration extends Conexion_Mysql {
 			$this->offsetCity = $this->get_option("offset_city");
 			$this->offsetTime = $this->get_option("offset_time");
 			$this->allowComments = $this->get_option("allow_comments");
+			$this->shorten_links = $this->get_option("shorten_links");
 		} else {
 			if($isFeed) {
 				header("HTTP/1.0 503 Service Unavailable"); 

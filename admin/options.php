@@ -48,6 +48,11 @@ if ($user->isAdmin()) {
 			die();
 		}
 		
+		if (!$tumble->saveOption($_POST["shorten_links"], "shorten_links")) {
+			header("Location: ".$conf->urlGelato."/admin/options.php?error=1&des=".$conf->merror);
+			die();
+		}
+		
 		header("Location: ".$conf->urlGelato."/admin/options.php?modified=true");
 		die();
 	} else {
@@ -194,6 +199,12 @@ if ($user->isAdmin()) {
 											<option value="11,Asia/Magadan" <?php echo ($conf->offsetCity=="Asia/Magadan")? "selected=\"selected\"":"" ?>>(GMT +11:00) Magadan, Soloman Is., New Caledonia</option>
 											<option value="12,Pacific/Auckland" <?php echo ($conf->offsetCity=="Pacific/Auckland")? "selected=\"selected\"":"" ?>>(GMT +12:00) Auckland, Wellington</option>
 											<option value="12,Pacific/Fiji" <?php echo ($conf->offsetCity=="Pacific/Fiji")? "selected=\"selected\"":"" ?>>(GMT +12:00) Fiji, Kamchatka, Marshall Is.</option>
+										</select>
+									</li>
+									<li class="select"><label for="shorten_links"><?php echo __("Shorten long URLs:")?></label>
+										<select name="shorten_links" id="shorten_links">
+											<option value="1" <?php if($conf->shorten_links) echo "selected"; ?>><?php echo __("Active")?></option>
+											<option value="0" <?php if(!$conf->shorten_links) echo "selected"; ?>><?php echo __("Deactive")?></option>
 										</select>
 									</li>
 								</ul>
