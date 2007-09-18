@@ -16,6 +16,7 @@
  * admin/options.php
  * admin/admin.php
  * admin/comments.php
+ * admin/users.php
  */
 
  
