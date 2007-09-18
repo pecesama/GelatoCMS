@@ -261,6 +261,7 @@ if ($user->isAdmin()) {
 									$template->mostrarPlantilla();
 									break;
 								case "url":
+									
 									$input = array("{type}", "{date}", "{id_user}", "{editTitle}", "{editUrl}", "{editBody}");
 									$output = array("4", $date, $_SESSION['user_id'], $title, $url, $body);
 									
@@ -390,6 +391,7 @@ if ($user->isAdmin()) {
 									$template->mostrarPlantilla();
 									break;
 								case "4":
+									$register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
 									$input = array("{Id_Post}", "{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
 									$output = array($register["id_post"], $formatedDate, $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
 									
