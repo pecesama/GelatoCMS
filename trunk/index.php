@@ -129,7 +129,8 @@ $template = new plantillas($conf->template);
                                                 $template->mostrarPlantilla();
                                                 break;
                                         case "4":
-                                                $input = array("{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
+                                                $register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
+												$input = array("{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
                                                 $output = array($formatedDate, $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
                                                 
                                                 $template->cargarPlantilla($input, $output, "template_url");
@@ -223,7 +224,8 @@ $template = new plantillas($conf->template);
                                 $template->mostrarPlantilla();
                                 break;
                         case "4":
-                                $input = array("{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
+                                $register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
+								$input = array("{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
                                 $output = array($formatedDate, $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
                                 
                                 $template->cargarPlantilla($input, $output, "template_url");
