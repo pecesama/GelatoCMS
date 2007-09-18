@@ -1,5 +1,6 @@
 <?php
-if(!defined('entry') || !entry) die('Not a valid page'); /* ===========================
+if(!defined('entry')) define('entry', true);
+ /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
   development version
@@ -11,10 +12,9 @@ if(!defined('entry') || !entry) die('Not a valid page'); /* ====================
   =========================== */
 ?>
 <?php
-require_once('../config.php');
-include("../classes/functions.php");
-include("../classes/user.class.php");
-require_once("../classes/configuration.class.php");
+require('../entry.php');
+global $user, $conf, $tumble;
+$template = new plantillas("admin");
 
 $user = new user();
 $conf = new configuration();
