@@ -17,6 +17,7 @@
  * admin/admin.php
  * admin/comments.php
  * admin/users.php
+ *admin/form.autosave.php
  */
 
  
