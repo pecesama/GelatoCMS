@@ -1,0 +1,423 @@
+# Хабрахабру привет! За поднятие кармы буду благодарен :)
+# http://nafigator.habrahabr.ru/
+# Copyright (C) 2007
+# This file is distributed under the same license as the gelato package.
+# Арсений Камышев <nafigator@gmail.com>, 2007.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gelato cms 0.90\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-07-29 22:39-0500\n"
+"PO-Revision-Date: 2007-09-18 19:21-0600\n"
+"Last-Translator: Pecesama <pecesama@hotmail.com>\n"
+"Language-Team: Arseniy Kamyshev <nafigator@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+#: admin.php:28
+msgid "admin users"
+msgstr "администраторы"
+
+#: admin.php:52
+#: comments.php:98
+#: index.php:141
+#: options.php:84
+#: settings.php:58
+#: user.php:68
+msgid "Processing request..."
+msgstr "Обработка запроса..."
+
+#: admin.php:55
+#: close.php:39
+#: comments.php:101
+#: index.php:144
+#: options.php:87
+#: settings.php:61
+#: user.php:71
+msgid "home"
+msgstr "главная"
+
+#: admin.php:57
+#: index.php:146
+msgid "View Tumblelog"
+msgstr "Открыть Тлог"
+
+#: admin.php:58
+#: index.php:147
+msgid "Log out"
+msgstr "Выйти"
+
+#: admin.php:66
+#: index.php:321
+#: options.php:99
+#: settings.php:74
+msgid "Settings"
+msgstr "Настройки"
+
+#: admin.php:67
+#: comments.php:111
+#: index.php:325
+msgid "Posts"
+msgstr "Записи"
+
+#: admin.php:68
+msgid "Add user"
+msgstr "Добавить пользователя"
+
+#: admin.php:69
+#: index.php:323
+#: options.php:98
+#: settings.php:72
+#: user.php:82
+msgid "Users"
+msgstr "Пользователи"
+
+#: admin.php:75
+msgid "The user has been added successfully."
+msgstr "Пользователь был успешно добавлен."
+
+#: admin.php:81
+msgid "The user has been eliminated successfully."
+msgstr "Пользователь был успешно удалён."
+
+#: admin.php:87
+msgid "The user has been modified successfully."
+msgstr "Пользователь был успешно отредактирован."
+
+#: admin.php:93
+#: ajax.php:36
+msgid "The username is not available."
+msgstr "Имя пользователя недоступно."
+
+#: admin.php:95
+msgid "Error on the database server:."
+msgstr "Ошибка базы банных сервера:."
+
+#: admin.php:103
+msgid "Login"
+msgstr "Вход"
+
+#: admin.php:104
+msgid "Name"
+msgstr "Имя"
+
+#: admin.php:105
+msgid "Actions"
+msgstr "Действия"
+
+#: admin.php:123
+#: comments.php:113
+#: user.php:83
+msgid "Edit"
+msgstr "Редактировать"
+
+#: admin.php:126
+msgid "Delete"
+msgstr "Удалить"
+
+#: admin.php:135
+msgid "No users available."
+msgstr "Нет доступных пользователей."
+
+#: ajax.php:23
+msgid "&nbsp;ending session..."
+msgstr "&nbsp;завершение сессии..."
+
+#: ajax.php:25
+msgid "&nbsp;failure ending session..."
+msgstr "&nbsp;ошибка завершения сессии..."
+
+#: ajax.php:31
+msgid "Required field cannot be left blank."
+msgstr "Обязательные поля не могут быть пустыми."
+
+#: ajax.php:34
+msgid "Username available."
+msgstr "Имя пользователя свободно."
+
+#: close.php:27
+msgid "logout"
+msgstr "выйти"
+
+#: close.php:41
+#: comments.php:103
+#: index.php:146
+#: options.php:89
+#: settings.php:63
+#: user.php:73
+msgid "Take me to the tumblelog"
+msgstr "Перейти к тлогу"
+
+#: close.php:41
+#: comments.php:103
+#: options.php:89
+#: settings.php:63
+#: user.php:73
+msgid "Back to the Tumblelog"
+msgstr "Вернуться в тлог"
+
+#: close.php:48
+msgid "Closing session"
+msgstr "Закрытие сессии"
+
+#: close.php:49
+msgid "logoff"
+msgstr "выход"
+
+#: close.php:57
+msgid "Ending session..."
+msgstr "Завершение сессии..."
+
+#: close.php:61
+msgid "Has happened an error when closing the session."
+msgstr "При закрытии сессии произошла ошибка."
+
+#: comments.php:74
+msgid "comments"
+msgstr "комментарии"
+
+#: comments.php:110
+msgid "Manage comments"
+msgstr "Управление комментариями"
+
+#: comments.php:112
+msgid "Spam"
+msgstr "Спам"
+
+#: comments.php:113
+msgid "List"
+msgstr "Список"
+
+#: comments.php:119
+msgid "The comment has been eliminated successfully."
+msgstr "Комментарий был успешно удалён."
+
+#: comments.php:122
+msgid "The post has NOT been eliminated."
+msgstr "Запись НЕ БЫЛА удалена."
+
+#: comments.php:128
+msgid "The comment has been modified successfully."
+msgstr "Комментарий был успешно изменён."
+
+#: comments.php:131
+msgid "The post has NOT been modified."
+msgstr "Запись НЕ БЫЛА изменена."
+
+#: index.php:104
+msgid "control panel"
+msgstr "панель управления"
+
+#: index.php:153
+msgid "New Post"
+msgstr "Создать запись"
+
+#: index.php:154
+msgid "Chat"
+msgstr "Чат"
+
+#: index.php:155
+msgid "Quote"
+msgstr "Цитата"
+
+#: index.php:156
+msgid "Link"
+msgstr "Ссылка"
+
+#: index.php:157
+msgid "Audio"
+msgstr "Аудио"
+
+#: index.php:158
+msgid "Video"
+msgstr "Видео"
+
+#: index.php:159
+msgid "Picture"
+msgstr "Картинка"
+
+#: index.php:160
+msgid "Regular"
+msgstr "Текст"
+
+#: index.php:167
+msgid "A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>."
+msgstr "Вышла новая верия gelato! Скачать её можно <a href=\"http://www.gelatocms.com/\">здесь</a>."
+
+#: index.php:172
+msgid "The post has been eliminated successfully."
+msgstr "Запись была успешно удалена."
+
+#: index.php:178
+msgid "The post has been modified successfully."
+msgstr "Запись была успешно изменена."
+
+#: index.php:184
+msgid "The post has been added successfully."
+msgstr "Запись была успешно добавлена."
+
+#: index.php:190
+msgid "Error on the database server:"
+msgstr "Ошибка базы данных сервера:"
+
+#: index.php:196
+msgid "Not an MP3 file or an upload problem."
+msgstr "Файл не в формате MP3 или ошибка при загрузке."
+
+#: index.php:202
+msgid "Not a photo file or an upload problem."
+msgstr "Файл не является изображением или ошибка при загрузке."
+
+#: index.php:305
+msgid "syntax is supported."
+msgstr "поддерживается."
+
+#: index.php:322
+#: options.php:100
+#: settings.php:73
+msgid "Options"
+msgstr "Опции"
+
+#: index.php:324
+msgid "Comments"
+msgstr "Комментарии"
+
+#: index.php:428
+msgid "No posts in this tumblelog."
+msgstr "В тлоге нет записей."
+
+#: options.php:61
+msgid "options"
+msgstr "опции"
+
+#: options.php:96
+msgid "Tumblelog options"
+msgstr "опции тлога"
+
+#: options.php:97
+#: settings.php:71
+#: user.php:81
+msgid "Post"
+msgstr "Запись"
+
+#: options.php:106
+#: settings.php:80
+msgid "The configuration has been modified successfully."
+msgstr "Настройки были успешно сохранены."
+
+#: options.php:111
+#: settings.php:85
+msgid "Error on the database server: "
+msgstr "Ошибка базы данных сервера: "
+
+#: options.php:120
+msgid "Rich text editor:"
+msgstr "Расширенный текстовый редактор:"
+
+#: options.php:122
+#: options.php:128
+#: options.php:134
+msgid "Active"
+msgstr "Активировать"
+
+#: options.php:123
+#: options.php:129
+#: options.php:135
+msgid "Deactive"
+msgstr "Скрыть"
+
+#: options.php:126
+msgid "URL friendly:"
+msgstr "Короткая ссылка:"
+
+#: options.php:132
+msgid "Allow readers comments:"
+msgstr "Разрешить комментарии:"
+
+#: options.php:138
+msgid "Time Offset:"
+msgstr "Часовой пояс:"
+
+#: options.php:206
+#: settings.php:129
+#: user.php:139
+msgid "Modify"
+msgstr "Изменить"
+
+#: settings.php:35
+msgid "settings"
+msgstr "настройки"
+
+#: settings.php:70
+msgid "Tumblelog configuration"
+msgstr "Настройки тлога"
+
+#: settings.php:94
+msgid "Title:"
+msgstr "Заголовок:"
+
+#: settings.php:96
+msgid "Description:"
+msgstr "Описание:"
+
+#: settings.php:98
+msgid "Installation URL"
+msgstr "URL тлога"
+
+#: settings.php:100
+msgid "Post limit:"
+msgstr "Лимит записей:"
+
+#: settings.php:102
+msgid "Language:"
+msgstr "Язык:"
+
+#: settings.php:114
+msgid "Template:"
+msgstr "Шаблон:"
+
+#: user.php:56
+msgid "add user"
+msgstr "добавить пользователя"
+
+#: user.php:80
+msgid "Start session"
+msgstr "Старт сессии"
+
+#: user.php:83
+#: user.php:139
+msgid "Add"
+msgstr "Добавить"
+
+#: user.php:99
+msgid "user:"
+msgstr "пользователь:"
+
+#: user.php:115
+msgid "password:"
+msgstr "пароль:"
+
+#: user.php:119
+msgid "retype password:"
+msgstr "повтор пароля:"
+
+#: user.php:123
+msgid "name:"
+msgstr "имя:"
+
+#: user.php:127
+msgid "e-mail:"
+msgstr "электронная почта:"
+
+#: user.php:131
+msgid "website:"
+msgstr "сайт:"
+
+#: user.php:135
+msgid "about:"
+msgstr "о себе:"
+

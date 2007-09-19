@@ -1,0 +1,418 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gelato cms 0.90\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-07-20 17:40-0500\n"
+"PO-Revision-Date: 2007-09-18 19:29-0600\n"
+"Last-Translator: Pecesama <pecesama@hotmail.com>\n"
+"Language-Team: Thiago Pedrosa <tppedrosa@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: BRAZIL\n"
+
+#: admin.php:28
+msgid "admin users"
+msgstr "administradores"
+
+#: admin.php:52
+#: index.php:141
+#: options.php:58
+#: settings.php:58
+#: user.php:68
+msgid "Processing request..."
+msgstr "Solicitação em processo..."
+
+#: admin.php:55
+#: close.php:39
+#: index.php:144
+#: options.php:61
+#: settings.php:61
+#: user.php:71
+msgid "home"
+msgstr "principal"
+
+#: admin.php:57
+#: index.php:146
+msgid "View Tumblelog"
+msgstr "Ver Tumblelog"
+
+#: admin.php:58
+#: index.php:147
+msgid "Log out"
+msgstr "Sair"
+
+#: admin.php:66
+#: index.php:321
+#: options.php:73
+#: settings.php:74
+msgid "Settings"
+msgstr "Configurações"
+
+#: admin.php:67
+#: index.php:324
+msgid "Posts"
+msgstr "Postagens"
+
+#: admin.php:68
+msgid "Add user"
+msgstr "Adicionar usuário"
+
+#: admin.php:69
+#: index.php:323
+#: options.php:72
+#: settings.php:72
+#: user.php:82
+msgid "Users"
+msgstr "Usuários"
+
+#: admin.php:75
+#: admin.php:81
+#: admin.php:87
+msgid "<div class=\"exito\" id=\"divMessages\">"
+msgstr "<div class=\"exito\" id=\"divMessages\">"
+
+#: admin.php:75
+msgid "The user has been added successfully."
+msgstr "O usuário foi adicionado com sucesso."
+
+#: admin.php:75
+#: admin.php:81
+#: admin.php:87
+#: admin.php:93
+#: admin.php:95
+msgid "</div>"
+msgstr "</div>"
+
+#: admin.php:81
+msgid "The user has been eliminated successfully."
+msgstr "O usuário foi eliminado com sucesso."
+
+#: admin.php:87
+msgid "The user has been modified successfully."
+msgstr "O usuário foi modificado com sucesso."
+
+#: admin.php:93
+msgid "<div class=\"error\" id=\"divMessages\">"
+msgstr "<div class=\"error\" id=\"divMessages\">"
+
+#: admin.php:93
+#: ajax.php:36
+msgid "The username is not available."
+msgstr "Erro no servidor do banco de dados:."
+
+#: admin.php:95
+msgid "<div class=\"error\" id=\"divMessages\"><strong>"
+msgstr ""
+
+#: admin.php:95
+msgid "Error on the database server:."
+msgstr ""
+
+#: admin.php:95
+msgid " </strong>"
+msgstr ""
+
+#: admin.php:95
+msgid "des"
+msgstr ""
+
+#: admin.php:103
+msgid "Login"
+msgstr ""
+
+#: admin.php:104
+msgid "Name"
+msgstr ""
+
+#: admin.php:105
+msgid "Actions"
+msgstr ""
+
+#: admin.php:115
+msgid "class=\"odd\""
+msgstr ""
+
+#: admin.php:117
+msgid "login"
+msgstr ""
+
+#: admin.php:117
+#: admin.php:120
+msgid "\n"
+msgstr ""
+
+#: admin.php:120
+msgid "name"
+msgstr ""
+
+#: admin.php:123
+#: admin.php:126
+msgid "id_user"
+msgstr ""
+
+#: admin.php:123
+#: user.php:83
+msgid "Edit"
+msgstr ""
+
+#: admin.php:126
+msgid "Delete"
+msgstr ""
+
+#: admin.php:135
+msgid "No users available."
+msgstr ""
+
+#: ajax.php:23
+msgid "&nbsp;ending session..."
+msgstr ""
+
+#: ajax.php:25
+msgid "&nbsp;failure ending session..."
+msgstr ""
+
+#: ajax.php:31
+msgid "Required field cannot be left blank."
+msgstr ""
+
+#: ajax.php:34
+msgid "Username available."
+msgstr ""
+
+#: close.php:27
+msgid "logout"
+msgstr ""
+
+#: close.php:41
+#: index.php:146
+#: options.php:63
+#: settings.php:63
+#: user.php:73
+msgid "Take me to the tumblelog"
+msgstr ""
+
+#: close.php:41
+#: options.php:63
+#: settings.php:63
+#: user.php:73
+msgid "Back to the Tumblelog"
+msgstr ""
+
+#: close.php:48
+msgid "Closing session"
+msgstr ""
+
+#: close.php:49
+msgid "logoff"
+msgstr ""
+
+#: close.php:57
+msgid "Ending session..."
+msgstr ""
+
+#: close.php:61
+msgid "Has happened an error when closing the session."
+msgstr ""
+
+#: index.php:104
+msgid "control panel"
+msgstr ""
+
+#: index.php:153
+msgid "New Post"
+msgstr ""
+
+#: index.php:154
+msgid "Chat"
+msgstr ""
+
+#: index.php:155
+msgid "Quote"
+msgstr ""
+
+#: index.php:156
+msgid "Link"
+msgstr ""
+
+#: index.php:157
+msgid "Audio"
+msgstr ""
+
+#: index.php:158
+msgid "Video"
+msgstr ""
+
+#: index.php:159
+msgid "Picture"
+msgstr ""
+
+#: index.php:160
+msgid "Regular"
+msgstr ""
+
+#: index.php:167
+msgid "A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>."
+msgstr ""
+
+#: index.php:172
+msgid "The post has been eliminated successfully."
+msgstr ""
+
+#: index.php:178
+msgid "The post has been modified successfully."
+msgstr ""
+
+#: index.php:184
+msgid "The post has been added successfully."
+msgstr ""
+
+#: index.php:190
+msgid "Error on the database server:"
+msgstr ""
+
+#: index.php:196
+msgid "Not an MP3 file or an upload problem."
+msgstr ""
+
+#: index.php:202
+msgid "Not a photo file or an upload problem."
+msgstr ""
+
+#: index.php:305
+msgid "syntax is supported."
+msgstr ""
+
+#: index.php:322
+#: options.php:74
+#: settings.php:73
+msgid "Options"
+msgstr ""
+
+#: index.php:427
+msgid "No posts in this tumblelog."
+msgstr ""
+
+#: options.php:35
+msgid "options"
+msgstr ""
+
+#: options.php:70
+msgid "Tumblelog options"
+msgstr ""
+
+#: options.php:71
+#: settings.php:71
+#: user.php:81
+msgid "Post"
+msgstr ""
+
+#: options.php:80
+#: settings.php:80
+msgid "The configuration has been modified successfully."
+msgstr ""
+
+#: options.php:85
+#: settings.php:85
+msgid "Error on the database server: "
+msgstr ""
+
+#: options.php:94
+msgid "Rich text editor:"
+msgstr ""
+
+#: options.php:96
+#: options.php:102
+msgid "Active"
+msgstr ""
+
+#: options.php:97
+#: options.php:103
+msgid "Deactive"
+msgstr ""
+
+#: options.php:109
+#: settings.php:122
+#: user.php:139
+msgid "Modify"
+msgstr ""
+
+#: settings.php:35
+msgid "settings"
+msgstr ""
+
+#: settings.php:70
+msgid "Tumblelog configuration"
+msgstr ""
+
+#: settings.php:94
+msgid "Title:"
+msgstr ""
+
+#: settings.php:96
+msgid "Description:"
+msgstr ""
+
+#: settings.php:98
+msgid "Installation URL"
+msgstr ""
+
+#: settings.php:100
+msgid "Post limit:"
+msgstr ""
+
+#: settings.php:102
+msgid "Language:"
+msgstr ""
+
+#: settings.php:107
+msgid "Template:"
+msgstr ""
+
+#: user.php:56
+msgid "add user"
+msgstr ""
+
+#: user.php:80
+msgid "Start session"
+msgstr ""
+
+#: user.php:83
+#: user.php:139
+msgid "Add"
+msgstr ""
+
+#: user.php:99
+msgid "user:"
+msgstr ""
+
+#: user.php:115
+msgid "password:"
+msgstr ""
+
+#: user.php:119
+msgid "retype password:"
+msgstr ""
+
+#: user.php:123
+msgid "name:"
+msgstr ""
+
+#: user.php:127
+msgid "e-mail:"
+msgstr ""
+
+#: user.php:131
+msgid "website:"
+msgstr ""
+
+#: user.php:135
+msgid "about:"
+msgstr ""
+
