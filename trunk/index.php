@@ -84,7 +84,7 @@ $template = new plantillas($conf->template);
                 if ($tumble->contarRegistros()>0) {
                         $dateTmp = null;          
                         while($register = mysql_fetch_array($rs)) {
-								$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
+								$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
                                 if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
 								$strEnd=($conf->urlFriendly) ? "/" : "";
 								$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
@@ -183,7 +183,7 @@ $template = new plantillas($conf->template);
         } else {
                 $register = $tumble->getPost($id_post);
                 
-				$formatedDate = date("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
+				$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
 				$strEnd=($conf->urlFriendly) ? "/" : "";
 				$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
                 
@@ -272,7 +272,7 @@ $template = new plantillas($conf->template);
 						
 						$commentAuthor = ($rowComment["web"]=="") ? $rowComment["username"] : "<a href=\"".$rowComment["web"]."\" rel=\"external\">".$rowComment["username"]."</a>";
 						$input = array("{Id_Comment}", "{Comment_Author}", "{Date}", "{Comment}");				
-						$output = array($rowComment["id_comment"], $commentAuthor, date("d.m.y", strtotime($rowComment["comment_date"])), $rowComment["content"]);
+						$output = array($rowComment["id_comment"], $commentAuthor, gmdate("d.m.y", strtotime($rowComment["comment_date"])+transform_offset($conf->offsetTime)), $rowComment["content"]);
 						$template->cargarPlantillaConBloque($input, $output, "template_comments", "comments");
 					}
 					$template->mostrarPlantillaConBloque();

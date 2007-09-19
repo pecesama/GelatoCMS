@@ -348,7 +348,7 @@ if ($user->isAdmin()) {
 					
 					if ($tumble->contarRegistros()>0) {				
 						while($register = mysql_fetch_array($rs)) {			
-							$formatedDate = date("M d", strtotime($register["date"]));
+							$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
 							$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";							
 							
 							$textile = new Textile();				

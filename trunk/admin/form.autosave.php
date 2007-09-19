@@ -1,4 +1,5 @@
 <?php
+if(!defined('entry'))define('entry', true);
 
 session_start();
 
@@ -11,7 +12,7 @@ function saveForm() {
 	$type = getMethod();
 	$id = ($type=='GET') ? $_GET['autosaveid'] : $_POST['autosaveid'];
 	$_SESSION[$id] = $_SERVER['QUERY_STRING'];
-	echo date('H:i | d/m/y',time());
+	echo gmdate('H:i | d/m/y',time()+transform_offset($conf->offsetTime));
 }
 
 function loadForm() {

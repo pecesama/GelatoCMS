@@ -84,7 +84,7 @@ if(!defined('entry')) define('entry',true);
 			$url = htmlspecialchars($url);
 			$strEnd=($conf->urlFriendly) ? "/" : "";
 			$url = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
-			$formatedDate = date("r", strtotime($register["date"])+transform_offset($conf->offsetTime));
+			$formatedDate = gmdate("r", strtotime($register["date"])+transform_offset($conf->offsetTime));
 ?>
 
 			<item>
