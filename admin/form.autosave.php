@@ -1,6 +1,7 @@
 <?php
 if(!defined('entry'))define('entry', true);
-
+require('../entry.php');
+global $conf;
 session_start();
 
 function isAjax() { 
