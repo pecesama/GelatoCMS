@@ -104,7 +104,7 @@ if(!defined('entry')) define('entry',true);
 						break;
 				}
 				$url = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
-				$formatedDate = gmdate("D, d M Y H:i:s \G\M\T", strtotime($register["date"]));
+				$formatedDate = gmdate("D, d M Y H:i:s \G\M\T", strtotime($register["date"])+transform_offset($conf->offsetTime));
 ?>
 
 				<item>
