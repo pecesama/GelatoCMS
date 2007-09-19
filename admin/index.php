@@ -106,7 +106,7 @@ if ($user->isAdmin()) {
 			function exit(el, path) {
 				el = $(el);
 				el.style.display="block";
-				el.setHTML('Processing request...');
+				el.setHTML('Processing request&hellip;');
 				new Ajax(path, {
 					onComplete:function(e) {
 						el.setHTML(e).effect('opacity').custom(0,1);
@@ -133,7 +133,7 @@ if ($user->isAdmin()) {
 	</head>
 	
 	<body>
-		<div id="div-process" style="display:none;"><?php echo __("Processing request...")?></div>
+		<div id="div-process" style="display:none;"><?php echo __("Processing request&hellip;")?></div>
 		<div id="cont">
 			<div id="head">
 				<h1><a href="<?php echo $conf->urlGelato;?>/admin/index.php" title="gelato :: <?php echo __("home")?>">gelato cms</a></h1>

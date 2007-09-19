@@ -50,7 +50,7 @@ $closed = $user->closeSession();
 <?php
 						if ($closed) {
 ?>		
-							<h2><?php echo __("Ending session...")?></h2>
+							<h2><?php echo __("Ending session&hellip;")?></h2>
 <?php
 						} else {	
 ?>
