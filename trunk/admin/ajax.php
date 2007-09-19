@@ -21,9 +21,9 @@ if(!defined('entry'))define('entry', true);
 			if ($_GET["action"] == "close") {
 				session_start();
 				if ($user->closeSession()) {
-					echo __("&nbsp;ending session...");
+					echo __("&nbsp;ending session&hellip;");
 				} else {
-					echo __("&nbsp;failure ending session...");
+					echo __("&nbsp;failure ending session&hellip;");
 				}
 			}	// $_GET["action"] == "close"
 			
