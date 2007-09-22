@@ -35,11 +35,7 @@ if ($user->isAdmin()) {
 		}
 		if (isset($_POST["btnVerifyUser"])) {
 			unset($_POST["btnVerifyUser"]);
-		}
-		if (isset($_POST["password"])) {
-			$_POST["password"] = md5($_POST["password"]);
-		}
-		
+		}		
 		if (isset($_POST["id_user"])) {
 			$user->modifyUser($_POST, $_POST["id_user"]);
 		} else {			

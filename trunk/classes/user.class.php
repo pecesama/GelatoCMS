@@ -87,8 +87,10 @@ class user extends Conexion_Mysql {
 	function addUser($fieldsArray) {
 		if ($this->ejecutarConsulta("SELECT id_user FROM ".$this->conf->tablePrefix."users WHERE login='".$fieldsArray['login']."'")) {
 			if ($this->contarRegistros()==0) {
+				$realPassword = ($fieldsArray["password"]);
+				$fieldsArray["password"] = md5($fieldsArray["password"]);
 				if ($this->insertarDeFormulario($this->conf->tablePrefix."users", $fieldsArray)) {
-					$this->confirmationEmail($fieldsArray['email'], $fieldsArray['login'], $fieldsArray['password']);
+					$this->confirmationEmail($fieldsArray['email'], $fieldsArray['login'], $realPassword);
 					header("Location: ".$this->conf->urlGelato."/admin/admin.php?added=true");
 					die();
 				} else {
@@ -103,6 +105,7 @@ class user extends Conexion_Mysql {
 	}
 
 	function modifyUser($fieldsArray, $id_user) {
+		$fieldsArray["password"] = md5($fieldsArray["password"]);
 		if ($this->modificarDeFormulario($this->conf->tablePrefix."users", $fieldsArray, "id_user=$id_user")) {
 			header("Location: ".$this->conf->urlGelato."/admin/admin.php?modified=true");
 			die();
