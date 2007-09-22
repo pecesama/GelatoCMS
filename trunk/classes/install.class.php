@@ -107,14 +107,14 @@ class Install {
 		  PRIMARY KEY  (`id_comment`)
 		) ENGINE = MYISAM ;";
 					
-		$sqlStr[] =  "INSERT INTO `".Table_prefix."config` VALUES (". $this->data['posts_limit'] .", '".$this->data['title']."', '".$this->data['description']."', '".$this->data['lang']."', '".$this->data['template']."', '".$this->data['url_installation']."');";		
-		$sqlStr[] =  "INSERT INTO `".Table_prefix."users` VALUES ('', '', '".$this->data['login']."', '".md5($this->data['password'])."', '".$this->data['email']."', '".$this->data['website']."', '".$this->data['about']."');";
-		$sqlStr[] =  "INSERT INTO `".Table_prefix."options` VALUES ('url_friendly', '1');";
-		$sqlStr[] =  "INSERT INTO `".Table_prefix."options` VALUES ('rich_text', '0');";		
+		$sqlStr[] = "INSERT INTO `".Table_prefix."config` VALUES (". $this->data['posts_limit'] .", '".$this->data['title']."', '".$this->data['description']."', '".$this->data['lang']."', '".$this->data['template']."', '".$this->data['url_installation']."');";		
+		$sqlStr[] = "INSERT INTO `".Table_prefix."users` VALUES ('', '', '".$this->data['login']."', '".md5($this->data['password'])."', '".$this->data['email']."', '".$this->data['website']."', '".$this->data['about']."');";
+		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('url_friendly', '1');";
+		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('rich_text', '0');";		
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('allow_comments', '0');";
-		$sqlStr[] =  "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', '".$this->data['offset_city']."');";		
+		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', '".$this->data['offset_city']."');";		
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('offset_time', '".$this->data['offset_time']."');";
-		
+		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('shorten_links', '0');";
 		foreach($sqlStr as $key => $query){
 			if(!$db->ejecutarConsulta($query)){
 				return false;
