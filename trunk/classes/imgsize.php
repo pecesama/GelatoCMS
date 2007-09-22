@@ -1,5 +1,5 @@
 <?php
- if(!defined('entry') || !entry) die('Not a valid page');
+ if(!defined('entry')) define('entry',true);
 header ("Content-type: image/jpeg");
 header('Cache-Control: max-age=172800, must-revalidate');
 header('Expires: ' . date('r', time()+120));
