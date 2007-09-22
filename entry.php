@@ -2,8 +2,10 @@
  if(!defined('entry') || !entry) die('Not a valid page');
 /*
  * Created on Sep 15, 2007
+ * Modified on Sep 22, 2007
  *
- * Known Entry Points 
+ * Known Entry Points
+ * api.php
  * install.php
  * index.php
  * login.php
@@ -17,7 +19,8 @@
  * admin/admin.php
  * admin/comments.php
  * admin/users.php
- *admin/form.autosave.php
+ * admin/form.autosave.php
+ * classes/imgsize.php 
  */
 
  
