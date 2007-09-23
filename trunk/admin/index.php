@@ -40,7 +40,7 @@ if ($user->isAdmin()) {
 					header("Location: ".$conf->urlGelato."/admin/index.php?photo=false");
 					die();
 				}
-				$_POST["url"] = "../uploads/".$photoName;
+				$_POST["url"] = "../uploads/".sanitizeName($photoName);
 			}
 			
 			if ( move_uploaded_file( $_FILES['photo']['tmp_name'], "../uploads/".sanitizeName($_FILES['photo']['name']) ) ) {
