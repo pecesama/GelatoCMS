@@ -85,16 +85,19 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 	
 	function getFile($remoteFileName) {
-		$fileName = "../uploads/".sanitizeName($remoteFileName);
+		$fileName = "../uploads/".sanitizeName(getFileName($remoteFileName));		
 		$str = _file_get_contents($remoteFileName);
 		if (!$handle = fopen($fileName, 'w')) {
+			//die("no se abrio de escritura");
 			return false;
 		}
+		
 		if (fwrite($handle, $str) === FALSE) {
+			//die("no se escribio");
 			return false;
 		}
 		fclose($handle);
-		return true;		
+		return true;	
 	}
 	
 	function isVimeoVideo($videoUrl) {
