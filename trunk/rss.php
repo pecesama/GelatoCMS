@@ -52,8 +52,9 @@ if(!defined('entry')) define('entry',true);
 					$desc = $register["description"];
 					break;
 				case "2":
+					$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
 					$tit = ($register["description"]=="") ? "Photo" : strip_tags($register["description"]);
-					$desc = "<img src=\"".$register["url"]."\"/>";
+					$desc = "<img src=\"".$photoPath."\"/>";
 					break;
 				case "3":
 					$tit = "\"".strip_tags($register["description"])."\"";
