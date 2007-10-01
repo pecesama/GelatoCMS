@@ -296,7 +296,11 @@ if ($user->isAdmin()) {
 							}
 ?>
 								<p>
-									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;"><a href="http://hobix.com/textile/">Textile</a> <?php echo __("syntax is supported.")?></span>
+									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
+                                    	<a href="http://hobix.com/textile/">Textile</a> <?php echo __("syntax is supported.")?>
+                                        <br />
+                                        Bookmarklet - <a href="javascript:g=window.getSelection();win=window.open('<?php echo $conf->urlGelato;?>/admin/bm.php?url='+encodeURIComponent(location.href)+'&sel='+encodeURIComponent(g),'w','toolbar=0,resizable=0,status=1,width=650,height=430'); void(win.document.close ())"><?php echo __("add to gelato")?></a>
+                                    </span>
 								</p>
 								<p>
 									<input class="btn" type="submit" name="btnAdd" value="<?php echo ($isEdition) ? "Modify" : "Create"; ?> post" />
