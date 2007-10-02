@@ -299,7 +299,7 @@ if ($user->isAdmin()) {
 									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
                                     	<a href="http://hobix.com/textile/">Textile</a> <?php echo __("syntax is supported.")?>
                                         <br />
-                                        Bookmarklet - <a href="javascript:g=window.getSelection();win=window.open('<?php echo $conf->urlGelato;?>/admin/bm.php?url='+encodeURIComponent(location.href)+'&sel='+encodeURIComponent(g),'w','toolbar=0,resizable=0,status=1,width=650,height=430'); void(win.document.close ())"><?php echo __("add to gelato")?></a>
+                                        Bookmarklet - <a href="javascript:var w; setTimeout('w.focus()',100);w=window.open(' http://www.pecesama.net/quotes/admin/bm.php?url='+encodeURIComponent(location.href)+'&sel='+encodeURIComponent(window.getSelection()),'bookmarklet','toolbar=0,resizable=0,status=1,width=650,height=460,dependent=yes' ); w.focus();"><?php echo __("add to gelato")?></a>
                                     </span>
 								</p>
 								<p>
