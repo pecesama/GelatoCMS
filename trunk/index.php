@@ -5,6 +5,7 @@
   */
   
   // Salazar pregunta
+  # o__O'
    
 if(!defined('entry'))define('entry', true);
  /* ===========================
