@@ -1,12 +1,4 @@
 <?php
- /*
-  * Probando... uno, dos, tres.
-  * Otra modificacion...
-  */
-  
-  // Salazar pregunta
-  # o__O'
-   
 if(!defined('entry'))define('entry', true);
  /* ===========================
 
