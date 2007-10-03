@@ -3,6 +3,8 @@
   * Probando... uno, dos, tres.
   * Otra modificacion...
   */
+  
+  // Salazar pregunta
    
 if(!defined('entry'))define('entry', true);
  /* ===========================
