@@ -1,7 +1,8 @@
 <?php
  /*
   * Probando... uno, dos, tres.
-  */   
+  * Otra modificacion...
+  */
    
 if(!defined('entry'))define('entry', true);
  /* ===========================
