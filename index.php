@@ -1,5 +1,7 @@
 <?php
-   
+ /*
+  * Probando... uno, dos, tres.
+  */   
    
 if(!defined('entry'))define('entry', true);
  /* ===========================
@@ -270,18 +272,20 @@ $template = new plantillas($conf->template);
 					$input = array("{Comments_Number}", "{Post_Title}");				
 					$output = array($comment->countComments($register["id_post"]), $register["title"]);
 					$template->precargarPlantillaConBloque($input, $output, "template_comments", "comments");
-					while($rowComment = mysql_fetch_array($rsComments)) {
-						
+
+					while($rowComment = mysql_fetch_assoc($rsComments)) {
+						echo "<pre>";
+						print_r($rowComment);
+						echo "</pre>";
 						$commentAuthor = ($rowComment["web"]=="") ? $rowComment["username"] : "<a href=\"".$rowComment["web"]."\" rel=\"external\">".$rowComment["username"]."</a>";
-						$input = array("{Id_Comment}", "{Comment_Author}", "{Date}", "{Comment}");				
+						$input = array("{Id_Comment}", "{Comment_Author}", "{Date}", "{Comment}");
 						$output = array($rowComment["id_comment"], $commentAuthor, gmdate("d.m.y", strtotime($rowComment["comment_date"])+transform_offset($conf->offsetTime)), $rowComment["content"]);
 						$template->cargarPlantillaConBloque($input, $output, "template_comments", "comments");
 					}
 					$template->mostrarPlantillaConBloque();
-					
 										
 					$input = array("{User_Cookie}", "{Email_Cookie}", "{Web_Cookie}", "{Id_Post}", "{Form_Action}", "{Date_Added}");
-					$output = array($_COOKIE['cookie_gel_user'], $_COOKIE['cookie_gel_email'], $_COOKIE['cookie_gel_web'], $register["id_post"], $conf->urlGelato."/admin/comments.php", gmmktime());
+					$output = array(isset($_COOKIE['cookie_gel_user'])?$_COOKIE['cookie_gel_user']:'', isset($_COOKIE['cookie_gel_email'])?$_COOKIE['cookie_gel_email']:'', isset($_COOKIE['cookie_gel_web'])?$_COOKIE['cookie_gel_web']:'', $register["id_post"], $conf->urlGelato."/admin/comments.php", gmmktime());
 					
 					$template->cargarPlantilla($input, $output, "template_comment_post");
 					$template->mostrarPlantilla(); 
