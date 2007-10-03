@@ -1,4 +1,5 @@
 <?php
+   
 if(!defined('entry'))define('entry', true);
  /* ===========================
 
