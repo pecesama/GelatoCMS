@@ -29,8 +29,8 @@ class configuration extends Conexion_Mysql {
 	var $offset_city;
 	var $offset_time;
 	var $shorten_links;
-	
-	
+	var $rssImportFrec;
+		
 	function configuration() {
 		parent::Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 		
@@ -54,6 +54,8 @@ class configuration extends Conexion_Mysql {
 			$this->offsetTime = $this->get_option("offset_time");
 			$this->allowComments = $this->get_option("allow_comments");
 			$this->shorten_links = $this->get_option("shorten_links");
+			$this->rssImportFrec = $this->get_option("rss_import_frec");
+			
 		} else {
 			if($isFeed) {
 				header("HTTP/1.0 503 Service Unavailable"); 

@@ -69,6 +69,7 @@ form.newpost label{}
 form.newpost input{ margin-bottom:10px;}
 form.newpost input.txt{ background: #fff url(images/grad-small.png) top left repeat-x; height:15px; border:1px solid #999; width:490px; padding:5px;}
 form.newpost input.btn{ }
+form.newpost input.check{ vertical-align:middle;}
 form.newpost textarea{background: #fff url(images/grad-big.png) top left repeat-x; height:190px; border:1px solid #999; width:490px; padding:5px; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:0.8em;}
 form.newpost select{ position:absolute; right:10px; top:1px;}
 html > body form.newpost select{min-width:100px;}
@@ -106,6 +107,16 @@ legend.install{font: normal 16.5px/17px georgia, "times new roman", serif; borde
 
 a.linkFrm, a.linkFrm:link, a.linkFrm:visited, a.linkFrm:active{ color:#297aab; text-decoration:none; outline:none;}
 a.linkFrm:hover{ text-decoration:underline; color:#297aab;  outline:none;}
+
+/* Feeds */
+
+#feedlist{}
+#feedlist ul{ list-style-type:none;}
+#feedlist li{ border-bottom:1px solid #999; font-size:12px; padding:2px 4px 2px 4px; margin:0 2px 0 2px;}
+#feedlist li span{ font-weight:bold;}
+#feedlist li.feederror{ background-color:#FFCCCC;}
+#feedlist li.feederror span{ color:#CC0000;}
+#feedlist li a img{border:none; padding:0 2px 2px 2px; vertical-align:middle;}
 
 /* User messages */
 

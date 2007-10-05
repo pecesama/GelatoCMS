@@ -53,6 +53,11 @@ if ($user->isAdmin()) {
 			die();
 		}
 		
+		if (!$tumble->saveOption($_POST["rss_import_frec"], "rss_import_frec")) {
+			header("Location: ".$conf->urlGelato."/admin/options.php?error=1&des=".$conf->merror);
+			die();
+		}
+
 		header("Location: ".$conf->urlGelato."/admin/options.php?modified=true");
 		die();
 	} else {
@@ -203,8 +208,25 @@ if ($user->isAdmin()) {
 									</li>
 									<li class="select"><label for="shorten_links"><?php echo __("Shorten long URLs:")?></label>
 										<select name="shorten_links" id="shorten_links">
-											<option value="1" <?php if($conf->shorten_links) echo "selected"; ?>><?php echo __("Active")?></option>
-											<option value="0" <?php if(!$conf->shorten_links) echo "selected"; ?>><?php echo __("Deactive")?></option>
+											<option value="1" <?php if($conf->shorten_links) echo "selected=\"selected\""; ?>><?php echo __("Active")?></option>
+											<option value="0" <?php if(!$conf->shorten_links) echo "selected=\"selected\""; ?>><?php echo __("Deactive")?></option>
+										</select>
+									</li>
+                                    <li class="select"><label for="rss_import_frec"><?php echo __("Import feeds every:")?></label>
+                                    	<select name="rss_import_frec" id="rss_import_frec">
+                                        
+                                        	<option value="5 minutes" <?php if($conf->rssImportFrec == '5 minutes') echo "selected=\"selected\""; ?>>5 <?php echo __("minutes");?></option>
+                                        	<option value="10 minutes" <?php if($conf->rssImportFrec == '10 minutes') echo "selected=\"selected\""; ?>>10 <?php echo __("minutes");?></option>
+                                            <option value="15 minutes" <?php if($conf->rssImportFrec == '15 minutes') echo "selected=\"selected\""; ?>>15 <?php echo __("minutes");?></option>
+                                            <option value="30 minutes" <?php if($conf->rssImportFrec == '30 minutes') echo "selected=\"selected\""; ?>>30 <?php echo __("minutes");?></option>
+                                            <option value="45 minutes" <?php if($conf->rssImportFrec == '45 minutes') echo "selected=\"selected\""; ?>>45 <?php echo __("minutes");?></option>
+                                            <option value="1 hour" <?php if($conf->rssImportFrec == '1 hour') echo "selected=\"selected\""; ?>>1 <?php echo __("hour");?></option>
+                                            <option value="2 hours" <?php if($conf->rssImportFrec == '2 hours') echo "selected=\"selected\""; ?>>2 <?php echo __("hours");?></option>
+                                            <option value="3 hours" <?php if($conf->rssImportFrec == '3 hours') echo "selected=\"selected\""; ?>>3 <?php echo __("hours");?></option>
+                                            <option value="4 hours" <?php if($conf->rssImportFrec == '4 hours') echo "selected=\"selected\""; ?>>4 <?php echo __("hours");?></option>
+                                            <option value="6 hours" <?php if($conf->rssImportFrec == '6 hours') echo "selected=\"selected\""; ?>>6 <?php echo __("hours");?></option>
+                                            <option value="12 hours" <?php if($conf->rssImportFrec == '12 hours') echo "selected=\"selected\""; ?>>12 <?php echo __("hours");?></option>
+                                            <option value="1 day" <?php if($conf->rssImportFrec == '1 day') echo "selected=\"selected\""; ?>>24 <?php echo __("hours");?></option>
 										</select>
 									</li>
 								</ul>
