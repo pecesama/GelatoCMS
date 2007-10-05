@@ -19,8 +19,8 @@
  * admin/admin.php
  * admin/comments.php
  * admin/users.php
- * admin/form.autosave.php
  * classes/imgsize.php 
+ * admin/feeds.php
  */
 
  
@@ -43,6 +43,7 @@ require_once("classes/templates.class.php");
 require_once("classes/pagination.class.php");
 require_once("classes/user.class.php");
 require_once("classes/comments.class.php");
+require_once("classes/feeds.class.php");
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'mysql_connection.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'streams.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gettext.class.php');
@@ -54,5 +55,9 @@ $tumble = new gelato();
 
 
 session_start();
+
+$feeds = new feeds();
+$feeds->updateFeeds();
+unset($feeds);
 
 ?>

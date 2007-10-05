@@ -51,6 +51,20 @@ CREATE TABLE `gel_comments` (
   PRIMARY KEY  (`id_comment`)
 ) ENGINE = MYISAM ;
 
+CREATE TABLE `gel_feeds` (
+	`id_feed` int(11) NOT NULL auto_increment,
+	`url` varchar(255) NOT NULL,
+	`title` varchar(255) NOT NULL,
+	`type` tinyint(4) NOT NULL default '1',
+	`updated_at` datetime NOT NULL,
+	`error` tinyint(1) NOT NULL default '0',
+	`credits` int(1) NOT NULL default '0',
+	`site_url` varchar(255) NOT NULL,
+	`id_user` int(10) NOT NULL,
+	PRIMARY KEY  (`id_feed`)
+) ENGINE=MyISAM1 ;
+
+
 -- Example data for table `gel_config`
 
 INSERT INTO `gel_config` VALUES (10, 'Tumble title', 'tumble description', 'en', 'tumblr', 'http://localhost/gelato');
@@ -67,3 +81,4 @@ INSERT INTO `gel_options` VALUES ('rich_text', '0');
 INSERT INTO `gel_options` VALUES ('allow_comments', '0');
 INSERT INTO `gel_options` VALUES ('offset_city', 'Mexico/General');
 INSERT INTO `gel_options` VALUES ('offset_time', '-6');
+INSERT INTO `gel_options` VALUES ('rss_import_frec', '5 minutes');

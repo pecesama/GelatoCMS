@@ -106,6 +106,20 @@ class Install {
 		  `spam` tinyint(4) NOT NULL,
 		  PRIMARY KEY  (`id_comment`)
 		) ENGINE = MYISAM ;";
+		
+		$sqlStr[] = "CREATE TABLE `".Table_prefix."feeds` (
+			`id_feed` int(11) NOT NULL auto_increment,
+			`url` varchar(255) NOT NULL,
+			`title` varchar(255) NOT NULL,
+			`type` tinyint(4) NOT NULL default '1',
+			`updated_at` datetime NOT NULL,
+			`error` tinyint(1) NOT NULL default '0',
+			`credits` int(1) NOT NULL default '0',
+			`site_url` varchar(255) NOT NULL,
+			`id_user` int(10) NOT NULL,
+			PRIMARY KEY  (`id_feed`)
+			) ENGINE=MyISAM ;";
+
 					
 		$sqlStr[] = "INSERT INTO `".Table_prefix."config` VALUES (". $this->data['posts_limit'] .", '".$this->data['title']."', '".$this->data['description']."', '".$this->data['lang']."', '".$this->data['template']."', '".$this->data['url_installation']."');";		
 		$sqlStr[] = "INSERT INTO `".Table_prefix."users` VALUES ('', '', '".$this->data['login']."', '".md5($this->data['password'])."', '".$this->data['email']."', '".$this->data['website']."', '".$this->data['about']."');";
@@ -115,6 +129,8 @@ class Install {
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', '".$this->data['offset_city']."');";		
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('offset_time', '".$this->data['offset_time']."');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('shorten_links', '0');";
+		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('rss_import_frec', '5 minutes');";
+
 		foreach($sqlStr as $key => $query){
 			if(!$db->ejecutarConsulta($query)){
 				return false;
@@ -143,20 +159,18 @@ class Install {
 	function is_gelato_installed(){
 		if (!$this->check_for_config()){ 
 			return false; 
-		} else {/*
+		} else {
 			if (!$this->is_db_installed()){
 				return false;
 			}
-			*/
+			
 		}
 		
 		return true;
 	}
-	/*
-	function is_db_installed(){
 	
+	function is_db_installed(){
 			global $db;	
-			
 			if (function_exists($db->ejecutarConsulta)){
 				$sqlStr = "SELECT * FROM `".Table_prefix."config`";
 				if($db->ejecutarConsulta($sqlStr)) {
@@ -167,7 +181,7 @@ class Install {
 			}
 	
 	}
-	*/
+	
 	function check_for_config(){
 		if(!file_exists('config.php')) return false;
 		if(!defined('DB_Server')) return false;
