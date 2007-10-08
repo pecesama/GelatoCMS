@@ -1,17 +1,15 @@
-//<!-- 
-
 function validateFrmAddUser() {
-	if ($('login').value == "") {
+	if ($("#login").value == "") {
 	   alert("The username field cannot be left blank.");
 	   document.frm_add.login.select();	
 	   return false;
 	}
-	if ($('password').value == "") {
+	if ($("#password").val() == "") {
 	   alert("The password field cannot be left blank.");
 	   document.frm_add.password.select();	
 	   return false;
 	}	
-	if ($('password').value != $('repass').value) {
+	if ($("#password").val() != $("#repass").val()) {
 	   alert("The password must match,\nplease verify them.");
 	   document.frm_add.password.focus();	
 	   return false;
@@ -19,17 +17,33 @@ function validateFrmAddUser() {
 	return true;
 }
 
-function verifyExistingUser() {
-	$('div-process').style.display="block";
-	el = $('target');
-	el.style.display="block";										
-	var path = 'ajax.php?action=verify&login='+$('login').value;
-	new Ajax(path, {
-		onComplete:function(e) {						
-			el.setHTML(e);
-			$('div-process').style.display="none";
+function verifyExistingUser() {	
+	$("#div-process").css({display:"block"});	
+	$("#target").css({display:"block"});		
+	$.ajax({
+		url: "ajax.php?action=verify&login="+$("#login").val(),
+		cache: false,
+		success: function(html){
+			$("#target").html(html);
+			$("#div-process").css({display:"none"});	
+			/*$("#login").css({display:"none"});*/	
 		}
-	}).request();
+	});
+	return false;
+}
+
+function exit(el, path) {					
+	el=document.getElementById(el);		
+	$(el).css({display:"block"});
+	$(el).html("Processing request...");
+	$.ajax({
+		url: path,
+		cache: false,
+		success: function(html){
+			$(el).html(html);
+			window.location='../login.php';			
+		}
+	});
 	return false;
 }
 
@@ -44,4 +58,3 @@ function selectFeedType(feed_url,username){
 		}
 }
 
-//-->
