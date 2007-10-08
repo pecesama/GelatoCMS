@@ -96,37 +96,19 @@ if ($user->isAdmin()) {
 		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<title>gelato :: <?php echo __("control panel")?></title>
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
-		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/mootools.js"></script>
-		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/slimbox.js"></script>
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/lightbox.js"></script>
 		<script language="javascript" type="text/javascript">
-		<!--
-			function exit(el, path) {
-				el = $(el);
-				el.style.display="block";
-				el.setHTML('Processing request&hellip;');
-				new Ajax(path, {
-					onComplete:function(e) {
-						el.setHTML(e).effect('opacity').custom(0,1);
-						window.location='../login.php';
-					}
-				}).request();
-				return false;
-			}
-
-			window.onload = function() {
-				contenedor = new Fx.Style('divMessages', 'opacity', {duration: 5000, onComplete:
-					function() {
-						document.getElementById('divMessages').style.display="none";
-					}
-				});
-				contenedor.custom(1,0);
-			}
-		-->
+		$(document).ready(function(){
+			$("#divMessages").fadeOut(5000,function(){
+				$("#divMessages").css({display:"none"});
+			});
+		});
 		</script>
 		<style type="text/css" media="screen">	
 			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
-			@import "<?php echo $conf->urlGelato;?>/admin/css/slimbox.css";
+			@import "<?php echo $conf->urlGelato;?>/admin/css/lightbox.css";
 		</style>
 	</head>
 	
@@ -369,7 +351,7 @@ if ($user->isAdmin()) {
 										$photoPath = $register["url"];
 									}
 
-									$effect = " style=\"cursor: pointer;\" onclick=\"Lightbox.show('".$register["url"]."', '".strip_tags($register["description"])."');\" ";
+									$effect = " href=\"".str_replace("../", $conf->urlGelato."/", $register["url"])."\" rel=\"lightbox\"";
 									
 									$input = array("{Id_Post}", "{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
 									$output = array($register["id_post"], $formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
