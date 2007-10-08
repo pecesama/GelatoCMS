@@ -51,9 +51,9 @@ $template = new plantillas($conf->template);
         $gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />\n";
         $gelato_includes .= "\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php")."\"/>\n";
         $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/themes/".$conf->template."/style.css\"/>\n";
-        $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/slimbox.css\" />\n";    
-        $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/mootools.js\"></script>\n";
-        $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/slimbox.js\"></script>";
+        $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/lightbox.css\" />\n";    
+        $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/jquery.js\"></script>\n";
+        $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/lightbox.js\"></script>";
         
         $input = array("{Gelato_includes}","{Title}", "{Description}", "{URL_Tumble}", "{Template_name}");
         $output = array($gelato_includes, $conf->title, $conf->description, $conf->urlGelato, $conf->template);
@@ -112,8 +112,8 @@ $template = new plantillas($conf->template);
                                                 } else {													
 													$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
                                                 }
-                                                
-                                                $effect = " onclick=\"Lightbox.show('".str_replace("../", $conf->urlGelato."/", $register["url"])."', '".strip_tags($register["description"])."');\" ";
+
+												$effect = " href=\"".str_replace("../", $conf->urlGelato."/", $register["url"])."\" rel=\"lightbox\"";
                                                 
                                                 $input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
                                                 $output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
@@ -210,9 +210,8 @@ $template = new plantillas($conf->template);
                                 } else {
 										$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
                                 }
-                                
-                                $effect = " onclick=\"Lightbox.show('".str_replace("../", $conf->urlGelato."/", $register["url"])."', '".strip_tags($register["description"])."');\" ";
-                                                
+
+								$effect = " href=\"".str_replace("../", $conf->urlGelato."/", $register["url"])."\" rel=\"lightbox\"";
                                 $input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
                                 $output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
                                 
