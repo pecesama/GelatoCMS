@@ -26,15 +26,16 @@ That's it! gelato should now be installed.
 	Demo user: admin
 	Demo pass: demo
 
-==== How to update to v0.90 from v0.85 any previous version =====
+==== How to update to v0.95 RC1 from v0.90 version =====
 
 1) Download and unzip the gelato package, if you haven't already.
 2) Create a backup of your config.php file.
-3) Replace all the old files with those from the new 0.90 EXCEPT for the file config.php
+3) Replace all the old files with those from the new 0.95 RC1 EXCEPT for the file config.php
 	3.1) If you do replace it by error, use the backup you create during step two.
 4) Execute the update.php file.
 7) Set CHMOD / permission ( Chmod 777 ) to the folder 'uploads'  and the folder 'uploads/CACHE'
 
 That's it! gelato should now be updated.
 
-==== Update files for version previous to v0.85 are available on the download section =====
+
+==== Update files for version previous to v0.90 are available on the download section =====
