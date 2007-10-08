@@ -33,4 +33,15 @@ function verifyExistingUser() {
 	return false;
 }
 
+function selectFeedType(feed_url,username){
+		var source = $('source');
+		if(source.selectedIndex != 0){
+			$('import_as').style.display="none";
+			$('url_label').firstChild.nodeValue = source[source.selectedIndex].firstChild.nodeValue + username;
+		}else{
+			$('import_as').style.display="block";
+			$('url_label').firstChild.nodeValue = feed_url;
+		}
+}
+
 //-->
