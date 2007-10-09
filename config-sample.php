@@ -10,26 +10,12 @@ if(!defined('entry') || !entry) die('Not a valid page');
   Copyright (C) 2007 by Pedro Santana <pecesama at gmail dot com>
 
   =========================== */
-?>
-<?php
-	// MySql configuration
-	define('DB_Server', '[server]');			// Set the MySQL hostname (generally "localhost")
-	define('DB_name', '[database]');			// Set the MySQL database gelato should use
-	define('DB_User', '[userdb]');				// Set the MySQL username
-	define('DB_Password', '[dbpass]'); 			// Set the MySQL password
-	define('Table_prefix', '[tableprefix]');	// Set the MySQL tables prefixes
-	/* Do not edit below this line */
 
-	define('Absolute_Path', dirname(__FILE__).DIRECTORY_SEPARATOR);	
-	
-	header("Expires: Mon, 26 Jul 1957 05:00:00 GMT");
-	header("Last-Modified: " . gmdate("D, d M Y H:i:s ") . " GMT");
-	header("Cache-Control: no-store, no-cache, must-revalidate");
-	header("Cache-Control: post-check=0, pre-check=0", false);
-	header("Pragma: no-cache");
-	ini_set('pcre.backtrack_limit', '10000');
-	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'mysql_connection.class.php');
-	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'streams.class.php');
-	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gettext.class.php');
-	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'lang.functions.php');
+define('DB_Server', '[server]');
+define('DB_name', '[database]');
+define('DB_User', '[userdb]');
+define('DB_Password', '[dbpass]'); 
+define('Table_prefix', 'gel_');
+define('Absolute_Path', dirname(__FILE__).DIRECTORY_SEPARATOR);
+
 ?>

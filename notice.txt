@@ -2,10 +2,11 @@
 Gelato developers and designers (in chronological order):
 
 Pedro Santana [ http://www.pecesama.net/weblog/ ]
-Jorge Condomí [ http://www.raven.com.ar/ ]
-Víctor de la Rocha [ http://blog.mis-algoritmos.com/ ]
+Jorge Condomi [ http://www.raven.com.ar/ ]
+Victor de la Rocha [ http://blog.mis-algoritmos.com/ ]
 Victor Bracco [ http://www.vbracco.com.ar/blog/ ]
 Matt Heitzenroder [ http://www.globaljourney.net/ ]
+Juan del Rio [ http://elcaminante.net/ ]
 
 = COPYRIGHT NOTICES =
 This product includes code and libraries developed by third parties, which are governed by different licenses.  These components, and their licenses, are listed below.
@@ -50,7 +51,3 @@ Textile class available under GNU General Public License.
 Copyright (c) 2003 Danilo Segan, http://savannah.nongnu.org/projects/php-gettext/
 Copyright (c) 2005 Nico Kaiser
 PHP-gettext available under GNU General Public License.
-
-= form.autosave =
-Copyright (c) Daniel Mota Leiva, http://icebeat.bitacoras.com/app/autosave/
-form.autosave available under Creative Commons Attribution-ShareAlike License.
