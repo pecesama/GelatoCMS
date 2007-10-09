@@ -1,15 +1,11 @@
 /**
  * jQuery Lightbox
- * Version 0.3 - 09/17/2007
+ * Version 0.4 - 09/17/2007
  * @author Warren Krewenki
  *
  * Based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/lightbox2/)
  * Originally written to make use of the Prototype framework, and Script.acalo.us, now altered to use jQuery.
  *
- * New in this version:
- * - fully encapsulated in one JSON object
- * - new method of adding the lightbox html
- * - removal of some dead functions
  **/
 
 var Lightbox = {
@@ -20,19 +16,25 @@ var Lightbox = {
 	imageArray : new Array,
 	activeImage : null,
 	inprogress : false,
-	
+	resizeSpeed : 350,
+	destroyElement: function(id){
+		if(el = document.getElementById(id)){
+			el.parentNode.removeChild(el);
+		}
+	},
 	initialize: function() {	
 		// attach lightbox to any links with rel 'lightbox'
 		$("a").each(function(){
 			if(this.rel.toLowerCase().match('lightbox')){
 				$(this).click(function(){
-					Lightbox.start(this);					
+					Lightbox.start(this);
 					return false;
 				});
 			}
 		});
-
-		$("body").append('<div id="overlay"></div><div id="lightbox"><div id="outerImageContainer"><div id="imageContainer"><img id="lightboxImage"><div style="" id="hoverNav"><a href="#" id="prevLink"></a><a href="#" id="nextLink"></a></div><div id="loading"><a href="#" id="loadingLink"><img src="admin/css/images/loading.gif"></a></div></div></div><div id="imageDataContainer"><div id="imageData"><div id="imageDetails"><span id="caption"></span><span id="numberDisplay"></span></div><div id="bottomNav"><a href="#" id="bottomNavClose"><img src="admin/css/images/close.gif"></a></div></div></div></div>');
+		
+		Lightbox.destroyElement('overlay'); Lightbox.destroyElement('lightbox');
+		$("body").append('<div id="overlay"></div><div id="lightbox"><div id="outerImageContainer"><div id="imageContainer"><img id="lightboxImage"><div style="" id="hoverNav"><a href="#" id="prevLink"></a><a href="#" id="nextLink"></a></div><div id="loading"><a href="#" id="loadingLink"><img src="'+Lightbox.fileLoadingImage+'"></a></div></div></div><div id="imageDataContainer"><div id="imageData"><div id="imageDetails"><span id="caption"></span><span id="numberDisplay"></span></div><div id="bottomNav"><a href="#" id="bottomNavClose"><img src="'+Lightbox.fileBottomNavCloseImage+'"></a></div></div></div></div>');
 		$("#overlay").click(function(){ Lightbox.end(); }).hide();
 		$("#lightbox").click(function(){ Lightbox.end();}).hide();
 		$("#loadingLink").click(function(){ Lightbox.end(); return false;});
@@ -45,15 +47,8 @@ var Lightbox = {
 	//	Display overlay and lightbox. If image is part of a set, add siblings to Lightbox.imageArray.
 	//
 	start: function(imageLink) {	
-		$("select, embed, object").hide();	
-
-		// * 	
-		var urlImg = $("img", imageLink).attr("src");
-		urlImg = urlImg.split("classes");
-		//urlImg = urlImg[0]+'admin/css/images/loading.gif';	
-		$("#loadingLink > img").attr({src:urlImg[0]+'admin/css/images/loading.gif'})
-		$("#bottomNavClose > img").attr({src:urlImg[0]+'admin/css/images/close.gif'})
-
+		$("select, embed, object").hide();
+		
 		// stretch overlay to fill page and fade in
 		var arrayPageSize = Lightbox.getPageSize();
 		$("#overlay").hide().css({width: '100%', height: arrayPageSize[1]+'px', opacity : Lightbox.overlayOpacity}).fadeIn();
@@ -119,7 +114,6 @@ var Lightbox = {
 		
 			// once image is preloaded, resize image container
 			imgPreloader.onload=function(){
-				console.log(Lightbox.activeImage);
 				document.getElementById('lightboxImage').src = Lightbox.imageArray[Lightbox.activeImage][0];
 				Lightbox.resizeImageContainer(imgPreloader.width, imgPreloader.height);
 			}
@@ -148,10 +142,9 @@ var Lightbox = {
 		wDiff = this.widthCurrent - widthNew;
 		hDiff = this.heightCurrent - heightNew;
 
-		$('#outerImageContainer').animate({width: widthNew},400,'linear',function(){
-			$("#outerImageContainer").animate({height: heightNew},400,'linear',function(){
+		$('#outerImageContainer').animate({width: widthNew, height: heightNew},Lightbox.resizeSpeed,'linear',function(){
 				Lightbox.showImage();
-			});
+
 		});
 
 
