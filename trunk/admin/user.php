@@ -97,9 +97,8 @@ if ($user->isAdmin()) {
 <?php
 							if (!$isEdition) {
 ?>
-									<script language="javascript" type="text/javascript">						
-										document.write("<br /><input class='submit_normal_azul' name='btnVerifyUser' id='btnVerifyUser' type='button' value='Check availability' onclick='verifyExistingUser()' />");
-									</script>
+								<br /><input class='submit_normal_azul' name='btnVerifyUser' id='btnVerifyUser' type='button' value='Check availability' onclick='verifyExistingUser()' />
+									
 <?php
 							}
 ?>

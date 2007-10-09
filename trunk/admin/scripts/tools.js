@@ -25,8 +25,8 @@ function verifyExistingUser() {
 		cache: false,
 		success: function(html){
 			$("#target").html(html);
-			$("#div-process").css({display:"none"});	
-			/*$("#login").css({display:"none"});*/	
+			$("#target").css({display:"block"});	
+			$("#div-process").css({display:"none"});					
 		}
 	});
 	return false;
