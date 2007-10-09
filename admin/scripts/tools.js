@@ -48,13 +48,11 @@ function exit(el, path) {
 }
 
 function selectFeedType(feed_url,username){
-		var source = $('source');
-		if(source.selectedIndex != 0){
-			$('import_as').style.display="none";
-			$('url_label').firstChild.nodeValue = source[source.selectedIndex].firstChild.nodeValue + username;
+		if( $('#source').val() != 'Rss'){
+			$('#import_as').hide();
+			$('#url_label').text($('#source').val() + username) ;
 		}else{
-			$('import_as').style.display="block";
-			$('url_label').firstChild.nodeValue = feed_url;
+			$('#import_as').show();
+			$('#url_label').text(feed_url);
 		}
 }
-

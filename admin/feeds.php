@@ -51,6 +51,7 @@ if ($user->isAdmin()) {
 			$("#divMessages").fadeOut(5000,function(){
 				$("#divMessages").css({display:"none"});
 			});
+			$("#source").change(function (){selectFeedType('<?php echo __("Feed Url:")?>','<?php echo __(" username:")?>')})
 		});
 		</script>
 		<style type="text/css" media="screen">	
@@ -84,7 +85,7 @@ if ($user->isAdmin()) {
 						<ul>
 							<li>
 								<label for="source"><?php echo __("Import data from:")?></label>
-								<select name="source" id="source" onchange="selectFeedType('<?php echo __("Feed Url:")?>','<?php echo __(" username:")?>' )">
+								<select name="source" id="source">
                                 	<option value="Rss" selected="selected">Rss/atom Feed</option>
                                     <option value="Twitter">Twitter</option>
                                     <option value="Youtube">Youtube</option>
