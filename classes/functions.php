@@ -13,7 +13,11 @@ if(!defined('entry') || !entry) die('Not a valid page');
 ?>
 <?php
 	function version() {
-		return "0.90";
+		return "0.95";
+	}
+	
+	function codeName() {
+		return "cioccolato RC1";
 	}
 	
 	function beginsWith($str, $sub) {

@@ -47,7 +47,7 @@ $template = new plantillas($conf->template);
         }
         
         $gelato_includes = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n";
-        $gelato_includes .= "\t<meta name=\"generator\" content=\"gelato cms ".version()."\" />\n";
+        $gelato_includes .= "\t<meta name=\"generator\" content=\"gelato  ".codeName()." (".version().")\" />\n";
         $gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />\n";
         $gelato_includes .= "\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php")."\"/>\n";
         $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/themes/".$conf->template."/style.css\"/>\n";

@@ -1,4 +1,4 @@
--- DB Gelato CMS v0.90
+-- DB Gelato CMS v0.95
 
 CREATE TABLE `gel_data` (
   `id_post` int(11) NOT NULL auto_increment,
@@ -81,4 +81,5 @@ INSERT INTO `gel_options` VALUES ('rich_text', '0');
 INSERT INTO `gel_options` VALUES ('allow_comments', '0');
 INSERT INTO `gel_options` VALUES ('offset_city', 'Mexico/General');
 INSERT INTO `gel_options` VALUES ('offset_time', '-6');
+INSERT INTO `gel_options` VALUES ('shorten_links', '0');
 INSERT INTO `gel_options` VALUES ('rss_import_frec', '5 minutes');

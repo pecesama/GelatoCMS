@@ -36,8 +36,6 @@ if ($user->isAuthenticated()) {
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
-		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/mootools.js"></script>
-		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/sortable.js"></script>
 		<style type="text/css" media="screen">	
 			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
 		</style>
