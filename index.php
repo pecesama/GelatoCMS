@@ -269,9 +269,9 @@ $template = new plantillas($conf->template);
 					$template->precargarPlantillaConBloque($input, $output, "template_comments", "comments");
 
 					while($rowComment = mysql_fetch_assoc($rsComments)) {
-						echo "<pre>";
+						/*echo "<pre>";
 						print_r($rowComment);
-						echo "</pre>";
+						echo "</pre>";*/
 						$commentAuthor = ($rowComment["web"]=="") ? $rowComment["username"] : "<a href=\"".$rowComment["web"]."\" rel=\"external\">".$rowComment["username"]."</a>";
 						$input = array("{Id_Comment}", "{Comment_Author}", "{Date}", "{Comment}");
 						$output = array($rowComment["id_comment"], $commentAuthor, gmdate("d.m.y", strtotime($rowComment["comment_date"])+transform_offset($conf->offsetTime)), $rowComment["content"]);
