@@ -28,9 +28,15 @@ if ($user->isAdmin()) {
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
-		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/sortable.js"></script>
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.tablesorter.min.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
+			$("#admin-table").tablesorter({        
+				headers: {            
+					2: {sorter: false},            
+					3: {sorter: false} 
+				} 
+			}); 			
 			$("#divMessages").fadeOut(5000,function(){
 				$("#divMessages").css({display:"none"});
 			});
@@ -90,12 +96,13 @@ if ($user->isAdmin()) {
 						}
 ?>						
 						<div class="tabla">
-						<table class="sortable" id="admin-table">
+						<table border="0" cellpadding="0" cellspacing="0" id="admin-table">
 							<thead>
 								<tr>
 									<th scope="col"><?php echo __("Login")?></th>
 									<th scope="col"><?php echo __("Name")?></th>
-									<th colspan="2" scope="col" class="unsortable"><?php echo __("Actions")?></th>
+									<th scope="col"><?php echo __("Actions")?></th>
+									<th scope="col"></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -106,20 +113,11 @@ if ($user->isAdmin()) {
 						while($register = mysql_fetch_array($rs)) {
 ?>
 							<tr <?php if ($odd) { echo 'class="odd"'; } $odd=!$odd; ?>>
-								<td>
-									<?php echo $register["login"]."\n"; ?>
-								</td>
-								<td>
-									<?php echo $register["name"]."\n"; ?>
-								</td>
-								<td>
-									<a href="user.php?edit=<?php echo $register["id_user"]; ?>"><?php echo __("Edit")?></a>
-								</td>
-								<?php if ($_SESSION["user_id"] != $register["id_user"]) { ?>
-								<td>
-									<a href="user.php?delete=<?php echo $register["id_user"]; ?>"><?php echo __("Delete")?></a>
-								</td>
-								<?php } ?>
+								<td><?php echo $register["login"]."\n"; ?></td>
+								<td><?php echo $register["name"]."\n"; ?></td>
+								<td><a href="user.php?edit=<?php echo $register["id_user"]; ?>"><?php echo __("Edit")?></a></td>								
+								<td><?php if ($_SESSION["user_id"] != $register["id_user"]) { ?><a href="user.php?delete=<?php echo $register["id_user"]; ?>"><?php echo __("Delete")?></a><?php } ?>&nbsp;</td>
+								
 							</tr>
 <?php
 						}

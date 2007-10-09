@@ -148,19 +148,15 @@ div.conversation ul { list-style-type: none; margin: 0px; padding: 0px 0px 0px 1
 		div.conversation ul li.even { background-color: #e8e8e8; }
 
 /* Tables design */
-
-#admin-table { width:535px; margin:0 auto; padding:0;}
-table { padding: 0; width:70%; margin: 0 auto; border-collapse: collapse; color: #333; background: #F3F5F7; }
-table a {color: #3A4856; text-decoration: none; border-bottom: 1px solid #C6C8CB; }
-table img { border:0px; }
-table a:visited {color: #777; text-decoration: none; }
-table a:hover {color: #000; text-decoration: none; }
-table caption {text-align: left; text-transform: uppercase;  padding-bottom: 10px; }
-table thead th {background: #BDD3E7; padding: 15px 10px; color: #fff; text-align: left; font-weight: normal; }
-table tbody, table thead {border-left: 1px solid #EAECEE; border-right: 1px solid #EAECEE; }
-table tbody {border-bottom: 1px solid #EAECEE; }                      
-table tbody td, table tbody th {padding: 10px; background: url('images/td_back.gif') repeat-x; text-align: left; }
-table tbody tr {background: #F3F5F7; }
-table tbody tr.odd {background: #F0F2F4; }
-table tbody  tr:hover {background: #EAECEE; color: #111; }
-table tfoot td, table tfoot th, table tfoot tr {text-align: left; background: #fff; padding: 10px; }
+#admin-table {background-color:#F3F5F7; margin:0; width:100%; text-align:left; font-size:12px; border:1px solid #EAECEE;}
+	#admin-table thead tr th, #admin-table tfoot tr th {background-color:#BDD3E7; padding:6px;}
+	#admin-table thead tr .header {background-image: url(images/bg.gif); background-repeat: no-repeat;	background-position: center right;	cursor: pointer;}
+	#admin-table tbody td {color:#3D3D3D; padding:6px; background-color:#FFF; background: url(images/td_back.gif) repeat-x; vertical-align:top;}
+	#admin-table a {color: #3A4856; text-decoration: none; border-bottom: 1px solid #C6C8CB; }
+	#admin-table tbody a:visited {color: #777; text-decoration: none; }
+	#admin-table tbody a:hover {color: #000; text-decoration: none; }
+	/*#admin-table tbody tr.odd td {background-color:#F0F0F6;}*/
+	#admin-table tbody tr:hover {background: #EAECEE; color: #111; }
+	#admin-table thead tr .headerSortUp {background-image: url(images/asc.gif);}
+	#admin-table thead tr .headerSortDown {background-image: url(images/desc.gif);}
+	#admin-table thead tr .headerSortDown, #admin-table thead tr .headerSortUp {background-color:#8dbdd8;}
