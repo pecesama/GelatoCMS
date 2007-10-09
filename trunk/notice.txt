@@ -11,13 +11,13 @@ Juan del Rio [ http://elcaminante.net/ ]
 = COPYRIGHT NOTICES =
 This product includes code and libraries developed by third parties, which are governed by different licenses.  These components, and their licenses, are listed below.
 
-= Mootools =
-Copyright (c) 2006 Valerio Proietti, http://mad4milk.net
-Mootools is available under MIT Style License.
+= jQuery =
+Copyright (c) 2007 John Resig, http://jquery.com
+jQuery is available under a dual licensed the MIT and GPL licenses.
 
-= Slimbox =
-Copyright (c) Christophe Beyls, http://www.digitalia.be
-Slimbox available under MIT Style License.
+= jQuery Lightbox =
+Copyright (c) 2007 Warren Krewenki, http://warren.mesozen.com/jquery-lightbox/
+jQuery Lightbox available under an Open License.
 
 = Sortable =
 Copyright (c) 1997-2006 Stuart Langridge, Joost de Valk, http://www.joostdevalk.nl/code/sortable-table/

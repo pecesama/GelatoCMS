@@ -27,28 +27,13 @@ if (!file_exists($configFile)) {
 
 $db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 
-/*$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('allow_comments', '0');";
-		
-$db->ejecutarConsulta($sqlStr);
-
-$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', 'Mexico/General');";
-		
-$db->ejecutarConsulta($sqlStr);
-		
-$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('offset_time', '-6');";
-
-$db->ejecutarConsulta($sqlStr);
-		
 $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('shorten_links', '0');";
 		
 $db->ejecutarConsulta($sqlStr);
-
- AFTER v0.90 */
  
 $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('rss_import_frec', '5 minutes');";
 		
 $db->ejecutarConsulta($sqlStr);
-
 
 $sqlStr = "CREATE TABLE `".Table_prefix."feeds` (
   `id_feed` int(11) NOT NULL auto_increment,
@@ -71,6 +56,6 @@ if(!is_dir('upload/CACHE')){
 }
 
 echo "<p><em>Finished!</em></p>";
-echo "<p>Now you are running on the new <strong>After 0.90</strong> version!!!</p>";
+echo "<p>Now you are running on the new <strong>gelato cioccolato RC1</strong> version!!!</p>";
 
 ?>
