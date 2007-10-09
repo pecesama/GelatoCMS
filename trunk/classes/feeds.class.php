@@ -38,8 +38,7 @@ class feeds extends Conexion_Mysql {
 			case 'VOX': 	$f['url'] = 'http://{{username}}.vox.com/library/posts/atom.xml'; $f['type'] = 1; break;
 			case 'Digg': 	$f['url'] = 'http://digg.com/rss/{{username}}/index2.xml'; $f['type'] = 1; break;
 			case 'Tumblr': 	$f['url'] = 'http://{{username}}.tumblr.com/rss'; $f['type'] = 1; break;
-/*>>*/		case 'Flickr': 	$f['url'] = 'http:/flickr.com/photos/{{username}}'; $f['type'] = 2; break; 
-/*>>*/		case 'Twitter': $f['url'] = 'http://twitter.com/{{username}}'; $f['type'] = 1; break;
+			case 'Twitter': $f['url'] = 'http://twitter.com/{{username}}'; $f['type'] = 1; break;
 			case 'Last.fm': $f['url'] = 'http://ws.audioscrobbler.com/1.0/user/{{username}}/recenttracks.rss'; $f['type'] = 1; break;
 			case 'Blogger': $f['url'] = 'http://{{username}}.blogspot.com/feeds/posts/default'; $f['type'] = 1; break;
 			case 'Youtube': $f['url'] = 'http://www.youtube.com/rss/user/{{username}}/videos.rss'; $f['type'] = 1; break;

@@ -86,7 +86,6 @@ if ($user->isAdmin()) {
 								<label for="source"><?php echo __("Import data from:")?></label>
 								<select name="source" id="source" onchange="selectFeedType('<?php echo __("Feed Url:")?>','<?php echo __(" username:")?>' )">
                                 	<option value="Rss" selected="selected">Rss/atom Feed</option>
-                                 	<option value="Flickr">Flickr</option>
                                     <option value="Twitter">Twitter</option>
                                     <option value="Youtube">Youtube</option>
                                     <option value="Last.fm">Last.fm</option>
