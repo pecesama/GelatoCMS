@@ -99,6 +99,7 @@ if ($user->isAdmin()) {
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/lightbox.js"></script>
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.validate.min.js"></script>
 		<script language="javascript" type="text/javascript">
 		$(document).ready(function(){
 			$("#divMessages").fadeOut(5000,function(){

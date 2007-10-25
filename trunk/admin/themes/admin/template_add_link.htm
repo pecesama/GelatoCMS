@@ -1,20 +1,38 @@
-									<p>
-										<label for="title">Name <span class="option">(optional)</span></label>			
-											<input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
-									</p>
-									<p>
-										<label for="url">URL</label>			
-											<input class="txt" type="text" name="url" id="url" value="{editUrl}" size="80" />
-									</p>
-									<p>
-									<div id="add_link_description" style="margin-top:5px;">
-										<a class="linkFrm" href="#" onclick="document.getElementById('link_description').style.display = ''; document.getElementById('add_link_description').style.display = 'none'; return false;" style="font-size:11px;">Add a description</a><br /><br />
-									</div>								
-									<div id="link_description" style="display:none;">
-										<label for="description">Description</label><br />								
-											<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>											
-									</div>
-									</p>
-									<input type="hidden" name="type" id="type" value="{type}" />
-									<input type="hidden" name="date" id="date" value="{date}" />
-									<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+			
+			<div>
+				<label for="title">Name <span class="option">(optional)</span></label>			
+				<input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
+			</div>
+			<div>
+				<label for="url">URL</label>			
+				<input class="txt" type="text" name="url" id="url" value="{editUrl}" size="80" />
+			</div>
+			<div>
+				<div id="add_link_description" style="margin-top:5px;">
+					<a class="linkFrm" href="#" onclick="document.getElementById('link_description').style.display = ''; document.getElementById('add_link_description').style.display = 'none'; return false;" style="font-size:11px;">Add a description</a><br /><br />
+				</div>								
+				<div id="link_description" style="display:none;">
+					<label for="description">Description</label><br />								
+					<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>											
+				</div>
+			</div>
+			<input type="hidden" name="type" id="type" value="{type}" />
+			<input type="hidden" name="date" id="date" value="{date}" />
+			<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+
+	<script>
+		$("#autosave").validate({
+			rules: {
+				url: {
+					required: true,
+					url: true
+				}
+			},
+			errorElement: "span",
+			errorClass: "validate_span", 
+			errorPlacement: function(label, element) { 
+				label.prependTo(element.prev())
+			} 
+		});
+	</script>

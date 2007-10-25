@@ -160,3 +160,8 @@ div.conversation ul { list-style-type: none; margin: 0px; padding: 0px 0px 0px 1
 	#admin-table thead tr .headerSortUp {background-image: url(images/asc.gif);}
 	#admin-table thead tr .headerSortDown {background-image: url(images/desc.gif);}
 	#admin-table thead tr .headerSortDown, #admin-table thead tr .headerSortUp {background-color:#8dbdd8;}
+
+/* validation */
+form.newpost input.validate_span {border:1px solid #ca3402; float:none;}
+	form.newpost span.validate_span {color:#ca3402; padding-left:10px; border:0; float:right;}
+
