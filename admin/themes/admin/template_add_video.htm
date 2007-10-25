@@ -1,16 +1,35 @@
-									<input type="hidden" name="title" id="title" value="" />
-									<p>
-										<label for="url">Video URL</label>			
-											<input class="txt" type="text" name="url" id="url" value="{editUrl}" size="80" />
-										<div style="color: rgb(136, 136, 136); margin-bottom: 5px; font-size: 11px; font-weight: bold;">
-											This is the URL from the video sites YouTube or Vimeo.<br>
-											<span style="font-size: 10px; font-weight: normal;">(ie. http://youtube.com/watch?v=HcBFLN9cli0)</span>
-										</div>
-									</p>									
-									<p>
-										<label for="description">Caption <span class="option">(optional)</span></label><br />
-											<textarea rows="12" cols="84" name="description" id="description" tabindex="2">{editBody}</textarea>											
-									</p>
-									<input type="hidden" name="type" id="type" value="{type}" />
-									<input type="hidden" name="date" id="date" value="{date}" />
-									<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+				
+		<div>
+			<label for="url">Video URL</label>			
+			<input class="txt" type="text" name="url" id="url" value="{editUrl}" size="80" />
+			<div style="color: rgb(136, 136, 136); margin-bottom: 5px; font-size: 11px; font-weight: bold;">
+				This is the URL from the video sites YouTube or Vimeo.<br>
+				<span style="font-size: 10px; font-weight: normal;">(ie. http://youtube.com/watch?v=HcBFLN9cli0)</span>
+			</div>
+		</div>									
+		<div>
+			<label for="description">Caption <span class="option">(optional)</span></label><br />
+			<textarea rows="12" cols="84" name="description" id="description" tabindex="2">{editBody}</textarea>											
+		</div>
+
+		<input type="hidden" name="title" id="title" value="" />
+		<input type="hidden" name="type" id="type" value="{type}" />
+		<input type="hidden" name="date" id="date" value="{date}" />
+		<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+
+	<script>
+		$("#autosave").validate({
+			rules: {
+				url: {
+					required: true,
+					url: true
+				}
+			},
+			errorElement: "span",
+			errorClass: "validate_span", 
+			errorPlacement: function(label, element) { 
+				label.prependTo(element.prev())
+			} 
+		});
+	</script>

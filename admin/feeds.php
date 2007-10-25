@@ -46,12 +46,28 @@ if ($user->isAdmin()) {
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
+		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.validate.min.js"></script>
 		<script type="text/javascript">
 		$(document).ready(function(){
 			$("#divMessages").fadeOut(5000,function(){
 				$("#divMessages").css({display:"none"});
 			});
 			$("#source").change(function (){selectFeedType('<?php echo __("Feed Url:")?>','<?php echo __(" username:")?>')})
+
+			$("#feedform").validate({
+				rules: {
+					url: {
+						required: true,
+						url: true
+					}
+				},
+				errorElement: "span",
+				errorClass: "validate_span", 
+				errorPlacement: function(label, element) { 
+					label.prependTo(element.prev())
+				} 
+			});
+
 		});
 		</script>
 		<style type="text/css" media="screen">	
@@ -80,7 +96,7 @@ if ($user->isAdmin()) {
 
 					<div class="tabla">
 
-						<form action="feeds.php" method="post" class="newpost">
+						<form action="feeds.php" method="post" class="newpost" id="feedform">
 						<fieldset>
 						<ul>
 							<li>
@@ -104,7 +120,7 @@ if ($user->isAdmin()) {
 							</li>
 							<li>
 								<label for="url" id="url_label"><?php echo __("Feed Url (double check):")?></label>
-									<input type="text" name="url" id="url" class="txt" />
+								<input type="text" name="url" id="url" class="txt" />
 							</li>
                             <li><label for="credits"><?php echo __('Show credits on each post?')?></label><input type="checkbox" name="credits" checked="checked" class="check" /></li>
 							<li>

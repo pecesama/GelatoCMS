@@ -1,20 +1,35 @@
-									<p>
-										<label for="title">Title <span class="option">(optional)</span></label>
-											<input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
-									</p>
-									<input type="hidden" name="url" id="url" value="" />
-									<p>
-										<label for="description">Conversation</label><br />
-										<div style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
-											<span style="font-weight: bold;">Example</span><br>
-											<span style="font-style: italic;">
-												Geek: Wow an open source tumblelog CMS!!.<br>
-												Normal: Tumble... what??<br>
-												Geek: Read the wikipedia!!
-											</span>
-										</div>
-											<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>
-									</p>
-									<input type="hidden" name="type" id="type" value="{type}" />
-									<input type="hidden" name="date" id="date" value="{date}" />
-									<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+		<div>
+			<label for="title">Title <span class="option">(optional)</span></label>
+				<input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
+		</div>
+		
+		<div>
+			<label for="description">Conversation</label>
+			<div style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
+				<span style="font-weight: bold;">Example</span><br>
+				<span style="font-style: italic;">
+					Geek: Wow an open source tumblelog CMS!!.<br>
+					Normal: Tumble... what??<br>
+					Geek: Read the wikipedia!!
+				</span>
+			</div>
+			<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>
+		</div>
+
+		<input type="hidden" name="url" id="url" value="" />
+		<input type="hidden" name="type" id="type" value="{type}" />
+		<input type="hidden" name="date" id="date" value="{date}" />
+		<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+	<script>
+		$("#autosave").validate({
+			rules: {
+				description: "required"
+			},
+			errorElement: "span",
+			errorClass: "validate_span", 
+			errorPlacement: function(label, element) { 
+				label.prependTo(element.parent().children("label"))
+			} 
+		});
+	</script>

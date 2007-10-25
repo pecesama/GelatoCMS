@@ -1,12 +1,29 @@
-									<input type="hidden" name="url" id="url" value="" />
-									<p>
-										<label for="description">Quote</label><br />
-											<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>											
-									</p>
-									<p>
-										<label for="title">Source <span class="option">(optional)</span></label>
-											<input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
-									</p>
-									<input type="hidden" name="type" id="type" value="{type}" />
-									<input type="hidden" name="date" id="date" value="{date}" />
-									<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+		
+		
+		<div>
+			<label for="description">Quote</label>
+			<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>											
+		</div>
+		<div>
+			<label for="title">Source <span class="option">(optional)</span></label>
+			<input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
+		</div>
+
+		<input type="hidden" name="url" id="url" value="" />
+		<input type="hidden" name="type" id="type" value="{type}" />
+		<input type="hidden" name="date" id="date" value="{date}" />
+		<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+
+	<script>
+		$("#autosave").validate({
+			rules: {
+				description: "required"
+			},
+			errorElement: "span",
+			errorClass: "validate_span", 
+			errorPlacement: function(label, element) { 
+				label.prependTo(element.prev())
+			} 
+		});
+	</script>
