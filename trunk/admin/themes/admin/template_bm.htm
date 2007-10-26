@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    	<title>gelato bookmarklet</title>
+    	<style type="text/css">
+    	    body {
+    	        background-color: #e1e1e1;
+    	        margin:           0px;
+    	        font:             Normal 15px 'Trebuchet MS',Verdana,Helvetica,sans-serif;
+    	        text-align:       center;
+    	    }
+    	    
+    	    div#content {
+    	        margin:           137px 30px 0px 30px;
+    	        padding:          15px;
+    	    }
+    	</style>
+    	<script type="text/javascript">
+			function countdown_func() {
+			    var prefix = 'or wait ';
+			    countdown--;
+			    el = document.getElementById('countdown');
+			    if (countdown == 1) {
+			        el.firstChild.nodeValue = 
+			            prefix + countdown + ' second.';
+			    } else if (countdown > 0) {
+			        el.firstChild.nodeValue = 
+			            prefix + countdown + ' seconds.';
+			    } else {
+                    self.close();
+			    }
+			    if (countdown > 0) setTimeout('countdown_func()', 1000);
+			}
+	
+          	var countdown = 3;
+        </script>
+    </head>
+
+    <body>
+        <div id="content">
+            <div style="margin-bottom:10px; font-size:40px; color:#777;">Done!</div>
+
+            <a href="#" onclick="javascript:self.close(); return false;"
+            style="color:#777;">Close this window</a>
+            
+            <span id="countdown" style="color:#777;">
+                or wait 3 seconds.
+            </span>
+        </div>
+
+        <script type="text/javascript">
+            setTimeout('countdown_func()', 1000);
+        </script>
+    </body>
+</html>

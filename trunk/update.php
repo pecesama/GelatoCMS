@@ -58,6 +58,6 @@ if(!is_dir('upload/CACHE')){
 }
 
 echo "<p><em>Finished!</em></p>";
-echo "<p>Now you are running on the new <strong>gelato cioccolato RC1</strong> version!!!</p>";
+echo "<p>Now you are running on the new <strong>gelato cioccolato</strong> version!!!</p>";
 
 ?>
