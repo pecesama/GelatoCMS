@@ -104,8 +104,10 @@ if ($user->isAdmin()) {
 		$(document).ready(function(){
 			$("#divMessages").fadeOut(5000,function(){
 				$("#divMessages").css({display:"none"});
-			});
+			});			
 		});
+		Lightbox.fileLoadingImage = "css/images/loading.gif";
+		Lightbox.fileBottomNavCloseImage = "css/images/closelabel.gif";		
 		</script>
 		<style type="text/css" media="screen">	
 			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
