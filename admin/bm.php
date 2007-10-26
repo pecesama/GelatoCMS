@@ -61,7 +61,13 @@ if ($user->isAdmin()) {
 		$_POST["description"] = strip_tags($_POST["description"]);
 		
 		if ($tumble->addPost($_POST)) {
-			header("Location: ".$conf->urlGelato."/admin/index.php?added=true");
+			//header("Location: ".$conf->urlGelato."/admin/index.php?added=true");
+			//die();
+			$input = array("{type}");
+			$output = array("1");
+			
+			$template->cargarPlantilla($input, $output, "template_bm");
+			$template->mostrarPlantilla();
 			die();
 		} else {
 			header("Location: ".$conf->urlGelato."/admin/index.php?error=2&des=".$this->merror);
@@ -146,7 +152,7 @@ if ($user->isAdmin()) {
 ?>					
 					</ul>
 					<p>&nbsp;</p>
-					<form action="index.php" method="post" <?php echo (isset($_GET["new"]) && $_GET["new"]=="photo") ? "enctype=\"multipart/form-data\"" : ""?> name="frmAdd" class="newpost">
+					<form action="bm.php" method="post" <?php echo (isset($_GET["new"]) && $_GET["new"]=="photo") ? "enctype=\"multipart/form-data\"" : ""?> name="frmAdd" class="newpost">
 						<fieldset>
 <?php					
 							$date = gmmktime();
@@ -166,7 +172,7 @@ if ($user->isAdmin()) {
 									$input = array("{type}", "{date}", "{id_user}", "{editUrl}", "{editBody}");
 									$output = array("2", $date, $_SESSION['user_id'], $url, $body);
 									
-									$template->cargarPlantilla($input, $output, "template_add_photo");
+									$template->cargarPlantilla($input, $output, "template_add_photo_bm");
 									$template->mostrarPlantilla();							   
 									break;
 								case "url":

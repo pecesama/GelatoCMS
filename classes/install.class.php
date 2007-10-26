@@ -123,7 +123,7 @@ class Install {
 					
 		$sqlStr[] = "INSERT INTO `".Table_prefix."config` VALUES (". $this->data['posts_limit'] .", '".$this->data['title']."', '".$this->data['description']."', '".$this->data['lang']."', '".$this->data['template']."', '".$this->data['url_installation']."');";		
 		$sqlStr[] = "INSERT INTO `".Table_prefix."users` VALUES ('', '', '".$this->data['login']."', '".md5($this->data['password'])."', '".$this->data['email']."', '".$this->data['website']."', '".$this->data['about']."');";
-		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('url_friendly', '1');";
+		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('url_friendly', '0');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('rich_text', '0');";		
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('allow_comments', '0');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', '".$this->data['offset_city']."');";		

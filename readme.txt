@@ -6,18 +6,28 @@
 	* If you installed gelato in the root directory, you should visit: http://example.com/install.php
     * If you installed gelato in its own subdirectory called tumblelog, for example, you should visit: http://example.com/tumblelog/install.php 
 4) Set CHMOD / permission ( Chmod 777 ) to the folder 'uploads' and the folder 'uploads/CACHE'
+5) REMOVE the install.php and update.php files.
 
 That's it! gelato should now be installed.
 
-==== How to update to v0.95 RC1 from v0.90 version =====
+==== How to update to v0.95 from v0.90 version =====
 
 1) Download and unzip the gelato package, if you haven't already.
 2) Create a backup of your config.php file.
-3) Replace all the old files with those from the new 0.95 RC1.
+3) Replace all the old files with those from the new 0.95.
 4) Rename the config-sample.php file to config.php.
 5) Open config.php in your favorite text editor and fill in your database details (using the information on your old config.php).
 4) Execute the update.php file.
 7) Set CHMOD / permission ( Chmod 777 ) to the folder 'uploads'  and the folder 'uploads/CACHE'.
+8) REMOVE the install.php and update.php files.
+
+That's it! gelato should now be updated.
+
+==== How to update to v0.95 from v0.95 RC1 version =====
+
+1) Download and unzip the gelato package, if you haven't already.
+2) Replace all the old files with those from the new 0.95.
+3) REMOVE the install.php and update.php files.
 
 That's it! gelato should now be updated.
 
@@ -34,6 +44,7 @@ That's it! gelato should now be updated.
 6) Place the gelato files in the desired location on your web server.
 	Note: The test data on the script /db/gelato_db.sql point the installation to http://localhost/gelato
 7) Set CHMOD / permission ( Chmod 777 ) to the folder 'uploads' and the folder 'uploads/CACHE'
+8) REMOVE the install.php and update.php files.
 
 That's it! gelato should now be installed.
 	Demo user: admin
