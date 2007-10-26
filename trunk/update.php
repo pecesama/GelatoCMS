@@ -25,6 +25,8 @@ if (!file_exists($configFile)) {
 	require($configFile);
 } 
 
+require_once('classes/mysql_connection.class.php'); 
+
 $db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 
 $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('shorten_links', '0');";
@@ -51,8 +53,8 @@ $sqlStr = "CREATE TABLE `".Table_prefix."feeds` (
 $db->ejecutarConsulta($sqlStr);
 
 if(!is_dir('upload/CACHE')){
-	mkdir('upload/CACHE');
-	chmod('upload/CACHE',777);
+	@mkdir('upload/CACHE');
+	@chmod('upload/CACHE',777);
 }
 
 echo "<p><em>Finished!</em></p>";
