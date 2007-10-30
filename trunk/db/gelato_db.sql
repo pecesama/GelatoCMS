@@ -62,7 +62,7 @@ CREATE TABLE `gel_feeds` (
 	`site_url` varchar(255) NOT NULL,
 	`id_user` int(10) NOT NULL,
 	PRIMARY KEY  (`id_feed`)
-) ENGINE=MyISAM1 ;
+) ENGINE=MyISAM ;
 
 
 -- Example data for table `gel_config`
