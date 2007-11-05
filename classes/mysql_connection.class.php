@@ -101,7 +101,9 @@ class Conexion_Mysql {
 	  
 	  foreach ($datos as $llave=>$valor) {
 		  
-		 $cols .= "$llave,";  
+		 $cols .= "$llave,"; 
+		 
+		 $valor = htmlspecialchars($valor,ENT_QUOTES);
 		 
 		 $tipo_col = $this->obtenerTipoCampo($tabla, $llave);  // obtiene el tipo de campo
 		 if (!$tipo_col) return false;  // error!
@@ -153,6 +155,8 @@ class Conexion_Mysql {
 		$sql = "UPDATE $tabla SET";
 		foreach ($datos as $llave=>$valor) {
 			$sql .= " $llave=";
+			
+			$valor = htmlspecialchars($valor,ENT_QUOTES);
 			
 			$tipo_col = $this->obtenerTipoCampo($tabla, $llave);  // obtiene el tipo de campo
 			if (!$tipo_col) return false;  // error!
