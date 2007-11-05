@@ -120,6 +120,9 @@ class gelato extends Conexion_Mysql {
 			$formatedText .= "	</li>\n";			
 		}
 		$formatedText .= "</ul>\n";
+		// Ugly path fix it ASAP 
+		$formatedText = str_replace("<p>","", $formatedText);
+		$formatedText = str_replace("</p>","", $formatedText);
 		return $formatedText;
 	}
 	
