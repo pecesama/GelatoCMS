@@ -121,7 +121,9 @@ class Conexion_Mysql {
 			$sqlValues .= "'$valor',";
 		 }
 		 elseif (substr_count(MYSQL_TYPES_STRING, "$tipo_col ")) {
-			$valor = addslashes($valor);
+			if ($this->auto_slashes) {
+				$valor = addslashes($valor);
+			}
 			$sqlValues .= "'$valor',";  
 		 }
 	  }
@@ -173,7 +175,9 @@ class Conexion_Mysql {
 			$sql .= "'$valor',";
 			}
 			elseif (substr_count(MYSQL_TYPES_STRING, "$tipo_col ")) {
-			if ($this->auto_slashes) $valor = addslashes($valor);
+			if ($this->auto_slashes) {
+				$valor = addslashes($valor);
+			}
 			$sql .= "'$valor',";  
 			}	
 		}
