@@ -39,7 +39,7 @@ var Lightbox = {
 		$("#lightbox").click(function(){ Lightbox.end();}).hide();
 		$("#loadingLink").click(function(){ Lightbox.end(); return false;});
 		$("#bottomNavClose").click(function(){ Lightbox.end(); return false; });
-		$('#outerImageContainer').css({width: '250px', height: '250px'});
+		$('#outerImageContainer').css({width: '250px', height: '250px;'});
 	},
 	
 	//
