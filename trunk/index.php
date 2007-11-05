@@ -89,6 +89,8 @@ $template = new plantillas($conf->template);
 								$strEnd=($conf->urlFriendly) ? "/" : "";
 								$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
                                 
+								$conversation = $register["description"];
+								
 								$textile = new Textile();				
 								$register["description"] = $textile->TextileThis($register["description"]);
 
@@ -141,7 +143,7 @@ $template = new plantillas($conf->template);
                                                 break;
                                         case "5":
                                                 $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Conversation}", "{URL_Tumble}");
-                                                $output = array($formatedDate, $permalink, $register["title"], $tumble->formatConversation($register["description"]), $conf->urlGelato);
+												$output = array($formatedDate, $permalink, $register["title"], $tumble->formatConversation($conversation), $conf->urlGelato);
                                                 
                                                 $template->cargarPlantilla($input, $output, "template_conversation");
                                                 $template->mostrarPlantilla();
@@ -187,6 +189,8 @@ $template = new plantillas($conf->template);
 				$strEnd=($conf->urlFriendly) ? "/" : "";
 				$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
                 
+				$conversation = $register["description"];
+				
 				$textile = new Textile();				
 				$register["description"] = $textile->TextileThis($register["description"]);
 				
@@ -238,7 +242,7 @@ $template = new plantillas($conf->template);
                                 break;
                         case "5":
                                 $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Conversation}", "{URL_Tumble}");
-                                $output = array($formatedDate, $permalink, $register["title"], $tumble->formatConversation($register["description"]), $conf->urlGelato);
+                                $output = array($formatedDate, $permalink, $register["title"], $tumble->formatConversation($conversation), $conf->urlGelato);
                                 
                                 $template->cargarPlantilla($input, $output, "template_conversation");
                                 $template->mostrarPlantilla();
