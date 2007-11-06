@@ -3,370 +3,419 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: gelato cms\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-20 17:40-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2007-07-29 22:39-0500\n"
+"PO-Revision-Date: 2007-11-06 12:23-0600\n"
+"Last-Translator: Pedro Santana <psantana@gelatocms.com>\n"
+"Language-Team: english\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: English\n"
 
 #: admin.php:28
 msgid "admin users"
-msgstr ""
+msgstr "admin users"
 
-#: admin.php:52 index.php:141 options.php:58 settings.php:58 user.php:68
+#: admin.php:52
+#: comments.php:98
+#: index.php:141
+#: options.php:84
+#: settings.php:58
+#: user.php:68
 msgid "Processing request..."
-msgstr ""
+msgstr "Processing request..."
 
-#: admin.php:55 close.php:39 index.php:144 options.php:61 settings.php:61
+#: admin.php:55
+#: close.php:39
+#: comments.php:101
+#: index.php:144
+#: options.php:87
+#: settings.php:61
 #: user.php:71
 msgid "home"
-msgstr ""
+msgstr "home"
 
-#: admin.php:57 index.php:146
+#: admin.php:57
+#: index.php:146
 msgid "View Tumblelog"
-msgstr ""
+msgstr "View Tumblelog"
 
-#: admin.php:58 index.php:147
+#: admin.php:58
+#: index.php:147
 msgid "Log out"
-msgstr ""
+msgstr "Log out"
 
-#: admin.php:66 index.php:321 options.php:73 settings.php:74
+#: admin.php:66
+#: index.php:321
+#: options.php:99
+#: settings.php:74
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
-#: admin.php:67 index.php:324
+#: admin.php:67
+#: comments.php:111
+#: index.php:325
 msgid "Posts"
-msgstr ""
+msgstr "Posts"
 
 #: admin.php:68
 msgid "Add user"
-msgstr ""
+msgstr "Add user"
 
-#: admin.php:69 index.php:323 options.php:72 settings.php:72 user.php:82
+#: admin.php:69
+#: index.php:323
+#: options.php:98
+#: settings.php:72
+#: user.php:82
 msgid "Users"
-msgstr ""
-
-#: admin.php:75 admin.php:81 admin.php:87
-msgid "<div class=\"exito\" id=\"divMessages\">"
-msgstr ""
+msgstr "Users"
 
 #: admin.php:75
 msgid "The user has been added successfully."
-msgstr ""
-
-#: admin.php:75 admin.php:81 admin.php:87 admin.php:93 admin.php:95
-msgid "</div>"
-msgstr ""
+msgstr "The user has been added successfully."
 
 #: admin.php:81
 msgid "The user has been eliminated successfully."
-msgstr ""
+msgstr "The user has been eliminated successfully."
 
 #: admin.php:87
 msgid "The user has been modified successfully."
-msgstr ""
+msgstr "The user has been modified successfully."
 
 #: admin.php:93
-msgid "<div class=\"error\" id=\"divMessages\">"
-msgstr ""
-
-#: admin.php:93 ajax.php:36
+#: ajax.php:36
 msgid "The username is not available."
-msgstr ""
-
-#: admin.php:95
-msgid "<div class=\"error\" id=\"divMessages\"><strong>"
-msgstr ""
+msgstr "The username is not available."
 
 #: admin.php:95
 msgid "Error on the database server:."
-msgstr ""
-
-#: admin.php:95
-msgid " </strong>"
-msgstr ""
-
-#: admin.php:95
-msgid "des"
-msgstr ""
+msgstr "Error in the database server."
 
 #: admin.php:103
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: admin.php:104
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: admin.php:105
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
-#: admin.php:115
-msgid "class=\"odd\""
-msgstr ""
-
-#: admin.php:117
-msgid "login"
-msgstr ""
-
-#: admin.php:117 admin.php:120
-msgid "\n"
-msgstr ""
-
-#: admin.php:120
-msgid "name"
-msgstr ""
-
-#: admin.php:123 admin.php:126
-msgid "id_user"
-msgstr ""
-
-#: admin.php:123 user.php:83
+#: admin.php:123
+#: comments.php:113
+#: user.php:83
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 #: admin.php:126
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: admin.php:135
 msgid "No users available."
-msgstr ""
+msgstr "No users available."
 
 #: ajax.php:23
 msgid "&nbsp;ending session..."
-msgstr ""
+msgstr "&nbsp;ending session..."
 
 #: ajax.php:25
 msgid "&nbsp;failure ending session..."
-msgstr ""
+msgstr "&nbsp;failure ending session..."
 
 #: ajax.php:31
 msgid "Required field cannot be left blank."
-msgstr ""
+msgstr "Required field cannot be left blank."
 
 #: ajax.php:34
 msgid "Username available."
-msgstr ""
+msgstr "Username available."
 
 #: close.php:27
 msgid "logout"
-msgstr ""
+msgstr "logout"
 
-#: close.php:41 index.php:146 options.php:63 settings.php:63 user.php:73
+#: close.php:41
+#: comments.php:103
+#: index.php:146
+#: options.php:89
+#: settings.php:63
+#: user.php:73
 msgid "Take me to the tumblelog"
-msgstr ""
+msgstr "Take me to the tumblelog"
 
-#: close.php:41 options.php:63 settings.php:63 user.php:73
+#: close.php:41
+#: comments.php:103
+#: options.php:89
+#: settings.php:63
+#: user.php:73
 msgid "Back to the Tumblelog"
-msgstr ""
+msgstr "Back to the Tumblelog"
 
 #: close.php:48
 msgid "Closing session"
-msgstr ""
+msgstr "Closing session"
 
 #: close.php:49
 msgid "logoff"
-msgstr ""
+msgstr "logoff"
 
 #: close.php:57
 msgid "Ending session..."
-msgstr ""
+msgstr "Ending session..."
 
 #: close.php:61
 msgid "Has happened an error when closing the session."
-msgstr ""
+msgstr "An error happened when closing the session."
+
+#: comments.php:74
+msgid "comments"
+msgstr "comments"
+
+#: comments.php:110
+msgid "Manage comments"
+msgstr "Manage comments"
+
+#: comments.php:112
+msgid "Spam"
+msgstr "Spam"
+
+#: comments.php:113
+msgid "List"
+msgstr "List"
+
+#: comments.php:119
+msgid "The comment has been eliminated successfully."
+msgstr "The comment has been deleted successfully."
+
+#: comments.php:122
+msgid "The post has NOT been eliminated."
+msgstr "The post could not be deleted."
+
+#: comments.php:128
+msgid "The comment has been modified successfully."
+msgstr "The comment has been modified successfully."
+
+#: comments.php:131
+msgid "The post has NOT been modified."
+msgstr "The post could not be modified."
 
 #: index.php:104
 msgid "control panel"
-msgstr ""
+msgstr "control panel"
 
 #: index.php:153
 msgid "New Post"
-msgstr ""
+msgstr "New Post"
 
 #: index.php:154
 msgid "Chat"
-msgstr ""
+msgstr "Chat"
 
 #: index.php:155
 msgid "Quote"
-msgstr ""
+msgstr "Quote"
 
 #: index.php:156
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 #: index.php:157
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: index.php:158
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: index.php:159
 msgid "Picture"
-msgstr ""
+msgstr "Picture"
 
 #: index.php:160
 msgid "Regular"
-msgstr ""
+msgstr "Regular"
 
 #: index.php:167
-msgid ""
-"A new gelato version has been released and is ready <a href=\"http://www."
-"gelatocms.com/\">for download</a>."
-msgstr ""
+msgid "A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>."
+msgstr "A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>."
 
 #: index.php:172
 msgid "The post has been eliminated successfully."
-msgstr ""
+msgstr "The post has been deleted successfully."
 
 #: index.php:178
 msgid "The post has been modified successfully."
-msgstr ""
+msgstr "The post has been modified successfully."
 
 #: index.php:184
 msgid "The post has been added successfully."
-msgstr ""
+msgstr "The post has been added successfully."
 
 #: index.php:190
 msgid "Error on the database server:"
-msgstr ""
+msgstr "Error on the database server:"
 
 #: index.php:196
 msgid "Not an MP3 file or an upload problem."
-msgstr ""
+msgstr "Not an MP3 file.Also, there could be a problem uploading this particular item."
 
 #: index.php:202
 msgid "Not a photo file or an upload problem."
-msgstr ""
+msgstr "Not an photo file.Also, there could be a problem uploading this particular item."
 
 #: index.php:305
 msgid "syntax is supported."
-msgstr ""
+msgstr "syntax is supported."
 
-#: index.php:322 options.php:74 settings.php:73
+#: index.php:322
+#: options.php:100
+#: settings.php:73
 msgid "Options"
-msgstr ""
+msgstr "Options"
 
-#: index.php:427
+#: index.php:324
+msgid "Comments"
+msgstr "Comments"
+
+#: index.php:428
 msgid "No posts in this tumblelog."
-msgstr ""
+msgstr "No posts in this tumblelog."
 
-#: options.php:35
+#: options.php:61
 msgid "options"
-msgstr ""
+msgstr "options"
 
-#: options.php:70
+#: options.php:96
 msgid "Tumblelog options"
-msgstr ""
+msgstr "Tumblelog options"
 
-#: options.php:71 settings.php:71 user.php:81
+#: options.php:97
+#: settings.php:71
+#: user.php:81
 msgid "Post"
-msgstr ""
+msgstr "Post"
 
-#: options.php:80 settings.php:80
+#: options.php:106
+#: settings.php:80
 msgid "The configuration has been modified successfully."
-msgstr ""
+msgstr "The configuration has been modified successfully."
 
-#: options.php:85 settings.php:85
+#: options.php:111
+#: settings.php:85
 msgid "Error on the database server: "
-msgstr ""
+msgstr "Error on the database server: "
 
-#: options.php:94
+#: options.php:120
 msgid "Rich text editor:"
-msgstr ""
+msgstr "Rich text editor:"
 
-#: options.php:96 options.php:102
+#: options.php:122
+#: options.php:128
+#: options.php:134
 msgid "Active"
-msgstr ""
+msgstr "Active"
 
-#: options.php:97 options.php:103
+#: options.php:123
+#: options.php:129
+#: options.php:135
 msgid "Deactive"
-msgstr ""
+msgstr "Deactive"
 
-#: options.php:109 settings.php:122 user.php:139
+#: options.php:126
+msgid "URL friendly:"
+msgstr "URL friendly:"
+
+#: options.php:132
+msgid "Allow readers comments:"
+msgstr "Allow readers comments:"
+
+#: options.php:138
+msgid "Time Offset:"
+msgstr "Time Offset:"
+
+#: options.php:206
+#: settings.php:129
+#: user.php:139
 msgid "Modify"
-msgstr ""
+msgstr "Modify"
 
 #: settings.php:35
 msgid "settings"
-msgstr ""
+msgstr "settings"
 
 #: settings.php:70
 msgid "Tumblelog configuration"
-msgstr ""
+msgstr "Tumblelog configuration"
 
 #: settings.php:94
 msgid "Title:"
-msgstr ""
+msgstr "Title:"
 
 #: settings.php:96
 msgid "Description:"
-msgstr ""
+msgstr "Description:"
 
 #: settings.php:98
 msgid "Installation URL"
-msgstr ""
+msgstr "Installation URL"
 
 #: settings.php:100
 msgid "Post limit:"
-msgstr ""
+msgstr "Post limit:"
 
 #: settings.php:102
 msgid "Language:"
-msgstr ""
+msgstr "Language:"
 
-#: settings.php:107
+#: settings.php:114
 msgid "Template:"
-msgstr ""
+msgstr "Template:"
 
 #: user.php:56
 msgid "add user"
-msgstr ""
+msgstr "add user"
 
 #: user.php:80
 msgid "Start session"
-msgstr ""
+msgstr "Start session"
 
-#: user.php:83 user.php:139
+#: user.php:83
+#: user.php:139
 msgid "Add"
-msgstr ""
+msgstr "Add"
 
 #: user.php:99
 msgid "user:"
-msgstr ""
+msgstr "user:"
 
 #: user.php:115
 msgid "password:"
-msgstr ""
+msgstr "password:"
 
 #: user.php:119
 msgid "retype password:"
-msgstr ""
+msgstr "retype password:"
 
 #: user.php:123
 msgid "name:"
-msgstr ""
+msgstr "name:"
 
 #: user.php:127
 msgid "e-mail:"
-msgstr ""
+msgstr "e-mail:"
 
 #: user.php:131
 msgid "website:"
-msgstr ""
+msgstr "website:"
 
 #: user.php:135
 msgid "about:"
-msgstr ""
+msgstr "about:"
+

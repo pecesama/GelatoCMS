@@ -5,414 +5,417 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gelato cms 0.90\n"
+"Project-Id-Version: gelato cms\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-20 17:40-0500\n"
-"PO-Revision-Date: 2007-09-18 19:29-0600\n"
-"Last-Translator: Pecesama <pecesama@hotmail.com>\n"
-"Language-Team: Thiago Pedrosa <tppedrosa@gmail.com>\n"
+"POT-Creation-Date: 2007-07-29 22:39-0500\n"
+"PO-Revision-Date: 2007-11-06 12:27-0600\n"
+"Last-Translator: Pedro Santana <psantana@gelatocms.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Portuguese\n"
-"X-Poedit-Country: BRAZIL\n"
+"X-Poedit-Language: Norwegian Nynorsk\n"
 
 #: admin.php:28
 msgid "admin users"
-msgstr "administradores"
+msgstr "administratorer"
 
 #: admin.php:52
+#: comments.php:98
 #: index.php:141
-#: options.php:58
+#: options.php:84
 #: settings.php:58
 #: user.php:68
 msgid "Processing request..."
-msgstr "Solicitação em processo..."
+msgstr "Behandler forespørsel..."
 
 #: admin.php:55
 #: close.php:39
+#: comments.php:101
 #: index.php:144
-#: options.php:61
+#: options.php:87
 #: settings.php:61
 #: user.php:71
 msgid "home"
-msgstr "principal"
+msgstr "hjem"
 
 #: admin.php:57
 #: index.php:146
 msgid "View Tumblelog"
-msgstr "Ver Tumblelog"
+msgstr "Vis Tumblelog"
 
 #: admin.php:58
 #: index.php:147
 msgid "Log out"
-msgstr "Sair"
+msgstr "Logg ut"
 
 #: admin.php:66
 #: index.php:321
-#: options.php:73
+#: options.php:99
 #: settings.php:74
 msgid "Settings"
-msgstr "Configurações"
+msgstr "Instillinger"
 
 #: admin.php:67
-#: index.php:324
+#: comments.php:111
+#: index.php:325
 msgid "Posts"
-msgstr "Postagens"
+msgstr "Poster"
 
 #: admin.php:68
 msgid "Add user"
-msgstr "Adicionar usuário"
+msgstr "Ny bruker"
 
 #: admin.php:69
 #: index.php:323
-#: options.php:72
+#: options.php:98
 #: settings.php:72
 #: user.php:82
 msgid "Users"
-msgstr "Usuários"
-
-#: admin.php:75
-#: admin.php:81
-#: admin.php:87
-msgid "<div class=\"exito\" id=\"divMessages\">"
-msgstr "<div class=\"exito\" id=\"divMessages\">"
+msgstr "Brukere"
 
 #: admin.php:75
 msgid "The user has been added successfully."
-msgstr "O usuário foi adicionado com sucesso."
-
-#: admin.php:75
-#: admin.php:81
-#: admin.php:87
-#: admin.php:93
-#: admin.php:95
-msgid "</div>"
-msgstr "</div>"
+msgstr "Ny bruker lagt til."
 
 #: admin.php:81
 msgid "The user has been eliminated successfully."
-msgstr "O usuário foi eliminado com sucesso."
+msgstr "Brukeren er slettet."
 
 #: admin.php:87
 msgid "The user has been modified successfully."
-msgstr "O usuário foi modificado com sucesso."
-
-#: admin.php:93
-msgid "<div class=\"error\" id=\"divMessages\">"
-msgstr "<div class=\"error\" id=\"divMessages\">"
+msgstr "Bruker er endret/oppdatert."
 
 #: admin.php:93
 #: ajax.php:36
 msgid "The username is not available."
-msgstr "Erro no servidor do banco de dados:."
-
-#: admin.php:95
-msgid "<div class=\"error\" id=\"divMessages\"><strong>"
-msgstr ""
+msgstr "Brukernavnet finnes ikke."
 
 #: admin.php:95
 msgid "Error on the database server:."
-msgstr ""
-
-#: admin.php:95
-msgid " </strong>"
-msgstr ""
-
-#: admin.php:95
-msgid "des"
-msgstr ""
+msgstr "Feil ved database server:."
 
 #: admin.php:103
 msgid "Login"
-msgstr ""
+msgstr "Logg inn"
 
 #: admin.php:104
 msgid "Name"
-msgstr ""
+msgstr "Navn"
 
 #: admin.php:105
 msgid "Actions"
-msgstr ""
-
-#: admin.php:115
-msgid "class=\"odd\""
-msgstr ""
-
-#: admin.php:117
-msgid "login"
-msgstr ""
-
-#: admin.php:117
-#: admin.php:120
-msgid "\n"
-msgstr ""
-
-#: admin.php:120
-msgid "name"
-msgstr ""
+msgstr "Valg"
 
 #: admin.php:123
-#: admin.php:126
-msgid "id_user"
-msgstr ""
-
-#: admin.php:123
+#: comments.php:113
 #: user.php:83
 msgid "Edit"
-msgstr ""
+msgstr "Rediger"
 
 #: admin.php:126
 msgid "Delete"
-msgstr ""
+msgstr "Slett"
 
 #: admin.php:135
 msgid "No users available."
-msgstr ""
+msgstr "Ingen brukere tilgjengelig."
 
 #: ajax.php:23
 msgid "&nbsp;ending session..."
-msgstr ""
+msgstr "&nbsp;avslutter økten..."
 
 #: ajax.php:25
 msgid "&nbsp;failure ending session..."
-msgstr ""
+msgstr "&nbsp;feil ved avsluttning av økten..."
 
 #: ajax.php:31
 msgid "Required field cannot be left blank."
-msgstr ""
+msgstr "Påkrvede felt kan ikke være blank."
 
 #: ajax.php:34
 msgid "Username available."
-msgstr ""
+msgstr "Brukernavn tilgjengelig."
 
 #: close.php:27
 msgid "logout"
-msgstr ""
+msgstr "logg ut"
 
 #: close.php:41
+#: comments.php:103
 #: index.php:146
-#: options.php:63
+#: options.php:89
 #: settings.php:63
 #: user.php:73
 msgid "Take me to the tumblelog"
-msgstr ""
+msgstr "Ta meg til tumblelogen"
 
 #: close.php:41
-#: options.php:63
+#: comments.php:103
+#: options.php:89
 #: settings.php:63
 #: user.php:73
 msgid "Back to the Tumblelog"
-msgstr ""
+msgstr "Tilbake til Tumblelogen"
 
 #: close.php:48
 msgid "Closing session"
-msgstr ""
+msgstr "Lukker økten"
 
 #: close.php:49
 msgid "logoff"
-msgstr ""
+msgstr "logg av"
 
 #: close.php:57
 msgid "Ending session..."
-msgstr ""
+msgstr "Avslutter økten..."
 
 #: close.php:61
 msgid "Has happened an error when closing the session."
-msgstr ""
+msgstr "En feil oppstod ved avslutting av økten."
+
+#: comments.php:74
+msgid "comments"
+msgstr "kommentarer"
+
+#: comments.php:110
+msgid "Manage comments"
+msgstr "Behandle kommentarer"
+
+#: comments.php:112
+msgid "Spam"
+msgstr "Søppel"
+
+#: comments.php:113
+msgid "List"
+msgstr "Liste"
+
+#: comments.php:119
+msgid "The comment has been eliminated successfully."
+msgstr "Kommentaren er slettet."
+
+#: comments.php:122
+msgid "The post has NOT been eliminated."
+msgstr "Posten kunne IKKE slettet."
+
+#: comments.php:128
+msgid "The comment has been modified successfully."
+msgstr "Kommentaren er endret."
+
+#: comments.php:131
+msgid "The post has NOT been modified."
+msgstr "Posten kunne IKKE endres."
 
 #: index.php:104
 msgid "control panel"
-msgstr ""
+msgstr "kontroll panel"
 
 #: index.php:153
 msgid "New Post"
-msgstr ""
+msgstr "Ny post"
 
 #: index.php:154
 msgid "Chat"
-msgstr ""
+msgstr "Snakk"
 
 #: index.php:155
 msgid "Quote"
-msgstr ""
+msgstr "Siter"
 
 #: index.php:156
 msgid "Link"
-msgstr ""
+msgstr "Lenke"
 
 #: index.php:157
 msgid "Audio"
-msgstr ""
+msgstr "Lyd"
 
 #: index.php:158
 msgid "Video"
-msgstr ""
+msgstr "Video"
 
 #: index.php:159
 msgid "Picture"
-msgstr ""
+msgstr "Bilde"
 
 #: index.php:160
 msgid "Regular"
-msgstr ""
+msgstr "Vanlig"
 
 #: index.php:167
 msgid "A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>."
-msgstr ""
+msgstr "En ny gelato versjon er klar og kan <a href=\"http://www.gelatocms.com/\">lastes ned</a>."
 
 #: index.php:172
 msgid "The post has been eliminated successfully."
-msgstr ""
+msgstr "Posten er slettet."
 
 #: index.php:178
 msgid "The post has been modified successfully."
-msgstr ""
+msgstr "Posten er endret."
 
 #: index.php:184
 msgid "The post has been added successfully."
-msgstr ""
+msgstr "Posten lagt til."
 
 #: index.php:190
 msgid "Error on the database server:"
-msgstr ""
+msgstr "Feil ved database server:"
 
 #: index.php:196
 msgid "Not an MP3 file or an upload problem."
-msgstr ""
+msgstr "Ikke en MP3 fil. Det kan også være feil ved opplastingen."
 
 #: index.php:202
 msgid "Not a photo file or an upload problem."
-msgstr ""
+msgstr "Ikke en bilde fil. Det kan også være feil ved opplastingen."
 
 #: index.php:305
 msgid "syntax is supported."
-msgstr ""
+msgstr "koder er støttet."
 
 #: index.php:322
-#: options.php:74
+#: options.php:100
 #: settings.php:73
 msgid "Options"
-msgstr ""
+msgstr "Valg"
 
-#: index.php:427
+#: index.php:324
+msgid "Comments"
+msgstr "Kommentarer"
+
+#: index.php:428
 msgid "No posts in this tumblelog."
-msgstr ""
+msgstr "Ingen poster i denne tumblelogen."
 
-#: options.php:35
+#: options.php:61
 msgid "options"
-msgstr ""
+msgstr "valg"
 
-#: options.php:70
+#: options.php:96
 msgid "Tumblelog options"
-msgstr ""
+msgstr "Tumblelog valg"
 
-#: options.php:71
+#: options.php:97
 #: settings.php:71
 #: user.php:81
 msgid "Post"
-msgstr ""
+msgstr "Post"
 
-#: options.php:80
+#: options.php:106
 #: settings.php:80
 msgid "The configuration has been modified successfully."
-msgstr ""
+msgstr "Instillingene er endret."
 
-#: options.php:85
+#: options.php:111
 #: settings.php:85
 msgid "Error on the database server: "
-msgstr ""
+msgstr "Feil ved  database server: "
 
-#: options.php:94
+#: options.php:120
 msgid "Rich text editor:"
-msgstr ""
+msgstr "Rik tekst redigerer:"
 
-#: options.php:96
-#: options.php:102
+#: options.php:122
+#: options.php:128
+#: options.php:134
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
-#: options.php:97
-#: options.php:103
+#: options.php:123
+#: options.php:129
+#: options.php:135
 msgid "Deactive"
-msgstr ""
+msgstr "Inaktiv"
 
-#: options.php:109
-#: settings.php:122
+#: options.php:126
+msgid "URL friendly:"
+msgstr "URL vennlig:"
+
+#: options.php:132
+msgid "Allow readers comments:"
+msgstr "Tillat kommentarer:"
+
+#: options.php:138
+msgid "Time Offset:"
+msgstr "Tids sone:"
+
+#: options.php:206
+#: settings.php:129
 #: user.php:139
 msgid "Modify"
-msgstr ""
+msgstr "Endre"
 
 #: settings.php:35
 msgid "settings"
-msgstr ""
+msgstr "instillinger"
 
 #: settings.php:70
 msgid "Tumblelog configuration"
-msgstr ""
+msgstr "Tumblelog instillinger"
 
 #: settings.php:94
 msgid "Title:"
-msgstr ""
+msgstr "Tittel:"
 
 #: settings.php:96
 msgid "Description:"
-msgstr ""
+msgstr "Beskrivelse:"
 
 #: settings.php:98
 msgid "Installation URL"
-msgstr ""
+msgstr "Installerings URL"
 
 #: settings.php:100
 msgid "Post limit:"
-msgstr ""
+msgstr "Maks post størrelse:"
 
 #: settings.php:102
 msgid "Language:"
-msgstr ""
+msgstr "Språk:"
 
-#: settings.php:107
+#: settings.php:114
 msgid "Template:"
-msgstr ""
+msgstr "Tema:"
 
 #: user.php:56
 msgid "add user"
-msgstr ""
+msgstr "ny bruker"
 
 #: user.php:80
 msgid "Start session"
-msgstr ""
+msgstr "Start økt"
 
 #: user.php:83
 #: user.php:139
 msgid "Add"
-msgstr ""
+msgstr "Legg til"
 
 #: user.php:99
 msgid "user:"
-msgstr ""
+msgstr "bruker:"
 
 #: user.php:115
 msgid "password:"
-msgstr ""
+msgstr "passord:"
 
 #: user.php:119
 msgid "retype password:"
-msgstr ""
+msgstr "Gjenta passord:"
 
 #: user.php:123
 msgid "name:"
-msgstr ""
+msgstr "navn:"
 
 #: user.php:127
 msgid "e-mail:"
-msgstr ""
+msgstr "epost:"
 
 #: user.php:131
 msgid "website:"
-msgstr ""
+msgstr "webside:"
 
 #: user.php:135
 msgid "about:"
-msgstr ""
+msgstr "om:"
 
