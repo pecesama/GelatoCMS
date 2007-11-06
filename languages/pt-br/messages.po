@@ -3,122 +3,104 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: gelato cms\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-29 22:39-0500\n"
-"PO-Revision-Date: 2007-11-06 12:29-0600\n"
-"Last-Translator: Pedro Santana <psantana@gelatocms.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2007-11-06 12:46-0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Portuguese\n"
-"X-Poedit-Country: BRAZIL\n"
 
-#: admin.php:28
+#: admin.php:28 admin.php:25
 msgid "admin users"
 msgstr "gerenciar usuários"
 
-#: admin.php:52
-#: comments.php:98
-#: index.php:141
-#: options.php:84
-#: settings.php:58
+#: admin.php:52 comments.php:98 index.php:141 options.php:84 settings.php:58
 #: user.php:68
 msgid "Processing request..."
 msgstr "Processando requisições..."
 
-#: admin.php:55
-#: close.php:39
-#: comments.php:101
-#: index.php:144
-#: options.php:87
-#: settings.php:61
-#: user.php:71
+#: admin.php:55 close.php:39 comments.php:101 index.php:144 options.php:87
+#: settings.php:61 user.php:71 login.php:68 admin.php:54 close.php:35
+#: comments.php:89 feeds.php:81 index.php:122 options.php:89 settings.php:52
+#: user.php:67
 msgid "home"
 msgstr "início"
 
-#: admin.php:57
-#: index.php:146
+#: admin.php:57 index.php:146 admin.php:56 index.php:124
 msgid "View Tumblelog"
 msgstr "Visualizar Tumblelog"
 
-#: admin.php:58
-#: index.php:147
+#: admin.php:58 index.php:147 admin.php:57 index.php:125
 msgid "Log out"
 msgstr "Log out"
 
-#: admin.php:66
-#: index.php:321
-#: options.php:99
-#: settings.php:74
+#: admin.php:66 index.php:321 options.php:99 settings.php:74 admin.php:65
+#: index.php:303 options.php:101 settings.php:65
 msgid "Settings"
 msgstr "Preferências"
 
-#: admin.php:67
-#: comments.php:111
-#: index.php:325
+#: admin.php:67 comments.php:111 index.php:325 admin.php:66 comments.php:99
+#: index.php:308
 msgid "Posts"
 msgstr "Posts"
 
-#: admin.php:68
+#: admin.php:68 admin.php:67
 msgid "Add user"
 msgstr "Adicionar usuário"
 
-#: admin.php:69
-#: index.php:323
-#: options.php:98
-#: settings.php:72
-#: user.php:82
+#: admin.php:69 index.php:323 options.php:98 settings.php:72 user.php:82
+#: admin.php:68 index.php:306 options.php:100 settings.php:63 user.php:78
 msgid "Users"
 msgstr "Usuários"
 
-#: admin.php:75
+#: admin.php:75 admin.php:74
 msgid "The user has been added successfully."
 msgstr "O usuário foi adicionado com sucesso."
 
-#: admin.php:81
+#: admin.php:81 admin.php:80
 msgid "The user has been eliminated successfully."
 msgstr "O usuário foi eliminado com sucesso."
 
-#: admin.php:87
+#: admin.php:87 admin.php:86
 msgid "The user has been modified successfully."
 msgstr "O usuário foi modificado com sucesso."
 
-#: admin.php:93
-#: ajax.php:36
+#: admin.php:93 ajax.php:36 admin.php:92
 msgid "The username is not available."
 msgstr "Este nome de usuário não está disponível."
 
-#: admin.php:95
+#: admin.php:95 admin.php:94
 msgid "Error on the database server:."
 msgstr "Erro no servidor de banco de dados:."
 
-#: admin.php:103
+#: admin.php:103 login.php:78 admin.php:102
 msgid "Login"
 msgstr "Login"
 
-#: admin.php:104
+#: admin.php:104 admin.php:103
 msgid "Name"
 msgstr "Nome"
 
-#: admin.php:105
+#: admin.php:105 admin.php:104
 msgid "Actions"
 msgstr "Ações"
 
-#: admin.php:123
-#: comments.php:113
-#: user.php:83
+#: admin.php:123 comments.php:113 user.php:83 admin.php:118 comments.php:101
+#: user.php:79
 msgid "Edit"
 msgstr "Editar"
 
-#: admin.php:126
+#: admin.php:126 admin.php:119
 msgid "Delete"
 msgstr "Apagar"
 
-#: admin.php:135
+#: admin.php:135 admin.php:128
 msgid "No users available."
 msgstr "Não há usuários disponíveis."
 
@@ -138,32 +120,27 @@ msgstr "Campo obrigatório não pode ser deixado em branco."
 msgid "Username available."
 msgstr "Nome de usuário disponível."
 
-#: close.php:27
+#: close.php:27 close.php:23
 msgid "logout"
 msgstr "logout"
 
-#: close.php:41
-#: comments.php:103
-#: index.php:146
-#: options.php:89
-#: settings.php:63
-#: user.php:73
+#: close.php:41 comments.php:103 index.php:146 options.php:89 settings.php:63
+#: user.php:73 login.php:70 close.php:37 comments.php:91 feeds.php:83
+#: index.php:124 options.php:91 settings.php:54 user.php:69
 msgid "Take me to the tumblelog"
 msgstr "Ir para o tumbelog"
 
-#: close.php:41
-#: comments.php:103
-#: options.php:89
-#: settings.php:63
-#: user.php:73
+#: close.php:41 comments.php:103 options.php:89 settings.php:63 user.php:73
+#: login.php:70 close.php:37 comments.php:91 feeds.php:83 options.php:91
+#: settings.php:54 user.php:69
 msgid "Back to the Tumblelog"
 msgstr "Voltar para o Tumblelog"
 
-#: close.php:48
+#: close.php:48 close.php:44
 msgid "Closing session"
 msgstr "Fechando sessão"
 
-#: close.php:49
+#: close.php:49 close.php:45
 msgid "logoff"
 msgstr "sair"
 
@@ -171,252 +148,390 @@ msgstr "sair"
 msgid "Ending session..."
 msgstr "Terminando sessão..."
 
-#: close.php:61
+#: close.php:61 close.php:57
 msgid "Has happened an error when closing the session."
 msgstr "Ocorreu um erro ao fechar a sessão."
 
-#: comments.php:74
+#: comments.php:74 comments.php:67
 msgid "comments"
 msgstr "comentários"
 
-#: comments.php:110
+#: comments.php:110 comments.php:98
 msgid "Manage comments"
 msgstr "Gerenciar comentários"
 
-#: comments.php:112
+#: comments.php:112 comments.php:100
 msgid "Spam"
 msgstr "Spam"
 
-#: comments.php:113
+#: comments.php:113 comments.php:101
 msgid "List"
 msgstr "Lista"
 
-#: comments.php:119
+#: comments.php:119 comments.php:107
 msgid "The comment has been eliminated successfully."
 msgstr "O comentário foi apagado com sucesso."
 
-#: comments.php:122
+#: comments.php:122 comments.php:110
 msgid "The post has NOT been eliminated."
 msgstr "O post não pôde ser deletado."
 
-#: comments.php:128
+#: comments.php:128 comments.php:116
 msgid "The comment has been modified successfully."
 msgstr "O comentário foi editado com sucesso."
 
-#: comments.php:131
+#: comments.php:131 comments.php:119
 msgid "The post has NOT been modified."
 msgstr "O post não pôde ser editado."
 
-#: index.php:104
+#: index.php:104 index.php:97
 msgid "control panel"
 msgstr "painel de controle"
 
-#: index.php:153
+#: index.php:153 bm.php:122 index.php:131
 msgid "New Post"
 msgstr "Novo Post"
 
-#: index.php:154
+#: index.php:154 index.php:132
 msgid "Chat"
 msgstr "Chat"
 
-#: index.php:155
+#: index.php:155 index.php:133
 msgid "Quote"
 msgstr "Quote"
 
-#: index.php:156
+#: index.php:156 bm.php:138 index.php:134
 msgid "Link"
 msgstr "Link"
 
-#: index.php:157
+#: index.php:157 bm.php:148 index.php:135
 msgid "Audio"
 msgstr "Áudio"
 
-#: index.php:158
+#: index.php:158 bm.php:143 index.php:136
 msgid "Video"
 msgstr "Vídeo"
 
-#: index.php:159
+#: index.php:159 bm.php:133 index.php:137
 msgid "Picture"
 msgstr "Imagem"
 
-#: index.php:160
+#: index.php:160 bm.php:128 index.php:138
 msgid "Regular"
 msgstr "Regular"
 
-#: index.php:167
-msgid "A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>."
-msgstr "Uma nova versão do gelato foi lançada e está disponível <a href=\"http://www.gelatocms.com/\">para download</a>."
+#: index.php:167 index.php:145
+msgid ""
+"A new gelato version has been released and is ready <a href=\"http://www."
+"gelatocms.com/\">for download</a>."
+msgstr ""
+"Uma nova versão do gelato foi lançada e está disponível <a href=\"http://www."
+"gelatocms.com/\">para download</a>."
 
-#: index.php:172
+#: index.php:172 index.php:150
 msgid "The post has been eliminated successfully."
 msgstr "O post foi deletado com sucesso."
 
-#: index.php:178
+#: index.php:178 index.php:156
 msgid "The post has been modified successfully."
 msgstr "O post foi modificado com sucesso."
 
-#: index.php:184
+#: index.php:184 index.php:162
 msgid "The post has been added successfully."
 msgstr "O post foi adicionado com sucesso."
 
-#: index.php:190
+#: index.php:190 index.php:168
 msgid "Error on the database server:"
 msgstr "Erro no servidor de banco de dados:"
 
-#: index.php:196
+#: index.php:196 index.php:174
 msgid "Not an MP3 file or an upload problem."
-msgstr "Não é um arquivo MP3. Além disso, pode ter havido um problema ao fazer o upload do arquivo."
+msgstr ""
+"Não é um arquivo MP3. Além disso, pode ter havido um problema ao fazer o "
+"upload do arquivo."
 
-#: index.php:202
+#: index.php:202 index.php:180
 msgid "Not a photo file or an upload problem."
-msgstr "Não é um arquivo de foto. Além disso, pode ter havido um problema ao fazer o upload do arquivo."
+msgstr ""
+"Não é um arquivo de foto. Além disso, pode ter havido um problema ao fazer o "
+"upload do arquivo."
 
-#: index.php:305
+#: index.php:305 bm.php:203 index.php:285
 msgid "syntax is supported."
 msgstr "sintaxe aceita."
 
-#: index.php:322
-#: options.php:100
-#: settings.php:73
+#: index.php:322 options.php:100 settings.php:73 feeds.php:92 index.php:304
+#: options.php:102 settings.php:64
 msgid "Options"
 msgstr "Opções"
 
-#: index.php:324
+#: index.php:324 index.php:307
 msgid "Comments"
 msgstr "Comentários"
 
-#: index.php:428
+#: index.php:428 index.php:415
 msgid "No posts in this tumblelog."
 msgstr "Não há posts nesse tumblelog."
 
-#: options.php:61
+#: options.php:61 options.php:68
 msgid "options"
 msgstr "opções"
 
-#: options.php:96
+#: options.php:96 options.php:98
 msgid "Tumblelog options"
 msgstr "Opções do tumblelog"
 
-#: options.php:97
-#: settings.php:71
-#: user.php:81
+#: options.php:97 settings.php:71 user.php:81 feeds.php:91 options.php:99
+#: settings.php:62 user.php:77
 msgid "Post"
 msgstr "Post"
 
-#: options.php:106
-#: settings.php:80
+#: options.php:106 settings.php:80 options.php:107 settings.php:70
 msgid "The configuration has been modified successfully."
 msgstr "As configurações foram modificadas com sucesso."
 
-#: options.php:111
-#: settings.php:85
+#: options.php:111 settings.php:85 options.php:112 settings.php:75
 msgid "Error on the database server: "
 msgstr "Erro no servidor de banco de dados: "
 
-#: options.php:120
+#: options.php:120 options.php:121
 msgid "Rich text editor:"
 msgstr "Editor Rich Text:"
 
-#: options.php:122
-#: options.php:128
-#: options.php:134
+#: options.php:122 options.php:128 options.php:134 options.php:123
+#: options.php:129 options.php:135 options.php:206
 msgid "Active"
 msgstr "Ativo"
 
-#: options.php:123
-#: options.php:129
-#: options.php:135
+#: options.php:123 options.php:129 options.php:135 options.php:124
+#: options.php:130 options.php:136 options.php:207
 msgid "Deactive"
 msgstr "Desativo"
 
-#: options.php:126
+#: options.php:126 options.php:127
 msgid "URL friendly:"
 msgstr "URL amigável:"
 
-#: options.php:132
+#: options.php:132 options.php:133
 msgid "Allow readers comments:"
 msgstr "Permitir comentários dos leitores:"
 
-#: options.php:138
+#: options.php:138 options.php:139
 msgid "Time Offset:"
 msgstr "Ajuste de hora:"
 
-#: options.php:206
-#: settings.php:129
-#: user.php:139
+#: options.php:206 settings.php:129 user.php:139 options.php:230
+#: settings.php:119 user.php:134
 msgid "Modify"
 msgstr "Modificar"
 
-#: settings.php:35
+#: settings.php:35 settings.php:31
 msgid "settings"
 msgstr "configurações"
 
-#: settings.php:70
+#: settings.php:70 settings.php:61
 msgid "Tumblelog configuration"
 msgstr "Configurações do tumblelog"
 
-#: settings.php:94
+#: settings.php:94 settings.php:84
 msgid "Title:"
 msgstr "Título:"
 
-#: settings.php:96
+#: settings.php:96 settings.php:86
 msgid "Description:"
 msgstr "Descrição:"
 
-#: settings.php:98
+#: settings.php:98 settings.php:88
 msgid "Installation URL"
 msgstr "URL de instalação"
 
-#: settings.php:100
+#: settings.php:100 settings.php:90
 msgid "Post limit:"
 msgstr "Limite de post:"
 
-#: settings.php:102
+#: settings.php:102 settings.php:92
 msgid "Language:"
 msgstr "Idioma:"
 
-#: settings.php:114
+#: settings.php:114 settings.php:104
 msgid "Template:"
 msgstr "Modelo:"
 
-#: user.php:56
+#: user.php:56 user.php:52
 msgid "add user"
 msgstr "adicionar usuário"
 
-#: user.php:80
+#: user.php:80 login.php:77 user.php:76
 msgid "Start session"
 msgstr "Iniciar sessão"
 
-#: user.php:83
-#: user.php:139
+#: user.php:83 user.php:139 feeds.php:127 user.php:79 user.php:134
 msgid "Add"
 msgstr "Adicionar"
 
-#: user.php:99
+#: user.php:99 user.php:95
 msgid "user:"
 msgstr "usuário:"
 
-#: user.php:115
+#: user.php:115 user.php:110
 msgid "password:"
 msgstr "senha:"
 
-#: user.php:119
+#: user.php:119 user.php:114
 msgid "retype password:"
 msgstr "redigite a senha:"
 
-#: user.php:123
+#: user.php:123 user.php:118
 msgid "name:"
 msgstr "nome:"
 
-#: user.php:127
+#: user.php:127 user.php:122
 msgid "e-mail:"
 msgstr "e-mail:"
 
-#: user.php:131
+#: user.php:131 user.php:126
 msgid "website:"
 msgstr "website:"
 
-#: user.php:135
+#: user.php:135 user.php:130
 msgid "about:"
 msgstr "sobre:"
 
+#: login.php:35
+msgid "login screen"
+msgstr ""
+
+#: login.php:65 admin.php:51 comments.php:86 index.php:119 options.php:86
+#: settings.php:49 user.php:64
+msgid "Processing request&hellip;"
+msgstr ""
+
+#: login.php:86
+msgid "User:"
+msgstr ""
+
+#: login.php:88
+msgid "Password:"
+msgstr ""
+
+#: login.php:90
+msgid "Remember me:"
+msgstr ""
+
+#: login.php:101
+msgid "&nbsp;You must be registered to use gelato."
+msgstr ""
+
+#: login.php:108
+msgid "&nbsp;You must be logged on the system."
+msgstr ""
+
+#: ajax.php:23
+msgid "&nbsp;ending session&hellip;"
+msgstr ""
+
+#: ajax.php:25
+msgid "&nbsp;failure ending session&hellip;"
+msgstr ""
+
+#: bm.php:102
+msgid "Must be a valid URL"
+msgstr ""
+
+#: bm.php:110
+msgid "bookmarklet"
+msgstr ""
+
+#: close.php:53
+msgid "Ending session&hellip;"
+msgstr ""
+
+#: feeds.php:27
+msgid "Feed added"
+msgstr ""
+
+#: feeds.php:34
+msgid "Feed deleted"
+msgstr ""
+
+#: feeds.php:43 index.php:305
+msgid "Feeds"
+msgstr ""
+
+#: feeds.php:55
+msgid "Feed Url:"
+msgstr ""
+
+#: feeds.php:55
+msgid " username:"
+msgstr ""
+
+#: feeds.php:89
+msgid "Configure your feeds"
+msgstr ""
+
+#: feeds.php:103
+msgid "Import data from:"
+msgstr ""
+
+#: feeds.php:115
+msgid "Import As:"
+msgstr ""
+
+#: feeds.php:117
+msgid "Text"
+msgstr ""
+
+#: feeds.php:118
+msgid "Photos"
+msgstr ""
+
+#: feeds.php:122
+msgid "Feed Url (double check):"
+msgstr ""
+
+#: feeds.php:125
+msgid "Show credits on each post?"
+msgstr ""
+
+#: feeds.php:138 feeds.php:140
+msgid "Delete this Feed"
+msgstr ""
+
+#: feeds.php:138
+msgid "Error updating"
+msgstr ""
+
+#: feeds.php:140
+msgid "Last update"
+msgstr ""
+
+#: feeds.php:140
+msgid "Importing"
+msgstr ""
+
+#: index.php:287
+msgid "add to gelato"
+msgstr ""
+
+#: options.php:204
+msgid "Shorten long URLs:"
+msgstr ""
+
+#: options.php:210
+msgid "Import feeds every:"
+msgstr ""
+
+#: options.php:213 options.php:214 options.php:215 options.php:216
+#: options.php:217
+msgid "minutes"
+msgstr ""
+
+#: options.php:218
+msgid "hour"
+msgstr ""
+
+#: options.php:219 options.php:220 options.php:221 options.php:222
+#: options.php:223 options.php:224
+msgid "hours"
+msgstr ""
