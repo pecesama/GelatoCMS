@@ -5,21 +5,22 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gelatoCMS german language file\n"
+"Project-Id-Version: gelatoCMS 0.90\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-29 22:39-0500\n"
-"PO-Revision-Date: 2007-11-06 12:25-0600\n"
+"PO-Revision-Date: 2007-11-06 12:26-0600\n"
 "Last-Translator: Pedro Santana <psantana@gelatocms.com>\n"
-"Language-Team: ogee <ogee@gmx.net>\n"
+"Language-Team: wolly's team <wolly66@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: admin.php:28
 msgid "admin users"
-msgstr "administratoren"
+msgstr "amministra utenti"
 
 #: admin.php:52
 #: comments.php:98
@@ -28,7 +29,7 @@ msgstr "administratoren"
 #: settings.php:58
 #: user.php:68
 msgid "Processing request..."
-msgstr "Anfrage läuft..."
+msgstr "Elaboro la richiesta..."
 
 #: admin.php:55
 #: close.php:39
@@ -43,29 +44,29 @@ msgstr "home"
 #: admin.php:57
 #: index.php:146
 msgid "View Tumblelog"
-msgstr "Tumblelog ansehen"
+msgstr "Visualizza il Tumblelog"
 
 #: admin.php:58
 #: index.php:147
 msgid "Log out"
-msgstr "Abmelden"
+msgstr "Scollegati"
 
 #: admin.php:66
 #: index.php:321
 #: options.php:99
 #: settings.php:74
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "Gestione"
 
 #: admin.php:67
 #: comments.php:111
 #: index.php:325
 msgid "Posts"
-msgstr "Beiträge"
+msgstr "Articoli"
 
 #: admin.php:68
 msgid "Add user"
-msgstr "Benutzer hinzufügen"
+msgstr "Aggiungi utente"
 
 #: admin.php:69
 #: index.php:323
@@ -73,74 +74,75 @@ msgstr "Benutzer hinzufügen"
 #: settings.php:72
 #: user.php:82
 msgid "Users"
-msgstr "Benutzer"
+msgstr "Utenti"
 
 #: admin.php:75
 msgid "The user has been added successfully."
-msgstr "Benutzer erfolgreich hinzugefügt."
+msgstr "L'utente &egrave; stato aggiunto."
 
 #: admin.php:81
 msgid "The user has been eliminated successfully."
-msgstr "Benutzer erfolgreich gelöscht."
+msgstr "L'utente &egrave; stato cancellato."
 
 #: admin.php:87
 msgid "The user has been modified successfully."
-msgstr "Benutzer erfolgreich aktualisiert."
+msgstr "L'utente &egrave; stato modificato."
 
 #: admin.php:93
 #: ajax.php:36
 msgid "The username is not available."
-msgstr "Dieser Benutzer ist nicht verfügbar."
+msgstr "Il nome utente non &egrave; disponibile."
 
 #: admin.php:95
 msgid "Error on the database server:."
-msgstr "Datenbank-Server Fehler:."
+msgstr "Errore sul server del database:."
 
 #: admin.php:103
 msgid "Login"
-msgstr "Anmelden"
+msgstr "Login"
 
 #: admin.php:104
 msgid "Name"
-msgstr "Name"
+msgstr "Nome"
 
 #: admin.php:105
 msgid "Actions"
-msgstr "Aktionen"
+msgstr "Azioni"
 
+#  C:\paolo.valenti.name\wp-content\themes\daily-digest-10/single.php:34
 #: admin.php:123
 #: comments.php:113
 #: user.php:83
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Modifica"
 
 #: admin.php:126
 msgid "Delete"
-msgstr "Löschen"
+msgstr "Cancella"
 
 #: admin.php:135
 msgid "No users available."
-msgstr "Keine Benutzer Verfügbar."
+msgstr "Nessun utente disponibile"
 
 #: ajax.php:23
 msgid "&nbsp;ending session..."
-msgstr "&nbsp;Beende die Session..."
+msgstr "&nbsp;sessione in chiusura..."
 
 #: ajax.php:25
 msgid "&nbsp;failure ending session..."
-msgstr "&nbsp;Session beenden: Fehler..."
+msgstr "&nbsp;errore nella chiusura della sessione..."
 
 #: ajax.php:31
 msgid "Required field cannot be left blank."
-msgstr "Erforderliche Formularfelder dürfen nicht leer sein."
+msgstr "I campi obbligatori non possono essere vuoti."
 
 #: ajax.php:34
 msgid "Username available."
-msgstr "Benutzername ist verfügbar."
+msgstr "Nome utente disponibile."
 
 #: close.php:27
 msgid "logout"
-msgstr "abmelden"
+msgstr "scollegati"
 
 #: close.php:41
 #: comments.php:103
@@ -149,7 +151,7 @@ msgstr "abmelden"
 #: settings.php:63
 #: user.php:73
 msgid "Take me to the tumblelog"
-msgstr "Bring mich zum Tumblelog"
+msgstr "Portami al Tumblelog"
 
 #: close.php:41
 #: comments.php:103
@@ -157,31 +159,31 @@ msgstr "Bring mich zum Tumblelog"
 #: settings.php:63
 #: user.php:73
 msgid "Back to the Tumblelog"
-msgstr "Zurück zum Tumblelog"
+msgstr "Torna al Tumblelog"
 
 #: close.php:48
 msgid "Closing session"
-msgstr "Schließlich Session"
+msgstr "La sessione si sta chiudendo"
 
 #: close.php:49
 msgid "logoff"
-msgstr "abmelden"
+msgstr "uscita"
 
 #: close.php:57
 msgid "Ending session..."
-msgstr "Beende Session..."
+msgstr "La sessione sta finendo..."
 
 #: close.php:61
 msgid "Has happened an error when closing the session."
-msgstr "Ist eine störung beim schließlich der session aufgetreten."
+msgstr "C'&egrave; stato un errore mentre si chiudeva la sessione."
 
 #: comments.php:74
 msgid "comments"
-msgstr "kommentare"
+msgstr "commenti"
 
 #: comments.php:110
 msgid "Manage comments"
-msgstr "Kommentare bearbeiten"
+msgstr "Gestisci i commenti"
 
 #: comments.php:112
 msgid "Spam"
@@ -189,31 +191,31 @@ msgstr "Spam"
 
 #: comments.php:113
 msgid "List"
-msgstr "Liste"
+msgstr "Elenco"
 
 #: comments.php:119
 msgid "The comment has been eliminated successfully."
-msgstr "Kommentar erfolgreich gelöscht."
+msgstr "Il commento Ã¨ stato eliminato."
 
 #: comments.php:122
 msgid "The post has NOT been eliminated."
-msgstr "Beitrag wurde nicht gelöscht."
+msgstr "L'articolo NON &egrave; stato eliminato."
 
 #: comments.php:128
 msgid "The comment has been modified successfully."
-msgstr "Kommentar erfolgreich überarbeitet."
+msgstr "Il commento &egrave; stato modificato."
 
 #: comments.php:131
 msgid "The post has NOT been modified."
-msgstr "Beitrag wurde nicht geändert."
+msgstr "L'articolo NON &egrave; stato modificato."
 
 #: index.php:104
 msgid "control panel"
-msgstr "kontollzentrum"
+msgstr "pannello di controllo"
 
 #: index.php:153
 msgid "New Post"
-msgstr "Neuer Beitrag"
+msgstr "Nuovo Articolo"
 
 #: index.php:154
 msgid "Chat"
@@ -221,7 +223,7 @@ msgstr "Chat"
 
 #: index.php:155
 msgid "Quote"
-msgstr "Zitat"
+msgstr "Quota"
 
 #: index.php:156
 msgid "Link"
@@ -237,143 +239,144 @@ msgstr "Video"
 
 #: index.php:159
 msgid "Picture"
-msgstr "Bild"
+msgstr "Immagini"
 
 #: index.php:160
 msgid "Regular"
-msgstr "Regulär"
+msgstr "Testo"
 
 #: index.php:167
 msgid "A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>."
-msgstr "Eine neue Gelato Version wurde veröffentlicht und steht <a href=\"http://www.gelatocms.com/\">zum Download</a> bereit."
+msgstr "Una nuova versione di gelato &egrave; stata rilasciata ed &egrave; pronta <a href=\"http://www.gelatocms.com/\">per lo scaricamento</a>."
 
 #: index.php:172
 msgid "The post has been eliminated successfully."
-msgstr "Beitrag wurde erfolgreich entfernt."
+msgstr "L'articolo &egrave; stato eliminato."
 
 #: index.php:178
 msgid "The post has been modified successfully."
-msgstr "Beitrag wurde erfolgreich geändert."
+msgstr "L'articolo &egrave; stato modificato."
 
 #: index.php:184
 msgid "The post has been added successfully."
-msgstr "Beitrag wurde erfolgreich hinzugefügt."
+msgstr "L'articolo &egrave; stato aggiunto."
 
 #: index.php:190
 msgid "Error on the database server:"
-msgstr "Datenbank-Server Fehler:"
+msgstr "Errore sul server del database:"
 
 #: index.php:196
 msgid "Not an MP3 file or an upload problem."
-msgstr "Kein MP3-Datei oder Upload Problem."
+msgstr "Non &egrave; un file MP3 o c'&egrave; stato un problema nel caricamento."
 
 #: index.php:202
 msgid "Not a photo file or an upload problem."
-msgstr "Kein Photo-Datei oder Upload Problem."
+msgstr "Non &egrave; un file di foto o c'&egrave; stato un problema nel caricamento."
 
 #: index.php:305
 msgid "syntax is supported."
-msgstr "syntax wird unterstützt."
+msgstr "sintassi &egrave; supportata."
 
 #: index.php:322
 #: options.php:100
 #: settings.php:73
 msgid "Options"
-msgstr "Optionen"
+msgstr "Opzioni"
 
+#  c:\temilocalizzati/comments-popup.php:46
 #: index.php:324
 msgid "Comments"
-msgstr "Kommentare"
+msgstr "Commenti"
 
 #: index.php:428
 msgid "No posts in this tumblelog."
-msgstr "Keine beiträge in diesem Tumblelog."
+msgstr "Nessun articolo in questo tumblelog"
 
 #: options.php:61
 msgid "options"
-msgstr "optionen"
+msgstr "opzioni"
 
 #: options.php:96
 msgid "Tumblelog options"
-msgstr "Tumblelog Optionen"
+msgstr "Opzioni del Tumblelog"
 
 #: options.php:97
 #: settings.php:71
 #: user.php:81
 msgid "Post"
-msgstr "Schreiben"
+msgstr "Articolo"
 
 #: options.php:106
 #: settings.php:80
 msgid "The configuration has been modified successfully."
-msgstr "Einstellungen erfolgreich gespeichert."
+msgstr "La configurazione &egrave; stata modificata."
 
 #: options.php:111
 #: settings.php:85
 msgid "Error on the database server: "
-msgstr "Datenbank-Server Fehler:"
+msgstr "Errore sul server del database."
 
 #: options.php:120
 msgid "Rich text editor:"
-msgstr "Reicher textherausgeber:"
+msgstr "Rich text editor:"
 
 #: options.php:122
 #: options.php:128
 #: options.php:134
 msgid "Active"
-msgstr "Aktiviert"
+msgstr "Attivo"
 
 #: options.php:123
 #: options.php:129
 #: options.php:135
 msgid "Deactive"
-msgstr "Deaktiviert"
+msgstr "Disattiva"
 
 #: options.php:126
 msgid "URL friendly:"
-msgstr "URL freundlich:"
+msgstr "URL amichevoli:"
 
 #: options.php:132
 msgid "Allow readers comments:"
-msgstr "Kommentare erlauben:"
+msgstr "Permetti ai lettori di commentare:"
 
 #: options.php:138
 msgid "Time Offset:"
-msgstr "Zeitzone:"
+msgstr "Fuso orario:"
 
 #: options.php:206
 #: settings.php:129
 #: user.php:139
 msgid "Modify"
-msgstr "Aktualisieren"
+msgstr "Modifica"
 
 #: settings.php:35
 msgid "settings"
-msgstr "einstellungen"
+msgstr "gestione"
 
 #: settings.php:70
 msgid "Tumblelog configuration"
-msgstr "Tumblelog konfiguration"
+msgstr "Configurazione Tumblelog"
 
 #: settings.php:94
 msgid "Title:"
-msgstr "Titel:"
+msgstr "Titolo:"
 
 #: settings.php:96
 msgid "Description:"
-msgstr "Beschreibung:"
+msgstr "Descrizione:"
 
 #: settings.php:98
 msgid "Installation URL"
-msgstr "Installations URL"
+msgstr "URL di installazione"
 
 #: settings.php:100
 msgid "Post limit:"
-msgstr "Max. Beiträge auf der Startseite:"
+msgstr "Articoli visualizzati"
 
 #: settings.php:102
 msgid "Language:"
-msgstr "Sprache:"
+msgstr "Lingua:"
 
 #: settings.php:114
 msgid "Template:"
@@ -381,42 +384,42 @@ msgstr "Template:"
 
 #: user.php:56
 msgid "add user"
-msgstr "benutzer hinzugügen"
+msgstr "aggiungi utente"
 
 #: user.php:80
 msgid "Start session"
-msgstr "Starte Session"
+msgstr "Avvia sessione"
 
 #: user.php:83
 #: user.php:139
 msgid "Add"
-msgstr "Hinzufügen:"
+msgstr "Aggiungi"
 
 #: user.php:99
 msgid "user:"
-msgstr "benutzer:"
+msgstr "utente:"
 
 #: user.php:115
 msgid "password:"
-msgstr "passwort:"
+msgstr "password:"
 
 #: user.php:119
 msgid "retype password:"
-msgstr "passwort erneut eingeben:"
+msgstr "riscrivi la password:"
 
 #: user.php:123
 msgid "name:"
-msgstr "name:"
+msgstr "nome:"
 
 #: user.php:127
 msgid "e-mail:"
-msgstr "e-mail:"
+msgstr "email:"
 
 #: user.php:131
 msgid "website:"
-msgstr "webseite:"
+msgstr "Sito web:"
 
 #: user.php:135
 msgid "about:"
-msgstr "Über:"
+msgstr "about:"
 

@@ -5,21 +5,22 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gelatoCMS german language file\n"
+"Project-Id-Version: gelato chinese\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-07-29 22:39-0500\n"
-"PO-Revision-Date: 2007-11-06 12:25-0600\n"
+"PO-Revision-Date: 2007-11-06 12:31-0600\n"
 "Last-Translator: Pedro Santana <psantana@gelatocms.com>\n"
-"Language-Team: ogee <ogee@gmx.net>\n"
+"Language-Team: hicode.org <sluke520@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: German\n"
-"X-Poedit-Country: GERMANY\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #: admin.php:28
 msgid "admin users"
-msgstr "administratoren"
+msgstr "管理员"
 
 #: admin.php:52
 #: comments.php:98
@@ -28,7 +29,7 @@ msgstr "administratoren"
 #: settings.php:58
 #: user.php:68
 msgid "Processing request..."
-msgstr "Anfrage läuft..."
+msgstr "进程请求..."
 
 #: admin.php:55
 #: close.php:39
@@ -38,34 +39,34 @@ msgstr "Anfrage läuft..."
 #: settings.php:61
 #: user.php:71
 msgid "home"
-msgstr "home"
+msgstr "首页"
 
 #: admin.php:57
 #: index.php:146
 msgid "View Tumblelog"
-msgstr "Tumblelog ansehen"
+msgstr "浏览微型博客"
 
 #: admin.php:58
 #: index.php:147
 msgid "Log out"
-msgstr "Abmelden"
+msgstr "注销"
 
 #: admin.php:66
 #: index.php:321
 #: options.php:99
 #: settings.php:74
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "设置"
 
 #: admin.php:67
 #: comments.php:111
 #: index.php:325
 msgid "Posts"
-msgstr "Beiträge"
+msgstr "日志"
 
 #: admin.php:68
 msgid "Add user"
-msgstr "Benutzer hinzufügen"
+msgstr "添加用户"
 
 #: admin.php:69
 #: index.php:323
@@ -73,74 +74,74 @@ msgstr "Benutzer hinzufügen"
 #: settings.php:72
 #: user.php:82
 msgid "Users"
-msgstr "Benutzer"
+msgstr "用户"
 
 #: admin.php:75
 msgid "The user has been added successfully."
-msgstr "Benutzer erfolgreich hinzugefügt."
+msgstr "成功添加用户"
 
 #: admin.php:81
 msgid "The user has been eliminated successfully."
-msgstr "Benutzer erfolgreich gelöscht."
+msgstr "成功删除用户"
 
 #: admin.php:87
 msgid "The user has been modified successfully."
-msgstr "Benutzer erfolgreich aktualisiert."
+msgstr "成功修改用户"
 
 #: admin.php:93
 #: ajax.php:36
 msgid "The username is not available."
-msgstr "Dieser Benutzer ist nicht verfügbar."
+msgstr "用户名不可用"
 
 #: admin.php:95
 msgid "Error on the database server:."
-msgstr "Datenbank-Server Fehler:."
+msgstr "数据库出错:"
 
 #: admin.php:103
 msgid "Login"
-msgstr "Anmelden"
+msgstr "登录"
 
 #: admin.php:104
 msgid "Name"
-msgstr "Name"
+msgstr "名称"
 
 #: admin.php:105
 msgid "Actions"
-msgstr "Aktionen"
+msgstr "操作"
 
 #: admin.php:123
 #: comments.php:113
 #: user.php:83
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "编辑"
 
 #: admin.php:126
 msgid "Delete"
-msgstr "Löschen"
+msgstr "删除"
 
 #: admin.php:135
 msgid "No users available."
-msgstr "Keine Benutzer Verfügbar."
+msgstr "无可用用户"
 
 #: ajax.php:23
 msgid "&nbsp;ending session..."
-msgstr "&nbsp;Beende die Session..."
+msgstr "&nbsp;结束会话..."
 
 #: ajax.php:25
 msgid "&nbsp;failure ending session..."
-msgstr "&nbsp;Session beenden: Fehler..."
+msgstr "&nbsp;失败结束会话..."
 
 #: ajax.php:31
 msgid "Required field cannot be left blank."
-msgstr "Erforderliche Formularfelder dürfen nicht leer sein."
+msgstr "必填项不能留空."
 
 #: ajax.php:34
 msgid "Username available."
-msgstr "Benutzername ist verfügbar."
+msgstr "用户名可用."
 
 #: close.php:27
 msgid "logout"
-msgstr "abmelden"
+msgstr "注销"
 
 #: close.php:41
 #: comments.php:103
@@ -149,7 +150,7 @@ msgstr "abmelden"
 #: settings.php:63
 #: user.php:73
 msgid "Take me to the tumblelog"
-msgstr "Bring mich zum Tumblelog"
+msgstr "转到 微型博客"
 
 #: close.php:41
 #: comments.php:103
@@ -157,31 +158,31 @@ msgstr "Bring mich zum Tumblelog"
 #: settings.php:63
 #: user.php:73
 msgid "Back to the Tumblelog"
-msgstr "Zurück zum Tumblelog"
+msgstr "返回 微型博客"
 
 #: close.php:48
 msgid "Closing session"
-msgstr "Schließlich Session"
+msgstr "关闭会话"
 
 #: close.php:49
 msgid "logoff"
-msgstr "abmelden"
+msgstr "登出"
 
 #: close.php:57
 msgid "Ending session..."
-msgstr "Beende Session..."
+msgstr "结束会话..."
 
 #: close.php:61
 msgid "Has happened an error when closing the session."
-msgstr "Ist eine störung beim schließlich der session aufgetreten."
+msgstr "关闭会话时发生错误."
 
 #: comments.php:74
 msgid "comments"
-msgstr "kommentare"
+msgstr "评论"
 
 #: comments.php:110
 msgid "Manage comments"
-msgstr "Kommentare bearbeiten"
+msgstr "管理评论"
 
 #: comments.php:112
 msgid "Spam"
@@ -189,234 +190,234 @@ msgstr "Spam"
 
 #: comments.php:113
 msgid "List"
-msgstr "Liste"
+msgstr "列表"
 
 #: comments.php:119
 msgid "The comment has been eliminated successfully."
-msgstr "Kommentar erfolgreich gelöscht."
+msgstr "成功删除评论."
 
 #: comments.php:122
 msgid "The post has NOT been eliminated."
-msgstr "Beitrag wurde nicht gelöscht."
+msgstr "日志未能删除."
 
 #: comments.php:128
 msgid "The comment has been modified successfully."
-msgstr "Kommentar erfolgreich überarbeitet."
+msgstr "成功修改评论."
 
 #: comments.php:131
 msgid "The post has NOT been modified."
-msgstr "Beitrag wurde nicht geändert."
+msgstr "日志未能修改."
 
 #: index.php:104
 msgid "control panel"
-msgstr "kontollzentrum"
+msgstr "控制面板"
 
 #: index.php:153
 msgid "New Post"
-msgstr "Neuer Beitrag"
+msgstr "新日志"
 
 #: index.php:154
 msgid "Chat"
-msgstr "Chat"
+msgstr "聊天"
 
 #: index.php:155
 msgid "Quote"
-msgstr "Zitat"
+msgstr "引用"
 
 #: index.php:156
 msgid "Link"
-msgstr "Link"
+msgstr "链接"
 
 #: index.php:157
 msgid "Audio"
-msgstr "Audio"
+msgstr "音频"
 
 #: index.php:158
 msgid "Video"
-msgstr "Video"
+msgstr "视频"
 
 #: index.php:159
 msgid "Picture"
-msgstr "Bild"
+msgstr "图像"
 
 #: index.php:160
 msgid "Regular"
-msgstr "Regulär"
+msgstr "规则"
 
 #: index.php:167
 msgid "A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>."
-msgstr "Eine neue Gelato Version wurde veröffentlicht und steht <a href=\"http://www.gelatocms.com/\">zum Download</a> bereit."
+msgstr "新版本发布，请<a href=\"http://www.gelatocms.com/\">下载</a>."
 
 #: index.php:172
 msgid "The post has been eliminated successfully."
-msgstr "Beitrag wurde erfolgreich entfernt."
+msgstr "成功删除日志."
 
 #: index.php:178
 msgid "The post has been modified successfully."
-msgstr "Beitrag wurde erfolgreich geändert."
+msgstr "成功修改日志."
 
 #: index.php:184
 msgid "The post has been added successfully."
-msgstr "Beitrag wurde erfolgreich hinzugefügt."
+msgstr "成功添加日志."
 
 #: index.php:190
 msgid "Error on the database server:"
-msgstr "Datenbank-Server Fehler:"
+msgstr "数据库出错:"
 
 #: index.php:196
 msgid "Not an MP3 file or an upload problem."
-msgstr "Kein MP3-Datei oder Upload Problem."
+msgstr "不是一个MP3文件.有可能是上传出错"
 
 #: index.php:202
 msgid "Not a photo file or an upload problem."
-msgstr "Kein Photo-Datei oder Upload Problem."
+msgstr "不是一个图像文件.有可能是上传出错"
 
 #: index.php:305
 msgid "syntax is supported."
-msgstr "syntax wird unterstützt."
+msgstr "支持语法."
 
 #: index.php:322
 #: options.php:100
 #: settings.php:73
 msgid "Options"
-msgstr "Optionen"
+msgstr "选项"
 
 #: index.php:324
 msgid "Comments"
-msgstr "Kommentare"
+msgstr "评论"
 
 #: index.php:428
 msgid "No posts in this tumblelog."
-msgstr "Keine beiträge in diesem Tumblelog."
+msgstr "暂无内容."
 
 #: options.php:61
 msgid "options"
-msgstr "optionen"
+msgstr "选项"
 
 #: options.php:96
 msgid "Tumblelog options"
-msgstr "Tumblelog Optionen"
+msgstr "微型博客 选项"
 
 #: options.php:97
 #: settings.php:71
 #: user.php:81
 msgid "Post"
-msgstr "Schreiben"
+msgstr "日志"
 
 #: options.php:106
 #: settings.php:80
 msgid "The configuration has been modified successfully."
-msgstr "Einstellungen erfolgreich gespeichert."
+msgstr "公共修改配置."
 
 #: options.php:111
 #: settings.php:85
 msgid "Error on the database server: "
-msgstr "Datenbank-Server Fehler:"
+msgstr "数据库出错: "
 
 #: options.php:120
 msgid "Rich text editor:"
-msgstr "Reicher textherausgeber:"
+msgstr "富文本编辑器r:"
 
 #: options.php:122
 #: options.php:128
 #: options.php:134
 msgid "Active"
-msgstr "Aktiviert"
+msgstr "激活"
 
 #: options.php:123
 #: options.php:129
 #: options.php:135
 msgid "Deactive"
-msgstr "Deaktiviert"
+msgstr "禁用"
 
 #: options.php:126
 msgid "URL friendly:"
-msgstr "URL freundlich:"
+msgstr "URL 友好:"
 
 #: options.php:132
 msgid "Allow readers comments:"
-msgstr "Kommentare erlauben:"
+msgstr "允许读者评论:"
 
 #: options.php:138
 msgid "Time Offset:"
-msgstr "Zeitzone:"
+msgstr "时区:"
 
 #: options.php:206
 #: settings.php:129
 #: user.php:139
 msgid "Modify"
-msgstr "Aktualisieren"
+msgstr "修改"
 
 #: settings.php:35
 msgid "settings"
-msgstr "einstellungen"
+msgstr "设置"
 
 #: settings.php:70
 msgid "Tumblelog configuration"
-msgstr "Tumblelog konfiguration"
+msgstr "微型博客 配置"
 
 #: settings.php:94
 msgid "Title:"
-msgstr "Titel:"
+msgstr "标题:"
 
 #: settings.php:96
 msgid "Description:"
-msgstr "Beschreibung:"
+msgstr "描述:"
 
 #: settings.php:98
 msgid "Installation URL"
-msgstr "Installations URL"
+msgstr "安装 URL"
 
 #: settings.php:100
 msgid "Post limit:"
-msgstr "Max. Beiträge auf der Startseite:"
+msgstr "日志限制:"
 
 #: settings.php:102
 msgid "Language:"
-msgstr "Sprache:"
+msgstr "语言:"
 
 #: settings.php:114
 msgid "Template:"
-msgstr "Template:"
+msgstr "模板:"
 
 #: user.php:56
 msgid "add user"
-msgstr "benutzer hinzugügen"
+msgstr "添加用户"
 
 #: user.php:80
 msgid "Start session"
-msgstr "Starte Session"
+msgstr "开始会话"
 
 #: user.php:83
 #: user.php:139
 msgid "Add"
-msgstr "Hinzufügen:"
+msgstr "添加"
 
 #: user.php:99
 msgid "user:"
-msgstr "benutzer:"
+msgstr "用户:"
 
 #: user.php:115
 msgid "password:"
-msgstr "passwort:"
+msgstr "密码:"
 
 #: user.php:119
 msgid "retype password:"
-msgstr "passwort erneut eingeben:"
+msgstr "教研密码:"
 
 #: user.php:123
 msgid "name:"
-msgstr "name:"
+msgstr "名字:"
 
 #: user.php:127
 msgid "e-mail:"
-msgstr "e-mail:"
+msgstr "邮件l:"
 
 #: user.php:131
 msgid "website:"
-msgstr "webseite:"
+msgstr "主页:"
 
 #: user.php:135
 msgid "about:"
-msgstr "Über:"
+msgstr "关于:"
 
