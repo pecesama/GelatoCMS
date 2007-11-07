@@ -25,7 +25,7 @@ $template = new plantillas($conf->template);
 
         if (isset($_GET["post"])) {
                 $id_post = $_GET["post"];
-                if (!is_numeric($id_post) && $id_post < 1 ){
+                if (!is_numeric($id_post) || $id_post < 1 ){
                 	header("Location: index.php");
                 }
         } else {
