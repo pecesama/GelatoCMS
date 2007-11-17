@@ -74,7 +74,9 @@ form.newpost textarea{background: #fff url(images/grad-big.png) top left repeat-
 form.newpost select{ position:absolute; right:10px; top:1px;}
 html > body form.newpost select{min-width:100px;}
 
-legend.install{font: normal 16.5px/17px georgia, "times new roman", serif; border: 0; margin-top: 0px; padding-top:0; margin-bottom: 0; padding-bottom: 0; color: #c60; margin-bottom: 10px;}
+legend.install{font: normal 16.5px/17px georgia, "times new roman", serif; border: 1px solid #ddd; margin-top: 0px; padding:5px; margin-bottom: 0; color: #c60; margin-bottom: 5px; background-color:#fff;}
+fieldset.install{border:1px solid #dfdfdf; padding:10px;}
+fieldset.install input.txt{width:468px;}
 
 .tabla{  margin:15px 15px; }
 .entry{ background-color:#efefef; border:1px solid #ccc; margin:20px 15px;}

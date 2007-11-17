@@ -17,6 +17,8 @@ class Install {
 		$this->errors_d[6]="Error establishing a database connection";
 		$this->errors_d[7]="Please add a hostname for the database server";
 		$this->errors_d[8]="Please name the database";
+		$this->errors_d[9]="Password does not match the confirm password";
+		$this->errors_d[10]="The login field cannot be empty";
 	}
 	
     function run() {
@@ -157,38 +159,37 @@ class Install {
 	}
 	
 	function is_gelato_installed(){
-		if (!$this->check_for_config()){ 
-			return false; 
-		} else {
-			if (!$this->is_db_installed()){
-				return false;
+		if(file_exists('config.php')) {
+			@include("config.php");
+			if (!$this->check_for_config()){ 
+				return false; 
+			} else {
+				if (!$this->is_db_installed()){
+					return false;
+				}
 			}
-			
+			return true;
+		}else{
+			return false;
 		}
-		
-		return true;
 	}
 	
 	function is_db_installed(){
-			global $db;	
-			if (function_exists($db->ejecutarConsulta)){
+			$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);	
 				$sqlStr = "SELECT * FROM `".Table_prefix."config`";
 				if($db->ejecutarConsulta($sqlStr)) {
 					return ($db->contarRegistros() > 0);
-				}
-			} else {
-				false;
+			}else{
+			return false;
 			}
 	
 	}
 	
 	function check_for_config(){
-		if(!file_exists('config.php')) return false;
 		if(!defined('DB_Server')) return false;
 		if(!defined('DB_name')) return false;
 		if(!defined('DB_User')) return false;
 		if(!defined('DB_Password')) return false;
-		
 		return true;
 	}
 	
@@ -242,11 +243,15 @@ define(\'Absolute_Path\', dirname(__FILE__).DIRECTORY_SEPARATOR);
 				$sep_err="";
 				$this->errors = false;
 				
-				if (!$this->data['login'] || !$this->data['db_login']) {
+				if (!$this->data['login']) {
 					$this->errors =$this->errors.$sep_err."1";
 					$sep_err="|";
 				}
-				if (!$this->data['password'] ||  !$this->data['db_password']) {
+				if (!$this->data['db_login']) {
+					$this->errors =$this->errors.$sep_err."10";
+					$sep_err="|";
+				}
+				if (!$this->data['password']) {
 					$this->errors=$this->errors.$sep_err."2";
 					$sep_err="|";
 				}
@@ -266,10 +271,15 @@ define(\'Absolute_Path\', dirname(__FILE__).DIRECTORY_SEPARATOR);
 					$this->errors=$this->errors.$sep_err."8";
 					$sep_err="|";
 				}
-				if ($this->data['password']!=$_POST['password2'] ||  $_POST['db_password']!=$_POST['db_password2'] ) {
+				if ($this->data['password']!=$_POST['password2']) {
 					$this->errors=$this->errors.$sep_err."3";
 					$sep_err="|";
-				}
+				}				
+				if ( $_POST['db_password']!=$_POST['db_password2']) {
+					$this->errors=$this->errors.$sep_err."9";
+					$sep_err="|";
+				}				
+				
 				$off_r= split("," , $this->data['time_offsets']);
 				$this->data['offset_time'] = $off_r[0];
 				$this->data['offset_city'] = $off_r[1];
