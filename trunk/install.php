@@ -54,41 +54,41 @@ $install->check_form();
 	
 		<div class="tabla">
 			<form action="install.php" method="post" id="config_form" autocomplete="off" class="newpost">
-				<fieldset>
+				<fieldset class="install">
 					<legend class="install">Database Settings</legend>
 					<ul>
 						<li><label for="login">User:</label>
-							<input type="text" name="db_login" id="db_login" value="" class="txt"/><?php echo $install->mostrarerror("1")?></li>
+							<input type="text" name="db_login" id="db_login" value="<?php echo $install->data['db_login']?>" class="txt"/><?php echo $install->mostrarerror("10")?></li>
 						<li><label for="password">Password:</label>
-							<input type="password" name="db_password" id="db_password" value="" class="txt"/><?php echo $install->mostrarerror("2")?></li>
+							<input type="password" name="db_password" id="db_password" value="" class="txt"/></li>
 						<li><label for="password2">Re-type password:</label>
-							<input type="password" name="db_password2" id="db_password2" value="" class="txt"/><?php echo $install->mostrarerror("3")?></li>						
+							<input type="password" name="db_password2" id="db_password2" value="" class="txt"/><?php echo $install->mostrarerror("9")?></li>						
 						<li><label for="email">Database Host:</label>
-							<input type="text" name="db_host" id="db_host" value="localhost" class="txt"/><?php echo $install->mostrarerror("7")?></li>	
+							<input type="text" name="db_host" id="db_host" value="<?php echo (!empty($install->data['db_host']))?  $install->data['db_host'] : 'localhost'?>" class="txt"/><?php echo $install->mostrarerror("7")?></li>	
 						<li><label for="email">Database Name:</label>
-							<input type="text" name="db_name" id="db_name" value="gelatocms" class="txt"/><?php echo $install->mostrarerror("8")?></li>											
+							<input type="text" name="db_name" id="db_name" value="<?php echo (!empty($install->data['db_name']))?  $install->data['db_name'] : 'gelatocms'?>" class="txt"/><?php echo $install->mostrarerror("8")?></li>											
 					</ul>
 				</fieldset><br  />
-				<fieldset>
+				<fieldset class="install">
 					<legend class="install">Admin user</legend>
 					<ul>
 						<li><label for="login">User:</label>
-							<input type="text" name="login" id="login" value="" class="txt"/><?php echo $install->mostrarerror("1")?></li>
+							<input type="text" name="login" id="login" value="<?php echo $install->data['login']?>" class="txt"/><?php echo $install->mostrarerror("1")?></li>
 						<li><label for="password">Password:</label>
 							<input type="password" name="password" id="password" value="" class="txt"/><?php echo $install->mostrarerror("2")?></li>
 						<li><label for="password2">Re-type password:</label>
 							<input type="password" name="password2" id="password2" value="" class="txt"/><?php echo $install->mostrarerror("3")?></li>						
 						<li><label for="email">E-mail:</label>
-							<input type="text" name="email" id="email" value="" class="txt"/><?php echo $install->mostrarerror("4")?></li>						
+							<input type="text" name="email" id="email" value="<?php echo $install->data['email']?>" class="txt"/><?php echo $install->mostrarerror("4")?></li>						
 					</ul>
 				</fieldset><br  />
-				<fieldset>
+				<fieldset class="install">
 					<legend class="install">Tumblelog configuration</legend>
 					<ul>							
 						<li><label for="title">Title:</label>
-							<input type="text" name="title" id="title" value="" class="txt"/></li>
+							<input type="text" name="title" id="title" value="<?php echo $install->data['title']?>" class="txt"/></li>
 						<li><label for="description">Description:</label>
-							<input type="text" name="description" id="description" value="" class="txt"/></li>
+							<input type="text" name="description" id="description" value="<?php echo $install->data['description']?>" class="txt"/></li>
 						<li><label for="url_installation">Installation URL</label>
 							<input type="text" name="url_installation" id="url_installation" value="<?php if(isset($_SERVER['SCRIPT_URI']))echo substr($_SERVER["SCRIPT_URI"], '0', '-12'); ?>" class="txt"/><?php echo $install->mostrarerror("5")?></li>
 						<li><label for="posts_limit">Post limit:</label>
@@ -167,7 +167,7 @@ $install->check_form();
 								<option value="9.50,Australia/Adelaide">(GMT +9:30) Adelaide</option>
 								<option value="9.50Australia/Darwin">(GMT +9:30) Darwin</option>
 								<option value="10,Australia/Brisbane">(GMT +10:00) Brisbane, Guam, Port Moresby</option>
-								<option value="10,Australia/Canberra">(GMT +10:00) Canberra, Hobart, Melbourne, Sydney, Vladivostok</option>
+								<option value="10,Australia/Canberra">(GMT +10:00) Canberra, Hobart, Melbourne, Sydney</option>
 								<option value="11,Asia/Magadan">(GMT +11:00) Magadan, Soloman Is., New Caledonia</option>
 								<option value="12,Pacific/Auckland">(GMT +12:00) Auckland, Wellington</option>
 								<option value="12,Pacific/Fiji">(GMT +12:00) Fiji, Kamchatka, Marshall Is.</option>
