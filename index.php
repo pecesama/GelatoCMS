@@ -54,9 +54,30 @@ $template = new plantillas($conf->template);
         $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/lightbox.css\" />\n";    
         $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/jquery.js\"></script>\n";
         $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/lightbox.js\"></script>";
-        
-        $input = array("{Gelato_includes}","{Title}", "{Description}", "{URL_Tumble}", "{Template_name}");
-        $output = array($gelato_includes, $conf->title, $conf->description, $conf->urlGelato, $conf->template);
+		
+		$page_title = $conf->title;
+		$page_title_divisor = " &raquo; "; // it should be set in configuration
+		$page_title_len = 50; // it should be set in configuration
+		if ($id_post) {
+			$register = $tumble->getPost($id_post);
+			$textile = new Textile();
+			if (empty($register["title"])) {
+				if (!empty($register["description"])) {
+					if (strlen($register["description"]) > $page_title_len) {
+						$page_title_data = substr($register["description"], 0, $page_title_len)."...";
+					}
+				}
+			} else {
+				$page_title_data = $register["title"];
+			}
+			$page_title_data = strip_tags($textile->TextileThis($page_title_data));
+			if (!empty($page_title_data)) {				
+				$page_title .= $page_title_divisor.stripslashes($page_title_data);
+			}
+		}
+	
+		$input = array("{Gelato_includes}","{Title}", "{Page_Title}", "{Description}", "{URL_Tumble}", "{Template_name}");
+		$output = array($gelato_includes, $conf->title, $page_title, $conf->description, $conf->urlGelato, $conf->template);
         
         $template->cargarPlantilla($input, $output, "template_header");
         $template->mostrarPlantilla();
