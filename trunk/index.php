@@ -289,8 +289,20 @@ $template = new plantillas($conf->template);
 					$comment = new comments();
 					$rsComments = $comment->getComments($register["id_post"]);
 					
+					$textile = new Textile();
+					if (empty($register["title"])) {
+						if (!empty($register["description"])) {
+							if (strlen($register["description"]) > 30) {
+								$postTitle = substr($register["description"], 0, 30)."...";
+							}
+						}
+					} else {
+						$postTitle = $register["title"];
+					}
+					$postTitle = strip_tags($textile->TextileThis($postTitle));
+					
 					$input = array("{Comments_Number}", "{Post_Title}");				
-					$output = array($comment->countComments($register["id_post"]), $register["title"]);
+					$output = array($comment->countComments($register["id_post"]), $postTitle);
 					$template->precargarPlantillaConBloque($input, $output, "template_comments", "comments");
 
 					while($rowComment = mysql_fetch_assoc($rsComments)) {
