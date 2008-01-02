@@ -55,14 +55,14 @@ if ($user->isAdmin()) {
 		if (!get_magic_quotes_gpc()) {	
 			$_POST["title"] = addslashes($_POST["title"]);
 			$_POST["description"] = addslashes($_POST["description"]);
-		}	
+		}
 		
-		$_POST["title"] = strip_tags($_POST["title"]);
-		$_POST["description"] = strip_tags($_POST["description"]);
+		$textile = new Textile();
+		
+		$_POST["title"] = $textile->TextileThis(removeBadTags($_POST["title"]));
+		$_POST["description"] = $textile->TextileThis(removeBadTags($_POST["description"]));
 		
 		if ($tumble->addPost($_POST)) {
-			//header("Location: ".$conf->urlGelato."/admin/index.php?added=true");
-			//die();
 			$input = array("{type}");
 			$output = array("1");
 			

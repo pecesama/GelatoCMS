@@ -17,7 +17,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 	
 	function codeName() {
-		return "cioccolato RC1";
+		return "vaniglia RC1";
 	}
 	
 	function beginsWith($str, $sub) {
@@ -346,5 +346,19 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	          $value = addslashes($value);
 	    }
 	    return $value;
+	}
+	
+	function removeBadTags($source) {
+		$validTags ='<p><ul><li><a><abbr><acronym><blockquote><code><pre><em><i><strike><s><strong><b><br><span><div><img>';
+		$source = strip_tags($source, $validTags);
+		return preg_replace('/<(.*?)>/ie', "'<'.removeBadAtributes('\\1').'>'", $source);
+	}
+	
+	function removeBadAtributes($sourceTag)
+	{
+		$badAtributes = 'javascript:|onclick|ondblclick|onmousedown|onmouseup|onmouseover|onmousemove|onmouseout|onkeypress|onkeydown|onkeyup|class';
+		$sourceTag = stripslashes($sourceTag);
+		$sourceTag = preg_replace("/$badAtributes/i", "niceTry", $sourceTag);
+		return $sourceTag;
 	}
 ?>

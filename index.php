@@ -112,8 +112,7 @@ $template = new plantillas($conf->template);
                                 
 								$conversation = $register["description"];
 								
-								$textile = new Textile();				
-								$register["description"] = $textile->TextileThis($register["description"]);
+								$register["description"] = $register["description"];
 
                                 $register["title"] = stripslashes($register["title"]);
                                 $register["description"] = stripslashes($register["description"]);
@@ -212,8 +211,7 @@ $template = new plantillas($conf->template);
                 
 				$conversation = $register["description"];
 				
-				$textile = new Textile();				
-				$register["description"] = $textile->TextileThis($register["description"]);
+				$register["description"] = $register["description"];
 				
 				$register["title"] = stripslashes($register["title"]);
                 $register["description"] = stripslashes($register["description"]);
@@ -306,9 +304,6 @@ $template = new plantillas($conf->template);
 					$template->precargarPlantillaConBloque($input, $output, "template_comments", "comments");
 
 					while($rowComment = mysql_fetch_assoc($rsComments)) {
-						/*echo "<pre>";
-						print_r($rowComment);
-						echo "</pre>";*/
 						$commentAuthor = ($rowComment["web"]=="") ? $rowComment["username"] : "<a href=\"".$rowComment["web"]."\" rel=\"external\">".$rowComment["username"]."</a>";
 						$input = array("{Id_Comment}", "{Comment_Author}", "{Date}", "{Comment}");
 						$output = array($rowComment["id_comment"], $commentAuthor, gmdate("d.m.y", strtotime($rowComment["comment_date"])+transform_offset($conf->offsetTime)), $rowComment["content"]);

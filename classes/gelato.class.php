@@ -123,6 +123,24 @@ class gelato extends Conexion_Mysql {
 		return $formatedText;
 	}
 	
+	function formatApiConversation($text) {
+		$formatedText = "";
+		
+		$lines = explode("\n", $text);
+		
+		foreach ($lines as $line) {
+			$pos = strpos($line, ":") + 1;
+			
+			$name = substr($line, 0, $pos-1);
+			$label = substr($line, 0, $pos);
+			$desc = substr($line, $pos, strlen($line));
+			
+			$formatedText .= "<conversation-line name=\"".$name."\" label=\"".$label."\">".$desc."</conversation-line>\n";
+		}
+		
+		return $formatedText;
+	}
+	
 	function saveMP3($remoteFileName) {
 		if (getMP3File($remoteFileName)) {
 			return true;
