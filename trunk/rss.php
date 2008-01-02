@@ -37,27 +37,25 @@ if(!defined('entry')) define('entry',true);
 
 <?php
 	include("classes/gelato.class.php");
-	include("classes/textile.class.php");
 	$tumble = new gelato();
 	$rs = $tumble->getPosts("20");
 	if ($tumble->contarRegistros()>0) {		
 
 		while($register = mysql_fetch_array($rs)) {
-			$textile = new Textile();				
-			$register["description"] = $textile->TextileThis($register["description"]);
+			$register["description"] = $register["description"];
 			
 			switch ($register["type"]) {
 				case "1":
-					$tit = ($register["title"]=="") ? strip_tags($register["description"]) : $register["title"];
+					$tit = ($register["title"]=="") ? $register["description"] : $register["title"];
 					$desc = $register["description"];
 					break;
 				case "2":
 					$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
-					$tit = ($register["description"]=="") ? "Photo" : strip_tags($register["description"]);
+					$tit = ($register["description"]=="") ? "Photo" : $register["description"];
 					$desc = "<img src=\"".$photoPath."\"/>";
 					break;
 				case "3":
-					$tit = "\"".strip_tags($register["description"])."\"";
+					$tit = "\"".$register["description"]."\"";
 					$tmpStr = ($register["title"]!="") ? "<br /><br /> - <em>".$register["title"]."</em>" : "";
 					$desc = "\"".$register["description"]."\"".$tmpStr;
 					break;
@@ -73,16 +71,16 @@ if(!defined('entry')) define('entry',true);
 					$desc = $tumble->formatConversation($register["description"]);
 					break;
 				case "6":
-					$tit = ($register["description"]=="") ? "Video" : strip_tags($register["description"]);
+					$tit = ($register["description"]=="") ? "Video" : $register["description"];
 					$desc = $tumble->getVideoPlayer($register["url"]);
 					break;
 				case "7":
-					$tit = ($register["description"]=="") ? "MP3" : strip_tags($register["description"]);
+					$tit = ($register["description"]=="") ? "MP3" : $register["description"];
 					$desc = $tumble->getMp3Player($register["url"]);
 					break;
 			}
-			$tit = htmlspecialchars($tit);
-			$url = htmlspecialchars($url);
+			$tit = strip_tags($tit);
+			//$url = htmlspecialchars($url);
 			$strEnd=($conf->urlFriendly) ? "/" : "";
 			$url = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
 			$formatedDate = gmdate("r", strtotime($register["date"])+transform_offset($conf->offsetTime));

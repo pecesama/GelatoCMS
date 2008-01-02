@@ -66,11 +66,12 @@ if ($user->isAdmin()) {
 		if (!get_magic_quotes_gpc()) {	
 			$_POST["title"] = addslashes($_POST["title"]);
 			$_POST["description"] = addslashes($_POST["description"]);
-		}	
+		}		
 		
-		$_POST["title"] = strip_tags($_POST["title"]);
-		$_POST["description"] = strip_tags($_POST["description"]);
+		$textile = new Textile();
 		
+		$_POST["title"] = $textile->TextileThis(removeBadTags($_POST["title"]));
+		$_POST["description"] = $textile->TextileThis(removeBadTags($_POST["description"]));
 		
 		if (isset($_POST["id_post"])) {
 			$tumble->modifyPost($_POST, $_POST["id_post"]);
@@ -109,6 +110,16 @@ if ($user->isAdmin()) {
 		Lightbox.fileLoadingImage = "css/images/loading.gif";
 		Lightbox.fileBottomNavCloseImage = "css/images/closelabel.gif";		
 		</script>
+<?php
+		if($conf->richText) {
+?>
+        	<script src="<?php echo $conf->urlGelato;?>/admin/scripts/nicEdit.js" type="text/javascript"></script>
+			<script type="text/javascript">
+                 bkLib.onDomLoaded(nicEditors.allTextAreas);
+            </script>
+<?php
+		}
+?>
 		<style type="text/css" media="screen">	
 			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
 			@import "<?php echo $conf->urlGelato;?>/admin/css/lightbox.css";
@@ -328,10 +339,7 @@ if ($user->isAdmin()) {
 					if ($tumble->contarRegistros()>0) {				
 						while($register = mysql_fetch_array($rs)) {			
 							$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
-							$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";							
-							
-							$textile = new Textile();				
-							$register["description"] = $textile->TextileThis($register["description"]);
+							$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
 							
 							$register["title"] = stripslashes($register["title"]);
 							$register["description"] = stripslashes($register["description"]);

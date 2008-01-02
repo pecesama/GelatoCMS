@@ -22,9 +22,12 @@ $commentId = ($isEdition) ? $_GET["edit"] : NULL;
 	
 if(isset($_POST["btnAdd"]))	{		
 	unset($_POST["btnAdd"]);
-	$_POST["username"] = strip_tags($_POST["username"]);
-	$_POST["email"] = strip_tags($_POST["email"]);	
-	$_POST["web"] = strip_tags($_POST["web"]);
+	
+	$textile = new Textile();
+	
+	$_POST["username"] = $textile->TextileThis(removeBadTags($_POST["username"]));
+	$_POST["email"] = $textile->TextileThis(removeBadTags($_POST["email"]));
+	$_POST["web"] = $textile->TextileThis(removeBadTags($_POST["web"]));
 		
 	if (isset($_POST["id_comment"])) {
 		if ($isAdmin) {

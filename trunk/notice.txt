@@ -1,5 +1,5 @@
 ﻿== CREDITS==
-Gelato developers and designers (in chronological order):
+gelato CMS developers and designers (in chronological order):
 
 Pedro Santana [ http://www.pecesama.net/weblog/ ]
 Jorge Condomi [ http://www.raven.com.ar/ ]
@@ -10,6 +10,10 @@ Juan del Rio [ http://elcaminante.net/ ]
 
 = COPYRIGHT NOTICES =
 This product includes code and libraries developed by third parties, which are governed by different licenses.  These components, and their licenses, are listed below.
+
+= NicEdit - Micro Inline WYSIWYG =
+Copyright 2007 Brian Kirchoff, http://nicedit.com/
+NicEdit available under MIT license.
 
 = jQuery =
 Copyright (c) 2007 John Resig, http://jquery.com
