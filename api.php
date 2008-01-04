@@ -12,11 +12,16 @@ if(!defined('entry')) define('entry',true);
   =========================== */
 ?>
 <?php
-	header("Content-type: text/xml; charset=utf-8");	
-	
+	header("Content-type: text/xml; charset=utf-8");
 	$isFeed = true;
-	$tumble = new gelato();
+	
+	require(dirname(__FILE__)."/config.php");
+	
+	include("classes/configuration.class.php");
 	$conf = new configuration();
+		
+	include("classes/gelato.class.php");
+	$tumble = new gelato();	
 	
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
@@ -61,14 +66,14 @@ if(!defined('entry')) define('entry',true);
 			<posts start="<?php echo $start; ?>" total="<?php echo $total; ?>">
 <?php 
 			while($register = mysql_fetch_array($rs)) {
-				$desc = $register["description"];
+				$desc = htmlspecialchars($register["description"]);
 				$url = $conf->urlGelato."/index.php?post=".$register["id_post"];
 				$formatedDate = gmdate("D, d M Y H:i:s", strtotime($register["date"])+transform_offset($conf->offsetTime));
 				
 				switch ($register["type"]) {
 					case "1":
 
-						$tit = ($register["title"]=="") ? $register["description"] : $register["title"];
+						$tit = ($register["title"]=="") ? $desc : $register["title"];
 ?>
 						
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="regular" date="<?php echo $formatedDate;?>">
@@ -78,7 +83,7 @@ if(!defined('entry')) define('entry',true);
 <?php						
 						break;
 					case "2":
-						$tit = ($register["description"]=="") ? "Photo" : $register["description"];
+						$tit = ($register["description"]=="") ? "Photo" : $desc;
 ?>
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="photo" date="<?php echo $formatedDate;?>">
 <?php
@@ -107,28 +112,41 @@ if(!defined('entry')) define('entry',true);
 <?php
 						break;
 					case "5":
-						$lines = explode("\n", $register["description"]);
+						$lines = explode("\n", $desc);
 						$line = $lines[0];
 						$tit = ($register["title"]=="") ? $line : $register["title"];
-						$desc = $tumble->formatConversation($register["description"]);
+						$desc = $tumble->formatConversation($desc);
 ?>
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="conversation" date="<?php echo $formatedDate;?>">
                             <conversation-title><?php echo $tit; ?></conversation-title>
-                            <conversation-text><?php echo $register["description"]; ?></conversation-text>
-                            <?php echo $tumble->formatApiConversation($register["description"]); ?>
+                            <conversation-text><?php echo $desc; ?></conversation-text>
+                            <?php echo $tumble->formatApiConversation($desc); ?>
                         </post>
 <?php
 						break;
-/*
 					case "6":
-						$tit = ($register["description"]=="") ? "Video" : $register["description"];
+						$tit = ($register["description"]=="") ? "Video" : $desc;
 						$desc = $tumble->getVideoPlayer($register["url"]);
+?>
+						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="video" date="<?php echo $formatedDate;?>">
+                            <video-caption><?php echo $tit; ?></video-caption>
+                            <video-source><?php echo $register["url"]; ?></video-source>
+                            <video-player><?php echo htmlspecialchars($desc); ?></video-player>                            
+                        </post>
+<?php
 						break;
+
 					case "7":
-						$tit = ($register["description"]=="") ? "MP3" : $register["description"];
+						$tit = ($register["description"]=="") ? "Audio" : $desc;
 						$desc = $tumble->getMp3Player($register["url"]);
+?>
+						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="audio" date="<?php echo $formatedDate;?>">
+                            <audio-caption><?php echo $tit; ?></audio-caption>
+                            <audio-player><?php echo htmlspecialchars($desc); ?></audio-player>                            
+                        </post>
+<?php
 						break;
-*/
+
 				}
 				$url = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
 				$formatedDate = gmdate("D, d M Y H:i:s", strtotime($register["date"])+transform_offset($conf->offsetTime));
