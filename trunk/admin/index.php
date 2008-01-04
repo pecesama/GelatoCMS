@@ -240,6 +240,7 @@ if ($user->isAdmin()) {
 									$template->mostrarPlantilla();
 									break;
 								case "photo":
+									$url = str_replace("../", $conf->urlGelato."/", $url);
 									$input = array("{type}", "{date}", "{id_user}", "{editUrl}", "{editBody}");
 									$output = array("2", $date, $_SESSION['user_id'], $url, $body);
 									

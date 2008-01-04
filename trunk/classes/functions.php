@@ -349,14 +349,14 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 	
 	function removeBadTags($source) {
-		$validTags ='<p><ul><li><a><abbr><acronym><blockquote><code><pre><em><i><strike><s><strong><b><br><span><div><img>';
+		$validTags ='<p><ol><ul><li><a><abbr><acronym><blockquote><code><pre><em><i><strike><s><strong><b><br><span><div><img>';
 		$source = strip_tags($source, $validTags);
 		return preg_replace('/<(.*?)>/ie', "'<'.removeBadAtributes('\\1').'>'", $source);
 	}
 	
 	function removeBadAtributes($sourceTag)
 	{
-		$badAtributes = 'javascript:|onclick|ondblclick|onmousedown|onmouseup|onmouseover|onmousemove|onmouseout|onkeypress|onkeydown|onkeyup|class';
+		$badAtributes = 'javascript:|onclick|ondblclick|onmousedown|onmouseup|onmouseover|onmousemove|onmouseout|onkeypress|onkeydown|onkeyup';
 		$sourceTag = stripslashes($sourceTag);
 		$sourceTag = preg_replace("/$badAtributes/i", "niceTry", $sourceTag);
 		return $sourceTag;
