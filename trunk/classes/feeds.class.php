@@ -136,5 +136,27 @@ class feeds extends Conexion_Mysql {
 		return $feeds;
 	}
 	
+	
+	/**
+	Calculate the seconds until next update
+	
+	@param $feed can be an ID, or the raw array from the DB
+	@raturn int
+	*/
+	function getNextUpdate($feed){
+		if(is_numeric($feed)){
+			$id = (int)$feed;
+		}elseif(is_array($feed)){
+			$id = $feed['id_feed'];
+		}else{
+			return false;
+		}
+		$timeToUpdate = trim($this->conf->rssImportFrec). ' ago';
+		$delta = time() - strtotime($timeToUpdate);
+		$this->ejecutarConsulta('SELECT (UNIX_TIMESTAMP(updated_at) - '.$delta.') - UNIX_TIMESTAMP(NOW())  FROM '.$this->conf->tablePrefix.'feeds WHERE id_feed = '.$id);
+		$time = mysql_fetch_array($this->mid_consulta);
+		return $time[0];
+
+	}
 }
 ?>
