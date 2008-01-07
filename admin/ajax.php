@@ -11,9 +11,10 @@ if(!defined('entry'))define('entry', true);
 
   =========================== */
 ?>
-<?php	
-	include("../classes/user.class.php");
-	require_once('../entry.php');	
+<?php
+	require_once('../entry.php');
+	global $user;
+	
 	if ($user->isAdmin()) {
 		if ($_GET["action"]) {
 			

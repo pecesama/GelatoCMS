@@ -11,10 +11,8 @@ if(!defined('entry')) define('entry',true);
 
   =========================== */
 
-include("../classes/user.class.php");
-include("../classes/functions.php");
-require_once("../classes/configuration.class.php");
 require_once('../entry.php');
+global $user, $conf, $tumble;
 
 if ($user->isAdmin()) {
 	

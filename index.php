@@ -15,7 +15,7 @@ if(!defined('entry'))define('entry', true);
 
 // Received a valid request, better start setting globals we'll need throughout the app in entry.php
 require_once('entry.php');
-global $user, $tumble, $conf, $db;
+global $user, $tumble, $conf;
 
 $template = new plantillas($conf->template);
         // My approach to MVC

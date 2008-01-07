@@ -12,12 +12,12 @@ if(!defined('entry')) define('entry',true);
   =========================== */
 ?>
 <?php
-	header("Content-type: text/xml; charset=utf-8");	
-	
-	require(dirname(__FILE__)."/config.php");
-	include("classes/configuration.class.php");
+	header("Content-type: text/xml; charset=utf-8");
 	$isFeed = true;
-	$conf = new configuration();
+	
+	require('entry.php');
+	global $conf, $tumble;
+	
 	
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
@@ -36,8 +36,6 @@ if(!defined('entry')) define('entry',true);
 
 
 <?php
-	include("classes/gelato.class.php");
-	$tumble = new gelato();
 	$rs = $tumble->getPosts("20");
 	if ($tumble->contarRegistros()>0) {		
 

@@ -11,6 +11,7 @@
  * login.php
  * update.php
  * rss.php
+ * admin/bm.php
  * admin/index.php
  * admin/close.php
  * admin/ajax.php
@@ -18,9 +19,9 @@
  * admin/options.php
  * admin/admin.php
  * admin/comments.php
- * admin/users.php
- * classes/imgsize.php 
- * admin/feeds.php
+ * admin/user.php
+ * admin/feeds.php 
+ * classes/imgsize.php
  */
 
  
@@ -48,10 +49,12 @@ require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'mysql_connection.class
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'streams.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gettext.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'lang.functions.php');
-        
+
+// Globals to be used throughout the application
 $user = new user();
-$conf = new configuration();
 $tumble = new gelato();
+$conf = new configuration();
+$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 
 
 session_start();
