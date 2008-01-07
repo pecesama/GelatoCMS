@@ -15,13 +15,9 @@ if(!defined('entry')) define('entry',true);
 	header("Content-type: text/xml; charset=utf-8");
 	$isFeed = true;
 	
-	require(dirname(__FILE__)."/config.php");
-	
-	include("classes/configuration.class.php");
-	$conf = new configuration();
-		
-	include("classes/gelato.class.php");
-	$tumble = new gelato();	
+	require('entry.php');
+	global $user, $conf, $tumble;
+	$f = new feeds();
 	
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
@@ -34,31 +30,25 @@ if(!defined('entry')) define('entry',true);
 		if (isset($_GET["type"])) { $hasType = true; } else { $hasType = false; }
 		if ($total > 50) { $total = 50; }		
 ?>		
-		<tumblelog name="<?php echo $_SESSION["user_login"];?>" timezone="<?php echo $conf->offsetCity;?>" title="<?php echo $conf->title;?>"><?php echo $conf->description;?></tumblelog>	
+		<tumblelog name="<?php echo $_SESSION["user_login"];?>" timezone="<?php echo $conf->offsetCity;?>" title="<?php echo $conf->title;?>"><?php 	
+		echo "\n\t".$conf->description."\n";
+?>
+			<feeds>
+<?php
+				$actual_feeds = $f->getFeedList();
+				foreach($actual_feeds as $feed){
+					$error_text = ($feed["error"]>0) ? "false" : "true";
+?>
+					<feed id="<?php echo $feed["id_feed"];?>" url="<?php echo htmlspecialchars($feed["url"]);?>" import-type="<?php echo type2Text($feed["type"]);?>" next-update-in-seconds="<? echo $f->getNextUpdate($feed["id_feed"]);?>" title="<?php echo htmlspecialchars($feed["title"]);?>" error-text="<? echo $error_text;?>"/>
+<?php
+				}
+?>
+            </feeds>
+        </tumblelog>	
 
 <?php
-		switch ($hasType) {
-			case "post":
-				$_GET["type"] = "1";
-				break;
-			case "photo":
-				$_GET["type"] = "2";							   
-				break;
-			case "quote":
-				$_GET["type"] = "3";
-				break;
-			case "url":
-				$_GET["type"] = "4";
-				break;
-			case "conversation":
-				$_GET["type"] = "5";
-				break;
-			case "video":
-				$_GET["type"] = "6";
-				break;
-			case "mp3":
-				$_GET["type"] = "7";
-				break;								
+		if ($hasType) {
+			$postType = type2Number($_GET["type"]);
 		}
 		$rs = $tumble->getPosts($total, $start);
 		if ($tumble->contarRegistros()>0) {
