@@ -13,7 +13,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 ?>
 <?php
 	function version() {
-		return "0.95";
+		return "1.0";
 	}
 	
 	function codeName() {
@@ -354,11 +354,66 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		return preg_replace('/<(.*?)>/ie', "'<'.removeBadAtributes('\\1').'>'", $source);
 	}
 	
-	function removeBadAtributes($sourceTag)
-	{
+	function removeBadAtributes($sourceTag) {
 		$badAtributes = 'javascript:|onclick|ondblclick|onmousedown|onmouseup|onmouseover|onmousemove|onmouseout|onkeypress|onkeydown|onkeyup';
 		$sourceTag = stripslashes($sourceTag);
 		$sourceTag = preg_replace("/$badAtributes/i", "niceTry", $sourceTag);
 		return $sourceTag;
+	}
+	
+	function type2Text($number) {
+		$tmpStr = "";
+		switch ($number) {
+			case "1":
+				$tmpStr = "post";
+				break;
+			case "2":
+				$tmpStr = "photo";							   
+				break;
+			case "3":
+				$tmpStr = "quote";
+				break;
+			case "4":
+				$tmpStr = "url";
+				break;
+			case "5":
+				$tmpStr = "conversation";
+				break;
+			case "6":
+				$tmpStr = "video";
+				break;
+			case "7":
+				$tmpStr = "mp3";
+				break;								
+		}
+		return $tmpStr;
+	}
+	
+	function type2Number($string) {
+		$tmpStr = "";
+		switch ($string) {
+			case "post":
+				$tmpStr = "1";
+				break;
+			case "photo":
+				$tmpStr = "2";							   
+				break;
+			case "quote":
+				$tmpStr = "3";
+				break;
+			case "url":
+				$tmpStr = "4";
+				break;
+			case "conversation":
+				$tmpStr = "5";
+				break;
+			case "video":
+				$tmpStr = "6";
+				break;
+			case "mp3":
+				$tmpStr = "7";
+				break;								
+		}
+		return $tmpStr;
 	}
 ?>
