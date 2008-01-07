@@ -13,7 +13,8 @@ if(!defined('entry')) define('entry',true);
 ?>
 <?php
 
-$configFile = dirname(__FILE__).DIRECTORY_SEPARATOR."config.php";
+require('entry.php');
+global $configFile, $db;
 	
 if (!file_exists($configFile)) {
 	$mensaje = "
@@ -23,11 +24,7 @@ if (!file_exists($configFile)) {
 	die($mensaje);
 } else {
 	require($configFile);
-} 
-
-require_once('classes/mysql_connection.class.php'); 
-
-$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
+}
 
 $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('shorten_links', '0');";
 		

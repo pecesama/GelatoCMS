@@ -11,12 +11,12 @@ if(!defined('entry'))define('entry', true);
 
   =========================== */
 
-$configFile = dirname(__FILE__).DIRECTORY_SEPARATOR."config.php";
+require('entry.php');
+global $user, $conf, $tumble;
 
-include('classes/functions.php');
-include('classes/install.class.php');
- 
+include('classes/install.class.php'); 
 $install = new Install(); 
+
 $install->data = $_POST;
 $install->check_form();
 

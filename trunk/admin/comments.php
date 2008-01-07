@@ -13,6 +13,7 @@ if(!defined('entry')) define('entry',true);
 ?>
 <?php
 require_once('../entry.php');
+global $user, $conf, $tumble;
 
 $comment = new comments();
 $template = new plantillas("admin");
