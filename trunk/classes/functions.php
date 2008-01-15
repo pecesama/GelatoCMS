@@ -126,11 +126,25 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$params = explode("?v=", $videoUrl);
 		$params2 = explode("&",$params[1]);
 		return $params2[0];
-	}	
+	}
+	
+	function isDailymotionVideo($videoUrl) {
+		if (beginsWith($videoUrl, "http://www.dailymotion.com/video/") || beginsWith($videoUrl, "http://dailymotion.com/video/"))
+			return true;
+		else
+			return false;
+	}
+
+	function getDailymotionVideoUrl($videoUrl) {
+		$params = explode("video/", $videoUrl);
+		$params2 = explode("_",$params[1]);
+		return $params2[0];
+	}
 	
 	function isVideo($url) {
 		if (isYoutubeVideo($url)) { return true; }
 		elseif (isVimeoVideo($url)) { return true; }
+		elseif (isDailymotionVideo($url)) { return true; }
 		else { return false; }
 	}
 	
