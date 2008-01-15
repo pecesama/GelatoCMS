@@ -63,7 +63,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 	
 	function isGoEar($songUrl) {
-		if (beginsWith($songUrl, "http://www.goear.com/listen.php?v="))
+		if (beginsWith($songUrl, "http://www.goear.com/listen.php?v=") || beginsWith($songUrl, "http://goear.com/listen.php?v="))
 			return true;
 		else
 			return false;
