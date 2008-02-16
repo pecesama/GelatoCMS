@@ -50,6 +50,8 @@ if(!defined('entry') || !entry) die('Not a valid page');
 			}
 		} elseif (isGoEar($remoteFileName)) {
 			return true;
+		} elseif (isOdeo($remoteFileName)) {
+			return true;			
 		} else {
 			return false;
 		}
@@ -67,6 +69,19 @@ if(!defined('entry') || !entry) die('Not a valid page');
 			return true;
 		else
 			return false;
+	}
+	
+	function isOdeo($songUrl){
+		if (beginsWith($songUrl, "http://odeo.com/audio/") || beginsWith($songUrl, "http://www.odeo.com/audio/"))
+			return true;
+		else
+			return false;
+	}
+	
+	function getOdeoCode($songUrl) {
+		$params = explode("audio/", $songUrl);
+		$params2 = explode("/",$params[1]);
+		return $params2[0];
 	}
 	
 	function isImageFile($photoUrl) {
