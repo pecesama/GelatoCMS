@@ -86,7 +86,12 @@ class feeds extends Conexion_Mysql {
 									if($post->get_title()  != $post->get_description()){
 										if(strpos($feed['url'],'twitter.com') <= 0){
 											$newPost['description'] = $post->get_description();
+											if(strpos($feed['url'],'youtube.com') > 0){
+												$newPost['description'] = preg_replace('/\<img ([^\>]+)/','<a href="'.$post->get_link().'"><img $1></a',$post->get_description());
+												
+											}
 										}
+
 									}
 								}elseif($feed['type'] == 2){ //IMAGES
 									$ma = array();
