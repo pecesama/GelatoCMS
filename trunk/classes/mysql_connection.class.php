@@ -115,13 +115,10 @@ class Conexion_Mysql {
 		 }
 		 elseif (substr_count(MYSQL_TYPES_DATE, "$tipo_col ")) {
 			$valor = $this->formatearFecha($valor, $tipo_col); // formatea las fechas
-			
 			$sqlValues .= "'$valor',";
 		 }
 		 elseif (substr_count(MYSQL_TYPES_STRING, "$tipo_col ")) {
-			if ($this->auto_slashes) {
-				$valor = addslashes($valor);
-			}
+			$valor = $this->sql_escape($valor);
 			$sqlValues .= "'$valor',";  
 		 }
 	  }
@@ -151,7 +148,7 @@ class Conexion_Mysql {
 			$this->merror = "Debes de pasar un arreglo como parametro.";
 			return false;
 		}
-		  
+
 		$sql = "UPDATE $tabla SET";
 		foreach ($datos as $llave=>$valor) {
 			$sql .= " $llave=";
@@ -171,9 +168,7 @@ class Conexion_Mysql {
 			$sql .= "'$valor',";
 			}
 			elseif (substr_count(MYSQL_TYPES_STRING, "$tipo_col ")) {
-			if ($this->auto_slashes) {
-				$valor = addslashes($valor);
-			}
+			$valor = $this->sql_escape($valor);
 			$sql .= "'$valor',";  
 			}	
 		}
@@ -228,8 +223,7 @@ class Conexion_Mysql {
 	  return date('Y-m-d H:i:s', $valor);
 	*/
 	}	
-	
-	
+
 	/**
 	 * Obtiene el registro obtenido de una consulta.
 	 */
@@ -284,6 +278,17 @@ class Conexion_Mysql {
 	function cierraConexion() {
 		mysql_free_result($this->mid_consulta);
 	}
-	
+
+	function sql_escape($value) {
+	    if(get_magic_quotes_gpc()) {
+	          $value = stripslashes($value);
+	    }
+	    if( function_exists("mysql_real_escape_string")) {
+	          $value = mysql_real_escape_string($value);
+	    } else {
+	          $value = addslashes($value);
+	    }
+	    return $value;
+	}	
 } //fin de la Clase conexion_mysql
 ?>

@@ -349,19 +349,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$dirs = array_unique($dirs);
  		return $dirs;
  	}
-	
-	function sql_escape($value) {
-	    if(get_magic_quotes_gpc()) {
-	          $value = stripslashes($value);
-	    }
-	    if( function_exists("mysql_real_escape_string")) {
-	          $value = mysql_real_escape_string($value);
-	    } else {
-	          $value = addslashes($value);
-	    }
-	    return $value;
-	}
-	
+
 	function removeBadTags($source) {
 		$validTags ='<p><ol><ul><li><a><abbr><acronym><blockquote><code><pre><em><i><strike><s><strong><b><br><span><div><img>';
 		$source = strip_tags($source, $validTags);
