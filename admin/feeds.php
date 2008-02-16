@@ -55,8 +55,7 @@ if ($user->isAdmin()) {
 			$("#feedform").validate({
 				rules: {
 					url: {
-						required: true,
-						url: true
+						required: true
 					}
 				},
 				errorElement: "span",
