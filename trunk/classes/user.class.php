@@ -46,7 +46,7 @@ class user extends Conexion_Mysql {
 
 	function validateUser($username="", $password="") {
 
-		if ($this->ejecutarConsulta("SELECT id_user, login, password  FROM ".$this->conf->tablePrefix."users WHERE login='".sql_escape($username)."' AND password='".$password."'")) {
+		if ($this->ejecutarConsulta("SELECT id_user, login, password  FROM ".$this->conf->tablePrefix."users WHERE login='".$this->sql_escape($username)."' AND password='".$password."'")) {
 			if ($this->contarRegistros()>0) {
 				$register=$this->obtenerRegistro();
 				$_SESSION['user_id']=$register["id_user"];
