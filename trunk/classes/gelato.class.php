@@ -173,7 +173,7 @@ class gelato extends Conexion_Mysql {
 			$id_video = getYahooVideoCode($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://d.yimg.com/static.video.yahoo.com/yep/YV_YEP.swf\"><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"event_function=YAHOO.yv.Player.SWFInterface&amp;id=".$id_video[1]."&amp;vid=".$id_video[0]."&amp;onsite=1&amp;site=video.yahoo.com&amp;page=792730258&amp;lang=en-US&amp;intl=us\" /></object>\n";
 		} else {
-			return "This URL is not a supported video (YouTube, Vimeo or DailyMotion)";
+			return "This URL is not a supported video (YouTube, Vimeo, DailyMotion or Yahoo Video)";
 		}		
 	}
 	
