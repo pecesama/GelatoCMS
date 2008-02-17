@@ -43,6 +43,7 @@ class feeds extends Conexion_Mysql {
 			case 'Blogger': $f['url'] = 'http://{{username}}.blogspot.com/feeds/posts/default'; $f['type'] = 1; break;
 			case 'Youtube': $f['url'] = 'http://www.youtube.com/rss/user/{{username}}/videos.rss'; $f['type'] = 1; break;
 			case 'Wordpress.com': $f['url'] = 'http://{{username}}.wordpress.com/feed/'; $f['type'] = 1; break;
+			case 'Del.icio.us': $f['url'] = 'http://feeds.delicious.com/rss/{{username}}'; $f['type'] = 1; break;
 			default : $f['url'] = ''; break;
 		}
 		if(!empty($f['url'])){
@@ -86,9 +87,13 @@ class feeds extends Conexion_Mysql {
 									if($post->get_title()  != $post->get_description()){
 										if(strpos($feed['url'],'twitter.com') <= 0){
 											$newPost['description'] = $post->get_description();
+											// Youtube Fix to add a link to the image
 											if(strpos($feed['url'],'youtube.com') > 0){
 												$newPost['description'] = preg_replace('/\<img ([^\>]+)/','<a href="'.$post->get_link().'"><img $1></a',$post->get_description());
-												
+											// Delicious fix to add a link post
+											}elseif(strpos($feed['url'],'delicious.com') > 0){
+												$newPost['type'] = 4;
+												$newPost['url'] = $post->get_link();
 											}
 										}
 
