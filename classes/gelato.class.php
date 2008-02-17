@@ -165,11 +165,13 @@ class gelato extends Conexion_Mysql {
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.youtube.com/v/".$id_video."\"><param name=\"movie\" value=\"http://www.youtube.com/v/".$id_video."\" /></object>\n";
 		} elseif (isVimeoVideo($url)) {
 			$id_video = getVimeoVideoUrl($url);
-			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\"><param name=\"movie\" value=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\" /></object>\n";}
-		elseif (isDailymotionVideo($url)) {
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\"><param name=\"movie\" value=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\" /></object>\n";
+		} elseif (isDailymotionVideo($url)) {
 			$id_video = getDailymotionVideoUrl($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.dailymotion.com/swf/".$id_video."\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/".$id_video."\" /></object>\n";
-
+		} elseif (isYahooVideo($url)) {
+			$id_video = getYahooVideoCode($url);
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://d.yimg.com/static.video.yahoo.com/yep/YV_YEP.swf\"><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"event_function=YAHOO.yv.Player.SWFInterface&amp;id=".$id_video[1]."&amp;vid=".$id_video[0]."&amp;onsite=1&amp;site=video.yahoo.com&amp;page=792730258&amp;lang=en-US&amp;intl=us\" /></object>\n";
 		} else {
 			return "This URL is not a supported video (YouTube, Vimeo or DailyMotion)";
 		}		
