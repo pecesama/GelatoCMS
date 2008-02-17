@@ -104,6 +104,7 @@ if ($user->isAdmin()) {
                                     <option value="Youtube">Youtube</option>
                                     <option value="Last.fm">Last.fm</option>
                                     <option value="Tumblr">Tumblr</option>
+									<option value="Del.icio.us">Del.icio.us</option>
                                     <option value="Wordpress.com">Wordpress.com</option>
                                     <option value="Blogger">Blogger</option>
                                     <option value="VOX">VOX</option>
