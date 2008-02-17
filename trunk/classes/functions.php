@@ -137,6 +137,20 @@ if(!defined('entry') || !entry) die('Not a valid page');
 			return false;
 	}
 	
+	function isYahooVideo($videoUrl){
+		if (beginsWith($videoUrl, "http://video.yahoo.com/watch/") || beginsWith($videoUrl, "http://www.video.yahoo.com/watch/"))
+			return true;
+		else
+			return false;
+	}
+	
+	function getYahooVideoCode($videoUrl){
+		$params = explode("http://video.yahoo.com/watch/", $videoUrl);
+		$params2 = explode("/",$params[1]);
+		$values[0] = $params2[0];
+		$values[1] = $params2[1];
+		return $values;
+	}
 	function getYoutubeVideoUrl($videoUrl) {
 		$params = explode("?v=", $videoUrl);
 		$params2 = explode("&",$params[1]);
@@ -160,6 +174,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		if (isYoutubeVideo($url)) { return true; }
 		elseif (isVimeoVideo($url)) { return true; }
 		elseif (isDailymotionVideo($url)) { return true; }
+		elseif (isYahooVideo($url)) { return true; }
 		else { return false; }
 	}
 	
