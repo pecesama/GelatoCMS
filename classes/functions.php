@@ -170,11 +170,26 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		return $params2[0];
 	}
 	
+	function isSlideSharePresentation($videoUrl) {
+		if (beginsWith($videoUrl, "[slideshare id="))
+			return true;
+		else
+			return false;
+	}
+	
+	function getSlideSharePresentationCode($videoUrl) {
+		$videoUrl = str_replace("[slideshare id=", "", $videoUrl);
+		$videoUrl = str_replace("&doc=", " ", $videoUrl);
+		$videoUrl = str_replace("&w=", " ", $videoUrl);
+		return explode(" ",$videoUrl);
+	}
+	
 	function isVideo($url) {
 		if (isYoutubeVideo($url)) { return true; }
 		elseif (isVimeoVideo($url)) { return true; }
 		elseif (isDailymotionVideo($url)) { return true; }
 		elseif (isYahooVideo($url)) { return true; }
+		elseif (isSlideSharePresentation($url)) { return true; }
 		else { return false; }
 	}
 	
