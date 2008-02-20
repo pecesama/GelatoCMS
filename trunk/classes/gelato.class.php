@@ -184,7 +184,7 @@ class gelato extends Conexion_Mysql {
 		} elseif (isGoEar($url)) {
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://www.goear.com/files/localplayer.swf\" width=\"366\" height=\"75\"><param name=\"movie\" value=\"http://www.goear.com/files/localautoplayer.swf\" /><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"file=".getGoEarCode($url)."\" /></object>\n";
 		} elseif (isOdeo($url)) {
-			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://media.odeo.com/flash/odeo_player.swf?v=3\" width=\"366\" height=\"75\"><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"type=audio&id=".getOdeoCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object></object>\n";
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://media.odeo.com/flash/odeo_player.swf?v=3\" width=\"366\" height=\"75\"><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"type=audio&amp;id=".getOdeoCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} else {
 			return "This URL is not an MP3 file.";
 		}		
