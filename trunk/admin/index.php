@@ -70,7 +70,7 @@ if ($user->isAdmin()) {
 		
 		$textile = new Textile();
 		
-		$_POST["title"] = $textile->TextileThis(removeBadTags($_POST["title"]));
+		$_POST["title"] = $textile->TextileThis(removeBadTags($_POST["title"],true));
 		$_POST["description"] = $textile->TextileThis(removeBadTags($_POST["description"]));
 		
 		if (isset($_POST["id_post"])) {
