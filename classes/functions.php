@@ -395,8 +395,12 @@ if(!defined('entry') || !entry) die('Not a valid page');
  		return $dirs;
  	}
 
-	function removeBadTags($source) {
-		$validTags ='<p><ol><ul><li><a><abbr><acronym><blockquote><code><pre><em><i><strike><s><strong><b><br><span><div><img>';
+	function removeBadTags($source,$secure=false) {
+		if($secure){
+			$validTags ='<abbr><acronym><em><i><strong><b><span>';
+		} else {
+			$validTags ='<p><ol><ul><li><a><abbr><acronym><blockquote><code><pre><em><i><strong><b><br><span><div><img>';
+		}
 		$source = strip_tags($source, $validTags);
 		return preg_replace('/<(.*?)>/ie', "'<'.removeBadAtributes('\\1').'>'", $source);
 	}
