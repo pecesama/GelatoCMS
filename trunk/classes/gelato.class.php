@@ -144,8 +144,6 @@ class gelato extends Conexion_Mysql {
 	function saveMP3($remoteFileName) {
 		if (getMP3File($remoteFileName)) {
 			return true;
-		} elseif (isGoEar($remoteFileName)) {
-			return true;
 		} else {
 			return false;
 		}
