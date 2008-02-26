@@ -174,7 +174,7 @@ class gelato extends Conexion_Mysql {
 			$id_video = getSlideSharePresentationCode($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.slideshare.net/swf/player.swf?presentationId=".$id_video[0]."&amp;doc=".$id_video[1]."&amp;inContest=0&amp;startSlide=1\"><param name=\"quality\" value=\"high\" /></object>\n";
 		} else {
-			return "This URL is not a supported video (YouTube, Vimeo, DailyMotion or Yahoo Video)";
+			return "This URL is not a supported video (YouTube, Vimeo, DailyMotion, Yahoo Video or SlideShare)";
 		}		
 	}
 	function getMp3Player($url) {

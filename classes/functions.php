@@ -120,14 +120,17 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 	
 	function isVimeoVideo($videoUrl) {
-		if (beginsWith($videoUrl, "http://vimeo.com/clip:") || beginsWith($videoUrl, "http://www.vimeo.com/clip:"))
+		if (beginsWith($videoUrl, "http://vimeo.com/") || beginsWith($videoUrl, "http://www.vimeo.com/"))
 			return true;
 		else
 			return false;
 	}
 	
 	function getVimeoVideoUrl($videoUrl) {
-		return array_pop(explode("clip:",$videoUrl));
+		if(substr_count($videoUrl,"clip:")==1)
+			return array_pop(explode("clip:",$videoUrl));
+		else
+			return array_pop(explode("/",$videoUrl));
 	}
 	
 	function isYoutubeVideo($videoUrl) {
