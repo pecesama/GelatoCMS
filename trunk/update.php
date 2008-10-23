@@ -34,6 +34,10 @@ $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('rss_import_frec', '5 m
 		
 $db->ejecutarConsulta($sqlStr);
 
+$sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('check_version', '1');";
+		
+$db->ejecutarConsulta($sqlStr);
+
 $sqlStr = "CREATE TABLE `".Table_prefix."feeds` (
   `id_feed` int(11) NOT NULL auto_increment,
   `url` varchar(255) NOT NULL,
