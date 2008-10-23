@@ -117,29 +117,24 @@ if ($user->isAuthenticated()) {
 		if($conf->richText) {
 ?>
         	<script src="<?php echo $conf->urlGelato;?>/admin/scripts/nicEdit.js" type="text/javascript"></script>
-                        <script type="text/javascript">
+            <script type="text/javascript">
                  bkLib.onDomLoaded(nicEditors.allTextAreas);
             </script>			
 <?php
-		} else {
-		
+		} else {		
 ?>
-		<script type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/jquery.markitup.pack.js"></script>
-			<script type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/sets/html/set.js"></script>
-			
+			<script type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/jquery.markitup.pack.js"></script>
+			<script type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/sets/html/set.js"></script>			
 			<link rel="stylesheet" type="text/css" href="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/skins/simple/style.css" />
-			<link rel="stylesheet" type="text/css" href="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/sets/html/style.css" />
-			
+			<link rel="stylesheet" type="text/css" href="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/sets/html/style.css" />			
 			<script type="text/javascript" >
 			   $(document).ready(function() {
 				  $("#description").markItUp(my_html);
 			   });
 			</script>		
 <?php
-		}
-		
+		}		
 ?>
-
 		<style type="text/css" media="screen">	
 			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
 			@import "<?php echo $conf->urlGelato;?>/admin/css/lightbox.css";
