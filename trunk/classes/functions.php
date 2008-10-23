@@ -135,7 +135,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	
 	function isYoutubeVideo($videoUrl) {
 		$url = explode("?", $videoUrl);
-		if (beginsWith($url[0], "http://") && endsWith($url[0], ".youtube.com/watch"))
+		if((beginsWith($url[0], "http://") && endsWith($url[0], ".youtube.com/watch")) || beginsWith($url[0], "http://youtube.com/watch"))
 			return true;
 		else
 			return false;
