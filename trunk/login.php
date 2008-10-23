@@ -21,11 +21,12 @@ if ($user->isAuthenticated()) {
 	header("Location: ".$conf->urlGelato."/admin/index.php");
 } else {
 	if (isset($_POST["pass"]) && isset($_POST["login"])) {		
-		//print "<pre>"; print_r($_SESSION); print "</pre>";die();
-		if ($user->validateUser($_POST['login'], md5($_POST['pass']))) {
+		if ($user->validateUser($_POST['login'], md5($_POST['pass']))) {			
 			header("Location: ".$conf->urlGelato."/admin/index.php");
-		} else {
+			exit();
+		} else {			
 			header("Location: ".$conf->urlGelato."/login.php?error=1");
+			exit();
 		}
 	} else {
 ?>

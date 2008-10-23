@@ -12,8 +12,6 @@ if(!defined('entry'))define('entry', true);
   =========================== */
 ?>
 <?php
-
-
 require('../entry.php');
 global $user, $conf, $tumble;
 $template = new plantillas("admin");
@@ -21,7 +19,7 @@ $template = new plantillas("admin");
 $isEdition = (isset($_GET["edit"])) ? true : false;
 $postId = ($isEdition) ? $_GET["edit"] : NULL;
 
-if ($user->isAdmin()) {
+if ($user->isAuthenticated()) {
 
 	if (isset($_GET["delete"])) {
 		$tumble->deletePost($_GET['delete']);
