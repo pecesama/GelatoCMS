@@ -54,6 +54,11 @@ if ($user->isAdmin()) {
 			header("Location: ".$conf->urlGelato."/admin/options.php?error=1&des=".$conf->merror);
 			die();
 		}
+		
+		if (!$tumble->saveOption($_POST["check_version"], "check_version")) {
+			header("Location: ".$conf->urlGelato."/admin/options.php?error=1&des=".$conf->merror);
+			die();
+		}
 
 		header("Location: ".$conf->urlGelato."/admin/options.php?modified=true");
 		die();
@@ -220,6 +225,12 @@ if ($user->isAdmin()) {
                                             <option value="6 hours" <?php if($conf->rssImportFrec == '6 hours') echo "selected=\"selected\""; ?>>6 <?php echo __("hours");?></option>
                                             <option value="12 hours" <?php if($conf->rssImportFrec == '12 hours') echo "selected=\"selected\""; ?>>12 <?php echo __("hours");?></option>
                                             <option value="1 day" <?php if($conf->rssImportFrec == '1 day') echo "selected=\"selected\""; ?>>24 <?php echo __("hours");?></option>
+										</select>
+									</li>
+									<li class="select"><label for="check_version"><?php echo __("Check for updates:")?></label>
+										<select name="check_version" id="check_version">
+											<option value="1" <?php if($conf->check_version) echo "selected=\"selected\""; ?>><?php echo __("Active")?></option>
+											<option value="0" <?php if(!$conf->check_version) echo "selected=\"selected\""; ?>><?php echo __("Deactive")?></option>
 										</select>
 									</li>
 								</ul>

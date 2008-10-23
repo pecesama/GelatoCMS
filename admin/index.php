@@ -165,12 +165,13 @@ if ($user->isAuthenticated()) {
 					</ul>
 					<p>&nbsp;</p>					
 <?php			
-					$present = version();
-					$lastest = _file_get_contents("http://www.gelatocms.com/vgel.txt");
-					if ($present < $lastest) {
-						echo "<div class=\"information\" id=\"update\">".__("A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>.")."</div><br />";
+					if($conf->check_version){
+						$present = version();
+						$lastest = _file_get_contents("http://www.gelatocms.com/vgel.txt");
+						if ($present < $lastest) {
+							echo "<div class=\"information\" id=\"update\">".__("A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>.")."</div><br />";
+						}
 					}
-					
 					if (isset($_GET["deleted"])) {
 						if ($_GET["deleted"]=="true") {
 							echo "<div class=\"exito\" id=\"divMessages\">".__("The post has been eliminated successfully.")."</div>";

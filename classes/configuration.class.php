@@ -30,6 +30,7 @@ class configuration extends Conexion_Mysql {
 	var $offset_time;
 	var $shorten_links;
 	var $rssImportFrec;
+	var $check_version;
 		
 	function configuration() {
 		parent::Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
@@ -55,6 +56,7 @@ class configuration extends Conexion_Mysql {
 			$this->allowComments = $this->get_option("allow_comments");
 			$this->shorten_links = $this->get_option("shorten_links");
 			$this->rssImportFrec = $this->get_option("rss_import_frec");
+			$this->check_version = $this->get_option("check_version");
 			
 		} else {
 			if($isFeed) {
