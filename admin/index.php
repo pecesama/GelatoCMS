@@ -66,10 +66,15 @@ if ($user->isAuthenticated()) {
 			$_POST["description"] = addslashes($_POST["description"]);
 		}		
 		
+		/*
 		$textile = new Textile();
 		
 		$_POST["title"] = $textile->TextileThis(removeBadTags($_POST["title"],true));
 		$_POST["description"] = $textile->TextileThis(removeBadTags($_POST["description"]));
+		*/
+		
+		$_POST["title"] = removeBadTags($_POST["title"],true);
+		$_POST["description"] = removeBadTags($_POST["description"]);
 		
 		if (isset($_POST["id_post"])) {
 			$tumble->modifyPost($_POST, $_POST["id_post"]);
@@ -112,12 +117,29 @@ if ($user->isAuthenticated()) {
 		if($conf->richText) {
 ?>
         	<script src="<?php echo $conf->urlGelato;?>/admin/scripts/nicEdit.js" type="text/javascript"></script>
-			<script type="text/javascript">
+                        <script type="text/javascript">
                  bkLib.onDomLoaded(nicEditors.allTextAreas);
-            </script>
+            </script>			
+<?php
+		} else {
+		
+?>
+		<script type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/jquery.markitup.pack.js"></script>
+			<script type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/sets/html/set.js"></script>
+			
+			<link rel="stylesheet" type="text/css" href="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/skins/simple/style.css" />
+			<link rel="stylesheet" type="text/css" href="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/sets/html/style.css" />
+			
+			<script type="text/javascript" >
+			   $(document).ready(function() {
+				  $("#description").markItUp(my_html);
+			   });
+			</script>		
 <?php
 		}
+		
 ?>
+
 		<style type="text/css" media="screen">	
 			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
 			@import "<?php echo $conf->urlGelato;?>/admin/css/lightbox.css";
@@ -292,11 +314,16 @@ if ($user->isAuthenticated()) {
 ?>
 								<p>
 									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
-                                    	<a href="http://hobix.com/textile/">Textile</a> <?php echo __("syntax is supported.")?>
-                                        <br />
-                                        Bookmarklet - <a href="javascript:var w; setTimeout('w.focus()',100);w=window.open('<?php echo $conf->urlGelato; ?>/admin/bm.php?url='+encodeURIComponent(location.href)+'&sel='+encodeURIComponent(window.getSelection()),'bookmarklet','toolbar=0,resizable=0,status=1,width=650,height=460,dependent=yes' ); w.focus();"><?php echo __("add to gelato")?></a>
-                                    </span>
-								</p>
+                                    	<?php echo __("Some HTML allowed")?>:<br />
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<code>
+										&lt;strong&gt; &lt;em&gt; &lt;del&gt; &lt;ul&gt;  &lt;ol&gt;  &lt;li&gt; &lt;a&gt;
+										<br />
+										&nbsp;&nbsp;&nbsp;&nbsp;&lt;blockquote&gt;
+                                        &lt;code&gt; &lt;pre&gt; &lt;img&gt;
+										<code>
+										<br />
+                                        Bookmarklet - <a href="javascript:var w; setTimeout('w.focus()',100);w=window.open('<?php echo $conf->urlGelato; ?>/admin/bm.php?url='+encodeURIComponent(location.href)+'&sel='+encodeURIComponent(window.getSelection()),'bookmarklet','toolbar=0,resizable=0,status=1,width=650,height=460,dependent=yes' ); w.focus();"><?php echo __("add to gelato")?></a>                                    </span>								</p>
 								<p>
 									<input class="btn" type="submit" name="btnAdd" value="<?php echo ($isEdition) ? "Modify" : "Create"; ?> post" />
 								</p>
