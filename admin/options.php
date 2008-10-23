@@ -156,6 +156,7 @@ if ($user->isAdmin()) {
 											<option value="-3.50,Canada/Newfoundland" <?php echo ($conf->offsetCity=="Canada/Newfoundland")? "selected=\"selected\"":"" ?>>(GMT -3:30) Newfoundland</option>
 											<option value="-3,Canada/Atlantic" <?php echo ($conf->offsetCity=="Canada/Atlantic")? "selected=\"selected\"":"" ?>>(GMT -3:00) Brasilia, Greenland</option>
 											<option value="-3,America/Buenos_Aires" <?php echo ($conf->offsetCity=="America/Buenos_Aires")? "selected=\"selected\"":"" ?>>(GMT -3:00) Buenos Aires, Georgetown</option>
+											<option value="-2,Atlantic/Central" <?php echo ($conf->offsetCity=="Atlantic/Central")? "selected=\"selected\"":"" ?>>(GMT -2:00) Atlantic Central</option>
 											<option value="-1,Atlantic/Cape_Verde" <?php echo ($conf->offsetCity=="Atlantic/Cape_Verde")? "selected=\"selected\"":"" ?>>(GMT -1:00) Cape Verde Is.</option>
 											<option value="-1,Atlantic/Azores" <?php echo ($conf->offsetCity=="Atlantic/Azores")? "selected=\"selected\"":"" ?>>(GMT -1:00) Azores</option>
 											<option value="0,Africa/Casablanca" <?php echo ($conf->offsetCity=="Africa/Casablanca")? "selected=\"selected\"":"" ?>>(GMT) Casablanca, Monrovia</option>
