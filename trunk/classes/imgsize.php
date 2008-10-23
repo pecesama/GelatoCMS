@@ -29,6 +29,13 @@ Filename : imgsize.php
 */
 
 $img = $_GET['img'];
+
+$ext=substr($img, -3);
+if ($ext != "jpg" && $ext !="gif" && $ext !="png") {
+	die("This is not a valid image file!!");
+}
+
+
 $percent = $_GET['percent'];
 $constrain = $_GET['constrain'];
 $w = $_GET['w'];
