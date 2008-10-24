@@ -222,6 +222,7 @@ if ($user->isAdmin()) {
 	</html>
 <?php
 } else {
-	header("Location: ".$conf->urlGelato."/login.php");
+	$target = (isset($_GET["url"]))? "/login.php?redirect_url=".$_GET["url"]."&sel=".$_GET["sel"] : "/login.php";
+	header("Location: ".$conf->urlGelato.$target);
 }
 ?>

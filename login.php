@@ -21,9 +21,14 @@ if ($user->isAuthenticated()) {
 	header("Location: ".$conf->urlGelato."/admin/index.php");
 } else {
 	if (isset($_POST["pass"]) && isset($_POST["login"])) {		
-		if ($user->validateUser($_POST['login'], md5($_POST['pass']))) {			
-			header("Location: ".$conf->urlGelato."/admin/index.php");
-			exit();
+		if ($user->validateUser($_POST['login'], md5($_POST['pass']))) {
+			if(isset($_POST["url_redirect"])){
+				header("Location: ".$conf->urlGelato."/admin/bm.php?url=".$_POST["url_redirect"]."&sel=".$_POST["sel"]);
+				exit();
+			} else {
+				header("Location: ".$conf->urlGelato."/admin/index.php");
+				exit();
+			}
 		} else {			
 			header("Location: ".$conf->urlGelato."/login.php?error=1");
 			exit();
@@ -82,6 +87,7 @@ if ($user->isAuthenticated()) {
 					<div class="tabla">
 
 								<form action="login.php" method="post" id="valida" autocomplete="off" class="newpost">
+									<?php echo (isset($_GET['redirect_url']))? "<input type=\"hidden\" name=\"url_redirect\" value=\"".$_GET['redirect_url']."\" /><input type=\"hidden\" name=\"sel\" value=\"".$_GET['sel']."\" />" : ""; ?>
 									<fieldset>
 									<ul>
 										<li><label for="login"><?php echo __("User:")?></label>
