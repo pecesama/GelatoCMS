@@ -1,5 +1,5 @@
 <?php
-if(!defined('entry')) define('entry',true);  
+if(!defined('entry')) define('entry',true);
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -15,27 +15,27 @@ if(!defined('entry')) define('entry',true);
 
 require('entry.php');
 global $configFile, $db;
-	
+
 if (!file_exists($configFile)) {
 	$mensaje = "
-			<h3 class=\"important\">Error reading configuration file</h3>			
+			<h3 class=\"important\">Error reading configuration file</h3>
 			<p>There doesn't seem to be a <code>config.php</code> file. I need this before we can get started.</p>
 			<p>This either means that you did not rename the <code>config-sample.php</code> file to <code>config.php</code>.</p>";
 	die($mensaje);
 } else {
-	require($configFile);
+	require_once($configFile);
 }
 
 $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('shorten_links', '0');";
-		
+
 $db->ejecutarConsulta($sqlStr);
- 
+
 $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('rss_import_frec', '5 minutes');";
-		
+
 $db->ejecutarConsulta($sqlStr);
 
 $sqlStr = "INSERT INTO `".Table_prefix."options` VALUES ('check_version', '1');";
-		
+
 $db->ejecutarConsulta($sqlStr);
 
 $sqlStr = "CREATE TABLE `".Table_prefix."feeds` (

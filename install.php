@@ -16,7 +16,7 @@ require_once('entry.php');
 
 $configFile = Absolute_Path."config.php";
 if(file_exists($configFile)){
-	require($configFile);
+	require_once($configFile);
 }else{
 	exit("You need to rename config-sample.php to config.php and fill out the required details.");
 }
