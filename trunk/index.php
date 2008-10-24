@@ -116,11 +116,13 @@ $template = new plantillas($conf->template);
 
                                 $register["title"] = stripslashes($register["title"]);
                                 $register["description"] = stripslashes($register["description"]);
-
+								
+								$comment = new comments();
+								
                                 switch ($tumble->getType($register["id_post"])) {
                                         case "1":
-                                                $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}");
-                                                $output = array($formatedDate, $permalink, $register["title"], $register["description"], $conf->urlGelato);
+                                                $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}", "{Comments_Number}");
+                                                $output = array($formatedDate, $permalink, $register["title"], $register["description"], $conf->urlGelato, $comment->countComments($register["id_post"]));
                                                                                         
                                                 $template->cargarPlantilla($input, $output, "template_regular_post");
                                                 $template->mostrarPlantilla();
