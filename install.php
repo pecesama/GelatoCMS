@@ -63,7 +63,7 @@ $install->check_form();
 					<legend class="install">Database Settings</legend>
 					<ul>
 						<li><label for="login">User:</label>
-							<input type="text" name="db_login" id="db_login" value="<?php echo $install->data['db_login']?>" class="txt"/><?php echo $install->mostrarerror("10")?></li>
+							<input type="text" name="db_login" id="db_login" value="<?php echo isset($install->data['db_login'])?$install->data['db_login']:''?>" class="txt"/><?php echo $install->mostrarerror("10")?></li>
 						<li><label for="password">Password:</label>
 							<input type="password" name="db_password" id="db_password" value="" class="txt"/></li>
 						<li><label for="password2">Re-type password:</label>
@@ -78,22 +78,22 @@ $install->check_form();
 					<legend class="install">Admin user</legend>
 					<ul>
 						<li><label for="login">User:</label>
-							<input type="text" name="login" id="login" value="<?php echo $install->data['login']?>" class="txt"/><?php echo $install->mostrarerror("1")?></li>
+							<input type="text" name="login" id="login" value="<?php echo isset($install->data['login'])?$install->data['login']:''?>" class="txt"/><?php echo $install->mostrarerror("1")?></li>
 						<li><label for="password">Password:</label>
 							<input type="password" name="password" id="password" value="" class="txt"/><?php echo $install->mostrarerror("2")?></li>
 						<li><label for="password2">Re-type password:</label>
 							<input type="password" name="password2" id="password2" value="" class="txt"/><?php echo $install->mostrarerror("3")?></li>
 						<li><label for="email">E-mail:</label>
-							<input type="text" name="email" id="email" value="<?php echo $install->data['email']?>" class="txt"/><?php echo $install->mostrarerror("4")?></li>
+							<input type="text" name="email" id="email" value="<?php echo isset($install->data['email'])?$install->data['email']:''?>" class="txt"/><?php echo $install->mostrarerror("4")?></li>
 					</ul>
 				</fieldset><br  />
 				<fieldset class="install">
 					<legend class="install">Tumblelog configuration</legend>
 					<ul>
 						<li><label for="title">Title:</label>
-							<input type="text" name="title" id="title" value="<?php echo $install->data['title']?>" class="txt"/></li>
+							<input type="text" name="title" id="title" value="<?php echo isset($install->data['title'])?$install->data['title']:''?>" class="txt"/></li>
 						<li><label for="description">Description:</label>
-							<input type="text" name="description" id="description" value="<?php echo $install->data['description']?>" class="txt"/></li>
+							<input type="text" name="description" id="description" value="<?php echo isset($install->data['description'])?$install->data['description']:''?>" class="txt"/></li>
 						<li><label for="url_installation">Installation URL</label>
 							<input type="text" name="url_installation" id="url_installation" value="<?php if(isset($_SERVER['SCRIPT_URI']))echo substr($_SERVER["SCRIPT_URI"], '0', '-12'); ?>" class="txt"/><?php echo $install->mostrarerror("5")?></li>
 						<li><label for="posts_limit">Post limit:</label>
