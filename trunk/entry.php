@@ -20,26 +20,35 @@
  * admin/admin.php
  * admin/comments.php
  * admin/user.php
- * admin/feeds.php 
+ * admin/feeds.php
  * classes/imgsize.php
  */
 
- 
 // PHP settings specific to Gelato
 ini_set('pcre.backtrack_limit', '10000');
+// Globals to be used throughout the application
+define('Absolute_Path', dirname(__FILE__).DIRECTORY_SEPARATOR);
+$installed = true;
+$configFile = Absolute_Path.'config.php';
 
-// Globals to be used throughout the application        
-$configFile = dirname(__FILE__).DIRECTORY_SEPARATOR."config.php";
+if(strpos($_SERVER['REQUEST_URI'],'/admin'))$dir = "../"; else $dir = "";
+if (!file_exists($configFile) and basename($_SERVER['PHP_SELF'])!='install.php'){
+	header("Location: {$dir}install.php");exit;
+}else{
+	include(Absolute_Path.'classes/install.class.php');
+	$install = new Install();
+	if(!$install->is_gelato_installed()){
+		if(basename($_SERVER['PHP_SELF'])!='install.php'){
+				header("Location: {$dir}install.php");exit;
+			}
+		$installed = false;
+	}
+}
 
-if (!file_exists($configFile)) {
-	header("Location: install.php");  
-} else {
-        require(dirname(__FILE__).DIRECTORY_SEPARATOR."config.php");
-}       
-
+require($configFile);
 require_once("classes/configuration.class.php");
 require_once("classes/textile.class.php");
-require_once("classes/gelato.class.php");    
+require_once("classes/gelato.class.php");
 require_once("classes/templates.class.php");
 require_once("classes/pagination.class.php");
 require_once("classes/user.class.php");
@@ -50,17 +59,17 @@ require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'streams.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gettext.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'lang.functions.php');
 
-// Globals to be used throughout the application
-$user = new user();
-$tumble = new gelato();
-$conf = new configuration();
-$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
+if($installed){
+	// Globals to be used throughout the application
+	$user = new user();
+	$tumble = new gelato();
+	$conf = new configuration();
+	$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 
+	session_start();
 
-session_start();
-
-$feeds = new feeds();
-$feeds->updateFeeds();
-unset($feeds);
-
+	$feeds = new feeds();
+	$feeds->updateFeeds();
+	unset($feeds);
+}
 ?>

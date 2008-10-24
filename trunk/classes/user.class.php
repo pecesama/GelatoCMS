@@ -1,5 +1,5 @@
 <?php
-if(!defined('entry') || !entry) die('Not a valid page'); 
+if(!defined('entry') || !entry) die('Not a valid page');
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -20,7 +20,6 @@ class user extends Conexion_Mysql {
 	var $cookieTime;
 	var $persist = false;
 
-
 	function user() {
 		parent::Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 		$this->cookie_life = 60*24*3600;
@@ -29,19 +28,19 @@ class user extends Conexion_Mysql {
 	}
 
 	function isAdmin() {
-		
+
 		if ((!empty($_SESSION["user_id"]) && !empty($_SESSION["user_login"]))  && (isset($_SESSION['authenticated'])  && $_SESSION['authenticated']==true)) {
 			return true;
 		}
-		
+
 		if(isset($_COOKIE["PHPSESSID"]) && $_COOKIE["PHPSESSID"]!="") {
 			if ((!empty($_SESSION["user_id"]) && !empty($_SESSION["user_login"]))  && (isset($_SESSION['authenticated'])  && $_SESSION['authenticated']==true)) {
 				return true;
-			} 
+			}
 		}
-		
+
 		return false;
-		
+
 	}
 
 	function validateUser($username="", $password="") {
@@ -55,7 +54,7 @@ class user extends Conexion_Mysql {
 				if (isset($_POST["save_pass"])) {
 					$this->persist = true;
 					setcookie("PHPSESSID",session_id(),$this->cookieTime+$this->cookie_life);
-				} 
+				}
 				return true;
 			} else {
 				return false;
@@ -65,9 +64,9 @@ class user extends Conexion_Mysql {
 		}
 	}
 
-	function closeSession() {	
+	function closeSession() {
 		if (!$this->persist) session_destroy();
-		return true;	
+		return true;
 	}
 
 	function userExist($user="") {
@@ -79,7 +78,7 @@ class user extends Conexion_Mysql {
 			}
 		}
 	}
-	
+
 	function isAuthenticated(){
 		return $this->isAdmin();
 	}
@@ -133,7 +132,7 @@ class user extends Conexion_Mysql {
 				return false;
 			}
 		}
-	}	
+	}
 
 	function confirmationEmail($email="", $user="", $password="") {
 		$msg =  "<font face=verdana><em><font size=2>Account information on <strong>gelato CMS</strong></font></em><br/><br/>";

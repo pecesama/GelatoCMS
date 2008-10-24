@@ -1,5 +1,5 @@
 <?php
-if(!defined('entry') || !entry) die('Not a valid page'); 
+if(!defined('entry') || !entry) die('Not a valid page');
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -14,8 +14,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 define('DB_Server', '[server]');
 define('DB_name', '[database]');
 define('DB_User', '[userdb]');
-define('DB_Password', '[dbpass]'); 
+define('DB_Password', '[dbpass]');
 define('Table_prefix', 'gel_');
-define('Absolute_Path', dirname(__FILE__).DIRECTORY_SEPARATOR);
 
 ?>
