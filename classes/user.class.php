@@ -27,16 +27,18 @@ class user extends Conexion_Mysql {
 		$this->conf = new configuration();
 	}
 
-	function isAdmin() {
-
+	function isAdmin() {		
+		
 		if ((!empty($_SESSION["user_id"]) && !empty($_SESSION["user_login"]))  && (isset($_SESSION['authenticated'])  && $_SESSION['authenticated']==true)) {
 			return true;
 		}
 
-		if(isset($_COOKIE["PHPSESSID"]) && $_COOKIE["PHPSESSID"]!="") {
+		if(isset($_COOKIE["PHPSESSID"]) && $_COOKIE["PHPSESSID"]!="") {		
+		
 			if ((!empty($_SESSION["user_id"]) && !empty($_SESSION["user_login"]))  && (isset($_SESSION['authenticated'])  && $_SESSION['authenticated']==true)) {
 				return true;
 			}
+		
 		}
 
 		return false;
@@ -79,7 +81,7 @@ class user extends Conexion_Mysql {
 		}
 	}
 
-	function isAuthenticated(){
+	function isAuthenticated() {
 		return $this->isAdmin();
 	}
 
