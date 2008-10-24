@@ -45,7 +45,9 @@ if (!file_exists($configFile) and basename($_SERVER['PHP_SELF'])!='install.php')
 	}
 }
 
-require($configFile);
+if($installed)
+	require($configFile);
+
 require_once("classes/configuration.class.php");
 require_once("classes/textile.class.php");
 require_once("classes/gelato.class.php");
