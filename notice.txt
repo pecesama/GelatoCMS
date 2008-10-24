@@ -11,6 +11,10 @@ Juan del Rio [ http://elcaminante.net/ ]
 = COPYRIGHT NOTICES =
 This product includes code and libraries developed by third parties, which are governed by different licenses.  These components, and their licenses, are listed below.
 
+= markItUp! Universal MarkUp Engine, JQuery plugin =
+Copyright (C) 2007-2008 Jay Salvat, http://markitup.jaysalvat.com/
+markItUp is available under a dual licensed the MIT and GPL licenses.
+
 = NicEdit - Micro Inline WYSIWYG =
 Copyright 2007 Brian Kirchoff, http://nicedit.com/
 NicEdit available under MIT license.
