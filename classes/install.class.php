@@ -1,13 +1,13 @@
 <?php
-if(!defined('entry') || !entry) die('Not a valid page'); 
-require('classes/mysql_connection.class.php');
+if(!defined('entry') || !entry) die('Not a valid page');
+require(Absolute_Path.'/classes/mysql_connection.class.php');
 
 class Install {
 	var $data = null;
 	var $errors = null;
 	var $showForm;
 	var $errors_d = array();
-	
+
 	function Install(){
 		$this->errors_d[1]="The login field cannot be empty";
 		$this->errors_d[2]="The password field cannot be empty";
@@ -20,41 +20,39 @@ class Install {
 		$this->errors_d[9]="Password does not match the confirm password";
 		$this->errors_d[10]="The login field cannot be empty";
 	}
-	
+
     function run() {
-    	
+
     	if (empty($this->data)) false;
-    	
-    	if (!$this->create_config()) return false;
-    	
+
     	$this->create_db();
-    	
+
     	if (!$this->install_db()) return false;
-		
+
 		return true;
     }
-    
+
     function create_db(){
-		
+
 	    $link =  mysql_connect($this->data['db_host'], $this->data['db_login'], $this->data['db_password']);
 		if (!$link) {
 		    die('Could not connect: ' . mysql_error());
 		}
-		
+
 		$sql = 'CREATE DATABASE ' . $this->data['db_name'];
 		if (!mysql_query($sql, $link)) {
 			$link = mysql_close($link);
 			return false;
-		} 
-		
-		return true;    	
+		}
+
+		return true;
     }
-    
+
 	function install_db(){
 		require('config.php');
-		$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);	
+		$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 		$sqlStr = array();
-		
+
 		$sqlStr[] = "CREATE TABLE `".Table_prefix."data` (
 			  `id_post` int(11) NOT NULL auto_increment,
 			  `title` text NULL,
@@ -86,16 +84,16 @@ class Install {
 			  `url_installation` varchar(250) NOT NULL,
 			  PRIMARY KEY  (`title`)
 			) ENGINE = MYISAM ;";
-			
 
-		
+
+
 		$sqlStr[] = "CREATE TABLE `".Table_prefix."options` (
 		  `name` varchar(100) NOT NULL,
 		  `val` varchar(255) NOT NULL,
 		  PRIMARY KEY  (`name`)
 		) ENGINE = MYISAM ;";
 
-		
+
 		$sqlStr[] = "CREATE TABLE `".Table_prefix."comments` (
 		  `id_comment` int(11) NOT NULL auto_increment,
 		  `id_post` int(11) NOT NULL,
@@ -108,7 +106,7 @@ class Install {
 		  `spam` tinyint(4) NOT NULL,
 		  PRIMARY KEY  (`id_comment`)
 		) ENGINE = MYISAM ;";
-		
+
 		$sqlStr[] = "CREATE TABLE `".Table_prefix."feeds` (
 			`id_feed` int(11) NOT NULL auto_increment,
 			`url` varchar(255) NOT NULL,
@@ -122,13 +120,13 @@ class Install {
 			PRIMARY KEY  (`id_feed`)
 			) ENGINE=MyISAM ;";
 
-					
-		$sqlStr[] = "INSERT INTO `".Table_prefix."config` VALUES (". $this->data['posts_limit'] .", '".$this->data['title']."', '".$this->data['description']."', '".$this->data['lang']."', '".$this->data['template']."', '".$this->data['url_installation']."');";		
+
+		$sqlStr[] = "INSERT INTO `".Table_prefix."config` VALUES (". $this->data['posts_limit'] .", '".$this->data['title']."', '".$this->data['description']."', '".$this->data['lang']."', '".$this->data['template']."', '".$this->data['url_installation']."');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."users` VALUES ('', '', '".$this->data['login']."', '".md5($this->data['password'])."', '".$this->data['email']."', '".$this->data['website']."', '".$this->data['about']."');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('url_friendly', '0');";
-		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('rich_text', '0');";		
+		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('rich_text', '0');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('allow_comments', '0');";
-		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', '".$this->data['offset_city']."');";		
+		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('offset_city', '".$this->data['offset_city']."');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('offset_time', '".$this->data['offset_time']."');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('shorten_links', '0');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('rss_import_frec', '5 minutes');";
@@ -141,7 +139,7 @@ class Install {
 
 		return true;
 	}
-	
+
 	function inerrors($n) {
 		if ( strpos($this->errors,$n)===false) {
 			return false;
@@ -149,7 +147,7 @@ class Install {
 			return true;
 		}
 	}
-	
+
 	function mostrarerror($n) {
 		if ($this->inerrors($n)) {
 			return '<span class="error">'.$this->errors_d[$n].'</span>';
@@ -157,12 +155,12 @@ class Install {
 			return "";
 		}
 	}
-	
+
 	function is_gelato_installed(){
-		if(file_exists('config.php')) {
-			@include("config.php");
-			if (!$this->check_for_config()){ 
-				return false; 
+		if(file_exists(Absolute_Path.'config.php')) {
+			@include(Absolute_Path."config.php");
+			if (!$this->check_for_config()){
+				return false;
 			} else {
 				if (!$this->is_db_installed()){
 					return false;
@@ -173,18 +171,18 @@ class Install {
 			return false;
 		}
 	}
-	
+
 	function is_db_installed(){
-			$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);	
+			$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 				$sqlStr = "SELECT * FROM `".Table_prefix."config`";
 				if($db->ejecutarConsulta($sqlStr)) {
 					return ($db->contarRegistros() > 0);
 			}else{
 			return false;
 			}
-	
+
 	}
-	
+
 	function check_for_config(){
 		if(!defined('DB_Server')) return false;
 		if(!defined('DB_name')) return false;
@@ -192,57 +190,24 @@ class Install {
 		if(!defined('DB_Password')) return false;
 		return true;
 	}
-	
-	function create_config(){
-		$config = fopen("config.php", 'w+');
-		$contents = '<?php
-if(!defined(\'entry\') || !entry) die(\'Not a valid page\'); 
-/* ===========================
 
-  gelato CMS - A PHP based tumblelog CMS
-  development version
-  http://www.gelatocms.com/
-
-  gelato CMS is a free software licensed under the GPL 2.0
-  Copyright (C) 2007 by Pedro Santana <pecesama at gmail dot com>
-
-  =========================== */
-
-define(\'DB_Server\', \''. $this->data['db_host'] . '\');
-define(\'DB_name\', \''. $this->data['db_name'] . '\');
-define(\'DB_User\', \''. $this->data['db_login'] . '\');
-define(\'DB_Password\', \''. $this->data['db_password'] . '\'); 
-define(\'Table_prefix\', \'gel_\');
-define(\'Absolute_Path\', dirname(__FILE__).DIRECTORY_SEPARATOR);
-
-?>';
-
-	    if (fwrite($config, $contents) === FALSE) {
-	        $this->errors = "Could not write config file to directory";
-	        return false;
-	    } 
-	    fclose($config);
-	    return true;		
-	}
-	
 	function check_form(){
 
 		$action="";
-		
+
 		if (isset($this->data['action'])){
 			$action=$this->data['action'];
 		}
-		
+
 		if (!$this->is_gelato_installed()){
-			
+
 		$this->showForm = true;
-			
-		
+
 			if ($action=="config") {
-				
+
 				$sep_err="";
 				$this->errors = false;
-				
+
 				if (!$this->data['login']) {
 					$this->errors =$this->errors.$sep_err."1";
 					$sep_err="|";
@@ -274,31 +239,31 @@ define(\'Absolute_Path\', dirname(__FILE__).DIRECTORY_SEPARATOR);
 				if ($this->data['password']!=$_POST['password2']) {
 					$this->errors=$this->errors.$sep_err."3";
 					$sep_err="|";
-				}				
+				}
 				if ( $_POST['db_password']!=$_POST['db_password2']) {
 					$this->errors=$this->errors.$sep_err."9";
 					$sep_err="|";
-				}				
-				
+				}
+
 				$off_r= split("," , $this->data['time_offsets']);
 				$this->data['offset_time'] = $off_r[0];
 				$this->data['offset_city'] = $off_r[1];
 				unset($this->data['time_offsets']);
-				
+
 				if (!$this->errors) {
-							
+
 					if ($this->run($this->data)) {
 						$this->showForm=false;
 					} else {
 						$this->errors=$this->errors.$sep_err."6";
 						$sep_err="|";
 						$this->showForm=true;
-					}		
+					}
 				} else {
 					$this->showForm=true;
 				}
 			}
-		}	
-	}	
+		}
+	}
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-if(!defined('entry'))define('entry', true);
+if(!defined('entry') || !entry) define('entry',true);
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -11,47 +11,52 @@ if(!defined('entry'))define('entry', true);
 
   =========================== */
 
-require('entry.php');
+// Received a valid request, better start setting globals we'll need throughout the app in entry.php
+require_once('entry.php');
+
+$configFile = Absolute_Path."config.php";
+if(file_exists($configFile)){
+	require($configFile);
+}else{
+	exit("You need to rename config-sample.php to config.php and fill out the required details.");
+}
+
 global $user, $conf, $tumble;
-
-include('classes/install.class.php'); 
-$install = new Install(); 
-
+$install = new Install();
 $install->data = $_POST;
 $install->check_form();
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="gelato cms <?php echo version();?>" />
-	<title>gelato :: installation</title>	
+	<title>gelato :: installation</title>
 	<link rel="shortcut icon" href="images/favicon.ico" />
-	<style type="text/css" media="screen">	
-		@import "admin/css/style.css";		
-	</style>		
+	<style type="text/css" media="screen">
+		@import "admin/css/style.css";
+	</style>
 </head>
 <body>
 <div id="cont">
 	<div id="head">
 		<h1><a href="index.php" title="gelato :: home">gelato cms</a></h1>
 	</div>
-	
+
 	<div id="main">
-	
+
 <?php
 
 	if ($install->showForm) {
 ?>
-	
+
 	<div class="box">
 		<ul class="menu manage">
 		<h3>gelato :: installation</h3>
 
 		<li class="selected"><a>Install</a></li>
 		</ul>
-	
+
 		<div class="tabla">
 			<form action="install.php" method="post" id="config_form" autocomplete="off" class="newpost">
 				<fieldset class="install">
@@ -62,11 +67,11 @@ $install->check_form();
 						<li><label for="password">Password:</label>
 							<input type="password" name="db_password" id="db_password" value="" class="txt"/></li>
 						<li><label for="password2">Re-type password:</label>
-							<input type="password" name="db_password2" id="db_password2" value="" class="txt"/><?php echo $install->mostrarerror("9")?></li>						
+							<input type="password" name="db_password2" id="db_password2" value="" class="txt"/><?php echo $install->mostrarerror("9")?></li>
 						<li><label for="email">Database Host:</label>
-							<input type="text" name="db_host" id="db_host" value="<?php echo (!empty($install->data['db_host']))?  $install->data['db_host'] : 'localhost'?>" class="txt"/><?php echo $install->mostrarerror("7")?></li>	
+							<input type="text" name="db_host" id="db_host" value="<?php echo (!empty($install->data['db_host']))?  $install->data['db_host'] : 'localhost'?>" class="txt"/><?php echo $install->mostrarerror("7")?></li>
 						<li><label for="email">Database Name:</label>
-							<input type="text" name="db_name" id="db_name" value="<?php echo (!empty($install->data['db_name']))?  $install->data['db_name'] : 'gelatocms'?>" class="txt"/><?php echo $install->mostrarerror("8")?></li>											
+							<input type="text" name="db_name" id="db_name" value="<?php echo (!empty($install->data['db_name']))?  $install->data['db_name'] : 'gelatocms'?>" class="txt"/><?php echo $install->mostrarerror("8")?></li>
 					</ul>
 				</fieldset><br  />
 				<fieldset class="install">
@@ -77,14 +82,14 @@ $install->check_form();
 						<li><label for="password">Password:</label>
 							<input type="password" name="password" id="password" value="" class="txt"/><?php echo $install->mostrarerror("2")?></li>
 						<li><label for="password2">Re-type password:</label>
-							<input type="password" name="password2" id="password2" value="" class="txt"/><?php echo $install->mostrarerror("3")?></li>						
+							<input type="password" name="password2" id="password2" value="" class="txt"/><?php echo $install->mostrarerror("3")?></li>
 						<li><label for="email">E-mail:</label>
-							<input type="text" name="email" id="email" value="<?php echo $install->data['email']?>" class="txt"/><?php echo $install->mostrarerror("4")?></li>						
+							<input type="text" name="email" id="email" value="<?php echo $install->data['email']?>" class="txt"/><?php echo $install->mostrarerror("4")?></li>
 					</ul>
 				</fieldset><br  />
 				<fieldset class="install">
 					<legend class="install">Tumblelog configuration</legend>
-					<ul>							
+					<ul>
 						<li><label for="title">Title:</label>
 							<input type="text" name="title" id="title" value="<?php echo $install->data['title']?>" class="txt"/></li>
 						<li><label for="description">Description:</label>
@@ -102,9 +107,9 @@ $install->check_form();
 							<select id="template" name="template">
 <?php
 							$themes = getThemes();
-							foreach ($themes as $theme) {									
+							foreach ($themes as $theme) {
 								echo "<option value=\"".$theme."\" selected=\"true\">".$theme."</option>\n";
-								
+
 							}
 ?>							</select>
 						<li>
@@ -175,17 +180,17 @@ $install->check_form();
 						</li>
 					</ul>
 				</fieldset>
-				<p>	
+				<p>
 					<input type="hidden" name="website" id="website" value="" />
 					<input type="hidden" name="about" id="about" value="" />
 					<input type="hidden" name="action" id="action" value="config" />
 					<input type="submit" name="btnsubmit" id="btnsubmit" value="<< Install >>" class="submit"/>
 				</p>
-			</form>		
+			</form>
 		</div>
 		<div class="footer-box">&nbsp;</div>
 	</div>
-	
+
 <?php
 	} else {
 		echo "<p><em>Finished!</em></p>";
@@ -197,7 +202,7 @@ $install->check_form();
 	<div id="foot">
 		<a href="http://www.gelatocms.com/" title="gelato CMS">gelato CMS</a> :: PHP/MySQL Tumblelog Content Management System.
 	</div>
-	
+
 </div>
 </body>
 </html>

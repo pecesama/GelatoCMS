@@ -15,26 +15,26 @@
 // constantes
 define('MYSQL_TYPES_NUMERIC', 'int real ');
 define('MYSQL_TYPES_DATE', 'datetime timestamp year date time ');
-define('MYSQL_TYPES_STRING', 'string blob '); 
+define('MYSQL_TYPES_STRING', 'string blob ');
 
 class Conexion_Mysql {
 
-	var $mbase_datos;	
-	var $mservidor;	
-	var $musuario;	
-	var $mclave; 
-	var $mid_conexion = 0; 	// Identificador de conexión	
+	var $mbase_datos;
+	var $mservidor;
+	var $musuario;
+	var $mclave;
+	var $mid_conexion = 0; 	// Identificador de conexiï¿½n
 	var $mid_consulta = 0; 	// Identificador de consulta
-	var $merror_numero = 0;		// Número de error			
-	var $merror = "";		// Descripción del error.
-	
-	/** Al crear una instancia de clase, se ejecutará esta función */	
-	function Conexion_Mysql($bd="", $host="localhost", $user="", $pass="") {	
-		$this->mbase_datos = $bd;	
-		$this->mservidor = $host;	
-		$this->musuario = $user;	
+	var $merror_numero = 0;		// Nï¿½mero de error
+	var $merror = "";		// Descripciï¿½n del error.
+
+	/** Al crear una instancia de clase, se ejecutara esta funcion */
+	function Conexion_Mysql($bd="", $host="localhost", $user="", $pass="") {
+		$this->mbase_datos = $bd;
+		$this->mservidor = $host;
+		$this->musuario = $user;
 		$this->mclave = $pass;
-		
+
 		if (!$this->conectar()) {
 			$mensaje = "
 				<h3 class=\"important\">Error establishing a database connection</h3>
@@ -44,42 +44,42 @@ class Conexion_Mysql {
 					<li>Are you sure that you have typed the correct hostname?</li>
 					<li>Are you sure that the database server is running?</li>
 				</ul>";
-			die($mensaje);			
+			die($mensaje);
 		}
 	}
-	
-	/** Conectar a la base de datos */	
-	function conectar() {		
-		// Conectamos al servidor		
-		$this->mid_conexion = @mysql_connect($this->mservidor, $this->musuario, $this->mclave);		
-		if (!$this->mid_conexion) {		
-			$this->merror = "No se logró realizar la conexión.";		
+
+	/** Conectar a la base de datos */
+	function conectar() {
+		// Conectamos al servidor
+		$this->mid_conexion = @mysql_connect($this->mservidor, $this->musuario, $this->mclave);
+		if (!$this->mid_conexion) {
+			$this->merror = "No se logrï¿½ realizar la conexiï¿½n.";
 			return false;
-		}	 
-		//seleccionamos la base de datos		
-		if (!@mysql_select_db($this->mbase_datos, $this->mid_conexion)) {		
-			$this->merror = "No se puede abrir la base ".$this->mbase_datos ;		
-			return false;		
-		}	 
-		return $this->mid_conexion;	// Si todo salio bien regresa el id de la conexión
-	}	
-	
-	/** Para ejecutar consultas en la conexión abierta */	
+		}
+		//seleccionamos la base de datos
+		if (!@mysql_select_db($this->mbase_datos, $this->mid_conexion)) {
+			$this->merror = "No se puede abrir la base ".$this->mbase_datos ;
+			return false;
+		}
+		return $this->mid_conexion;	// Si todo salio bien regresa el id de la conexiï¿½n
+	}
+
+	/** Para ejecutar consultas en la conexiï¿½n abierta */
 	function ejecutarConsulta($msql = "") {
-		if ($msql == "") {	
-			$this->merror = "No introdujo la sentencia SQL";	
-			return false;	
-		}		
-		//ejecutamos la consulta		
-		$this->mid_consulta = mysql_query($msql, $this->mid_conexion);		
-		if (!$this->mid_consulta) {		
-			$this->merror_numero = mysql_errno();		
+		if ($msql == "") {
+			$this->merror = "No introdujo la sentencia SQL";
+			return false;
+		}
+		//ejecutamos la consulta
+		$this->mid_consulta = mysql_query($msql, $this->mid_conexion);
+		if (!$this->mid_consulta) {
+			$this->merror_numero = mysql_errno();
 			$this->merror = mysql_error()." error";
-			return false;		
-		}				
-		return $this->mid_consulta; // Si todo salio bien regresa el id de la consulta	
-	}	
-	
+			return false;
+		}
+		return $this->mid_consulta; // Si todo salio bien regresa el id de la consulta
+	}
+
 	/**
 	 * Inserta un registro en la DB por cada llave->valor en un arreglo.
 	 * No se debe usar sentencias SQL con esta funcion.
@@ -90,26 +90,26 @@ class Conexion_Mysql {
 	 * @return string El ID del insert, verdadero si la tabla no tiene un campo auto_increment o false si ocurre un error.
 	 */
 	function insertarDeFormulario($tabla, $datos) {
-	  	  
+
 	  if (empty($datos)) {
 		 $this->merror = "Debes de pasar un arreglo como parametro.";
 		 return false;
 	  }
-	  
+
 	  $cols = '(';
 	  $sqlValues = '(';
-	  
+
 	  foreach ($datos as $llave=>$valor) {
-		  
-		 $cols .= "$llave,"; 
-		 
+
+		 $cols .= "$llave,";
+
 		 $tipo_col = $this->obtenerTipoCampo($tabla, $llave);  // obtiene el tipo de campo
 		 if (!$tipo_col) return false;  // error!
-		 
+
 		 // determina si se necesita poner comillas al valor.
 		 if (is_null($valor)) {
-			$sqlValues .= "NULL,";   
-		 } 
+			$sqlValues .= "NULL,";
+		 }
 		 elseif (substr_count(MYSQL_TYPES_NUMERIC, "$tipo_col ")) {
 			$sqlValues .= "$valor,";
 		 }
@@ -119,17 +119,17 @@ class Conexion_Mysql {
 		 }
 		 elseif (substr_count(MYSQL_TYPES_STRING, "$tipo_col ")) {
 			$valor = $this->sql_escape($valor);
-			$sqlValues .= "'$valor',";  
+			$sqlValues .= "'$valor',";
 		 }
 	  }
 	  $cols = rtrim($cols, ',').')';
-	  $sqlValues = rtrim($sqlValues, ',').')';     
-	  
-	  // inserta los valores en la DB	  
+	  $sqlValues = rtrim($sqlValues, ',').')';
+
+	  // inserta los valores en la DB
 	  $sql = "INSERT INTO $tabla $cols VALUES $sqlValues";
-	  return $this->ejecutarConsulta($sql);	  
+	  return $this->ejecutarConsulta($sql);
 	}
-	
+
 	/**
 	 * Modifica un registro en la DB por cada llave->valor en un arreglo.
 	 * No se debe usar sentencias SQL con esta funcion.
@@ -143,7 +143,7 @@ class Conexion_Mysql {
 	 * 		Falso si ocurrio algun error.
 	 */
 	function modificarDeFormulario($tabla, $datos, $condicion="") {
-      
+
 		if (empty($datos)) {
 			$this->merror = "Debes de pasar un arreglo como parametro.";
 			return false;
@@ -152,14 +152,14 @@ class Conexion_Mysql {
 		$sql = "UPDATE $tabla SET";
 		foreach ($datos as $llave=>$valor) {
 			$sql .= " $llave=";
-			
+
 			$tipo_col = $this->obtenerTipoCampo($tabla, $llave);  // obtiene el tipo de campo
 			if (!$tipo_col) return false;  // error!
-			
+
 			// determina si se necesita poner comillas al valor.
 			if (is_null($valor)) {
-			$sql .= "NULL,";   
-			} 
+			$sql .= "NULL,";
+			}
 			elseif (substr_count(MYSQL_TYPES_NUMERIC, "$tipo_col ")) {
 			$sql .= "$valor,";
 			}
@@ -169,25 +169,25 @@ class Conexion_Mysql {
 			}
 			elseif (substr_count(MYSQL_TYPES_STRING, "$tipo_col ")) {
 			$valor = $this->sql_escape($valor);
-			$sql .= "'$valor',";  
-			}	
+			$sql .= "'$valor',";
+			}
 		}
 		$sql = rtrim($sql, ','); // elimina la ultima coma
 		if (!empty($condicion)) $sql .= " WHERE $condicion";
-		
+
 		// modifica los valores
 		return $this->ejecutarConsulta($sql);
 	}
-	
+
 	/**
-	 * Obtiene la informacion sobre un campo usando la funcion mysql_fetch_field.	 
+	 * Obtiene la informacion sobre un campo usando la funcion mysql_fetch_field.
 	 *
 	 * @param mixed $tabla El nombre de la tabla en la BD.
 	 * @param string $campo El campo del que se desea la informacion.
 	 * @return array Un arreglo con la informacion del campo o false si hay algun error.
 	 */
 	function obtenerTipoCampo($tabla, $campo) {
-	
+
 	  $r = mysql_query("SELECT $campo FROM $tabla");
 	  if (!$r) {
 		 $this->merror = mysql_error();
@@ -200,9 +200,9 @@ class Conexion_Mysql {
 		 return false;
 	  }
 	  mysql_free_result($r);
-	  return $ret;	  
+	  return $ret;
 	}
-   
+
 	/**
 	 * Convierte una fecha en formato para DB.
 	 *
@@ -214,7 +214,7 @@ class Conexion_Mysql {
 			if(eregi("^([0-9]+)$",$valor)){
 				$valor = date("Y-m-d H:i:s",$valor);
 			}else{
-				// Estariá en el formato strtotime()
+				// Estariï¿½ en el formato strtotime()
 				$valor = date("Y-m-d H:i:s",strtotime($valor));
 			}
 		}
@@ -222,56 +222,56 @@ class Conexion_Mysql {
 	/*  if (gettype($valor) == 'string') $valor = strtotime($valor);
 	  return date('Y-m-d H:i:s', $valor);
 	*/
-	}	
+	}
 
 	/**
 	 * Obtiene el registro obtenido de una consulta.
 	 */
-	function obtenerRegistro() {				
-		return mysql_fetch_assoc($this->mid_consulta);	  	
-	}	
-	
+	function obtenerRegistro() {
+		return mysql_fetch_assoc($this->mid_consulta);
+	}
+
 	/**
-	 * Devuelve el número de campos de una consulta.
+	 * Devuelve el nï¿½mero de campos de una consulta.
 	 */
-	function contarCampos() {	
-		return mysql_num_fields($this->mid_consulta);	
-	}	
-	
+	function contarCampos() {
+		return mysql_num_fields($this->mid_consulta);
+	}
+
 	/**
-	 * Devuelve el número de registros de una consulta.
+	 * Devuelve el nï¿½mero de registros de una consulta.
 	 */
-	function contarRegistros() {	
-		return @mysql_num_rows($this->mid_consulta);	
-	}	
-	
+	function contarRegistros() {
+		return @mysql_num_rows($this->mid_consulta);
+	}
+
 	/**
 	 * Devuelve el nombre de un campo de una consulta.
 	 */
-	function obtenerNombreCampo($numero_campo) {	
-		return mysql_field_name($this->mid_consulta, $numero_campo);	
-	}	
-	
+	function obtenerNombreCampo($numero_campo) {
+		return mysql_field_name($this->mid_consulta, $numero_campo);
+	}
+
 	/**
 	 * Muestra los datos de una consulta (para debug).
 	 */
 	function verConsulta() {
-		echo "<table border=1>\n";	 	
-		// mostramos los nombres de los campos		
-		for ($i = 0; $i < $this->contarCampos(); $i++) {		
-			echo "<td><b>".$this->obtenerNombreCampo($i)."</b></td>\n";		
-		}		
-		echo "</tr>\n";		
+		echo "<table border=1>\n";
+		// mostramos los nombres de los campos
+		for ($i = 0; $i < $this->contarCampos(); $i++) {
+			echo "<td><b>".$this->obtenerNombreCampo($i)."</b></td>\n";
+		}
+		echo "</tr>\n";
 		// mostrarmos los registros
-		while ($row = mysql_fetch_row($this->mid_consulta)) {		
-			echo "<tr> \n";		
-			for ($i = 0; $i < $this->contarCampos(); $i++) {		
-				echo "<td>".$row[$i]."</td>\n";		
-			}		
-			echo "</tr>\n";		
-		}	
+		while ($row = mysql_fetch_row($this->mid_consulta)) {
+			echo "<tr> \n";
+			for ($i = 0; $i < $this->contarCampos(); $i++) {
+				echo "<td>".$row[$i]."</td>\n";
+			}
+			echo "</tr>\n";
+		}
 	}
-	
+
 	/**
 	 * Cierra la conexion a la BD.
 	 */
@@ -289,6 +289,6 @@ class Conexion_Mysql {
 	          $value = addslashes($value);
 	    }
 	    return $value;
-	}	
+	}
 } //fin de la Clase conexion_mysql
 ?>
