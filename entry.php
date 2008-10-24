@@ -28,7 +28,6 @@ ob_start();
 error_reporting (E_ALL);
 ini_set('display_errors', '1');
 
- 
 // PHP settings specific to Gelato
 ini_set('pcre.backtrack_limit', '10000');
 // Globals to be used throughout the application
@@ -41,9 +40,9 @@ $dir = (strpos($_SERVER['REQUEST_URI'],'/admin')) ? "../" : "";
 if (!file_exists($configFile) and basename($_SERVER['PHP_SELF'])!='install.php'){
 	header("Location: {$dir}install.php");
 	exit;
-} else {	
-	include(Absolute_Path.'classes/install.class.php');	
-	$install = new Install();	
+} else {
+	include_once(Absolute_Path.'classes/install.class.php');
+	$install = new Install();
 	if(!$install->is_gelato_installed()){
 		if(basename($_SERVER['PHP_SELF'])!='install.php'){
 				header("Location: {$dir}install.php");exit;
@@ -53,7 +52,7 @@ if (!file_exists($configFile) and basename($_SERVER['PHP_SELF'])!='install.php')
 }
 
 if($installed) {
-	require($configFile);
+	require_once($configFile);
 }
 
 require_once("classes/configuration.class.php");
@@ -76,11 +75,11 @@ if($installed){
 	$tumble = new gelato();
 	$conf = new configuration();
 	$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
-	
+
 	session_start();
-	
-	$feeds = new feeds();	
-	$feeds->updateFeeds();	
+
+	$feeds = new feeds();
+	$feeds->updateFeeds();
 	unset($feeds);
 }
 ?>

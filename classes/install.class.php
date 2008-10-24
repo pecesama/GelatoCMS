@@ -49,7 +49,7 @@ class Install {
     }
 
 	function install_db(){
-		require('config.php');
+		require_once(Absolute_Path.'config.php');
 		$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 		$sqlStr = array();
 
@@ -158,7 +158,7 @@ class Install {
 
 	function is_gelato_installed(){
 		if(file_exists(Absolute_Path.'config.php')) {
-			@include(Absolute_Path."config.php");
+			include_once(Absolute_Path."config.php");
 			if (!$this->check_for_config()){
 				return false;
 			} else {
