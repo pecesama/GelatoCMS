@@ -200,7 +200,7 @@ $theme = new themes;
 
                         $theme->set('pagination',$p->getPagination());
                 } else {
-                        $template->renderizaEtiqueta("No posts in this tumblelog.", "div","error");
+                        $theme->set('error','No posts in this tumblelog.');
                 }
         } else {
                 $register = $tumble->getPost($id_post);
