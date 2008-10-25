@@ -55,14 +55,15 @@ if($installed) {
 	require_once($configFile);
 }
 
-require_once("classes/configuration.class.php");
-require_once("classes/textile.class.php");
-require_once("classes/gelato.class.php");
-require_once("classes/templates.class.php");
-require_once("classes/pagination.class.php");
-require_once("classes/user.class.php");
-require_once("classes/comments.class.php");
-require_once("classes/feeds.class.php");
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'configuration.class.php');
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'textile.class.php');
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gelato.class.php');
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'templates.class.php');
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'themes.class.php');
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'pagination.class.php');
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'user.class.php');
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'comments.class.php');
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'feeds.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'mysql_connection.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'streams.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gettext.class.php');

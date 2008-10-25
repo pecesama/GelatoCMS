@@ -17,9 +17,8 @@ if(!defined('entry'))define('entry', true);
 require_once('entry.php');
 global $user, $tumble, $conf;
 
-$template = new plantillas($conf->template);
+$theme = new themes;
         // My approach to MVC
-
 
         if(isset($_SERVER['PATH_INFO'])) $param_url = explode("/",$_SERVER['PATH_INFO']);
 
@@ -34,8 +33,10 @@ $template = new plantillas($conf->template);
                 } else {
                         $id_post = NULL;
                 }
-        }		
-        
+        }
+
+        $theme->set('id_post',$id_post);
+
         if (isset($_GET["page"])) {
                 $page_num = $_GET["page"];
         } else {
@@ -45,16 +46,16 @@ $template = new plantillas($conf->template);
                         $page_num = NULL;
                 }
         }
-        
+
         $gelato_includes = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n";
         $gelato_includes .= "\t<meta name=\"generator\" content=\"gelato  ".codeName()." (".version().")\" />\n";
         $gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />\n";
         $gelato_includes .= "\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php")."\"/>\n";
         $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/themes/".$conf->template."/style.css\"/>\n";
-        $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/lightbox.css\" />\n";    
+        $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/lightbox.css\" />\n";
         $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/jquery.js\"></script>\n";
         $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/lightbox.js\"></script>";
-		
+
 		$page_title = $conf->title;
 		$page_title_divisor = " &raquo; "; // it should be set in configuration
 		$page_title_len = 50; // it should be set in configuration
@@ -71,236 +72,212 @@ $template = new plantillas($conf->template);
 				$page_title_data = $register["title"];
 			}
 			$page_title_data = strip_tags($textile->TextileThis($page_title_data));
-			if (!empty($page_title_data)) {				
+			if (!empty($page_title_data)) {
 				$page_title .= $page_title_divisor.stripslashes($page_title_data);
 			}
 		}
-	
-		$input = array("{Gelato_includes}","{Title}", "{Page_Title}", "{Description}", "{URL_Tumble}", "{Template_name}");
-		$output = array($gelato_includes, $conf->title, $page_title, $conf->description, $conf->urlGelato, $conf->template);
-        
-        $template->cargarPlantilla($input, $output, "template_header");
-        $template->mostrarPlantilla();
-        
-        if ($user->isAuthenticated()) { 
-                $input = array("{User}", "{URL_Tumble}");
-                $output = array($_SESSION["user_login"], $conf->urlGelato);
-                
-                $template->cargarPlantilla($input, $output, "template_isadmin");
-                $template->mostrarPlantilla();
-        }
-        
-        if (!$id_post) {
 
+		$theme->set('Gelato_includes',$gelato_includes);
+		$theme->set('Title',$conf->title);
+		$theme->set('Page_Title',$page_title);
+		$theme->set('Description',$conf->description);
+		$theme->set('URL_Tumble',$conf->urlGelato);
+		$theme->set('Template_name',$conf->template);
+
+		$theme->set('isAuthenticated',$user->isAuthenticated());
+        if($user->isAuthenticated()){
+			$theme->set('User',$_SESSION["user_login"]);
+			$theme->set('URL_Tumble',$conf->urlGelato);
+        }
+
+		$rows = array();
+        if(!$id_post){
                 $limit=$conf->postLimit;
-        
+
                 if(isset($page_num) && is_numeric($page_num) && $page_num>0) { // Is defined the page and is numeric?
                         $from = (($page_num-1) * $limit);
                 } else {
                         $from = 0;
                 }
-        
+
                 $rs = $tumble->getPosts($limit, $from);
 
                 if ($tumble->contarRegistros()>0) {
-                        $dateTmp = null;          
-                        while($register = mysql_fetch_array($rs)) {
+                        $dateTmp = null;
+                        while($register = mysql_fetch_assoc($rs)) {
 								$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
                                 if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
 								$strEnd=($conf->urlFriendly) ? "/" : "";
 								$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
-                                
+
 								$conversation = $register["description"];
-								
+
 								$register["description"] = $register["description"];
 
                                 $register["title"] = stripslashes($register["title"]);
-                                $register["description"] = stripslashes($register["description"]);								
-								
-                                switch ($tumble->getType($register["id_post"])) {
+                                $register["description"] = stripslashes($register["description"]);
+
+								$postType = $tumble->getType($register["id_post"]);
+
+								$row['Date_Added'] = $formatedDate;
+								$row['Permalink'] = $permalink;
+								$theme->set('postType',$postType);
+
+                                switch ($postType){
                                         case "1":
-                                                $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}");
-                                                $output = array($formatedDate, $permalink, $register["title"], $register["description"], $conf->urlGelato, );
-                                                                                        
-                                                $template->cargarPlantilla($input, $output, "template_regular_post");
-                                                $template->mostrarPlantilla();
+                                        		$row['Title'] = $register["title"];
+                                        		$row['Body'] = $register["description"];
                                                 break;
-                                        case "2":                                               
+                                        case "2":
                                                 $fileName = "uploads/".getFileName($register["url"]);
-                                                
-                                                $x = @getimagesize($fileName);                                          
-                                                if ($x[0] > 500) {                                                      
+
+                                                $x = @getimagesize($fileName);
+                                                if ($x[0] > 500) {
 													$photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
-                                                } else {													
+                                                } else {
 													$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
                                                 }
 
 												$effect = " href=\"".str_replace("../", $conf->urlGelato."/", $register["url"])."\" rel=\"lightbox\"";
-                                                
-                                                $input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
-                                                $output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
-                                                
-                                                $template->cargarPlantilla($input, $output, "template_photo");
-                                                $template->mostrarPlantilla();                                                     
+
+												$row['PhotoURL'] = $photoPath;
+												$row['PhotoAlt'] = strip_tags($register["description"]);
+												$row['Caption'] = $register["description"];
+												$row['Effect'] = $effect;
                                                 break;
                                         case "3":
-                                                $input = array("{Date_Added}", "{Permalink}", "{Quote}", "{Source}", "{URL_Tumble}");
-                                                $output = array($formatedDate, $permalink, $register["description"], $register["title"], $conf->urlGelato);
-                                                
-                                                $template->cargarPlantilla($input, $output, "template_quote");
-                                                $template->mostrarPlantilla();
+                                        		$row['Quote'] = $register["description"];
+                                        		$row['Source'] = $register["title"];
                                                 break;
                                         case "4":
                                                 if($conf->shorten_links){
 													$register["url"] = _file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
 												}
 												$register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
-												$input = array("{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
-                                                $output = array($formatedDate, $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
-                                                
-                                                $template->cargarPlantilla($input, $output, "template_url");
-                                                $template->mostrarPlantilla();
+
+												$row['URL'] = $register["url"];
+												$row['Name'] = $register["title"];
+												$row['Description'] = $register["description"];
                                                 break;
                                         case "5":
-                                                $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Conversation}", "{URL_Tumble}");
-												$output = array($formatedDate, $permalink, $register["title"], $tumble->formatConversation($conversation), $conf->urlGelato);
-                                                
-                                                $template->cargarPlantilla($input, $output, "template_conversation");
-                                                $template->mostrarPlantilla();
+                                        		$row['Title'] = $register["title"];
+                                        		$row['Conversation'] = $tumble->formatConversation($conversation);
                                                 break;
                                         case "6":
-                                                $input = array("{Date_Added}", "{Permalink}", "{Video}", "{Caption}", "{URL_Tumble}");
-                                                $output = array($formatedDate, $permalink, $tumble->getVideoPlayer($register["url"]), $register["description"], $conf->urlGelato);
-                                                
-                                                $template->cargarPlantilla($input, $output, "template_video");
-                                                $template->mostrarPlantilla();
+                                        		$row['Video'] = $tumble->getVideoPlayer($register["url"]);
+                                        		$row['Caption'] = $register["description"];
                                                 break;
                                         case "7":
-                                                $input = array("{Date_Added}", "{Permalink}", "{Mp3}", "{Caption}", "{URL_Tumble}");
-                                                $output = array($formatedDate, $permalink, $tumble->getMp3Player($register["url"]), $register["description"], $conf->urlGelato);
-                                                
-                                                $template->cargarPlantilla($input, $output, "template_mp3");
-                                                $template->mostrarPlantilla();
+                                        		$row['Mp3'] = $tumble->getMp3Player($register["url"]);
+                                        		$row['Caption'] = $register["description"];
                                                 break;
                                 }
-								
-								
+
 								$comment = new comments();
 								$noComments = $comment->countComments($register["id_post"]);
-								
+
 								$user = new user();
 								$username = $user->getUserByID($register["id_user"]);
-								
-								
-								$input = array("{Permalink}", "{User}", "{Comments_Number}");
-								$output = array($permalink, $username["name"], $noComments);
-																		
-								$template->cargarPlantilla($input, $output, "template_details");
-								$template->mostrarPlantilla();
+
+								$row['User'] = $username["name"];
+								$row['Comments_Number'] = $noComments;
+
+								$rows[] = $row;
                         }
+
+						$theme->set('rows',$rows);
 
                         $p = new pagination;
                         $p->Items($tumble->getPostsNumber());
                         $p->limit($limit);
-                        
 						if($conf->urlFriendly){
 								$p->urlFriendly('[...]');
 								$p->target($conf->urlGelato."/page/[...]");
 							}else
 								$p->target($conf->urlGelato);
-                        
+
                         $p->currentPage(isset($page_num) ? $page_num : 1);
-                        $p->show();
 
-
+                        $theme->set('pagination',$p->getPagination());
                 } else {
                         $template->renderizaEtiqueta("No posts in this tumblelog.", "div","error");
                 }
         } else {
                 $register = $tumble->getPost($id_post);
-                
+
 				$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
 				$strEnd=($conf->urlFriendly) ? "/" : "";
 				$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
-                
+
 				$conversation = $register["description"];
-				
+
 				$register["description"] = $register["description"];
-				
+
 				$register["title"] = stripslashes($register["title"]);
                 $register["description"] = stripslashes($register["description"]);
-                
-                switch ($tumble->getType($register["id_post"])) {
+
+				$row['Date_Added'] = $formatedDate;
+				$row['Permalink'] = $permalink;
+				$postType = $tumble->getType($register["id_post"]);
+				$theme->set('postType',$postType);
+                switch ($postType) {
                         case "1":
-                                $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}");
-                                $output = array($formatedDate, $permalink, $register["title"], $register["description"], $conf->urlGelato);
-                                                                        
-                                $template->cargarPlantilla($input, $output, "template_regular_post");
-                                $template->mostrarPlantilla();
+								$row['Title'] = $register["title"];
+								$row['Body'] = $register["description"];
                                 break;
                         case "2":
                                 $fileName = "uploads/".getFileName($register["url"]);
-                                                
-                                $x = @getimagesize($fileName);                                          
-                                if ($x[0] > 500) {                                      
+
+                                $x = @getimagesize($fileName);
+                                if ($x[0] > 500) {
                                         $photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
                                 } else {
 										$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
                                 }
 
 								$effect = " href=\"".str_replace("../", $conf->urlGelato."/", $register["url"])."\" rel=\"lightbox\"";
-                                $input = array("{Date_Added}", "{Permalink}", "{PhotoURL}", "{PhotoAlt}", "{Caption}", "{Effect}", "{URL_Tumble}");
-                                $output = array($formatedDate, $permalink, $photoPath, strip_tags($register["description"]), $register["description"], $effect, $conf->urlGelato);
-                                
-                                $template->cargarPlantilla($input, $output, "template_photo");
-                                $template->mostrarPlantilla();                                                     
+
+								$row['PhotoURL'] = $photoPath;
+								$row['PhotoAlt'] = strip_tags($register["description"]);
+								$row['Caption'] = $register["description"];
+								$row['Effect'] = $effect;
                                 break;
                         case "3":
-                                $input = array("{Date_Added}", "{Permalink}", "{Quote}", "{Source}", "{URL_Tumble}");
-                                $output = array($formatedDate, $permalink, $register["description"], $register["title"], $conf->urlGelato);
-                                
-                                $template->cargarPlantilla($input, $output, "template_quote");
-                                $template->mostrarPlantilla();
+								$row['Quote'] = $register["description"];
+                                $row['Source'] = $register["title"];
                                 break;
                         case "4":
                                 if($conf->shorten_links){
 									$register["url"] = _file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
 								}
-								$register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
-								$input = array("{Date_Added}", "{Permalink}", "{URL}", "{Name}", "{Description}", "{URL_Tumble}");
-                                $output = array($formatedDate, $permalink, $register["url"], $register["title"], $register["description"], $conf->urlGelato);
-                                
-                                $template->cargarPlantilla($input, $output, "template_url");
-                                $template->mostrarPlantilla();
+								$row['URL'] = $register["url"];
+								$row['Name'] = $register["title"];
+								$row['Description'] = $register["description"];
                                 break;
                         case "5":
-                                $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Conversation}", "{URL_Tumble}");
-                                $output = array($formatedDate, $permalink, $register["title"], $tumble->formatConversation($conversation), $conf->urlGelato);
-                                
-                                $template->cargarPlantilla($input, $output, "template_conversation");
-                                $template->mostrarPlantilla();
-                                break;
-                        case "6":
-                                $input = array("{Date_Added}", "{Permalink}", "{Video}", "{Caption}", "{URL_Tumble}");
-                                $output = array($formatedDate, $permalink, $tumble->getVideoPlayer($register["url"]), $register["description"], $conf->urlGelato);
-                                
-                                $template->cargarPlantilla($input, $output, "template_video");
-                                $template->mostrarPlantilla();
-                                break;
-                        case "7":
-                                $input = array("{Date_Added}", "{Permalink}", "{Mp3}", "{Caption}", "{URL_Tumble}");
-                                $output = array($formatedDate, $permalink, $tumble->getMp3Player($register["url"]), $register["description"], $conf->urlGelato);
-                                
-                                $template->cargarPlantilla($input, $output, "template_mp3");
-                                $template->mostrarPlantilla();
-                                break;
+								$row['Title'] = $register["title"];
+								$row['Conversation'] = $tumble->formatConversation($conversation);
+								break;
+						case "6":
+								$row['Video'] = $tumble->getVideoPlayer($register["url"]);
+								$row['Caption'] = $register["description"];
+								break;
+						case "7":
+								$row['Mp3'] = $tumble->getMp3Player($register["url"]);
+								$row['Caption'] = $register["description"];
+								break;
                 }
-				
+
 				if ($conf->allowComments) {
-					
+
 					$comment = new comments();
 					$rsComments = $comment->getComments($register["id_post"]);
-					
+
+					$user = new user();
+					$username = $user->getUserByID($register["id_user"]);
+
+					$row['User'] = $username["name"];
+
 					$textile = new Textile();
 					if (empty($register["title"])) {
 						if (!empty($register["description"])) {
@@ -312,31 +289,37 @@ $template = new plantillas($conf->template);
 						$postTitle = $register["title"];
 					}
 					$postTitle = strip_tags($textile->TextileThis($postTitle));
-					
-					$input = array("{Comments_Number}", "{Post_Title}");				
-					$output = array($comment->countComments($register["id_post"]), $postTitle);
-					$template->precargarPlantillaConBloque($input, $output, "template_comments", "comments");
 
+					$row['Post_Title'] = $postTitle;
+					$row['Comments_Number'] = $comment->countComments($register["id_post"]);
+
+					$rows[] = $row;
+					$theme->set('rows',$rows);
+
+					$comments = array();
 					while($rowComment = mysql_fetch_assoc($rsComments)) {
 						$commentAuthor = ($rowComment["web"]=="") ? $rowComment["username"] : "<a href=\"".$rowComment["web"]."\" rel=\"external\">".$rowComment["username"]."</a>";
-						$input = array("{Id_Comment}", "{Comment_Author}", "{Date}", "{Comment}");
-						$output = array($rowComment["id_comment"], $commentAuthor, gmdate("d.m.y", strtotime($rowComment["comment_date"])+transform_offset($conf->offsetTime)), $rowComment["content"]);
-						$template->cargarPlantillaConBloque($input, $output, "template_comments", "comments");
+
+						$answers['Id_Comment'] = $rowComment["id_comment"];
+						$answers['Comment_Author'] = $commentAuthor;
+						$answers['Date'] = gmdate("d.m.y", strtotime($rowComment["comment_date"])+transform_offset($conf->offsetTime));
+						$answers['Comment'] = $rowComment["content"];
+
+						$comments[] = $answers;
 					}
-					$template->mostrarPlantillaConBloque();
-										
-					$input = array("{User_Cookie}", "{Email_Cookie}", "{Web_Cookie}", "{Id_Post}", "{Form_Action}", "{Date_Added}");
-					$output = array(isset($_COOKIE['cookie_gel_user'])?$_COOKIE['cookie_gel_user']:'', isset($_COOKIE['cookie_gel_email'])?$_COOKIE['cookie_gel_email']:'', isset($_COOKIE['cookie_gel_web'])?$_COOKIE['cookie_gel_web']:'', $register["id_post"], $conf->urlGelato."/admin/comments.php", gmmktime());
-					
-					$template->cargarPlantilla($input, $output, "template_comment_post");
-					$template->mostrarPlantilla(); 
-					
+					$theme->set('comments',$comments);
+
+					$whois['User_Cookie'] = isset($_COOKIE['cookie_gel_user'])?$_COOKIE['cookie_gel_user']:'';
+					$whois['Email_Cookie'] = isset($_COOKIE['cookie_gel_email'])?$_COOKIE['cookie_gel_email']:'';
+					$whois['Web_Cookie'] = isset($_COOKIE['cookie_gel_web'])?$_COOKIE['cookie_gel_web']:'';
+					$whois['Id_Post'] = $register["id_post"];
+
+					$theme->set('Date_Added',gmmktime());
+					$theme->set('Form_Action',$conf->urlGelato."/admin/comments.php");
+					$theme->set('whois',$whois);
 				}
         }
-        
-        $input = array("{URL_Tumble}");
-        $output = array($conf->urlGelato);
-        
-        $template->cargarPlantilla($input, $output, "template_footer");
-        $template->mostrarPlantilla();
-?> 
+
+        $theme->set('URL_Tumble',$conf->urlGelato);
+		$theme->display(Absolute_Path.'themes/'.$conf->template.'/index.htm');
+?>

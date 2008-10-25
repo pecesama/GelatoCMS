@@ -13,7 +13,7 @@ Author URI: http://www.mis-algoritmos.com
 		/*Default values*/
 		var $total_pages = null;
 		var $limit = null;
-		var $target = ""; 
+		var $target = "";
 		var $page = 1;
 		var $adjacents = 2;
 		var $showCounter = false;
@@ -29,22 +29,22 @@ Author URI: http://www.mis-algoritmos.com
 
 		/*****/
 		var $calculate = false;
-		
+
 		#Total items
 		function items($value){$this->total_pages = intval($value);}
-		
+
 		#how many items to show per page
 		function limit($value){$this->limit = intval($value);}
-		
+
 		#Page to sent the page value
 		function target($value){$this->target = $value;}
-		
+
 		#Current page
 		function currentPage($value){$this->page = intval($value);}
-		
+
 		#How many adjacent pages should be shown on each side of the current page?
 		function adjacents($value){$this->adjacents = intval($value);}
-		
+
 		#show counter?
 		function showCounter($value=""){$this->showCounter=($value===true)?true:false;}
 
@@ -67,7 +67,7 @@ Author URI: http://www.mis-algoritmos.com
 					}
 				$this->urlF=$value;
 			}
-		
+
 		var $pagination;
 
 		function pagination(){}
@@ -76,18 +76,23 @@ Author URI: http://www.mis-algoritmos.com
 					if($this->calculate())
 						echo "<div class=\"$this->className\">$this->pagination</div>";
 			}
+		function getPagination(){
+				if(!$this->calculate)
+					if($this->calculate())
+						return "<div class=\"$this->className\">$this->pagination</div>";
+			}
 		function get_pagenum_link($id){
 				//if(strpos($this->target,'?')===false)
 						if($this->urlF)
 								return str_replace($this->urlF,$id,$this->target);
-								
+
 							else
 								return "$this->target?$this->parameterName=$id";
-					//else 
+					//else
 						//return "$this->target&$this->parameterName=$id";
-						
+
 			}
-		
+
 		function calculate(){
 				$this->pagination = "";
 				$this->calculate == true;
@@ -97,7 +102,7 @@ Author URI: http://www.mis-algoritmos.com
 						echo "Especificaste un wildcard para sustituir, pero no existe en el target<br />";
 						$error = true;
 					}elseif($this->urlF and $this->urlF == '%' and strpos($this->target,$this->urlF)===false){
-						echo "Es necesario especificar en el target el comodin % para sustituir el número de página<br />";
+						echo "Es necesario especificar en el target el comodin % para sustituir el nï¿½mero de pï¿½gina<br />";
 						$error = true;
 					}
 				if($this->total_pages == null){
@@ -109,35 +114,35 @@ Author URI: http://www.mis-algoritmos.com
 						$error = true;
 					}
 				if($error)return false;
-				
+
 				$n = trim($this->nextT.' '.$this->nextI);
 				$p = trim($this->prevI.' '.$this->prevT);
-				
+
 				/* Setup vars for query. */
-				if($this->page) 
+				if($this->page)
 					$start = ($this->page - 1) * $this->limit;             //first item to display on this page
 				else
 					$start = 0;                                //if no page var is given, set start to 0
-			
+
 				/* Setup page vars for display. */
 				if ($this->page == 0) $this->page = 1;                    //if no page var is given, default to 1.
 				$prev = $this->page - 1;                            //previous page is page - 1
 				$next = $this->page + 1;                            //next page is page + 1
 				$lastpage = ceil($this->total_pages/$this->limit);        //lastpage is = total pages / items per page, rounded up.
 				$lpm1 = $lastpage - 1;                        //last page minus 1
-				
-				/* 
-					Now we apply our rules and draw the pagination object. 
+
+				/*
+					Now we apply our rules and draw the pagination object.
 					We're actually saving the code to a variable in case we want to draw it more than once.
 				*/
-				
+
 				if($lastpage > 1){
 						//anterior button
 						if($this->page > 1)
 								$this->pagination .= "<a href=\"".$this->get_pagenum_link($prev)."\">$p</a>";
 							else
 								$this->pagination .= "<span class=\"disabled\">$p</span>";
-						//pages	
+						//pages
 						if ($lastpage < 7 + ($this->adjacents * 2)){//not enough pages to bother breaking it up
 								for ($counter = 1; $counter <= $lastpage; $counter++){
 										if ($counter == $this->page)
