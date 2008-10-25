@@ -110,6 +110,17 @@ fieldset.install input.txt{width:468px;}
 a.linkFrm, a.linkFrm:link, a.linkFrm:visited, a.linkFrm:active{ color:#297aab; text-decoration:none; outline:none;}
 a.linkFrm:hover{ text-decoration:underline; color:#297aab;  outline:none;}
 
+.bookmarklet {
+ 	font-weight:bold; padding: 1px 2px;
+ 	border: 2px solid #888;
+	background-color: #eee; text-decoration:none;
+}
+
+.bookmarklet:hover {
+	background-color: #6FA6EA; text-decoration:none;
+}
+
+
 /* Feeds */
 
 #feedlist{}
