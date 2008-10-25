@@ -22,15 +22,18 @@ if(!defined('entry')) define('entry',true);
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
 ?>
 	<gelato version="1.0">
-<?php
-	
+<?php	
 	if (isset($_GET["action"]) && $_GET["action"] == "read") {
 		if (isset($_GET["start"])) { $start = $_GET["start"]; } else { $start = 0; }
 		if (isset($_GET["total"])) { $total = $_GET["total"]; } else { $total = 20; }
 		if (isset($_GET["type"])) { $hasType = true; } else { $hasType = false; }
-		if ($total > 50) { $total = 50; }		
+		if ($total > 50) { $total = 50; }
+		$user = new user();
+		$userData = $user->getUserByID(1);
+		$username = ($userData["name"] == "") ? "gelato" : $userData["name"];
 ?>		
-		<tumblelog name="<?php echo $_SESSION["user_login"];?>" timezone="<?php echo $conf->offsetCity;?>" title="<?php echo $conf->title;?>"><?php 	
+		<tumblelog name="<?php echo $username;?>" timezone="<?php echo $conf->offsetCity;?>" title="<?php echo $conf->title;?>">
+<?php 	
 		echo "\n\t".$conf->description."\n";
 ?>
 			<feeds>
