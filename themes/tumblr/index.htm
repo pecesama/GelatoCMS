@@ -30,133 +30,136 @@
 			</div>
 		{/if}
 
-		{block {$rows} as {$row}}
-			<div class="date">
-				{$row.Date_Added}
+		{if {$error}}
+			<div class="error">{$error}</div>
+		{else}
+			{block {$rows} as {$row}}
+				<div class="date">
+					{$row.Date_Added}
+				</div>
+				{if {$postType}==1}
+					<div class="post">
+						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
+
+						<div class="regular">
+							<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
+							{$row.Body}
+						</div>
+					</div>
+				{elseif {$postType}==2}
+					<div class="post">
+						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
+						<div class="photo">
+							<a {$row.Effect}><img src="{$row.PhotoURL}" alt="{$row.PhotoAlt}" /></a><br/>
+							<div class="caption">{$row.Caption}</div>
+						</div>
+					</div>
+				{elseif {$postType}==3}
+					<div class="post">
+						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
+						<div class="quote">
+							<span class="quote"><big class="quote"><a href="{$row.Permalink}">&#147;</a></big> {$row.Quote}</span>
+							<div class="source">&mdash; {$row.Source}</div>
+						</div>
+					</div>
+				{elseif {$postType}==4}
+					<div class="post">
+						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
+							<div class="link">
+								&#187; <a href="{$row.URL}">{$row.Name}</a>
+							<div class="description">{$row.Description}</div>
+						</div>
+					</div>
+				{elseif {$postType}==5}
+					<div class="post">
+						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
+						<div class="conversation">
+								...<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
+							{$row.Conversation}
+						</div>
+					</div>
+				{elseif {$postType}==6}
+					<div class="post">
+						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
+						<div class="video">
+							{$row.Video}
+							<div class="caption">{$row.Caption}</div>
+						</div>
+					</div>
+				{elseif {$postType}==7}
+					<div class="post">
+						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
+						<div class="video">
+							{$row.Mp3}
+							<div class="caption">{$row.Caption}</div>
+						</div>
+					</div>
+				{/if}
+
+			<div class="totalComments">
+				<h3>Posted by {$row.User} - <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) comments</a></h3>
 			</div>
-			{if {$postType}==1}
-				<div class="post">
-					<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
+		{/block}
 
-					<div class="regular">
-						<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
-						{$row.Body}
-					</div>
-				</div>
-			{elseif {$postType}==2}
-				<div class="post">
-					<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
-					<div class="photo">
-						<a {$row.Effect}><img src="{$row.PhotoURL}" alt="{$row.PhotoAlt}" /></a><br/>
-						<div class="caption">{$row.Caption}</div>
-					</div>
-				</div>
-			{elseif {$postType}==3}
-				<div class="post">
-					<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
-					<div class="quote">
-						<span class="quote"><big class="quote"><a href="{$row.Permalink}">&#147;</a></big> {$row.Quote}</span>
-						<div class="source">&mdash; {$row.Source}</div>
-					</div>
-				</div>
-			{elseif {$postType}==4}
-				<div class="post">
-					<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
-						<div class="link">
-							&#187; <a href="{$row.URL}">{$row.Name}</a>
-						<div class="description">{$row.Description}</div>
-					</div>
-				</div>
-			{elseif {$postType}==5}
-				<div class="post">
-					<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
-					<div class="conversation">
-							...<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
-						{$row.Conversation}
-					</div>
-				</div>
-			{elseif {$postType}==6}
-				<div class="post">
-					<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
-					<div class="video">
-						{$row.Video}
-						<div class="caption">{$row.Caption}</div>
-					</div>
-				</div>
-			{elseif {$postType}==7}
-				<div class="post">
-					<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
-					<div class="video">
-						{$row.Mp3}
-						<div class="caption">{$row.Caption}</div>
-					</div>
-				</div>
-			{/if}
+		{if {$id_post}}
+			<div class="containerComments">
+				<h3 id="comments">{$row.Comments_Number} answers to &#8220;{$row.Post_Title}&#8221;</h3>
+				<ol class="commentlist">
+					{block {$comments} as {$comment}}
+					<li class="alt" id="comment-{$comment.Id_Comment}">
+						<cite>
+							<a href="#comment-{$comment.Id_Comment}" title="Comment permalink">#</a>&nbsp;&nbsp;
+							{$comment.Comment_Author} said:
+						</cite>
+						<br />
+						<span class="timestampComment"> at {$comment.Date}</span><br /><br />
+						{$comment.Comment}
+						<br /><br />
+					</li>
+					{/block}
+				</ol>
+			</div>
 
-		<div class="totalComments">
-			<h3>Posted by {$row.User} - <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) comments</a></h3>
+			<div class="containerFormComments">
+			<h3 id="respond">Add your comment</h3>
+
+			<form action="{Form_Action}" method="post" name="commentForm" id="commentForm">
+				<p>
+					<label for="username">
+						<small>Name:</small>
+					</label>
+					<input name="username" id="username" value="{whois.User_Cookie}" size="22" tabindex="1" type="text" />
+				</p>
+				<p>
+					<label for="email">
+						<small>E-mail:</small>
+					</label>
+					<input name="email" id="email" value="{whois.Email_Cookie}" size="22" tabindex="2" type="text" />
+				</p>
+				<p>
+					<label for="web">
+						<small>Website:</small>
+					</label>
+					<input name="web" id="web" value="{whois.Web_Cookie}" size="22" tabindex="3" type="text" />
+				</p>
+				<p>
+					<textarea name="content" id="content" cols="100" rows="10" tabindex="4"></textarea>
+				</p>
+				<p>
+					<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;"><a href="http://hobix.com/textile/">Textile</a> syntax is supported.</span>
+				<p>
+					<input type="submit" value="Add comment" name="btnAdd" id="btnAdd" tabindex="5" />
+				</p>
+				<p>
+					<input name="id_post" id="id_post" value="{id_post}" type="hidden" />
+					<input name="comment_date" id="comment_date" value="{Date_Added}" type="hidden" />
+				</p>
+			</form>
 		</div>
-	{/block}
-
-	{if {$id_post}}
-		<div class="containerComments">
-			<h3 id="comments">{$row.Comments_Number} answers to &#8220;{$row.Post_Title}&#8221;</h3>
-			<ol class="commentlist">
-				{block {$comments} as {$comment}}
-				<li class="alt" id="comment-{$comment.Id_Comment}">
-					<cite>
-						<a href="#comment-{$comment.Id_Comment}" title="Comment permalink">#</a>&nbsp;&nbsp;
-						{$comment.Comment_Author} said:
-					</cite>
-					<br />
-					<span class="timestampComment"> at {$comment.Date}</span><br /><br />
-					{$comment.Comment}
-					<br /><br />
-				</li>
-				{/block}
-			</ol>
-		</div>
-
-		<div class="containerFormComments">
-		<h3 id="respond">Add your comment</h3>
-
-		<form action="{Form_Action}" method="post" name="commentForm" id="commentForm">
-			<p>
-				<label for="username">
-					<small>Name:</small>
-				</label>
-				<input name="username" id="username" value="{whois.User_Cookie}" size="22" tabindex="1" type="text" />
-			</p>
-			<p>
-				<label for="email">
-					<small>E-mail:</small>
-				</label>
-				<input name="email" id="email" value="{whois.Email_Cookie}" size="22" tabindex="2" type="text" />
-			</p>
-			<p>
-				<label for="web">
-					<small>Website:</small>
-				</label>
-				<input name="web" id="web" value="{whois.Web_Cookie}" size="22" tabindex="3" type="text" />
-			</p>
-			<p>
-				<textarea name="content" id="content" cols="100" rows="10" tabindex="4"></textarea>
-			</p>
-			<p>
-				<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;"><a href="http://hobix.com/textile/">Textile</a> syntax is supported.</span>
-			<p>
-				<input type="submit" value="Add comment" name="btnAdd" id="btnAdd" tabindex="5" />
-			</p>
-			<p>
-				<input name="id_post" id="id_post" value="{id_post}" type="hidden" />
-				<input name="comment_date" id="comment_date" value="{Date_Added}" type="hidden" />
-			</p>
-		</form>
-	</div>
-	{else}
-		{pagination}
+		{else}
+			{pagination}
+		{/if}
 	{/if}
-
 	</div>
 	<div id="footer">
 		subscribe via <a href="{URL_Tumble}/rss.php">rss</a> &nbsp;/&nbsp;
