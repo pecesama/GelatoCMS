@@ -115,14 +115,12 @@ $template = new plantillas($conf->template);
 								$register["description"] = $register["description"];
 
                                 $register["title"] = stripslashes($register["title"]);
-                                $register["description"] = stripslashes($register["description"]);
-								
-								$comment = new comments();
+                                $register["description"] = stripslashes($register["description"]);								
 								
                                 switch ($tumble->getType($register["id_post"])) {
                                         case "1":
-                                                $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}", "{Comments_Number}");
-                                                $output = array($formatedDate, $permalink, $register["title"], $register["description"], $conf->urlGelato, $comment->countComments($register["id_post"]));
+                                                $input = array("{Date_Added}", "{Permalink}", "{Title}", "{Body}", "{URL_Tumble}");
+                                                $output = array($formatedDate, $permalink, $register["title"], $register["description"], $conf->urlGelato, );
                                                                                         
                                                 $template->cargarPlantilla($input, $output, "template_regular_post");
                                                 $template->mostrarPlantilla();
@@ -185,6 +183,20 @@ $template = new plantillas($conf->template);
                                                 $template->mostrarPlantilla();
                                                 break;
                                 }
+								
+								
+								$comment = new comments();
+								$noComments = $comment->countComments($register["id_post"]);
+								
+								$user = new user();
+								$username = $user->getUserByID($register["id_user"]);
+								
+								
+								$input = array("{Permalink}", "{User}", "{Comments_Number}");
+								$output = array($permalink, $username["name"], $noComments);
+																		
+								$template->cargarPlantilla($input, $output, "template_details");
+								$template->mostrarPlantilla();
                         }
 
                         $p = new pagination;
