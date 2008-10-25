@@ -55,12 +55,10 @@ if ($user->isAdmin()) {
 		if (!get_magic_quotes_gpc()) {
 			$_POST["title"] = addslashes($_POST["title"]);
 			$_POST["description"] = addslashes($_POST["description"]);
-		}
-
-		$textile = new Textile();
-
-		$_POST["title"] = $textile->TextileThis(removeBadTags($_POST["title"]));
-		$_POST["description"] = $textile->TextileThis(removeBadTags($_POST["description"]));
+		}		
+		
+		$_POST["title"] = removeBadTags($_POST["title"],true);
+		$_POST["description"] = removeBadTags($_POST["description"]);
 
 		if ($tumble->addPost($_POST)) {
 			$input = array("{type}");
@@ -109,7 +107,17 @@ if ($user->isAdmin()) {
 		<meta name="generator" content="gelato cms <?php echo version();?>" />
 		<title>gelato :: <?php echo __("bookmarklet")?></title>
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
+        <script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
+        <script type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/jquery.markitup.pack.js"></script>
+		<script type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/sets/html/set.js"></script>			
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/skins/simple/style.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $conf->urlGelato;?>/admin/scripts/markitup/sets/html/style.css" />			
+        <script type="text/javascript" >
+           $(document).ready(function() {
+              $("#description").markItUp(my_html);
+           });
+        </script>
 		<style type="text/css" media="screen">
 			@import "<?php echo $conf->urlGelato;?>/admin/css/style.css";
 		</style>
