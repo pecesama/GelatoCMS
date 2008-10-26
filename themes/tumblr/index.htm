@@ -36,8 +36,8 @@
 			{block {$rows} as {$row}}
 				<div class="date">
 					{$row.Date_Added}
-				</div> {$row.postType}
-				{if {$row.postType}=='regular'}
+				</div>
+				{if {$row.postType}=='post'}
 					<div class="post">
 						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 
