@@ -96,9 +96,11 @@
 					</div>
 				{/if}
 
-			<div class="totalComments">
-				<h3>Posted by {$row.User} - <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) comments</a></h3>
-			</div>
+			{if !{$id_post}}
+				<div class="totalComments">
+					<h3>Posted by {$row.User} - <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) comments</a></h3>
+				</div>
+			{/if}
 		{/block}
 
 		{if {$id_post}}
