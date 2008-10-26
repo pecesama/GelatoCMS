@@ -123,7 +123,6 @@ $theme = new themes;
 								$row['Date_Added'] = $formatedDate;
 								$row['Permalink'] = $permalink;
 								$row['postType'] = $postType;
-
                                 switch ($postType){
                                         case "1":
                                         		$row['Title'] = $register["title"];
@@ -220,7 +219,7 @@ $theme = new themes;
 				$row['Date_Added'] = $formatedDate;
 				$row['Permalink'] = $permalink;
 				$postType = $tumble->getType($register["id_post"]);
-				$theme->set('postType',$postType);
+				$row['postType'] = $postType;
                 switch ($postType) {
                         case "1":
 								$row['Title'] = $register["title"];
