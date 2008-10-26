@@ -56,7 +56,6 @@ if($installed) {
 }
 
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'configuration.class.php');
-require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'textile.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gelato.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'templates.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'themes.class.php');
