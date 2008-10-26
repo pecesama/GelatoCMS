@@ -20,21 +20,18 @@ if(!defined('entry')) define('entry',true);
 	
 	
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-?>
-	
+?>	
 	<rss version="2.0">
 	<channel>
 		<title><?php echo htmlspecialchars($conf->title);?></title>
 		<link><?php echo $conf->urlGelato;?></link>
 		<description><?php echo htmlspecialchars($conf->description);?></description>
-		<generator>gelato CMS</generator>
+		<generator>gelato CMS <?php echo codeName()." (".version().")"; ?></generator>        
 		<image>
 			<url><?php echo $conf->urlGelato;?>/images/information.png</url>
 			<title><?php echo htmlspecialchars($conf->description);?></title>
 			<link><?php echo $conf->urlGelato;?></link>
 		</image>
-
-
 <?php
 	$rs = $tumble->getPosts("20");
 	if ($tumble->contarRegistros()>0) {		
@@ -77,13 +74,11 @@ if(!defined('entry')) define('entry',true);
 					$desc = $tumble->getMp3Player($register["url"]);
 					break;
 			}
-			$tit = strip_tags($tit);
-			//$url = htmlspecialchars($url);
-			$strEnd=($conf->urlFriendly) ? "/" : "";
-			$url = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
-			$formatedDate = gmdate("r", strtotime($register["date"])+transform_offset($conf->offsetTime));
+			$tit = trimString($tit);
+			$strEnd = ($conf->urlFriendly) ? "/" : "";
+			$url = $conf->urlGelato.($conf->urlFriendly ? "/post/" : "/index.php?post=").$register["id_post"].$strEnd;
+			$formatedDate = gmdate("r", strtotime($register["date"]) + transform_offset($conf->offsetTime));
 ?>
-
 			<item>
 				<title><?php echo $tit;?></title>
 				<description><![CDATA[<?php echo $desc;?>]]></description>

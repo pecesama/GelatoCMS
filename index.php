@@ -18,7 +18,7 @@ require_once('entry.php');
 global $user, $tumble, $conf;
 
 $theme = new themes;
-        // My approach to MVC
+        // Our first approach to MVC... ¿our second? visit http://www.flavorphp.com
 
         if(isset($_SERVER['PATH_INFO'])) $param_url = explode("/",$_SERVER['PATH_INFO']);
 
@@ -49,7 +49,7 @@ $theme = new themes;
         }
 
         $gelato_includes = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n";
-        $gelato_includes .= "\t<meta name=\"generator\" content=\"gelato  ".codeName()." (".version().")\" />\n";
+        $gelato_includes .= "\t<meta name=\"generator\" content=\"gelato ".codeName()." (".version().")\" />\n";
         $gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />\n";
         $gelato_includes .= "\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php")."\"/>\n";
         $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/themes/".$conf->template."/style.css\"/>\n";
@@ -64,11 +64,7 @@ $theme = new themes;
 			$register = $tumble->getPost($id_post);			
 			if (empty($register["title"])) {
 				if (!empty($register["description"])) {
-					if (strlen($register["description"]) > $page_title_len) {
-						$page_title_data = substr($register["description"], 0, $page_title_len)."...";
-					} else {
-						$page_title_data = $register["description"];
-					}
+					$page_title_data = trimString($register["description"], $page_title_len);
 				} else {
 					$page_title_data =  type2Text($register["type"]);
 				}
@@ -76,7 +72,7 @@ $theme = new themes;
 				$page_title_data = $register["title"];
 			}			
 			if (!empty($page_title_data)) {
-				$page_title .= $page_title_divisor.stripslashes(strip_tags($page_title_data));
+				$page_title .= $page_title_divisor.stripslashes($page_title_data);
 			}
 		}
 
@@ -278,15 +274,11 @@ $theme = new themes;
 					$user = new user();
 					$username = $user->getUserByID($register["id_user"]);
 
-					$row['User'] = $username["name"];
+					$row["User"] = $username["name"];
 					
 					if (empty($register["title"])) {
 						if (!empty($register["description"])) {
-							if (strlen($register["description"]) > 30) {
-								$postTitle = substr($register["description"], 0, 30)."...";
-							} else {
-								$postTitle = $register["description"];
-							}
+							$postTitle = trimString($register["description"]);
 						} else {
 							$postTitle =  type2Text($register["type"]);
 						}
@@ -294,8 +286,8 @@ $theme = new themes;
 						$postTitle = $register["title"];
 					}					
 
-					$row['Post_Title'] = strip_tags($postTitle);
-					$row['Comments_Number'] = $comment->countComments($register["id_post"]);
+					$row["Post_Title"] = $postTitle;
+					$row["Comments_Number"] = $comment->countComments($register["id_post"]);
 
 					$rows[] = $row;
 					$theme->set('rows',$rows);
