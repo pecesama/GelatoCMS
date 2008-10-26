@@ -1,5 +1,5 @@
 <?php
-if(!defined('entry') || !entry) die('Not a valid page'); 
+if(!defined('entry') || !entry) die('Not a valid page');
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -15,32 +15,32 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	function version() {
 		return "1.0";
 	}
-	
+
 	function codeName() {
 		return "vaniglia RC1";
 	}
-	
+
 	function beginsWith($str, $sub) {
 		return (strpos($str, $sub) === 0);
 	}
-	
+
 	function endsWith($str, $sub) {
 		return (substr($str, strlen($str) - strlen($sub)) == $sub);
 	}
-	
+
 	function getFileName($fileUrl) {
 		$path = explode('/', $fileUrl);
 		return $path[count($path)-1];
 	}
-	
+
 	function isMP3($fileUrl) {
 		if (endsWith($fileUrl, ".mp3")) {
 			return true;
 		} else {
 			return false;
 		}
-	}	
-	
+	}
+
 	function getMP3File($remoteFileName) {
 		if (isMP3($remoteFileName)) {
 			if (getFile($remoteFileName)) {
@@ -51,48 +51,48 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		} elseif (isGoEar($remoteFileName)) {
 			return true;
 		} elseif (isOdeo($remoteFileName)) {
-			return true;			
+			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	function getGoEarCode($songUrl) {
 		$pos = strpos($songUrl, "?v=");
 		$lon = strlen($songUrl);
 		$str = substr($songUrl, $pos + 3, $lon);
 		return $str;
 	}
-	
+
 	function isGoEar($songUrl) {
 		if (beginsWith($songUrl, "http://www.goear.com/listen.php?v=") || beginsWith($songUrl, "http://goear.com/listen.php?v="))
 			return true;
 		else
 			return false;
 	}
-	
+
 	function isOdeo($songUrl){
 		if (beginsWith($songUrl, "http://odeo.com/audio/") || beginsWith($songUrl, "http://www.odeo.com/audio/"))
 			return true;
 		else
 			return false;
 	}
-	
+
 	function getOdeoCode($songUrl) {
 		$params = explode("audio/", $songUrl);
 		$params2 = explode("/",$params[1]);
 		return $params2[0];
 	}
-	
+
 	function isImageFile($photoUrl) {
 		if (endsWith($photoUrl, ".jpg")) { return true; }
 		elseif (endsWith($photoUrl, ".gif")) { return true; }
 		elseif (endsWith($photoUrl, ".png")) { return true; }
 		else { return false; }
 	}
-	
+
 	function getPhotoFile($remoteFileName) {
-		if (isImageFile($remoteFileName)) {		
+		if (isImageFile($remoteFileName)) {
 			if (getFile($remoteFileName)) {
 				return true;
 			} else {
@@ -102,37 +102,37 @@ if(!defined('entry') || !entry) die('Not a valid page');
 			return false;
 		}
 	}
-	
+
 	function getFile($remoteFileName) {
-		$fileName = "../uploads/".sanitizeName(getFileName($remoteFileName));		
+		$fileName = "../uploads/".sanitizeName(getFileName($remoteFileName));
 		$str = _file_get_contents($remoteFileName);
 		if (!$handle = fopen($fileName, 'w')) {
 			//die("no se abrio de escritura");
 			return false;
 		}
-		
+
 		if (fwrite($handle, $str) === FALSE) {
 			//die("no se escribio");
 			return false;
 		}
 		fclose($handle);
-		return true;	
+		return true;
 	}
-	
+
 	function isVimeoVideo($videoUrl) {
 		if (beginsWith($videoUrl, "http://vimeo.com/") || beginsWith($videoUrl, "http://www.vimeo.com/"))
 			return true;
 		else
 			return false;
 	}
-	
+
 	function getVimeoVideoUrl($videoUrl) {
 		if(substr_count($videoUrl,"clip:")==1)
 			return array_pop(explode("clip:",$videoUrl));
 		else
 			return array_pop(explode("/",$videoUrl));
 	}
-	
+
 	function isYoutubeVideo($videoUrl) {
 		$url = explode("?", $videoUrl);
 		if((beginsWith($url[0], "http://") && endsWith($url[0], ".youtube.com/watch")) || beginsWith($url[0], "http://youtube.com/watch"))
@@ -140,14 +140,14 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		else
 			return false;
 	}
-	
+
 	function isYahooVideo($videoUrl){
 		if (beginsWith($videoUrl, "http://video.yahoo.com/watch/") || beginsWith($videoUrl, "http://www.video.yahoo.com/watch/"))
 			return true;
 		else
 			return false;
 	}
-	
+
 	function getYahooVideoCode($videoUrl){
 		$params = explode("http://video.yahoo.com/watch/", $videoUrl);
 		$params2 = explode("/",$params[1]);
@@ -160,7 +160,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$params2 = explode("&",$params[1]);
 		return $params2[0];
 	}
-	
+
 	function isGoogleVideoUrl($videoUrl){
 		if (beginsWith($videoUrl, "http://video.google.com/videoplay?")){
 			return true;
@@ -168,13 +168,13 @@ if(!defined('entry') || !entry) die('Not a valid page');
 			return false;
 		}
 	}
-	
+
 	function getGoogleVideoCode($videoUrl){
 		$params = explode("?docid=", $videoUrl);
 		$params2 = explode("&",$params[1]);
 		return $params2[0];
 	}
-	
+
 	function isDailymotionVideo($videoUrl) {
 		if (beginsWith($videoUrl, "http://www.dailymotion.com/video/") || beginsWith($videoUrl, "http://dailymotion.com/video/"))
 			return true;
@@ -187,21 +187,21 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$params2 = explode("_",$params[1]);
 		return $params2[0];
 	}
-	
+
 	function isSlideSharePresentation($videoUrl) {
 		if (beginsWith($videoUrl, "[slideshare id="))
 			return true;
 		else
 			return false;
 	}
-	
+
 	function getSlideSharePresentationCode($videoUrl) {
 		$videoUrl = str_replace("[slideshare id=", "", $videoUrl);
 		$videoUrl = str_replace("&doc=", " ", $videoUrl);
 		$videoUrl = str_replace("&w=", " ", $videoUrl);
 		return explode(" ",$videoUrl);
 	}
-	
+
 	function isVideo($url) {
 		if (isYoutubeVideo($url)) { return true; }
 		elseif (isVimeoVideo($url)) { return true; }
@@ -211,12 +211,12 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		elseif (isGoogleVideoUrl($url)) { return true; }
 		else { return false; }
 	}
-	
-	function sendMail($to, $title, $body, $from) {					
+
+	function sendMail($to, $title, $body, $from) {
 		$rp     = trim($from);
 		$org    = "gelato CMS";
 		$mailer = "gelato CMS Mailer";
-			
+
 		$head  = '';
 		$head  .= "Content-Type: text/html \r\n";
 		$head  .= "Date: ". date('r'). " \r\n";
@@ -228,13 +228,13 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$head  .= "X-Sender: $from \r\n";
 		$head  .= "X-Priority: 3 \r\n";
 		$head  .= "X-Mailer: $mailer \r\n";
-			
+
 		$body  = str_replace("\r\n", "\n", $body);
 		$body  = str_replace("\n", "\r\n", $body);
-			
-		return @mail($to, $title, $body, $head);			
+
+		return @mail($to, $title, $body, $head);
 	}
-	
+
 	function getThemes() {
  		$themes_dir = "themes";
  		$dirs = array();
@@ -262,20 +262,20 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		//HACK: We need to rework the regular expression to allow the dot
 		$ext = substr($name, strlen($name)-3, strlen($name));
 		$body = substr($name, 0, strlen($name)-4);
-		
+
 		$name = $body.".".$ext;
-		
+
 		return $name;
 	}
-	
+
 	function _file_get_contents($path) {
-		// Modified function from: 
+		// Modified function from:
 		//		http://work.dokoku.net/Anieto2k/_file_get_contents.phps
 		//		http://www.anieto2k.com/2007/02/09/file_get_contents-y-dreamhost/
 		if (!preg_match('/^http/i', $path)) {
 			if ($fp = fopen($path, 'r')) {
 				return fread($fp, 1024);
-			} else {			
+			} else {
 				return false;
 			}
 		} else {
@@ -297,7 +297,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 				if (!$data['host'] || $data['scheme'] != "http") {
 					return false;
 				}
-		
+
 				$f = @fsockopen($data['host'], ($data['port']) ? $data['port'] : 80, $e1, $e2, 3);
 				if (!$f) {
 					return false;
@@ -307,17 +307,17 @@ if(!defined('entry') || !entry) die('Not a valid page');
 				$q .= "Host: " . $data['host'] . "\r\n";
 				$q .= "Connection: close\r\n";
 				$q .= "Referer: http://www.gelatocms.com/\r\n\r\n";
-		
+
 				$recv = "";
 				fwrite($f, $q);
 				while (!feof($f)) {
 					$recv .= fread($f, 1024);
 				}
-		
+
 				$request = $q;
 				$response = substr($recv, 0, strpos($recv, "\r\n\r\n"));
 				$body = substr($recv, strpos($recv, "\r\n\r\n") + 4);
-		
+
 				if (preg_match('/http\/1\\.[0|1] ([0-9]{3})/i', $response, $res)) {
 					if ($res[1][0] != "2") {
 						return false;
@@ -325,7 +325,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 				} else {
 					return false;
 				}
-		
+
 				if (preg_match('/transfer-encoding:\s*chunked/i', $response)) {
 					$tmp_body = $body;
 					$new = "";
@@ -344,12 +344,12 @@ if(!defined('entry') || !entry) die('Not a valid page');
 						}
 					}
 					$body = $new;
-				}	
+				}
 				return $body;
 			}
 		}
 	}
-	
+
 	function get_curl_version() {
 		$curl = 0;
 		if (is_array(curl_version())) {
@@ -363,7 +363,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		}
 		return $curl;
 	}
-	
+
 	function transform_offset($offset){
 		$sp = strpos($offset , ".")? explode("." , $offset) : false;
 		if(is_array($sp)){
@@ -376,7 +376,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		}
 		return $off;
 	}
-	
+
 	function getLangs() {
  		$langs_dir = "languages";
  		$dirs = array();
@@ -388,7 +388,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$cls_lang_dir = @ dir($dir);
 		while (($directory = $cls_lang_dir->read()) !== false) {
 			if($directory != "." && $directory != "..") {
-				
+
 				$dir2 = (substr(PHP_OS, 0, 3) == 'WIN') ? $path."\\".$langs_dir."\\".$directory : $path."/".$langs_dir."/".$directory;
 				$dir2 = str_replace("admin\\", "", $dir2);
 				$dir2 = str_replace("admin/", "", $dir2);
@@ -423,14 +423,14 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$source = strip_tags($source, $validTags);
 		return preg_replace('/<(.*?)>/ie', "'<'.removeBadAtributes('\\1').'>'", $source);
 	}
-	
+
 	function removeBadAtributes($sourceTag) {
 		$badAtributes = 'javascript:|onclick|ondblclick|onmousedown|onmouseup|onmouseover|onmousemove|onmouseout|onkeypress|onkeydown|onkeyup';
 		$sourceTag = stripslashes($sourceTag);
 		$sourceTag = preg_replace("/$badAtributes/i", "niceTry", $sourceTag);
 		return $sourceTag;
 	}
-	
+
 	function type2Text($number) {
 		$tmpStr = "";
 		switch ($number) {
@@ -438,7 +438,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 				$tmpStr = "post";
 				break;
 			case "2":
-				$tmpStr = "photo";							   
+				$tmpStr = "photo";
 				break;
 			case "3":
 				$tmpStr = "quote";
@@ -454,11 +454,11 @@ if(!defined('entry') || !entry) die('Not a valid page');
 				break;
 			case "7":
 				$tmpStr = "mp3";
-				break;								
+				break;
 		}
 		return $tmpStr;
 	}
-	
+
 	function type2Number($string) {
 		$tmpStr = "";
 		switch ($string) {
@@ -466,7 +466,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 				$tmpStr = "1";
 				break;
 			case "photo":
-				$tmpStr = "2";							   
+				$tmpStr = "2";
 				break;
 			case "quote":
 				$tmpStr = "3";
@@ -482,14 +482,16 @@ if(!defined('entry') || !entry) die('Not a valid page');
 				break;
 			case "mp3":
 				$tmpStr = "7";
-				break;								
+				break;
 		}
 		return $tmpStr;
 	}
-	
+
 	function trimString($string, $len = "") {
+		if($len>strlen($string) or $len<1)
+			return $string;
 		$string = strip_tags($string);
-		$len = (empty($len)) ? "50" : $len ;		
+		$len = (empty($len)) ? "50" : $len ;
 		return ( strpos($string, " ", $len) ) ? substr_replace($string, "...", $len) : $string ;
 	}
 ?>
