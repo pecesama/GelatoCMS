@@ -18,7 +18,7 @@ require_once('entry.php');
 global $user, $tumble, $conf;
 
 $theme = new themes;
-        // Our first approach to MVC... ¿our second? visit http://www.flavorphp.com
+        // Our first approach to MVC... ï¿½our second? visit http://www.flavorphp.com
 
         if(isset($_SERVER['PATH_INFO'])) $param_url = explode("/",$_SERVER['PATH_INFO']);
 
@@ -36,7 +36,7 @@ $theme = new themes;
         }
 
         $theme->set('id_post',$id_post);
-	$theme->set('error','');
+		$theme->set('error','');
 
         if (isset($_GET["page"])) {
                 $page_num = $_GET["page"];
@@ -61,7 +61,7 @@ $theme = new themes;
 		$page_title_divisor = " &raquo; "; // it should be set in configuration
 		$page_title_len = 50; // it should be set in configuration
 		if ($id_post) {
-			$register = $tumble->getPost($id_post);			
+			$register = $tumble->getPost($id_post);
 			if (empty($register["title"])) {
 				if (!empty($register["description"])) {
 					$page_title_data = trimString($register["description"], $page_title_len);
@@ -70,7 +70,7 @@ $theme = new themes;
 				}
 			} else {
 				$page_title_data = $register["title"];
-			}			
+			}
 			if (!empty($page_title_data)) {
 				$page_title .= $page_title_divisor.stripslashes($page_title_data);
 			}
@@ -82,6 +82,7 @@ $theme = new themes;
 		$theme->set('Description',$conf->description);
 		$theme->set('URL_Tumble',$conf->urlGelato);
 		$theme->set('Template_name',$conf->template);
+		$theme->set('allowComments',$conf->allowComments);
 
 		$theme->set('isAuthenticated',$user->isAuthenticated());
         if($user->isAuthenticated()){
@@ -116,12 +117,11 @@ $theme = new themes;
                                 $register["title"] = stripslashes($register["title"]);
                                 $register["description"] = stripslashes($register["description"]);
 
-								$postType = $tumble->getType($register["id_post"]);
-
 								$row['Date_Added'] = $formatedDate;
 								$row['Permalink'] = $permalink;
-								$row['postType'] = $postType;
-                                switch ($postType){
+								$row['postType'] = type2Text($register["type"]);
+
+                                switch ($register['type']){
                                         case "1":
                                         		$row['Title'] = $register["title"];
                                         		$row['Body'] = $register["description"];
@@ -216,9 +216,9 @@ $theme = new themes;
 
 				$row['Date_Added'] = $formatedDate;
 				$row['Permalink'] = $permalink;
-				$postType = $tumble->getType($register["id_post"]);
-				$row['postType'] = $postType;
-                switch ($postType) {
+				$row['postType'] = type2Text($register["type"]);
+
+                switch ($register['type']) {
                         case "1":
 								$row['Title'] = $register["title"];
 								$row['Body'] = $register["description"];
@@ -266,16 +266,11 @@ $theme = new themes;
 								break;
                 }
 
-				if ($conf->allowComments) {
-
-					$comment = new comments();
-					$rsComments = $comment->getComments($register["id_post"]);
-
 					$user = new user();
 					$username = $user->getUserByID($register["id_user"]);
 
 					$row["User"] = $username["name"];
-					
+
 					if (empty($register["title"])) {
 						if (!empty($register["description"])) {
 							$postTitle = trimString($register["description"]);
@@ -284,14 +279,15 @@ $theme = new themes;
 						}
 					} else {
 						$postTitle = $register["title"];
-					}					
+					}
 
-					$row["Post_Title"] = $postTitle;
-					$row["Comments_Number"] = $comment->countComments($register["id_post"]);
+				$row["Post_Title"] = $postTitle;
 
-					$rows[] = $row;
-					$theme->set('rows',$rows);
+				$comment = new comments();
+				$row["Comments_Number"] = $comment->countComments($register["id_post"]);
 
+				if ($conf->allowComments) {
+					$rsComments = $comment->getComments($register["id_post"]);
 					$comments = array();
 					while($rowComment = mysql_fetch_assoc($rsComments)) {
 						$commentAuthor = ($rowComment["web"]=="") ? $rowComment["username"] : "<a href=\"".$rowComment["web"]."\" rel=\"external\">".$rowComment["username"]."</a>";
@@ -314,6 +310,9 @@ $theme = new themes;
 					$theme->set('Form_Action',$conf->urlGelato."/admin/comments.php");
 					$theme->set('whois',$whois);
 				}
+
+				$rows[] = $row;
+				$theme->set('rows',$rows);
         }
 
         $theme->set('URL_Tumble',$conf->urlGelato);
