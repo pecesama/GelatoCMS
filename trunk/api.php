@@ -59,16 +59,16 @@ if(!defined('entry')) define('entry',true);
 			<posts start="<?php echo $start; ?>" total="<?php echo $total; ?>">
 <?php 
 			while($register = mysql_fetch_array($rs)) {
-				$desc = htmlspecialchars($register["description"]);
-				$url = $conf->urlGelato."/index.php?post=".$register["id_post"];
-				$formatedDate = gmdate("D, d M Y H:i:s", strtotime($register["date"])+transform_offset($conf->offsetTime));
+				$desc = trimString($register["description"]);				
+				$strEnd = ($conf->urlFriendly) ? "/" : "";
+				$url = $conf->urlGelato.($conf->urlFriendly ? "/post/" : "/index.php?post=").$register["id_post"].$strEnd;
+				$formatedDate = gmdate("D, d M Y H:i:s", strtotime($register["date"]) + transform_offset($conf->offsetTime));
 				
 				switch ($register["type"]) {
 					case "1":
 
-						$tit = ($register["title"]=="") ? $desc : $register["title"];
-?>
-						
+						$tit = (empty($register["title"])) ? $desc : strip_tags($register["title"]);
+?>						
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="regular" date="<?php echo $formatedDate;?>">
 							<regular-title><?php echo $tit;?></regular-title>
 							<regular-body><?php echo $desc;?></regular-body>
@@ -76,7 +76,7 @@ if(!defined('entry')) define('entry',true);
 <?php						
 						break;
 					case "2":
-						$tit = ($register["description"]=="") ? "Photo" : $desc;
+						$tit = (empty($register["description"])) ? "Photo" : $desc;
 ?>
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="photo" date="<?php echo $formatedDate;?>">
 <?php
@@ -91,12 +91,12 @@ if(!defined('entry')) define('entry',true);
 ?>
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="quote" date="<?php echo $formatedDate;?>">
 							<quote-text><?php echo $desc; ?></quote-text>
-							<quote-source><?php echo $register["title"]; ?></quote-source>
+							<quote-source><?php echo strip_tags($register["title"]); ?></quote-source>
 						</post>
 <?php
 						break;
 					case "4":
-						$tit = ($register["title"]=="") ? $register["url"] : $register["title"];
+						$tit = (empty($register["title"])) ? $register["url"] : strip_tags($register["title"]);
 ?>
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="link" date="<?php echo $formatedDate;?>">
                             <link-text><?php echo $tit; ?></link-text>
@@ -107,7 +107,7 @@ if(!defined('entry')) define('entry',true);
 					case "5":
 						$lines = explode("\n", $desc);
 						$line = $lines[0];
-						$tit = ($register["title"]=="") ? $line : $register["title"];
+						$tit = (empty($register["title"])) ? trimString($line) : $register["title"];
 						$desc = $tumble->formatConversation($desc);
 ?>
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="conversation" date="<?php echo $formatedDate;?>">
@@ -118,7 +118,7 @@ if(!defined('entry')) define('entry',true);
 <?php
 						break;
 					case "6":
-						$tit = ($register["description"]=="") ? "Video" : $desc;
+						$tit = (empty($register["description"])) ? "Video" : $desc;
 						$desc = $tumble->getVideoPlayer($register["url"]);
 ?>
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="video" date="<?php echo $formatedDate;?>">
@@ -130,7 +130,7 @@ if(!defined('entry')) define('entry',true);
 						break;
 
 					case "7":
-						$tit = ($register["description"]=="") ? "Audio" : $desc;
+						$tit = (empty($register["description"])) ? "Audio" : $desc;
 						$desc = $tumble->getMp3Player($register["url"]);
 ?>
 						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="audio" date="<?php echo $formatedDate;?>">
@@ -140,11 +140,8 @@ if(!defined('entry')) define('entry',true);
 <?php
 						break;
 
-				}
-				$url = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
-				$formatedDate = gmdate("D, d M Y H:i:s", strtotime($register["date"])+transform_offset($conf->offsetTime));
-			}		
- 
+				}				
+			} 
 ?>
 				</posts>
 <?php	

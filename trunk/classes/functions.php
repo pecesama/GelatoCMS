@@ -471,4 +471,10 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		}
 		return $tmpStr;
 	}
+	
+	function trimString($string, $len = "") {
+		$string = strip_tags($string)
+		$len = (empty($len)) ? "50" : $len ;		
+		return ( strpos($string, " ", $len) ) ? substr_replace($string, "...", $len) : $string ;
+	}
 ?>
