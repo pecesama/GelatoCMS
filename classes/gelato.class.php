@@ -173,8 +173,11 @@ class gelato extends Conexion_Mysql {
 		} elseif (isSlideSharePresentation($url)) {
 			$id_video = getSlideSharePresentationCode($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.slideshare.net/swf/player.swf?presentationId=".$id_video[0]."&amp;doc=".$id_video[1]."&amp;inContest=0&amp;startSlide=1\"><param name=\"quality\" value=\"high\" /></object>\n";
+		} elseif (isGoogleVideoUrl($url)) {
+			$id_video = getGoogleVideoCode($url);
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://video.google.com/googleplayer.swf?docid=".$id_video."&hl=es&fs=true\"><param name=\"movie\" value=\"http://video.google.com/googleplayer.swf?docid=".$id_video."&hl=es&fs=true\" /><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowScriptAccess\" value=\"always\" /></object>\n";
 		} else {
-			return "This URL is not a supported video (YouTube, Vimeo, DailyMotion, Yahoo Video or SlideShare)";
+			return "This URL is not a supported video (YouTube, Google Video, Vimeo, DailyMotion, Yahoo Video or SlideShare)";
 		}		
 	}
 	function getMp3Player($url) {

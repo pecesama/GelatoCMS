@@ -161,6 +161,20 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		return $params2[0];
 	}
 	
+	function isGoogleVideoUrl($videoUrl){
+		if (beginsWith($videoUrl, "http://video.google.com/videoplay?")){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	function getGoogleVideoCode($videoUrl){
+		$params = explode("?docid=", $videoUrl);
+		$params2 = explode("&",$params[1]);
+		return $params2[0];
+	}
+	
 	function isDailymotionVideo($videoUrl) {
 		if (beginsWith($videoUrl, "http://www.dailymotion.com/video/") || beginsWith($videoUrl, "http://dailymotion.com/video/"))
 			return true;
@@ -194,6 +208,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		elseif (isDailymotionVideo($url)) { return true; }
 		elseif (isYahooVideo($url)) { return true; }
 		elseif (isSlideSharePresentation($url)) { return true; }
+		elseif (isGoogleVideoUrl($url)) { return true; }
 		else { return false; }
 	}
 	
