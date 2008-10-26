@@ -318,7 +318,7 @@ if ($user->isAuthenticated()) {
 										<br />
 										&nbsp;&nbsp;&nbsp;&nbsp;&lt;blockquote&gt;
                                         &lt;code&gt; &lt;pre&gt; &lt;img&gt;
-										<code>
+										</code>
 										<br /><br />
                                         Bookmarklet - <a class="bookmarklet" title="<?php echo __("Drag to the Bookmarks Toolbar")?>" href="javascript:var w; setTimeout('w.focus()',100);w=window.open('<?php echo $conf->urlGelato; ?>/admin/bm.php?url='+encodeURIComponent(location.href)+'&sel='+encodeURIComponent(window.getSelection()),'bookmarklet','toolbar=0,resizable=0,status=1,width=650,height=540,dependent=yes' ); w.focus();"><?php echo __("add to gelato")?></a>
                                         <br /><br />

@@ -208,7 +208,17 @@ if ($user->isAdmin()) {
 							}
 ?>
 								<p>
-									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;"><a href="http://hobix.com/textile/">Textile</a> <?php echo __("syntax is supported.")?></span>
+									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
+                                    	<?php echo __("Some HTML allowed")?>:<br />
+										&nbsp;&nbsp;&nbsp;&nbsp;
+										<code>
+                                            &lt;strong&gt; &lt;em&gt; &lt;del&gt; &lt;ul&gt;  &lt;ol&gt;  &lt;li&gt; &lt;a&gt;
+                                            <br />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;blockquote&gt;
+                                            &lt;code&gt; &lt;pre&gt; &lt;img&gt;
+										</code>
+										<br /><br />
+                                    </span>
 								</p>
 								<p>
 									<input class="btn" type="submit" name="btnAdd" value="Create post" />

@@ -401,7 +401,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 
 	function removeBadTags($source,$secure=false) {
 		if($secure){
-			$validTags ='<abbr><acronym><em><i><strong><b><span>';
+			$validTags ='<blockquote><code><em><i><strong><b><a>';
 		} else {
 			$validTags ='<p><ol><ul><li><a><abbr><acronym><blockquote><code><pre><em><i><strong><b><del><br><span><div><img>';
 		}
