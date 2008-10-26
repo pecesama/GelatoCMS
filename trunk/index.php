@@ -61,20 +61,22 @@ $theme = new themes;
 		$page_title_divisor = " &raquo; "; // it should be set in configuration
 		$page_title_len = 50; // it should be set in configuration
 		if ($id_post) {
-			$register = $tumble->getPost($id_post);
-			$textile = new Textile();
+			$register = $tumble->getPost($id_post);			
 			if (empty($register["title"])) {
 				if (!empty($register["description"])) {
 					if (strlen($register["description"]) > $page_title_len) {
 						$page_title_data = substr($register["description"], 0, $page_title_len)."...";
+					} else {
+						$page_title_data = $register["description"];
 					}
+				} else {
+					$page_title_data =  type2Text($register["type"]);
 				}
 			} else {
 				$page_title_data = $register["title"];
-			}
-			$page_title_data = strip_tags($textile->TextileThis($page_title_data));
+			}			
 			if (!empty($page_title_data)) {
-				$page_title .= $page_title_divisor.stripslashes($page_title_data);
+				$page_title .= $page_title_divisor.stripslashes(strip_tags($page_title_data));
 			}
 		}
 
