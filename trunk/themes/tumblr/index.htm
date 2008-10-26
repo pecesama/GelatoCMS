@@ -37,7 +37,7 @@
 				<div class="date">
 					{$row.Date_Added}
 				</div>
-				{if {$postType}==1}
+				{if {$row.postType}==1}
 					<div class="post">
 						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 
@@ -46,7 +46,7 @@
 							{$row.Body}
 						</div>
 					</div>
-				{elseif {$postType}==2}
+				{elseif {$row.postType}==2}
 					<div class="post">
 						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="photo">
@@ -54,7 +54,7 @@
 							<div class="caption">{$row.Caption}</div>
 						</div>
 					</div>
-				{elseif {$postType}==3}
+				{elseif {$row.postType}==3}
 					<div class="post">
 						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="quote">
@@ -62,7 +62,7 @@
 							<div class="source">&mdash; {$row.Source}</div>
 						</div>
 					</div>
-				{elseif {$postType}==4}
+				{elseif {$row.postType}==4}
 					<div class="post">
 						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 							<div class="link">
@@ -70,7 +70,7 @@
 							<div class="description">{$row.Description}</div>
 						</div>
 					</div>
-				{elseif {$postType}==5}
+				{elseif {$row.postType}==5}
 					<div class="post">
 						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="conversation">
@@ -78,7 +78,7 @@
 							{$row.Conversation}
 						</div>
 					</div>
-				{elseif {$postType}==6}
+				{elseif {$row.postType}==6}
 					<div class="post">
 						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="video">
@@ -86,7 +86,7 @@
 							<div class="caption">{$row.Caption}</div>
 						</div>
 					</div>
-				{elseif {$postType}==7}
+				{elseif {$row.postType}==7}
 					<div class="post">
 						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="video">

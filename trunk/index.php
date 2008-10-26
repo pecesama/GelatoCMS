@@ -36,6 +36,7 @@ $theme = new themes;
         }
 
         $theme->set('id_post',$id_post);
+	$theme->set('error','');
 
         if (isset($_GET["page"])) {
                 $page_num = $_GET["page"];
@@ -121,7 +122,7 @@ $theme = new themes;
 
 								$row['Date_Added'] = $formatedDate;
 								$row['Permalink'] = $permalink;
-								$theme->set('postType',$postType);
+								$row['postType'] = $postType;
 
                                 switch ($postType){
                                         case "1":
