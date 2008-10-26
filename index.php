@@ -279,20 +279,22 @@ $theme = new themes;
 					$username = $user->getUserByID($register["id_user"]);
 
 					$row['User'] = $username["name"];
-
-					$textile = new Textile();
+					
 					if (empty($register["title"])) {
 						if (!empty($register["description"])) {
 							if (strlen($register["description"]) > 30) {
 								$postTitle = substr($register["description"], 0, 30)."...";
+							} else {
+								$postTitle = $register["description"];
 							}
+						} else {
+							$postTitle =  type2Text($register["type"]);
 						}
 					} else {
 						$postTitle = $register["title"];
-					}
-					$postTitle = strip_tags($textile->TextileThis($postTitle));
+					}					
 
-					$row['Post_Title'] = $postTitle;
+					$row['Post_Title'] = strip_tags($postTitle);
 					$row['Comments_Number'] = $comment->countComments($register["id_post"]);
 
 					$rows[] = $row;
