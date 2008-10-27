@@ -245,7 +245,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
  		$handle = opendir($dir);
  		$i=0;
  		while($filename = readdir($handle)) {
- 			if($filename != "." && $filename != "..") {
+ 			if($filename != "." && $filename != ".." && $filename != ".svn") {
  				$dirs[$i]=trim($filename);
  				$i++;
  			}
