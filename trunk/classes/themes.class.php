@@ -46,10 +46,9 @@ class themes{
 		$this->registrar_vars();
 		$this->__();
 		$this->eval_control_structures();
-
 		//evaluate All as PHP code
 		ob_start();eval($this->output);
-		$this->output = ob_get_clean();
+		$this->output = stripslashes(ob_get_clean());
 	}
 
 	function eval_control_structures(){
