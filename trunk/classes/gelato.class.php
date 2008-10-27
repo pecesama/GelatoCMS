@@ -191,6 +191,14 @@ class gelato extends Conexion_Mysql {
 		} else {
 			return "This URL is not an MP3 file.";
 		}		
-	}	
+	}
+
+	function getPermalink($post_id){
+		$strEnd = ($this->conf->urlFriendly) ? "/" : "";
+		$out = $this->conf->urlGelato;
+		$out .= ($this->conf->urlFriendly) ? "/post/" : "/index.php?post=";
+		$out .= $post_id.$strEnd;
+		return $out;
+	}
 } 
 ?>

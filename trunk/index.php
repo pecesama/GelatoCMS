@@ -107,8 +107,8 @@ $theme = new themes;
                         while($register = mysql_fetch_assoc($rs)) {
 								$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
                                 if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
-								$strEnd=($conf->urlFriendly) ? "/" : "";
-								$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
+								
+								$permalink = $tumble->getPermalink($register["id_post"]);
 
 								$conversation = $register["description"];
 
@@ -204,8 +204,7 @@ $theme = new themes;
                 $register = $tumble->getPost($id_post);
 
 				$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
-				$strEnd=($conf->urlFriendly) ? "/" : "";
-				$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
+				$permalink = $tumble->getPermalink($register["id_post"]);
 
 				$conversation = $register["description"];
 
