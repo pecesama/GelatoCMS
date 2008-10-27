@@ -28,9 +28,10 @@ class comments extends Conexion_Mysql {
 	}
 	
 	function generateCookie($fieldsArray) {
-		setcookie("cookie_gel_user", $fieldsArray["username"], time() + 30000000, "/");
-		setcookie("cookie_gel_email", $fieldsArray["email"], time() + 30000000, "/");
-		setcookie("cookie_gel_web", $fieldsArray["web"], time() + 30000000, "/");
+		$path = dirname(dirname($_SERVER['SCRIPT_NAME']."../"));
+		setcookie("cookie_gel_user", $fieldsArray["username"], time() + 30000000, $path);
+		setcookie("cookie_gel_email", $fieldsArray["email"], time() + 30000000, $path);
+		setcookie("cookie_gel_web", $fieldsArray["web"], time() + 30000000, $path);
 	}
 	
 	function isSpam($fieldsArray) {
