@@ -365,8 +365,8 @@ if ($user->isAuthenticated()) {
 					if ($tumble->contarRegistros()>0) {				
 						while($register = mysql_fetch_array($rs)) {			
 							$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
-							$permalink = $conf->urlGelato."/index.php/post/".$register["id_post"]."/";
-							
+							$strEnd=($conf->urlFriendly) ? "/" : "";
+							$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
 							$register["title"] = stripslashes($register["title"]);
 							$register["description"] = stripslashes($register["description"]);
 							

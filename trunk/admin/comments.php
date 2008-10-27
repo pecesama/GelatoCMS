@@ -44,8 +44,12 @@ if(isset($_POST["btnAdd"]))	{
 		$_POST["spam"] = ($comment->isSpam($_POST)) ? "1" : "0";		
 		$_POST["ip_user"] = $_SERVER["REMOTE_ADDR"];
 		
+		$strEnd=($conf->urlFriendly) ? "/" : "";
 		if ($comment->addComment($_POST)) {
-			header("Location: ".$conf->urlGelato."/index.php/post/".$_POST["id_post"]);
+			header("Location: ".$conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$_POST["id_post"].$strEnd);
+			die();
+		} else {
+			header("Location: ".$conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$_POST["id_post"].$strEnd);
 			die();
 		}
 	}		
