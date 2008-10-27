@@ -107,7 +107,7 @@ class themes{
 		preg_match_all($patron,$this->output,$out);
 
 		foreach($out[1] as $k=>$v){
-				$this->output = str_replace("{__('$v')}",$this->l10n->__($v),$this->output);
+				$this->output = preg_replace("/{__\((?:'|\")$v(?:'|\")\)}/",__($v),$this->output);
 			}
 	}
 }
