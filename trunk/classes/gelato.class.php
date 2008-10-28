@@ -1,5 +1,5 @@
 <?php
-if(!defined('entry') || !entry) die('Not a valid page'); 
+if(!defined('entry') || !entry) die('Not a valid page');
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -17,12 +17,12 @@ require_once("functions.php");
 
 class gelato extends Conexion_Mysql {
 	var $conf;
-	
+
 	function gelato() {
 		parent::Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
 		$this->conf = new configuration();
 	}
-	
+
 	function saveSettings($fieldsArray) {
 		if ($this->modificarDeFormulario($this->conf->tablePrefix."config", $fieldsArray)) {
 			header("Location: ".$this->conf->urlGelato."/admin/settings.php?modified=true");
@@ -32,24 +32,24 @@ class gelato extends Conexion_Mysql {
 			die();
 		}
 	}
-	
+
 	function saveOption($value, $name) {
-		$sqlStr = "UPDATE ".$this->conf->tablePrefix."options SET val='".$value."' WHERE name='".$name."' LIMIT 1";		
+		$sqlStr = "UPDATE ".$this->conf->tablePrefix."options SET val='".$value."' WHERE name='".$name."' LIMIT 1";
 		if ($this->ejecutarConsulta($sqlStr)) {
 			return true;
 		} else {
 			return true;
 		}
 	}
-	
-	function addPost($fieldsArray) {		
+
+	function addPost($fieldsArray) {
 		if ($this->insertarDeFormulario($this->conf->tablePrefix."data", $fieldsArray)) {
 			return true;
 		} else {
 			return false;
-		}		
+		}
 	}
-	
+
 	function modifyPost($fieldsArray, $id_post) {
 		if ($this->modificarDeFormulario($this->conf->tablePrefix."data", $fieldsArray, "id_post=$id_post")) {
 			header("Location: ".$this->conf->urlGelato."/admin/index.php?modified=true");
@@ -59,31 +59,31 @@ class gelato extends Conexion_Mysql {
 			die();
 		}
 	}
-	
+
 	function deletePost($idPost) {
 		$this->ejecutarConsulta("DELETE FROM ".$this->conf->tablePrefix."data WHERE id_post=".$idPost);
-	}	
-	
+	}
+
 	function getPosts($limit="10", $from="0") {
 		$sqlStr = "select * from ".$this->conf->tablePrefix."data ORDER BY date DESC LIMIT $from,$limit";
 		$this->ejecutarConsulta($sqlStr);
 		return $this->mid_consulta;
 	}
-	
+
 	function getPost($id="") {
 		$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."data WHERE id_post=".$id);
 		return mysql_fetch_array($this->mid_consulta);
 	}
-	
+
 	function getPostsNumber() {
 		$this->ejecutarConsulta("select count(*) as total from ".$this->conf->tablePrefix."data");
 		$row = mysql_fetch_assoc($this->mid_consulta);
 		return $row['total'];
 	}
-	
+
 	function getType($id) {
-		if ($this->ejecutarConsulta("select type from ".$this->conf->tablePrefix."data WHERE id_post=".$id)) {	
-			if ($this->contarRegistros()>0) {	
+		if ($this->ejecutarConsulta("select type from ".$this->conf->tablePrefix."data WHERE id_post=".$id)) {
+			if ($this->contarRegistros()>0) {
 				while($registro = mysql_fetch_array($this->mid_consulta)) {
 					return $registro[0];
 				}
@@ -92,55 +92,55 @@ class gelato extends Conexion_Mysql {
 			return "0";
 		}
 	}
-	
+
 	function formatConversation($text) {
 		$formatedText = "";
 		$odd=true;
-		
+
 		$lines = explode("\n", $text);
-		
+
 		$formatedText .= "<ul>\n";
 		foreach ($lines as $line) {
 			$pos = strpos($line, ":") + 1;
-			
+
 			$label = substr($line, 0, $pos);
 			$desc = substr($line, $pos, strlen($line));
-			
-			if ($odd) { 
-				$cssClass = "odd"; 
+
+			if ($odd) {
+				$cssClass = "odd";
 			} else {
-				$cssClass = "even"; 
+				$cssClass = "even";
 			}
 			$odd=!$odd;
-			
-			
+
+
 			$formatedText .= "	<li class=\"".$cssClass."\">\n";
 			$formatedText .= "		<span class=\"label\">".$label."</span>\n";
 			$formatedText .= "		".$desc."\n";
-			$formatedText .= "	</li>\n";			
+			$formatedText .= "	</li>\n";
 		}
 		$formatedText .= "</ul>\n";
 		return $formatedText;
 	}
-	
+
 	function formatApiConversation($text) {
 		$formatedText = "";
-		
+
 		$lines = explode("\n", $text);
-		
+
 		foreach ($lines as $line) {
 			$pos = strpos($line, ":") + 1;
-			
+
 			$name = substr($line, 0, $pos-1);
 			$label = substr($line, 0, $pos);
 			$desc = substr($line, $pos, strlen($line));
-			
+
 			$formatedText .= "<conversation-line name=\"".$name."\" label=\"".$label."\">".$desc."</conversation-line>\n";
 		}
-		
+
 		return $formatedText;
 	}
-	
+
 	function saveMP3($remoteFileName) {
 		if (getMP3File($remoteFileName)) {
 			return true;
@@ -148,15 +148,15 @@ class gelato extends Conexion_Mysql {
 			return false;
 		}
 	}
-	
-	function savePhoto($remoteFileName) {		
+
+	function savePhoto($remoteFileName) {
 		if (getPhotoFile($remoteFileName)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	function getVideoPlayer($url) {
 		if (isYoutubeVideo($url)) {
 			$id_video = getYoutubeVideoUrl($url);
@@ -178,7 +178,7 @@ class gelato extends Conexion_Mysql {
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://video.google.com/googleplayer.swf?docid=".$id_video."&amp;hl=es&amp;fs=true\"><param name=\"movie\" value=\"http://video.google.com/googleplayer.swf?docid=".$id_video."&amp;hl=es&amp;fs=true\" /><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowScriptAccess\" value=\"always\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} else {
 			return "This URL is not a supported video (YouTube, Google Video, Vimeo, DailyMotion, Yahoo Video or SlideShare)";
-		}		
+		}
 	}
 	function getMp3Player($url) {
 		if (isMP3($url)) {
@@ -190,7 +190,7 @@ class gelato extends Conexion_Mysql {
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://media.odeo.com/flash/odeo_player.swf?v=3\" width=\"366\" height=\"75\"><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"type=audio&amp;id=".getOdeoCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} else {
 			return "This URL is not an MP3 file.";
-		}		
+		}
 	}
 
 	function getPermalink($post_id){
@@ -200,5 +200,13 @@ class gelato extends Conexion_Mysql {
 		$out .= $post_id.$strEnd;
 		return $out;
 	}
-} 
+
+	function getPermalink($post_id){
+		$strEnd = ($this->conf->urlFriendly) ? "/" : "";
+		$out = $this->conf->urlGelato;
+		$out .= ($this->conf->urlFriendly) ? "/post/" : "/index.php?post=";
+		$out .= $post_id.$strEnd;
+		return $out;
+	}
+}
 ?>

@@ -122,12 +122,12 @@ class Conexion_Mysql {
 			$sqlValues .= "'$valor',";
 		 }
 	  }
-	  $cols = rtrim($cols, ',').')';
-	  $sqlValues = rtrim($sqlValues, ',').')';
+		  $cols = rtrim($cols, ',').')';
+		  $sqlValues = rtrim($sqlValues, ',').')';
 
-	  // inserta los valores en la DB
-	  $sql = "INSERT INTO $tabla $cols VALUES $sqlValues";
-	  return $this->ejecutarConsulta($sql);
+		  // inserta los valores en la DB
+		  $sql = "INSERT INTO $tabla $cols VALUES $sqlValues";
+		return $this->ejecutarConsulta($sql);
 	}
 
 	/**
