@@ -107,7 +107,7 @@ $theme = new themes;
                         while($register = mysql_fetch_assoc($rs)) {
 								$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
                                 if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
-								
+
 								$permalink = $tumble->getPermalink($register["id_post"]);
 
 								$conversation = $register["description"];
