@@ -488,7 +488,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function trimString($string, $len = "") {
-		if($len>strlen($string) or $len<1) {		
+		if($len>strlen($string) or $len<1 or strlen($string)<1) {		
 			return strip_tags($string);
 		}
 		$string = strip_tags($string);
