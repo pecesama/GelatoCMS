@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="gelato cms {version}" />
+		<title>gelato :: {__("control panel")}</title>
+		<link rel="shortcut icon" href="{conf.urlGelato}/images/favicon.ico" />
+		<script language="javascript" type="text/javascript" src="{conf.urlGelato}/admin/scripts/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="{conf.urlGelato}/admin/scripts/tools.js"></script>
+		<script language="javascript" type="text/javascript" src="{conf.urlGelato}/admin/scripts/lightbox.js"></script>
+		<script language="javascript" type="text/javascript" src="{conf.urlGelato}/admin/scripts/jquery.validate.min.js"></script>
+		<script language="javascript" type="text/javascript">
+		$(document).ready(function(){
+			$("#divMessages").fadeOut(5000,function(){
+				$("#divMessages").css({display:"none"});
+			});
+		});
+		Lightbox.fileLoadingImage = "css/images/loading.gif";
+		Lightbox.fileBottomNavCloseImage = "css/images/closelabel.gif";
+		</script>
+		{if {$conf.richText}}
+        	<script src="{conf.urlGelato}/admin/scripts/nicEdit.js" type="text/javascript"></script>
+            <script type="text/javascript">
+                 bkLib.onDomLoaded(nicEditors.allTextAreas);
+            </script>
+		{else}
+			<script type="text/javascript" src="{conf.urlGelato}/admin/scripts/markitup/jquery.markitup.pack.js"></script>
+			<script type="text/javascript" src="{conf.urlGelato}/admin/scripts/markitup/sets/html/set.js"></script>
+			<link rel="stylesheet" type="text/css" href="{conf.urlGelato}/admin/scripts/markitup/skins/simple/style.css" />
+			<link rel="stylesheet" type="text/css" href="{conf.urlGelato}/admin/scripts/markitup/sets/html/style.css" />
+			<script type="text/javascript" >
+			   $(document).ready(function() {
+				  $("#description").markItUp(my_html);
+			   });
+			</script>
+		{/if}
+		<style type="text/css" media="screen">
+			@import "{conf.urlGelato}/admin/css/style.css";
+			@import "{conf.urlGelato}/admin/css/lightbox.css";
+		</style>
+	</head>
+
+	<body>
+		<div id="div-process" style="display:none;">{__("Processing request&hellip;")}</div>
+		<div id="cont">
+			<div id="head">
+				<h1><a href="{conf.urlGelato}/admin/index.php" title="gelato :: {__("home")}">gelato cms</a></h1>
+				<ul id="nav">
+					<li><a href="{conf.urlGelato}/" title="{__("Take me to the tumblelog")}">{__("View Tumblelog")}</a></li>
+					<li><a href="close.php" title="Log off" >{__("Log out")}</a></li>
+			  	</ul>
+			</div>
+			<div id="main">
+				<div class="box">
+					<ul class="menu">
+					<h3>{__("New Post")}</h3>
+
+					<li {if {$new}=="conversation"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=conversation"><img src="css/images/comments.png" alt="New chat" /> {__("Chat")}</a></li>
+					<li {if {$new}=="quote"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=quote"><img src="css/images/quote.png" alt="New qoute" /> {__("Quote")}</a></li>
+					<li {if {$new}=="url"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=url"><img src="css/images/world.png" alt="New link" /> {__("Link")}</a></li>
+					<li {if {$new}=="mp3"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=mp3"><img src="css/images/music.png" alt="New audio" /> {__("Audio")}</a></li>
+					<li {if {$new}=="video"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=video"><img src="css/images/film.png" alt="New video" /> {__("Video")}</a></li>
+					<li {if {$new}=="photo"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=photo"><img src="css/images/image.png" alt="New picture" /> {__("Picture")}</a></li>
+					<li {if {$new}=="post" or {$new}==null}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=post"><img src="css/images/page.png" alt="New post" /> {__("Regular")}</a></li>
+					</ul>
+					<p>&nbsp;</p>
+
+					{if {$information}}<div class="information" id="update">{information}</div><br />{/if}
+					{if {$action.deleted} or {$action.modified} or {$action.added}}<div class="exito" id="divMessages">{exito}</div>{/if}
+					{if {$error}}<div class="error"><strong>{error}</div>{/if}
+
+					<form action="index.php" method="post" {if {$new}=='photo'}enctype="multipart/form-data"{/if} name="frmAdd" id="autosave" class="newpost">
+						<fieldset>
+							{if {$postId}}<input type="hidden" name="id_post" id="id_post" value="{postId}" />{/if}
+							{if {$type}=='post'}
+								<div>
+									<label for="title" style="display:block;">Title <span class="option">(optional)</span></label>
+									<br /><input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
+								</div>
+								<div>
+									<label for="description" style="display:block;">Body</label>
+									<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>
+								</div>
+
+								<input type="hidden" name="url" id="url" value="" />
+								<input type="hidden" name="type" id="type" value="{type}" />
+								<input type="hidden" name="date" id="date" value="{date}" />
+								<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+								<script>
+									$("#autosave").validate({
+										rules: {
+											description: "required"
+										},
+										errorElement: "span",
+										errorClass: "validate_span",
+										errorPlacement: function(label, element) {
+											label.prependTo(element.prev())
+										}
+									});
+								</script>
+							{elseif {$type}=='photo'}
+								<div id="photo_upload">
+									<label for="description">Photo</label>
+									<br /><input type="file" name="photo" id="photo" accept="image/gif,image/jpeg,image/jpg,image/png"/>
+									<div style="font-size:11px; color:#666; margin-top:5px;">
+										Supports JPEG, GIF and PNG.&nbsp; <strong>Max size is 10 MB.</strong>
+									</div>
+									<div style="font-size:11px; color:#666; margin-top:5px;">
+										<a href="#" class="linkFrm">Use a URL instead</a>
+									</div>
+								</div>
+
+								<div id="photo_url">
+									<label for="description">Photo URL</label>
+									<br /><input class="input-text" type="text" name="url" id="url" size="80" value="{editUrl}" />
+									<div style="font-size:11px; color:#666; margin-top:5px;">
+										<a href="#" class="linkFrm">Use a upload form instead</a>
+									</div>
+								</div>
+
+								<div>
+									<label for="description" style="display:block;">Caption <span class="option">(optional)</span></label>
+									<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>
+								</div>
+
+								<input type="hidden" name="title" id="title" value="" />
+								<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+								<input type="hidden" name="type" id="type" value="{type}" />
+								<input type="hidden" name="date" id="date" value="{date}" />
+								<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+								<script>
+									$('#photo_url').css('display','none');
+									$("#autosave").validate({
+										rules: {
+											photo: {
+												required:  function() {
+							 						return ($('#photo_upload').css('display')!= 'none') ? true : false;
+							  					},
+												accept: "(jpe?g|gif|png)"
+											},
+							 				url: {
+												required:  function() {
+							 						return ($('#photo_url').css('display')!= 'none') ? true : false;
+							  					},
+												url: true
+											}
+										},
+										errorElement: "span",
+										errorClass: "validate_span",
+										errorPlacement: function(label, element) {
+											label.prependTo(element.prev())
+										}
+									});
+
+									$("#photo_upload a.linkFrm").click( function() {
+											$('#photo_upload').css('display','none');
+											$('#photo_url').css('display','block');
+											$('#photo').val('');
+											return false;
+										}
+									);
+
+									$("#photo_url a.linkFrm").click( function() {
+											$('#photo_url').css('display','none');
+											$('#photo_upload').css('display','block');
+											$('#url').val('');
+											return false;
+										}
+									);
+								</script>
+							{elseif {$type}=='quote'}
+								<div>
+									<label for="description">Quote</label>
+									<br /><textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>
+								</div>
+								<div>
+									<label for="title">Source <span class="option">(optional)</span></label>
+									<br /><input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
+								</div>
+
+								<input type="hidden" name="url" id="url" value="" />
+								<input type="hidden" name="type" id="type" value="{type}" />
+								<input type="hidden" name="date" id="date" value="{date}" />
+								<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+								<script>
+									$("#autosave").validate({
+										rules: {
+											description: "required"
+										},
+										errorElement: "span",
+										errorClass: "validate_span",
+										errorPlacement: function(label, element) {
+											label.prependTo(element.prev())
+										}
+									});
+								</script>
+							{elseif {$type}=='url'}
+								<div>
+									<label for="title">Name <span class="option">(optional)</span></label>
+									<br /><input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
+								</div>
+								<div>
+									<label for="url">URL</label>
+									<br /><input class="txt" type="text" name="url" id="url" value="{editUrl}" size="80" />
+								</div>
+								<div>
+									<div id="add_link_description" style="margin-top:5px;">
+										<a class="linkFrm" href="#" onclick="document.getElementById('link_description').style.display = ''; document.getElementById('add_link_description').style.display = 'none'; return false;" style="font-size:11px;">Add a description</a><br /><br />
+									</div>
+									<div id="link_description" style="display:none;">
+										<label for="description">Description</label><br />
+										<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>
+									</div>
+								</div>
+								<input type="hidden" name="type" id="type" value="{type}" />
+								<input type="hidden" name="date" id="date" value="{date}" />
+								<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+								<script>
+									$("#autosave").validate({
+										rules: {
+											url: {
+												required: true,
+												url: true
+											}
+										},
+										errorElement: "span",
+										errorClass: "validate_span",
+										errorPlacement: function(label, element) {
+											label.prependTo(element.prev())
+										}
+									});
+								</script>
+							{elseif {$type}=='conversation'}
+								<div>
+									<label for="title">Title <span class="option">(optional)</span></label><br />
+									<input class="txt" type="text" name="title" id="title" value="{editTitle}" size="80" />
+								</div>
+
+								<div>
+									<label for="description">Conversation</label>
+									<div style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
+										<span style="font-weight: bold;">Example</span><br>
+										<span style="font-style: italic;">
+											Geek: Wow an open source tumblelog CMS!!.<br>
+											Normal: Tumble... what??<br>
+											Geek: Read the wikipedia!!
+										</span>
+									</div>
+									<textarea rows="12" cols="84" name="description" id="description">{editBody}</textarea>
+								</div>
+
+								<input type="hidden" name="url" id="url" value="" />
+								<input type="hidden" name="type" id="type" value="{type}" />
+								<input type="hidden" name="date" id="date" value="{date}" />
+								<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+								<script>
+									$("#autosave").validate({
+										rules: {
+											description: "required"
+										},
+										errorElement: "span",
+										errorClass: "validate_span",
+										errorPlacement: function(label, element) {
+											label.prependTo(element.parent().children("label"))
+										}
+									});
+								</script>
+							{elseif {$type}=='video'}
+								<div>
+									<label for="url">Video URL</label>
+									<br /><input class="txt" type="text" name="url" id="url" value="{editUrl}" size="80" />
+									<div style="color: rgb(136, 136, 136); margin-bottom: 5px; font-size: 11px; font-weight: bold;">
+										This is the URL from the video sites YouTube, Vimeo, Yahoo, Daily Motion <br />
+										or even an Slide Share Presentation.<br />
+										<span style="font-size: 10px; font-weight: normal;">(ie. http://youtube.com/watch?v=HcBFLN9cli0)</span>
+									</div>
+								</div>
+								<div>
+									<label for="description">Caption <span class="option">(optional)</span></label><br />
+									<textarea rows="12" cols="84" name="description" id="description" tabindex="2">{editBody}</textarea>
+								</div>
+
+								<input type="hidden" name="title" id="title" value="" />
+								<input type="hidden" name="type" id="type" value="{type}" />
+								<input type="hidden" name="date" id="date" value="{date}" />
+								<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+								<script>
+									$("#autosave").validate({
+										rules: {
+											url: {
+												required: true,
+												url: true
+											}
+										},
+										errorElement: "span",
+										errorClass: "validate_span",
+										errorPlacement: function(label, element) {
+											label.prependTo(element.prev())
+										}
+									});
+								</script>
+							{elseif {$type}=='mp3'}
+								<div>
+									<label for="url">MP3 URL</label>
+									<br /><input class="txt" type="text" name="url" id="url" value="{editUrl}" size="80" />
+									<div style="color: rgb(136, 136, 136); margin-bottom: 5px; font-size: 11px; font-weight: bold;">
+										This is the MP3 file URL or a GoEar URL or an Odeo URL.<br>
+										<span style="font-size: 10px; font-weight: normal;">(ie. http://www.goear.com/listen.php?v=c0a2c85)</span>
+									</div>
+								</div>
+								<div>
+									<label for="description">Caption <span class="option">(optional)</span></label><br />
+									<textarea rows="12" cols="84" name="description" id="description" tabindex="2">{editBody}</textarea>
+								</div>
+
+								<input type="hidden" name="title" id="title" value="" />
+								<input type="hidden" name="type" id="type" value="{type}" />
+								<input type="hidden" name="date" id="date" value="{date}" />
+								<input type="hidden" name="id_user" id="id_user" value="{id_user}" />
+
+								<script>
+									$("#autosave").validate({
+										rules: {
+											url: {
+												required: true,
+												url: true
+											}
+										},
+										errorElement: "span",
+										errorClass: "validate_span",
+										errorPlacement: function(label, element) {
+											label.prependTo(element.prev())
+										}
+									});
+								</script>
+							{/if}
+
+							<p>
+								<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
+		                            				{__("Some HTML allowed")}:<br />
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<code>
+										&lt;strong&gt; &lt;em&gt; &lt;del&gt; &lt;ul&gt;  &lt;ol&gt;  &lt;li&gt; &lt;a&gt;
+										<br />
+										&nbsp;&nbsp;&nbsp;&nbsp;&lt;blockquote&gt;
+										&lt;code&gt; &lt;pre&gt; &lt;img&gt;
+									</code>
+									<br /><br />
+					                                Bookmarklet - <a class="bookmarklet" title="{__("Drag to the Bookmarks Toolbar")}" href="javascript:var w; setTimeout('w.focus()',100);w=window.open('{conf.urlGelato}/admin/bm.php?url='+encodeURIComponent(location.href)+'&sel='+encodeURIComponent(window.getSelection()),'bookmarklet','toolbar=0,resizable=0,status=1,width=650,height=540,dependent=yes' ); w.focus();">{__("add to gelato")}</a>
+		                			                <br /><br />
+                       				         	</span>
+                			                </p>
+							<p>
+								<input class="btn" type="submit" name="btnAdd" value="{if {$isEdition}}Modify{else}Create{/if} post" />
+							</p>
+						</fieldset>
+					</form>
+					<div class="footer-box">&nbsp;</div>
+				</div>
+
+				<div class="box">
+					<ul class="menu manage">
+					<h3>{__('Manage')}</h3>
+					<li><a href="{conf.urlGelato}/admin/settings.php">{__("Settings")}</a></li>
+					<li><a href="{conf.urlGelato}/admin/options.php">{__("Options")}</a></li>
+                    			<li><a href="{conf.urlGelato}/admin/feeds.php">{__("Feeds")}</a></li>
+					<li><a href="{conf.urlGelato}/admin/admin.php">{__("Users")}</a></li>
+					<li><a href="{conf.urlGelato}/admin/comments.php">{__("Comments")}</a></li>
+					<li class="selected"><a>{__("Posts")}</a></li>
+					</ul>
+
+					{if !{$isEdition}}
+						{if {$Posts_Number}}
+							{block {$rows} as {$row}}
+								<div class="entry">
+									<div class="info"><span class="compact"><a href="{$row.Permalink}">Link</a>&nbsp;<a href="{conf.urlGelato}/admin/index.php?edit={$row.Id_Post}"><img src="{conf.urlGelato}/admin/css/images/edit.png" alt="" title="" /></a>&nbsp;<a href="{conf.urlGelato}/admin/index.php?delete={$row.Id_Post}"><img src="{conf.urlGelato}/admin/css/images/delete.png" alt="" title="" /></a></span>
+										<p>{$row.Date_Added}</p>
+									</div>
+									<div class="post">
+										{if {$row.postType}=='post'}
+											<span class="option"><a href="{$row.Permalink}">{$row.Title}</a></span>
+											<p>{$row.Body}</p>
+										{elseif {$row.postType}=='photo'}
+											<span class="option">{$row.Caption}</span>
+											<p><a {Effect}><img src="{$row.PhotoURL}" alt="{$row.PhotoAlt}" /></a></a></p>
+										{elseif {$row.postType}=='quote'}
+											<span class="option">&mdash; {$row.Source}</span>
+											<p><big class="quote"><a href="{$row.Permalink}">&#147;</a></big> {$row.Quote}</p>
+										{elseif {$row.postType}=='url'}
+											<span class="option">&#187; <a href="{$row.URL}">{$row.Name}</a></span>
+											<p>{$row.Description}</p>
+										{elseif {$row.postType}=='conversation'}
+											<span class="option">{$row.Title}</span>
+											<div class="conversation">{$row.Conversation}</div>
+										{elseif {$row.postType}=='video'}
+											<span class="option">{$row.Caption}</span>
+											<p><img src="{conf.urlGelato}/admin/css/images/film.png" alt="Watch video" />&nbsp;<a href="{$row.Permalink}">{__('Watch')}</a></p>
+										{elseif {$row.postType}=='mp3'}
+											<span class="option">{$row.Caption}</span>
+											<p><img src="{conf.urlGelato}/admin/css/images/music.png" alt="Play song" />&nbsp;<a href="{$row.Permalink}">{__('Play')}</a></p>
+										{/if}
+									</div>
+								</div>
+							{/block}
+						{/if}
+					{/if}
+
+					{pagination}
+					<div class="footer-box">&nbsp;</div>
+				</div>
+			</div>
+			<div id="foot">
+				<a href="http://www.gelatocms.com/" title="gelato CMS">gelato CMS</a> :: {__("PHP&MySQL Tumblelog Content Management System.')}
+			</div>
+		</div>
+	</body>
+</html>
