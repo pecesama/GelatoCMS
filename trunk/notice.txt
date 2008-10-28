@@ -11,8 +11,12 @@ Juan del Rio [ http://elcaminante.net/ ]
 = COPYRIGHT NOTICES =
 This product includes code and libraries developed by third parties, which are governed by different licenses.  These components, and their licenses, are listed below.
 
+= Archive based on code from: simple Tumblr API processor =
+Copyright (c) Vivek, http://www.stageleftstudios.com
+simple Tumblr API processor is available under Creative Commons Attribution-Noncommercial-Share Alike 3.0 United States License.
+
 = markItUp! Universal MarkUp Engine, JQuery plugin =
-Copyright (C) 2007-2008 Jay Salvat, http://markitup.jaysalvat.com/
+Copyright (c) 2007-2008 Jay Salvat, http://markitup.jaysalvat.com/
 markItUp is available under a dual licensed the MIT and GPL licenses.
 
 = NicEdit - Micro Inline WYSIWYG =
@@ -46,10 +50,6 @@ Clase Conexion_Mysql available under MIT license.
 = Digg Style Paginator Class =
 Copyright (c) Victor De la Rocha, http://www.mis-algoritmos.com/
 Digg Style Paginator Class available under MIT license.
-
-= Clase plantillas =
-Copyright (c) Pedro Santana, http://www.pecesama.net/weblog/
-Clase plantillas available under MIT license.
 
 = Textile class =
 Copyright (c) 2003-2004, Dean Allen, http://textile.thresholdstate.com/

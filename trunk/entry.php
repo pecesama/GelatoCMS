@@ -83,4 +83,3 @@ if($installed){
 	unset($feeds);
 }
 ?>
-
