@@ -488,8 +488,9 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function trimString($string, $len = "") {
-		if($len>strlen($string) or $len<1)
-			return $string;
+		if($len>strlen($string) or $len<1) {		
+			return strip_tags($string);
+		}
 		$string = strip_tags($string);
 		$len = (empty($len)) ? "50" : $len ;
 		return ( strpos($string, " ", $len) ) ? substr_replace($string, "...", $len) : $string ;

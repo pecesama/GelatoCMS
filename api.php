@@ -82,7 +82,7 @@ if(!defined('entry')) define('entry',true);
 <?php
 							$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
 ?>
-                            <photo-caption><?php echo $tit;?></photo-caption>
+                            <photo-caption><?php echo stripslashes($tit);?></photo-caption>
                             <photo-url><?php echo $photoPath;?></photo-url>                            
                         </post>
 <?php
