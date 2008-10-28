@@ -294,7 +294,7 @@ $theme = new themes;
 						$answers['Id_Comment'] = $rowComment["id_comment"];
 						$answers['Comment_Author'] = $commentAuthor;
 						$answers['Date'] = gmdate("d.m.y", strtotime($rowComment["comment_date"])+transform_offset($conf->offsetTime));
-						$answers['Comment'] = $rowComment["content"];
+						$answers['Comment'] = nl2br($rowComment["content"]);
 
 						$comments[] = $answers;
 					}
