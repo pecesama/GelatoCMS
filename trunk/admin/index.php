@@ -279,10 +279,10 @@ if ($user->isAuthenticated()) {
 							$row['Caption'] = $register["description"];
 							break;
 					}
-<<<<<<< .mine
+
 					$rows[] = $row;
 				}
-=======
+
 					
 					$limit=$conf->postLimit;
 					
@@ -319,7 +319,9 @@ if ($user->isAuthenticated()) {
 									} else {
 										$photoPath = $register["url"];
 									}
->>>>>>> .r241
+							}
+						}
+					}
 
 				$p = new pagination;
 				$p->items($tumble->getPostsNumber());
