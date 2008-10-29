@@ -61,6 +61,8 @@ body{ background: #fff; text-align:center; font-family:"Trebuchet Ms", Verdana, 
 
 .manage li a{ padding:14px 6px 0 6px;}
 
+#context_help{ display:block; margin:0; padding:5px; position: absolute; border: 1px solid #222; background-color: #444; color:#fff; font-size: 12px;}
+
 form.newpost{ width:500px; margin:0 auto; padding:0;}
 form.newpost ul{ list-style-type:none; margin:20px 0 10px 0; padding:0;}
 form.newpost li{ margin:4px 0; padding:0; position:relative;}

@@ -88,7 +88,7 @@ if ($user->isAdmin()) {
 		<div id="div-process" style="display:none;"><?php echo __("Processing request&hellip;")?></div>
 		<div id="cont">
 			<div id="head">
-				<h1><a href="<?php echo $conf->urlGelato;?>/" title="gelato :: <?php echo __("home")?>">gelato cms</a></h1>
+				<h1><a href="<?php echo $conf->urlGelato;?>/admin/index.php" title="gelato :: <?php echo __("home")?>">gelato cms</a></h1>
 				<ul id="nav">
 					<li><a href="<?php echo $conf->urlGelato;?>/" title="<?php echo __("Take me to the tumblelog")?>"><?php echo __("Back to the Tumblelog")?></a></li>
 			  	</ul>
