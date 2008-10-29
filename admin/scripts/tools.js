@@ -56,3 +56,22 @@ function selectFeedType(feed_url,username){
 			$('#url_label').text(feed_url);
 		}
 }
+
+$(function(){
+	
+	// Fancy tooltip 
+	var t = '';
+	$(".help").hover(function(e){
+		t = $(this).attr('title');
+		$(this).removeAttr('title').animate({opacity:1.0},500,function(){
+			if($("#context_help").get().length < 1){
+				$('.box:last').append('<div id="context_help"></div>');
+			}
+			$('#context_help').hide().html(t).css({left:e.pageX, top:e.pageY + 20}).fadeIn('slow');
+		});
+	},function(){
+		$(this).stop().attr('title',t);
+		$('#context_help').fadeOut('fast', function(){$(this).css({left:0, top:0})});
+	});
+	
+});
