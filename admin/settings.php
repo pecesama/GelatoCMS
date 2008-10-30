@@ -90,9 +90,9 @@ if ($user->isAdmin()) {
 										<select id="lang" name="lang">
 <?php									
 										$langs = getLangs();
-										foreach ($langs as $lang) {
-											$active = ($conf->lang==$lang) ? "selected" : "";
-											echo "<option value=\"".$lang."\" ".$active.">".$lang."</option>\n";
+										foreach ($langs as $key=>$lang) {
+											$active = ($conf->lang==$key) ? "selected" : "";
+											echo "<option value=\"".$key."\" ".$active.">".$lang."</option>\n";
 											
 										}
 ?>

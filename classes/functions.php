@@ -417,7 +417,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 							}
 							if (preg_match('|\.mo$|', $directory2)){
 								if(!in_array($directory2,$dirs)){
-									$dirs[$i]=trim($directory);
+									$dirs[$directory]=displayLanguage(trim($directory));
 									$i++;
 								}
 							}
@@ -509,5 +509,141 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$string = strip_tags($string);
 
 		return (strpos($string," ",$len))?substr_replace($string, "...", $len):$string;
+	}
+	
+	function displayLanguage($lang){
+		$out = "";
+		if(strpos($lang, '-')==2){
+			$lang = explode('-',$lang);
+		}
+		$language = is_array($lang)? $lang[0] : $lang;
+		switch($language){
+			case 'af': $out = __('Afrikaans'); break;
+			case 'sq': $out = __('Albanian'); break;
+			case 'ar': $out = __('Arabic'); break;
+			case 'eu': $out = __('Basque'); break;
+			case 'bg': $out = __('Bulgarian'); break;
+			case 'be': $out = __('Belarusian'); break;
+			case 'ca': $out = __('Catalan'); break;
+			case 'zh': $out = __('Chinese'); break;
+			case 'hr': $out = __('Croatian'); break;
+			case 'cs': $out = __('Czech'); break;
+			case 'da': $out = __('Danish'); break;
+			case 'nl': $out = __('Dutch'); break;
+			case 'en': $out = __('English'); break;
+			case 'et': $out = __('Estonian'); break;
+			case 'fo': $out = __('Faeroese'); break;
+			case 'fa': $out = __('Farsi'); break;
+			case 'fi': $out = __('Finnish'); break;
+			case 'fr': $out = __('French'); break;
+			case 'gd': $out = __('Gaelic'); break;
+			case 'de': $out = __('German'); break;
+			case 'el': $out = __('Greek'); break;
+			case 'he': $out = __('Hebrew'); break;
+			case 'hi': $out = __('Hindi'); break;
+			case 'hu': $out = __('Hungarian'); break;
+			case 'is': $out = __('Icelandic'); break;
+			case 'id': $out = __('Indonesian'); break;
+			case 'it': $out = __('Italian'); break;
+			case 'ja': $out = __('Japanese'); break;
+			case 'ko': $out = __('Korean'); break;
+			case 'lv': $out = __('Latvian'); break;
+			case 'lt': $out = __('Lithuanian'); break;
+			case 'mk': $out = __('Macedonian'); break;
+			case 'ms': $out = __('Malaysian'); break;
+			case 'mt': $out = __('Maltese'); break;
+			case 'no': $out = __('Norwegian'); break;
+			case 'pl': $out = __('Polish'); break;
+			case 'pt': $out = __('Portuguese'); break;
+			case 'rm': $out = __('Rhaeto-Romanic'); break;
+			case 'ro': $out = __('Romanian'); break;
+			case 'ru': $out = __('Russian'); break;
+			case 'sz': $out = __('Sami'); break;
+			case 'sr': $out = __('Serbian'); break;
+			case 'sk': $out = __('Slovak'); break;
+			case 'sl': $out = __('Slovenian'); break;
+			case 'sb': $out = __('Sorbian'); break;
+			case 'es': $out = __('Spanish'); break;
+			case 'sx': $out = __('Sutu'); break;
+			case 'sv': $out = __('Swedish'); break;
+			case 'th': $out = __('Thai'); break;
+			case 'ts': $out = __('Tsonga'); break;
+			case 'tn': $out = __('Tswana'); break;
+			case 'tr': $out = __('Turkish'); break;
+			case 'uk': $out = __('Ukrainian'); break;
+			case 'ur': $out = __('Urdu'); break;
+			case 've': $out = __('Venda'); break;
+			case 'vi': $out = __('Vietnamese'); break;
+			case 'xh': $out = __('Xhosa'); break;
+			case 'ji': $out = __('Yiddish'); break;
+			case 'zu': $out = __('Zulu'); break;
+			default: $out = $language;
+		}
+		if(is_array($lang)){
+			$country = strtolower($lang[1]);
+			switch($country){
+				//Aca una lista con los paises. No se como tendría que hacer para hacer insensible a mayusculas o minusculas: es-MX o es-mx ¿?
+				case 'sa': $out .= " (". __('Saudi Arabia'). ")"; break;
+				case 'iq': $out .= " (". __('Iraq'). ")"; break;
+				case 'eg': $out .= " (". __('Egypt'). ")"; break;
+				case 'ly': $out .= " (". __('Libya'). ")"; break;
+				case 'dz': $out .= " (". __('Algeria'). ")"; break;
+				case 'ma': $out .= " (". __('Morocco'). ")"; break;
+				case 'tn': $out .= " (". __('Tunisia'). ")"; break;
+				case 'om': $out .= " (". __('Oman'). ")"; break;
+				case 'ye': $out .= " (". __('Yemen'). ")"; break;
+				case 'sy': $out .= " (". __('Syria'). ")"; break;
+				case 'jo': $out .= " (". __('Jordan'). ")"; break;
+				case 'lb': $out .= " (". __('Lebanon'). ")"; break;
+				case 'kw': $out .= " (". __('Kuwait'). ")"; break;
+				case 'ae': $out .= " (". __('U.A.E.'). ")"; break;
+				case 'bh': $out .= " (". __('Bahrain'). ")"; break;
+				case 'qa': $out .= " (". __('Qatar'). ")"; break;
+				case 'tw': $out .= " (". __('Taiwan'). ")"; break;
+				case 'cn': $out .= " (". __('PRC'). ")"; break;
+				case 'hk': $out .= " (". __('Hong Kong SAR'). ")"; break;
+				case 'sg': $out .= " (". __('Singapore'). ")"; break;
+				case 'be': $out .= " (". __('Belgium'). ")"; break;
+				case 'us': $out .= " (". __('United States'). ")"; break;
+				case 'gb': $out .= " (". __('United Kingdom'). ")"; break;
+				case 'au': $out .= " (". __('Australia'). ")"; break;
+				case 'ca': $out .= " (". __('Canada'). ")"; break;
+				case 'nz': $out .= " (". __('New Zealand'). ")"; break;
+				case 'ie': $out .= " (". __('Ireland'). ")"; break;
+				case 'za': $out .= " (". __('South Africa'). ")"; break;
+				case 'jm': $out .= " (". __('Jamaica'). ")"; break;
+				case 'bz': $out .= " (". __('Belize'). ")"; break;
+				case 'tt': $out .= " (". __('Trinidad'). ")"; break;
+				case 'ch': $out .= " (". __('Switzerland'). ")"; break;
+				case 'lu': $out .= " (". __('Luxembourg'). ")"; break;
+				case 'at': $out .= " (". __('Austria'). ")"; break;
+				case 'li': $out .= " (". __('Liechtenstein'). ")"; break;
+				case 'br': $out .= " (". __('Brazil'). ")"; break;
+				case 'pt': $out .= " (". __('Portugal'). ")"; break;
+				case 'mo': $out .= " (". __('Republic of Moldova'). ")"; break;
+				case 'sz': $out .= " (". __('Lappish'). ")"; break;
+				case 'mx': $out .= " (". __('Mexico'). ")"; break;
+				case 'gt': $out .= " (". __('Guatemala'). ")"; break;
+				case 'cr': $out .= " (". __('Costa Rica'). ")"; break;
+				case 'pa': $out .= " (". __('Panama'). ")"; break;
+				case 'do': $out .= " (". __('Dominican Republic'). ")"; break;
+				case 've': $out .= " (". __('Venezuela'). ")"; break;
+				case 'co': $out .= " (". __('Colombia'). ")"; break;
+				case 'pe': $out .= " (". __('Peru'). ")"; break;
+				case 'ar': $out .= " (". __('Argentina'). ")"; break;
+				case 'ec': $out .= " (". __('Ecuador'). ")"; break;
+				case 'cl': $out .= " (". __('Chile'). ")"; break;
+				case 'uy': $out .= " (". __('Uruguay'). ")"; break;
+				case 'py': $out .= " (". __('Paraguay'). ")"; break;
+				case 'bo': $out .= " (". __('Bolivia'). ")"; break;
+				case 'sv': $out .= " (". __('El Salvador'). ")"; break;
+				case 'hn': $out .= " (". __('Honduras'). ")"; break;
+				case 'ni': $out .= " (". __('Nicaragua'). ")"; break;
+				case 'pr': $out .= " (". __('Puerto Rico'). ")"; break;
+				case 'fi': $out .= " (". __('Finland'). ")"; break;
+				default: $out .= "(".$country.")";
+			}
+		}
+		return $out;
 	}
 ?>
