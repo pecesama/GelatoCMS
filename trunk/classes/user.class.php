@@ -138,11 +138,12 @@ class user extends Conexion_Mysql {
 
 	function confirmationEmail($email="", $user="", $password="") {
 		$msg =  "<font face=verdana><em><font size=2>Account information on <strong>gelato CMS</strong></font></em><br/><br/>";
+		$msg .=	"Visit the <a href=\"".$this->conf->urlGelato."/admin/\">tumblelog panel</a> <br/><br/>";
 		$msg .=	"<font size=1>Username: <strong>".$user."</strong><br/><br/>";
-		$msg .=	"Password: <strong>".$password."</strong><br/><br/>";
+		$msg .=	"Password: <strong>".$password."</strong><br/><br/>";		
 		$msg .=	"<em>Don't tell your password to anybody!!</em><br/><br/></font>";
 
-		sendMail($email, "Register conformation on gelato CMS", $msg, "no-reply@gelatocms.com");
+		sendMail($email, "Register confirmation on gelato CMS", $msg, "no-reply@gelatocms.com");
 	}
 }
 ?>
