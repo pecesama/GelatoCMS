@@ -140,7 +140,13 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		else
 			return false;
 	}
-
+	
+	function getYoutubeVideoUrl($videoUrl) {
+		$params = explode("?v=", $videoUrl);
+		$params2 = explode("&",$params[1]);
+		return $params2[0];
+	}
+	
 	function isYahooVideo($videoUrl){
 		if (beginsWith($videoUrl, "http://video.yahoo.com/watch/") || beginsWith($videoUrl, "http://www.video.yahoo.com/watch/"))
 			return true;
@@ -155,11 +161,6 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$values[1] = $params2[1];
 		return $values;
 	}
-	function getYoutubeVideoUrl($videoUrl) {
-		$params = explode("?v=", $videoUrl);
-		$params2 = explode("&",$params[1]);
-		return $params2[0];
-	}
 
 	function isGoogleVideoUrl($videoUrl){
 		if (beginsWith($videoUrl, "http://video.google.com/videoplay?")){
@@ -171,6 +172,20 @@ if(!defined('entry') || !entry) die('Not a valid page');
 
 	function getGoogleVideoCode($videoUrl){
 		$params = explode("?docid=", $videoUrl);
+		$params2 = explode("&",$params[1]);
+		return $params2[0];
+	}
+	
+	function isMTVVideoUrl($videoUrl){
+		if (beginsWith($videoUrl, "http://www.mtvmusic.com/video/?id=") || beginsWith($videoUrl, "http://mtvmusic.com/video/?id=")){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	function getMTVVideoCode($videoUrl){
+		$params = explode("?id=", $videoUrl);
 		$params2 = explode("&",$params[1]);
 		return $params2[0];
 	}
@@ -209,6 +224,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		elseif (isYahooVideo($url)) { return true; }
 		elseif (isSlideSharePresentation($url)) { return true; }
 		elseif (isGoogleVideoUrl($url)) { return true; }
+		elseif (isMTVVideoUrl($url)) { return true; }
 		else { return false; }
 	}
 
