@@ -487,12 +487,11 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		return $tmpStr;
 	}
 
-	function trimString($string, $len = "") {
-		if($len>strlen($string) or $len<1 or strlen($string)<1) {		
+	function trimString($string, $len=50) {
+		if($len>strlen(strip_tags($string)) or $len<1 or strlen(strip_tags($string))<1)
 			return strip_tags($string);
-		}
 		$string = strip_tags($string);
-		$len = (empty($len)) ? "50" : $len ;
-		return ( strpos($string, " ", $len) ) ? substr_replace($string, "...", $len) : $string ;
+
+		return (strpos($string," ",$len))?substr_replace($string, "...", $len):$string;
 	}
 ?>

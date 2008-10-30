@@ -112,8 +112,6 @@ $theme = new themes;
 
 								$conversation = $register["description"];
 
-								$register["description"] = $register["description"];
-
                                 $register["title"] = stripslashes($register["title"]);
                                 $register["description"] = stripslashes($register["description"]);
 

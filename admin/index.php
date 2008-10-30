@@ -170,34 +170,41 @@ if ($user->isAuthenticated()) {
 
                 if (!isset($_GET['new'])) $_GET['new'] = 'post';
 
-                $theme->set('date',$date);
-                $theme->set('id_user',$_SESSION['user_id']);
-                $theme->set('type',$_GET["new"]);
-                $theme->set('editBody',$body);
-
+				$form = new themes;
+                $form->set('date',$date);
+                $form->set('id_user',$_SESSION['user_id']);
+                $form->set('type',$_GET["new"]);
+				$form->set('editBody',$body);
                 switch ($_GET["new"]) {
                         case "post":
-                                $theme->set('editTitle',$title);
+                                $form->set('editTitle',$title);
+                                $theme->set('form',$form->fetch(Absolute_Path.'admin/themes/admin/template_add_post.htm'));
                                 break;
                         case "photo":
                                 $url = str_replace("../", $conf->urlGelato."/", $url);
-                                $theme->set('editUrl',$url);
+                                $form->set('editUrl',$url);
+                                $theme->set('form',$form->fetch(Absolute_Path.'admin/themes/admin/template_add_photo.htm'));
                                 break;
                         case "quote":
-                                $theme->set('editTitle',$title);
+                                $form->set('editTitle',$title);
+                                $theme->set('form',$form->fetch(Absolute_Path.'admin/themes/admin/template_add_quote.htm'));
                                 break;
                         case "url":
-                                $theme->set('editTitle',$title);
-                                $theme->set('editUrl',$url);
+                                $form->set('editTitle',$title);
+                                $form->set('editUrl',$url);
+                                $theme->set('form',$form->fetch(Absolute_Path.'admin/themes/admin/template_add_link.htm'));
                                 break;
                         case "conversation":
-                                $theme->set('editTitle',$title);
+                                $form->set('editTitle',$title);
+                                $theme->set('form',$form->fetch(Absolute_Path.'admin/themes/admin/template_add_conversation.htm'));
                                 break;
                         case "video":
-                                $theme->set('editUrl',$url);
+                                $form->set('editUrl',$url);
+                                $theme->set('form',$form->fetch(Absolute_Path.'admin/themes/admin/template_add_video.htm'));
                                 break;
                         case "mp3":
-                                $theme->set('editUrl',$url);
+                                $form->set('editUrl',$url);
+                                $theme->set('form',$form->fetch(Absolute_Path.'admin/themes/admin/template_add_mp3.htm'));
                                 break;
                         }
 
