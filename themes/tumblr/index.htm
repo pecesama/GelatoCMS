@@ -25,8 +25,8 @@
 		{if {$isAuthenticated}}
 			<div style="padding:4px; border:solid 2px #bbb; display:inline; background-color:#ddd; position:absolute; top:3px; right:3px;">
 				<b>Hi, {User}.</b>&nbsp;&nbsp;
-				<a target="_top" href="{URL_Tumble}/admin/index.php">Add/Edit my posts</a>&nbsp;&nbsp;
-				<a target="_top" href="{URL_Tumble}/admin/close.php">Sign out</a>
+				<a target="_top" href="{URL_Tumble}/admin/index.php">{__("Add or Edit my posts")}</a>&nbsp;&nbsp;
+				<a target="_top" href="{URL_Tumble}/admin/close.php">{__("Sign out")}</a>
 			</div>
 		{/if}
 
@@ -37,85 +37,66 @@
 				<div class="date">
 					{$row.Date_Added}
 				</div>
+				<div class="post">
+					<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 				{if {$row.postType}=='post'}
-					<div class="post">
-						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
-
 						<div class="regular">
 							<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
 							{$row.Body}
 						</div>
-					</div>
 				{elseif {$row.postType}=='photo'}
-					<div class="post">
-						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="photo">
 							<a {$row.Effect}><img src="{$row.PhotoURL}" alt="{$row.PhotoAlt}" /></a><br/>
 							<div class="caption">{$row.Caption}</div>
 						</div>
-					</div>
 				{elseif {$row.postType}=='quote'}
-					<div class="post">
-						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="quote">
 							<span class="quote"><big class="quote"><a href="{$row.Permalink}">&#147;</a></big> {$row.Quote}</span>
 							<div class="source">&mdash; {$row.Source}</div>
 						</div>
-					</div>
 				{elseif {$row.postType}=='url'}
-					<div class="post">
-						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
-							<div class="link">
-								&#187; <a href="{$row.URL}">{$row.Name}</a>
+						<div class="link">
+							&#187; <a href="{$row.URL}">{$row.Name}</a>
 							<div class="description">{$row.Description}</div>
 						</div>
-					</div>
 				{elseif {$row.postType}=='conversation'}
-					<div class="post">
-						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="conversation">
-								...<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
+							...<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
 							{$row.Conversation}
 						</div>
-					</div>
 				{elseif {$row.postType}=='video'}
-					<div class="post">
-						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="video">
 							{$row.Video}
 							<div class="caption">{$row.Caption}</div>
 						</div>
-					</div>
 				{elseif {$row.postType}=='mp3'}
-					<div class="post">
-						<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
 						<div class="video">
 							{$row.Mp3}
 							<div class="caption">{$row.Caption}</div>
 						</div>
-					</div>
 				{/if}
-
+				</div>
 			{if !{$id_post}}
 				<div class="totalComments">
-					<h3>Posted by {$row.User} {if {$allowComments}}- <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) comments{/if}</a></h3>
+					<h3>{__("Posted by")} {$row.User} {if {$allowComments}}- <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) {__("comments")}{/if}</a></h3>
 				</div>
 			{/if}
+			
 		{/block}
 
 		{if {$id_post}}
 			{if {$row.Comments_Number}>0}
 				<div class="containerComments">
-					<h3 id="comments">{$row.Comments_Number} answers to &#8220;{$row.Post_Title}&#8221;</h3>
+					<h3 id="comments">{$row.Comments_Number} {__("answers to")} &#8220;{$row.Post_Title}&#8221;</h3>
 					<ol class="commentlist">
 						{block {$comments} as {$comment}}
 						<li class="alt" id="comment-{$comment.Id_Comment}">
 							<cite>
 								<a href="#comment-{$comment.Id_Comment}" title="Comment permalink">#</a>&nbsp;&nbsp;
-								{$comment.Comment_Author} said:
+								{$comment.Comment_Author} {__("said")}:
 							</cite>
 							<br />
-							<span class="timestampComment"> at {$comment.Date}</span><br /><br />
+							<span class="timestampComment"> {__("at")} {$comment.Date}</span><br /><br />
 							{$comment.Comment}
 							<br /><br />
 						</li>
@@ -126,24 +107,24 @@
 
 			{if {$allowComments}}
 				<div class="containerFormComments">
-					<h3 id="respond">Add your comment</h3>
+					<h3 id="respond">{__("Add your comment")}</h3>
 
 					<form action="{Form_Action}" method="post" name="commentForm" id="commentForm">
 						<p>
 							<label for="username">
-								<small>Name:</small>
+								<small>{__("Name:")}</small>
 							</label>
 							<input name="username" id="username" value="{whois.User_Cookie}" size="22" tabindex="1" type="text" />
 						</p>
 						<p>
 							<label for="email">
-								<small>E-mail:</small>
+								<small>{__("E-mail:")}</small>
 							</label>
 							<input name="email" id="email" value="{whois.Email_Cookie}" size="22" tabindex="2" type="text" />
 						</p>
 						<p>
 							<label for="web">
-								<small>Website:</small>
+								<small>{__("Website:")}</small>
 							</label>
 							<input name="web" id="web" value="{whois.Web_Cookie}" size="22" tabindex="3" type="text" />
 						</p>
@@ -152,7 +133,7 @@
 						</p>
 						<p>
 							<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
-		                    	Some HTML allowed:<br />
+		                    	{__("Some HTML allowed:")}<br />
 		                        &nbsp;&nbsp;&nbsp;&nbsp;
 		                        <code>
 		                            &lt;blockquote&gt; &lt;code&gt; &lt;em&gt; &lt;strong&gt; &lt;a&gt;
@@ -175,8 +156,8 @@
 	{/if}
 	</div>
 	<div id="footer">
-		subscribe via <a href="{URL_Tumble}/rss.php">rss</a> &nbsp;/&nbsp;
-		powered by <a href="http://www.gelatocms.com/">gelato cms</a>
+		{__("subscribe via")} <a href="{URL_Tumble}/rss.php">rss</a> &nbsp;/&nbsp;
+		{__("powered by")} <a href="http://www.gelatocms.com/">gelato cms</a>
 	</div>
 </body>
 </html>
