@@ -13,7 +13,7 @@ class themes{
 	var $vars=array(); //variable para apilar las variables que se asignan a la plantilla
 
 	function themes(){
-		#$this->l10n = l10n::getInstance();
+
 	}
 
 	function set($name, $value){
@@ -46,6 +46,7 @@ class themes{
 		$this->registrar_vars();
 		$this->__();
 		$this->eval_control_structures();
+
 		//evaluate All as PHP code
 		ob_start();eval($this->output);
 		$this->output = stripslashes(ob_get_clean());
@@ -67,9 +68,6 @@ class themes{
 		//Converting the $this->vars[\'variable\'] format to {$this->vars['variable']}
 		$this->output = preg_replace("/[\$]this->vars\[\\\'([^ \.\\\]+)\\\'\]\[\\\'([^ \.\\\]+)\\\'\]/","{\$this->vars['$1']['$2']}",$this->output);
 		$this->output = preg_replace("/[\$]this->vars\[\\\'([^ \.\\\]+)\\\'\]/","{\$this->vars['$1']}",$this->output);
-
-		//Converting the {__(\'word\')} format to {__('word')}
-		#$this->output = preg_replace("/[\$]this->vars\[\\\'([^ \.\\\]+)\\\'\]/","{\$this->vars['$1']}",$this->output);
 	}
 
 	//sustituye las variables en el output del template
@@ -90,13 +88,18 @@ class themes{
 		//replacing {$key} format by $this->vars['key']
 		//replacing  {$array.key} format by $this->vars['array']['key']
 		$patrones = array(
-			'/{\$([^ \.}]+)}/s',
-			'/{\$([^ \.}]+)\.([^ \.}]+)}/s'
+			#'/{\$([^ \.}]+)}/s',
+			#'/{\$([^ \.}]+)\.([^ \.}]+)}/s'
+			'/{\$(\w+)}/s',
+			'/{\$(\w+)\.(\w+)}/s',
+			'/\$(\W)/s'
 		);
 		$reemplazos = array(
 			"\$this->vars['$1']",
-			"\$this->vars['$1']['$2']"
+			"\$this->vars['$1']['$2']",
+			"\\\\$$1"
 		);
+
 		$this->output = preg_replace($patrones, $reemplazos, $this->output);
 	}
 
