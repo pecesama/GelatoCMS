@@ -176,8 +176,11 @@ class gelato extends Conexion_Mysql {
 		} elseif (isGoogleVideoUrl($url)) {
 			$id_video = getGoogleVideoCode($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://video.google.com/googleplayer.swf?docid=".$id_video."&amp;hl=es&amp;fs=true\"><param name=\"movie\" value=\"http://video.google.com/googleplayer.swf?docid=".$id_video."&amp;hl=es&amp;fs=true\" /><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowScriptAccess\" value=\"always\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
+		} elseif (isMTVVideoUrl($url)) {
+			$id_video = getMTVVideoCode($url);
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://media.mtvnservices.com/mgid:uma:video:mtvmusic.com:".$id_video."\"><param name=\"movie\" value=\"http://media.mtvnservices.com/mgid:uma:video:mtvmusic.com:".$id_video."\" /><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowScriptAccess\" value=\"never\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";	
 		} else {
-			return "This URL is not a supported video (YouTube, Google Video, Vimeo, DailyMotion, Yahoo Video or SlideShare)";
+			return "This URL is not a supported video (YouTube, Google Video, Vimeo, DailyMotion, Yahoo Video, MTV or SlideShare)";
 		}
 	}
 	function getMp3Player($url) {
