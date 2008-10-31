@@ -48,16 +48,13 @@ $theme = new themes;
                 }
         }
 
-        $gelato_includes = "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>\n";
-        $gelato_includes .= "\t<meta name=\"generator\" content=\"gelato ".codeName()." (".version().")\" />\n";
-        $gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />\n";
-        $gelato_includes .= "\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php")."\"/>\n";
-        $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/themes/".$conf->template."/style.css\"/>\n";
-        $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/lightbox.css\" />\n";
-        $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/jquery.js\"></script>\n";
-        $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/lightbox.js\"></script>";
-		
-		
+		$feed_url = $conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php");
+		$trigger->call('feed_url');
+		$theme->set('rssFeed',"\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$feed_url."\"/>\n");
+
+        $gelato_includes = "<meta name=\"generator\" content=\"gelato ".codeName()." (".version().")\" />\n";
+        $gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />";
+
 		$page_title = $conf->title;
 		$page_title_divisor = " &raquo; "; // it should be set in configuration
 		$page_title_len = 50; // it should be set in configuration
@@ -76,7 +73,7 @@ $theme = new themes;
 				$page_title .= $page_title_divisor.stripslashes($page_title_data);
 			}
 		}
-		
+
 		$trigger->call('gelato_includes');
 		$theme->set('Gelato_includes',$gelato_includes);
 		$theme->set('Title',$conf->title);

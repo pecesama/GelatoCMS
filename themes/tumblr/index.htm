@@ -2,7 +2,12 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	{Gelato_includes}
+	<link rel="stylesheet" type="text/css" href="{URL_Tumble}/themes/{Template_name}/style.css"/>
+	<script language="javascript" type="text/javascript" src="{URL_Tumble}/admin/scripts/jquery.js"></script>
+	<script language="javascript" type="text/javascript" src="{URL_Tumble}/admin/scripts/lightbox.js"></script>
+	<link rel="stylesheet" type="text/css" href="{URL_Tumble}/admin/css/lightbox.css" />
     <title>{Page_Title}</title>
     <!--[if IE]>
         <style type="text/css">
@@ -81,7 +86,7 @@
 					<h3>{__("Posted by")} {$row.User} {if {$allowComments}}- <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) {__("comments")}{/if}</a></h3>
 				</div>
 			{/if}
-			
+
 		{/block}
 
 		{if {$id_post}}
