@@ -38,6 +38,7 @@
 			@import "{conf.urlGelato}/admin/css/style.css";
 			@import "{conf.urlGelato}/admin/css/lightbox.css";
 		</style>
+		{admin_includes}
 	</head>
 
 	<body>
@@ -89,7 +90,7 @@
 									</span>
 								</p>
 							<p>
-								<input class="btn" type="submit" name="btnAdd" value="{if {$isEdition}}Modify{else}Create{/if} post" />
+								<input class="btn" type="submit" id="publish" name="btnAdd" value="{if {$isEdition}}Modify{else}Create{/if} post" />
 							</p>
 						</fieldset>
 					</form>

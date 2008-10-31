@@ -102,7 +102,9 @@ if ($user->isAuthenticated()) {
                 if ($isEdition) {
                         $post = $tumble->getPost($postId);
                 }
-
+				$admin_includes = "";
+				$trigger->call('admin_includes');
+                $theme->set('admin_includes',$admin_includes);
                 $theme->set('version',version());
                 $theme->set('conf', array(
                         'urlGelato'=>$conf->urlGelato,
