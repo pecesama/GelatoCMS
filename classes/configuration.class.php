@@ -12,9 +12,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
   =========================== */
 ?>
 <?php
-require_once("lang.functions.php");
-require_once('mysql_connection.class.php');
-class configuration extends Conexion_Mysql {
+class configuration {
 	
 	var $urlGelato;
 	var $tablePrefix;
@@ -31,14 +29,14 @@ class configuration extends Conexion_Mysql {
 	var $shorten_links;
 	var $rssImportFrec;
 	var $check_version;
+	var $plugins = array();	
 		
-	function configuration() {
-		parent::Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
-		
+	function configuration() {		
 		global $isFeed;
+		global $db;
 		
-		if ($this->ejecutarConsulta("SELECT * FROM ".Table_prefix."config")) {
-			$row=$this->obtenerRegistro();
+		if ($db->ejecutarConsulta("SELECT * FROM ".Table_prefix."config")) {
+			$row=$db->obtenerRegistro();
 			$this->tablePrefix = Table_prefix;
 			$this->urlGelato = $row['url_installation'];				
 			$this->postLimit = $row['posts_limit'];
@@ -58,6 +56,16 @@ class configuration extends Conexion_Mysql {
 			$this->rssImportFrec = $this->get_option("rss_import_frec");
 			$this->check_version = $this->get_option("check_version");
 			
+			//TODO: Soporte de los plugins desde BD activar/desactivar
+			if ($handle = opendir("plugins")) {				
+				while (false !== ($file = readdir($handle))) { 
+					if (substr($file, strlen($file)-3, 3) == "php") {
+						require_once("plugins/{$file}");
+						$this->plugins[] = substr($file, 0, strlen($file)-4);						
+					} 
+				} 
+				closedir($handle); 
+			}			
 		} else {
 			if($isFeed) {
 				header("HTTP/1.0 503 Service Unavailable"); 
@@ -73,10 +81,11 @@ class configuration extends Conexion_Mysql {
 	}
 	
 	function get_option($name){
+		global $db;
 		$sql = "SELECT * FROM ".Table_prefix."options WHERE name='".$name."' LIMIT 1";
-		$this->ejecutarConsulta($sql);
-		if ($this->contarRegistros()>0) {
-			$row=$this->obtenerRegistro();
+		$db->ejecutarConsulta($sql);
+		if ($db->contarRegistros()>0) {
+			$row=$db->obtenerRegistro();
 			return $row['val'];
 		} else {
 			return "0";

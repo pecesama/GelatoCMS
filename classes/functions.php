@@ -646,4 +646,32 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		}
 		return $out;
 	}
-?>
+
+	function init_plugins() {        
+		global $conf;
+        
+        foreach ($conf->plugins as $index => $plugin) {
+			//echo "[".$index."] => ".$plugin."<br />";
+            if (!file_exists("plugins/".$plugin.".php")) {
+				//echo "\tNo existe el archivo<br />";
+                unset($config->plugins[$index]);
+                continue;
+            }
+			//echo "\tSi existe el archivo<br />";
+            
+            if (!class_exists($plugin)) {
+				//echo "\tNo existe la clase<br />";
+                continue;
+			}
+			//echo "\tSi existe la clase<br />";
+
+            plugins::$instances[$plugin] = new $plugin;
+			/*print_r(plugins::$instances[$plugin]);
+			echo "<br />";*/
+        }
+		/*echo "<br /><br />";
+		print_r(plugins::$instances);
+		echo "<br />";
+		die();*/
+	}
+	?>
