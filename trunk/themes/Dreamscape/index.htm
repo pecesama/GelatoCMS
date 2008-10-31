@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+		{Gelato_includes}
+		<link rel="stylesheet" type="text/css" href="{URL_Tumble}/themes/{Template_name}/style.css"/>
+		<script language="javascript" type="text/javascript" src="{URL_Tumble}/admin/scripts/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="{URL_Tumble}/admin/scripts/lightbox.js"></script>
+		<link rel="stylesheet" type="text/css" href="{URL_Tumble}/admin/css/lightbox.css" />
+
+        <!-- DEFAULT COLORS -->
+        <meta name="color:Background" content="#002c43">
+        <meta name="color:Content Background" content="#005885">
+        <meta name="color:Content Border" content="#003955">
+        <meta name="color:Title" content="#fff">
+        <meta name="color:Description" content="#568">
+        <meta name="color:Post Title" content="#fff">
+        <meta name="color:Text" content="#fff">
+        <meta name="color:Inline Link" content="#ff9900">
+        <meta name="color:Quote" content="#fff">
+        <meta name="color:Quote Source" content="#aaa">
+        <meta name="color:Link Post" content="#ff9900">
+        <meta name="color:Conversation Background" content="#46a6e9">
+        <meta name="color:Conversation Border" content="#0070ba">
+        <meta name="color:Conversation Text" content="#000">
+        <meta name="color:Photo Border" content="#eee">
+        <meta name="color:Date 1" content="#888">
+        <meta name="color:Date 2" content="#4075a2">
+        <!-- END DEFAULT COLORS -->
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	    <title>{Page_Title}</title>
+	    {rssFeed}
+
+        <!--[if lt IE 7]>
+            <style type="text/css">
+                #content {
+                    background-image: none;
+                }
+
+                .post .date {
+                    right: 600px;
+                }
+            </style>
+        <![endif]-->
+    </head>
+    <body>
+        <div id="content">
+            <h1><a href="{URL_Tumble}">Gelato</a></h1>
+			{if {$error}}
+				<div class="error">{$error}</div>
+			{else}
+				{block {$rows} as {$row}}
+					<div class="post">
+						<div class="permalink"><a href="{$row.Permalink}">•</a></div>
+						<div class="date">
+							{$row.Date_Added}
+						</div>
+
+					{if {$row.postType}=='post'}
+						<div class="regular">
+							<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
+							{$row.Body}
+						</div>
+					{elseif {$row.postType}=='photo'}
+						<div class="photo">
+							<a {$row.Effect}><img src="{$row.PhotoURL}" alt="{$row.PhotoAlt}"></a>
+							<div class="caption">
+								{$row.Caption}
+							</div>
+						</div>
+					{elseif {$row.postType}=='quote'}
+						<div class="quote">
+							<span class="quote">
+								<big class="quote">“</big> <a href="{$row.Permalink}">{$row.Quote}</a>
+							</span>
+							<span class="source">{$row.Source}</span>
+						</div>
+					{elseif {$row.postType}=='url'}
+	                    <div class="link">
+		                    <a href="{$row.URL}" class="link" >{$row.Name}</a>
+	                        <div class="description">{$row.Description}</div>
+	                    </div>
+					{elseif {$row.postType}=='conversation'}
+						<div class="conversation">
+							...<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
+							{$row.Conversation}
+						</div>
+					{elseif {$row.postType}=='video'}
+						<div class="video">
+							{$row.Video}
+							<div class="caption">{$row.Caption}</div>
+						</div>
+					{elseif {$row.postType}=='mp3'}
+						<div class="video">
+							{$row.Mp3}
+							<div class="caption">{$row.Caption}</div>
+						</div>
+					{/if}
+					</div>
+					{if !{$id_post}}
+						<div class="totalComments">
+							<h3>{__("Posted by")} {$row.User} {if {$allowComments}}- <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) {__("comments")}{/if}</a></h3>
+						</div>
+					{/if}
+				{/block}
+
+				{if {$id_post}}
+					{if {$row.Comments_Number}>0}
+						<div class="containerComments">
+							<h3 id="comments">{$row.Comments_Number} {__("answers to")} &#8220;{$row.Post_Title}&#8221;</h3>
+							<ol class="commentlist">
+								{block {$comments} as {$comment}}
+								<li class="alt" id="comment-{$comment.Id_Comment}">
+									<cite>
+										<a href="#comment-{$comment.Id_Comment}" title="Comment permalink">#</a>&nbsp;&nbsp;
+										{$comment.Comment_Author} {__("said")}:
+									</cite>
+									<br />
+									<span class="timestampComment"> {__("at")} {$comment.Date}</span><br /><br />
+									{$comment.Comment}
+									<br /><br />
+								</li>
+								{/block}
+							</ol>
+						</div>
+					{/if}
+
+					{if {$allowComments}}
+						<div class="containerFormComments">
+							<h3 id="respond">{__("Add your comment")}</h3>
+
+							<form action="{Form_Action}" method="post" name="commentForm" id="commentForm">
+								<p>
+									<label for="username">
+										<small>{__("Name:")}</small>
+									</label>
+									<input name="username" id="username" value="{whois.User_Cookie}" size="22" tabindex="1" type="text" />
+								</p>
+								<p>
+									<label for="email">
+										<small>{__("E-mail:")}</small>
+									</label>
+									<input name="email" id="email" value="{whois.Email_Cookie}" size="22" tabindex="2" type="text" />
+								</p>
+								<p>
+									<label for="web">
+										<small>{__("Website:")}</small>
+									</label>
+									<input name="web" id="web" value="{whois.Web_Cookie}" size="22" tabindex="3" type="text" />
+								</p>
+								<p>
+									<textarea name="content" id="content" cols=" rows="10" tabindex="4"></textarea>
+								</p>
+								<p>
+									<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
+				                    	{__("Some HTML allowed:")}<br />
+				                        &nbsp;&nbsp;&nbsp;&nbsp;
+				                        <code>
+				                            &lt;blockquote&gt; &lt;code&gt; &lt;em&gt; &lt;strong&gt; &lt;a&gt;
+				                        </code>
+				                	</span>
+				                </p>
+						  		<p>
+									<input type="submit" value="Add comment" name="btnAdd" id="btnAdd" tabindex="5" />
+								</p>
+								<p>
+									<input name="id_post" id="id_post" value="{id_post}" type="hidden" />
+									<input name="comment_date" id="comment_date" value="{Date_Added}" type="hidden" />
+								</p>
+							</form>
+						</div>
+					{/if}
+				{else}
+					{pagination}
+				{/if}
+			{/if}
+            <div id="footer">
+                <p class="tiny">
+                	{__("subscribe via")} <a href="{URL_Tumble}/rss.php">rss</a> &nbsp;/&nbsp;
+					{__("powered by")} <a href="http://www.gelatocms.com/">gelato cms</a>
+                </p>
+            </div>
+        </div>
+
+	</body>
+</html>
