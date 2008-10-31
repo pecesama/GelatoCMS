@@ -652,7 +652,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
         
         foreach ($conf->plugins as $index => $plugin) {
 			//echo "[".$index."] => ".$plugin."<br />";
-            if (!file_exists("plugins/".$plugin.".php")) {
+            if (!file_exists(Absolute_Path."plugins/".$plugin.".php")) {
 				//echo "\tNo existe el archivo<br />";
                 unset($conf->plugins[$index]);
                 continue;

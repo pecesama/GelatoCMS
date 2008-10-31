@@ -28,14 +28,17 @@ if(!defined('entry') || !entry) die('Not a valid page');
 			echo "<br />";*/
 			
 			$index = 0;
-            foreach (plugins::$instances as $plugin) {				
-				$action = $this->actions[$name][$index][1];                
-				if (is_callable(array($plugin, $action))) {                    
-					$plugin->$action();
+            foreach (plugins::$instances as $plugin) {
+				if(array_key_exists($index,$this->actions[$name])){
+					$action = $this->actions[$name][$index][1]; 
+					if (is_callable(array($plugin, $action))) {
+						//echo "ejecutar: ".$action."()<br/>";					
+						$plugin->$action();
+						$index++;
+					}
 				}
-				$index++;
 			}
-        }
+        }	
         
 		function exists($name) {
             if (isset($this->exists[$name])) {
@@ -50,9 +53,11 @@ if(!defined('entry') || !entry) die('Not a valid page');
 				print_r($this->actions[$name]);
 				echo "<br />";
 				echo $this->actions[$name][0][1];
-				echo "<br />";*/                
-				if (is_callable(array($plugin, $this->actions[$name][0][1]))) {
-                    return $this->exists[$name] = true;
+				echo "<br />";*/
+				if(array_key_exists($name,$this->actions)){
+					if (is_callable(array($plugin, $this->actions[$name][0][1]))) {
+						return $this->exists[$name] = true;
+					}
 				}
 			}
 
