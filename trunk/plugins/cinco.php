@@ -3,7 +3,7 @@
 class cinco extends plugins {
 	
 	function cinco() {
-		$this->addAction('add_post', 'dameCinco');
+		//$this->addAction('gelato_init', 'dameCinco');
 	}
 	
 	function dameCinco() {

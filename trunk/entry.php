@@ -97,7 +97,7 @@ if($installed){
 	//print_r($plugEngine->actions);
 	//die();
 	
-	$trigger->call('add_post');	
+	$trigger->call('gelato_init');	
 
 	$feeds = new feeds();
 	$feeds->updateFeeds();
