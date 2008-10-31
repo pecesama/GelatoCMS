@@ -141,11 +141,9 @@ class Install {
 	}
 
 	function inerrors($n) {
-		if ( strpos($this->errors,$n)===false) {
+		if(strpos($this->errors,(string)$n)===false)
 			return false;
-		} else {
-			return true;
-		}
+		return true;
 	}
 
 	function mostrarerror($n) {
