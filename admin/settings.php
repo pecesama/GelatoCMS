@@ -109,7 +109,10 @@ if ($user->isAdmin()) {
 										}
 ?>
 										</select>
-									</li>									
+									</li>
+<?php	
+									$trigger->call('add_settings_panel');	
+?>
 								</ul>
 							</fieldset>
 							<p>

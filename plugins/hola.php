@@ -3,7 +3,7 @@
 class hola extends plugins {
 	
 	function hola() {
-		$this->addAction('add_post', 'saluda');		
+		//$this->addAction('gelato_init', 'saluda');		
 	}
 	
 	function saluda() {

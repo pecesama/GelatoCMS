@@ -56,7 +56,8 @@ $theme = new themes;
         $gelato_includes .= "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"".$conf->urlGelato."/admin/css/lightbox.css\" />\n";
         $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/jquery.js\"></script>\n";
         $gelato_includes .= "\t<script language=\"javascript\" type=\"text/javascript\" src=\"".$conf->urlGelato."/admin/scripts/lightbox.js\"></script>";
-
+		
+		
 		$page_title = $conf->title;
 		$page_title_divisor = " &raquo; "; // it should be set in configuration
 		$page_title_len = 50; // it should be set in configuration
@@ -75,7 +76,8 @@ $theme = new themes;
 				$page_title .= $page_title_divisor.stripslashes($page_title_data);
 			}
 		}
-
+		
+		$trigger->call('gelato_includes');
 		$theme->set('Gelato_includes',$gelato_includes);
 		$theme->set('Title',$conf->title);
 		$theme->set('Page_Title',$page_title);
