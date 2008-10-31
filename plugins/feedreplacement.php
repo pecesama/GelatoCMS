@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Feed Replacement
+Plugin Name: FeedReplacement
 Plugin URI: http://www.gelatocms.com/plugins/feedreplacement/
 Description: 
 Author: Victor Bracco
@@ -19,10 +19,11 @@ class feedreplacement extends plugins {
 		$this->addAction('gelato_init', 'feedreplacement_check');
 		
 		//reemplaza el link del feed de gelato por el link de feedburner
-		$this->addAction('gelato_includes', 'feedreplacement_includeFeed');
+		//$this->addAction('add_post', 'dameCinco');
 		
 		//lo mismo pero con el que esta en el header
-		//$this->addAction('add_post', 'dameCinco');
+		$this->addAction('gelato_includes', 'feedreplacement_includeFeed');
+		
 		
 		//guarda la opcion si viene por POST
 		if ($user->isAdmin()) {
