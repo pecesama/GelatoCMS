@@ -18,15 +18,17 @@ class kodrs extends plugins {
 
 	function source_code_beautifier() {
 		global $rows;
-		foreach($rows as $key=>$post){
-			// Si no es tipo 'post' entonces no tiene 'Body' :)
-			if($post["postType"]=="post"){
-				$text = $rows[$key]['Body'];		
-				$result = preg_replace_callback("/<code\s+.*lang\s*=\"(.*)\">(.*)<\/code>/siU", 
-					array('kodrs', 'replace_with_geshi'), 
-					$text
-				);
-				$rows[$key]['Body'] = $result;
+		if(count($rows)>0){
+			foreach($rows as $key=>$post){
+				// Si no es tipo 'post' entonces no tiene 'Body' :)
+				if($post["postType"]=="post"){
+					$text = $rows[$key]['Body'];		
+					$result = preg_replace_callback("/<code\s+.*lang\s*=\"(.*)\">(.*)<\/code>/siU", 
+						array('kodrs', 'replace_with_geshi'), 
+						$text
+					);
+					$rows[$key]['Body'] = $result;
+				}
 			}
 		}
 	}
