@@ -18,7 +18,7 @@ require_once('entry.php');
 global $user, $tumble, $conf;
 
 $theme = new themes;
-        // Our first approach to MVC... �our second? visit http://www.flavorphp.com
+        // Our first approach to MVC... our second? visit http://www.flavorphp.com
 
         if(isset($_SERVER['PATH_INFO'])) $param_url = explode("/",$_SERVER['PATH_INFO']);
 
@@ -179,7 +179,8 @@ $theme = new themes;
 
 								$rows[] = $row;
                         }
-
+						
+						$trigger->call('post_content');
 						$theme->set('rows',$rows);
 
                         $p = new pagination;
@@ -308,6 +309,8 @@ $theme = new themes;
 				}
 
 				$rows[] = $row;
+				
+				$trigger->call('post_content');
 				$theme->set('rows',$rows);
         }
 
