@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: FeedReplacement
-Plugin URI: http://www.gelatocms.com/plugins/feedreplacement/
+Plugin URI:  http://plugins.gelatocms.com/feedreplacement/
 Description: 
 Author: Victor Bracco
 Author URI: http://www.vbracco.com.ar/
@@ -24,6 +24,8 @@ class feedreplacement extends plugins {
 		//lo mismo pero con el que esta en el header
 		$this->addAction('gelato_includes', 'feedreplacement_includeFeed');
 		
+		//redirecting all trafic
+		$this->addAction('feed_header', 'feedreplacement_redirect');
 		
 		//guarda la opcion si viene por POST
 		if ($user->isAdmin()) {
@@ -64,6 +66,15 @@ class feedreplacement extends plugins {
 		}
 	}
 	
+	function feedreplacement_redirect(){
+		global $conf;
+		$feedreplacement_url = $conf->get_option('feedreplacement_url');
+		if (!preg_match("/feedburner|feedvalidator/i", $_SERVER['HTTP_USER_AGENT'])) {
+			header("Location: ".$feedreplacement_url);
+			header("HTTP/1.1 302 Temporary Redirect");
+			exit();
+		}
+	}
 }
 
 ?>
