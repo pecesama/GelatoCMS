@@ -57,12 +57,10 @@ class feedreplacement extends plugins {
 	}
 	
 	function feedreplacement_includeFeed(){
-		global $conf,$gelato_includes;
+		global $conf,$gelato_includes,$feed_url;
 		$feedreplacement_url = $conf->get_option('feedreplacement_url');
 		if($feedreplacement_url!=""){
-			$feed = ($conf->urlFriendly?"/rss/":"/rss.php");
-			$url = $conf->urlGelato.$feed;
-			$gelato_includes = str_replace($url,$feedreplacement_url,$gelato_includes);
+			$feed_url = $feedreplacement_url;
 		}
 	}
 	
