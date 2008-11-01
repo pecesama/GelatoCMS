@@ -12,10 +12,12 @@ if(!defined('entry')) define('entry',true);
   =========================== */
 ?>
 <?php
+	require('entry.php');
+	$trigger->call('feed_header');
+	
 	header("Content-type: text/xml; charset=utf-8");
 	$isFeed = true;
 	
-	require('entry.php');
 	global $conf, $tumble;
 	
 	
