@@ -49,8 +49,6 @@ $theme = new themes;
         }
 
 		$feed_url = $conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php");
-		$trigger->call('feed_url');
-		$theme->set('rssFeed',"\t<link rel=\"alternate\" type=\"application/rss+xml\" title=\"RSS\" href=\"".$feed_url."\"/>\n");
 
         $gelato_includes = "<meta name=\"generator\" content=\"gelato ".codeName()." (".version().")\" />\n";
         $gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />";
@@ -75,6 +73,7 @@ $theme = new themes;
 		}
 
 		$trigger->call('gelato_includes');
+		$theme->set('rssFeed',$feed_url);
 		$theme->set('Gelato_includes',$gelato_includes);
 		$theme->set('Title',$conf->title);
 		$theme->set('Page_Title',$page_title);
