@@ -650,24 +650,28 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	function init_plugins() {        
 		global $conf;
         
-        foreach ($conf->plugins as $index => $plugin) {
+		$actives = json_decode($conf->active_plugins,1);
+		$actives = $actives[1];
+        foreach ($actives as $index => $plugin) {
 			//echo "[".$index."] => ".$plugin."<br />";
-            if (!file_exists(Absolute_Path."plugins/".$plugin.".php")) {
+            if (!file_exists(Absolute_Path."plugins/".$plugin)) {
 				//echo "\tNo existe el archivo<br />";
-                unset($conf->plugins[$index]);
+                unset($actives[$index]);
                 continue;
-            }
+            }else{
+				require_once(Absolute_Path.'plugins/'.$plugin);
+			}
 			//echo "\tSi existe el archivo<br />";
             
-            if (!class_exists($plugin)) {
+			if (!class_exists($index)) {
 				//echo "\tNo existe la clase<br />";
                 continue;
 			}
 			//echo "\tSi existe la clase<br />";
 
-            plugins::$instances[$plugin] = new $plugin;
-			/*print_r(plugins::$instances[$plugin]);
-			echo "<br />";*/
+			plugins::$instances[$index] = new $index;
+			//print_r(plugins::$instances[$index]);
+			//echo "<br />";
         }
 		/*echo "<br /><br />";
 		print_r(plugins::$instances);

@@ -56,9 +56,10 @@ if ($user->isAdmin()) {
 				<div class="box">
 					<ul class="menu manage">
 					<h3><?php echo __("Tumblelog configuration")?></h3>
-					<li><a href="index.php"><?php echo __("Post")?></a></li>
-					<li><a href="admin.php"><?php echo __("Users")?></a></li>
-					<li><a href="options.php"><?php echo __("Options")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/index.php"><?php echo __("Post")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/admin.php"><?php echo __("Users")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/plugins.php"><?php echo __("Plugins")?></a></li>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/options.php"><?php echo __("Options")?></a></li>
 					<li class="selected"><a><?php echo __("Settings")?></a></li>
 					</ul>
 <?php
