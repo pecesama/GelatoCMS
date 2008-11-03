@@ -28,7 +28,7 @@
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	    <title>{Page_Title}</title>
-	    {rssFeed}
+	    <link rel="alternate" type="application/rss+xml" title="RSS" href="{rssFeed}" />
 
         <!--[if lt IE 7]>
             <style type="text/css">
@@ -44,7 +44,10 @@
     </head>
     <body>
         <div id="content">
-            <h1><a href="{URL_Tumble}">Gelato</a></h1>
+            <h1><a href="{URL_Tumble}">{Title}</a></h1>
+            <div id="description">
+                {Description}
+            </div>
 			{if {$error}}
 				<div class="error">{$error}</div>
 			{else}
