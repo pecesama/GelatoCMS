@@ -20,38 +20,38 @@ global $user, $tumble, $conf;
 $theme = new themes;
         // Our first approach to MVC... our second? visit http://www.flavorphp.com
 
-        if(isset($_SERVER['PATH_INFO'])) $param_url = explode("/",$_SERVER['PATH_INFO']);
+		if(isset($_SERVER['PATH_INFO'])) $param_url = explode("/",$_SERVER['PATH_INFO']);
 
-        if (isset($_GET["post"])) {
-                $id_post = $_GET["post"];
-                if (!is_numeric($id_post) || $id_post < 1 ){
+		if (isset($_GET["post"])) {
+				$id_post = $_GET["post"];
+				if (!is_numeric($id_post) || $id_post < 1 ){
                 	header("Location: index.php");
-                }
-        } else {
-                if (isset($param_url[1]) && $param_url[1]=="post") {
-                        $id_post = (isset($param_url[2])) ? ((is_numeric($param_url[2])) ? $param_url[2] : NULL) : NULL;
-                } else {
-                        $id_post = NULL;
-                }
-        }
+				}
+		} else {
+			if (isset($param_url[1]) && $param_url[1]=="post") {
+ 				$id_post = (isset($param_url[2])) ? ((is_numeric($param_url[2])) ? $param_url[2] : NULL) : NULL;
+			} else {
+				$id_post = NULL;
+			}
+		}
 
-        $theme->set('id_post',$id_post);
+		$theme->set('id_post',$id_post);
 		$theme->set('error','');
 
-        if (isset($_GET["page"])) {
-                $page_num = $_GET["page"];
-        } else {
-                if (isset($param_url[1]) && $param_url[1]=="page") {
-                        $page_num = (isset($param_url[2])) ? ((is_numeric($param_url[2])) ? $param_url[2] : NULL) : NULL;
-                } else {
-                        $page_num = NULL;
-                }
-        }
+		if (isset($_GET["page"])) {
+			$page_num = $_GET["page"];
+		} else {
+			if (isset($param_url[1]) && $param_url[1]=="page") {
+				$page_num = (isset($param_url[2])) ? ((is_numeric($param_url[2])) ? $param_url[2] : NULL) : NULL;
+			} else {
+				$page_num = NULL;
+			}
+		}
 
 		$feed_url = $conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php");
 
-        $gelato_includes = "<meta name=\"generator\" content=\"gelato ".codeName()." (".version().")\" />\n";
-        $gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />";
+		$gelato_includes = "<meta name=\"generator\" content=\"gelato ".codeName()." (".version().")\" />\n";
+		$gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />";
 
 		$page_title = $conf->title;
 		$page_title_divisor = " &raquo; "; // it should be set in configuration
@@ -83,54 +83,53 @@ $theme = new themes;
 		$theme->set('allowComments',$conf->allowComments);
 
 		$theme->set('isAuthenticated',$user->isAuthenticated());
-        if($user->isAuthenticated()){
+		if($user->isAuthenticated()){
 			$theme->set('User',$_SESSION["user_login"]);
 			$theme->set('URL_Tumble',$conf->urlGelato);
-        }
+		}
 
 		$rows = array();
-        if(!$id_post){
-                $limit=$conf->postLimit;
+		if(!$id_post){
+ 				$limit=$conf->postLimit;
 
-                if(isset($page_num) && is_numeric($page_num) && $page_num>0) { // Is defined the page and is numeric?
-                        $from = (($page_num-1) * $limit);
-                } else {
-                        $from = 0;
-                }
+				if(isset($page_num) && is_numeric($page_num) && $page_num>0) { // Is defined the page and is numeric?
+					$from = (($page_num-1) * $limit);
+				} else {
+					$from = 0;
+				}
 
-                $rs = $tumble->getPosts($limit, $from);
+				$rs = $tumble->getPosts($limit, $from);
 
-                if ($tumble->contarRegistros()>0) {
-                        $dateTmp = null;
-                        while($register = mysql_fetch_assoc($rs)) {
+				if ($tumble->contarRegistros()>0) {
+						$dateTmp = null;
+						while($register = mysql_fetch_assoc($rs)) {
 								$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
-                                if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
+								if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
 
 								$permalink = $tumble->getPermalink($register["id_post"]);
 
 								$conversation = $register["description"];
 
-                                $register["title"] = stripslashes($register["title"]);
-                                $register["description"] = stripslashes($register["description"]);
+								$register["title"] = stripslashes($register["title"]);
+								$register["description"] = stripslashes($register["description"]);
 
 								$row['Date_Added'] = $formatedDate;
 								$row['Permalink'] = $permalink;
 								$row['postType'] = type2Text($register["type"]);
 
-                                switch ($register['type']){
-                                        case "1":
-                                        		$row['Title'] = $register["title"];
-                                        		$row['Body'] = $register["description"];
-                                                break;
-                                        case "2":
-                                                $fileName = "uploads/".getFileName($register["url"]);
-
-                                                $x = @getimagesize($fileName);
-                                                if ($x[0] > 500) {
+								switch ($register['type']){
+										case "1":
+											$row['Title'] = $register["title"];
+											$row['Body'] = $register["description"];
+											break;
+											case "2":
+											$fileName = "uploads/".getFileName($register["url"]);
+											$x = @getimagesize($fileName);
+												if ($x[0] > 500) {
 													$photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
-                                                } else {
+												} else {
 													$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
-                                                }
+												}
 
 												$effect = " href=\"".str_replace("../", $conf->urlGelato."/", $register["url"])."\" rel=\"lightbox\"";
 
@@ -138,13 +137,13 @@ $theme = new themes;
 												$row['PhotoAlt'] = strip_tags($register["description"]);
 												$row['Caption'] = $register["description"];
 												$row['Effect'] = $effect;
-                                                break;
-                                        case "3":
-                                        		$row['Quote'] = $register["description"];
-                                        		$row['Source'] = $register["title"];
-                                                break;
+												break;
+										case "3":
+												$row['Quote'] = $register["description"];
+												$row['Source'] = $register["title"];
+												break;
                                         case "4":
-                                                if($conf->shorten_links){
+												if($conf->shorten_links){
 													$register["url"] = _file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
 												}
 												$register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
@@ -152,20 +151,20 @@ $theme = new themes;
 												$row['URL'] = $register["url"];
 												$row['Name'] = $register["title"];
 												$row['Description'] = $register["description"];
-                                                break;
-                                        case "5":
-                                        		$row['Title'] = $register["title"];
-                                        		$row['Conversation'] = $tumble->formatConversation($conversation);
-                                                break;
-                                        case "6":
-                                        		$row['Video'] = $tumble->getVideoPlayer($register["url"]);
-                                        		$row['Caption'] = $register["description"];
-                                                break;
-                                        case "7":
-                                        		$row['Mp3'] = $tumble->getMp3Player($register["url"]);
-                                        		$row['Caption'] = $register["description"];
-                                                break;
-                                }
+												break;
+												case "5":
+												$row['Title'] = $register["title"];
+												$row['Conversation'] = $tumble->formatConversation($conversation);
+												break;
+										case "6":
+												$row['Video'] = $tumble->getVideoPlayer($register["url"]);
+												$row['Caption'] = $register["description"];
+												break;
+										case "7":
+												$row['Mp3'] = $tumble->getMp3Player($register["url"]);
+												$row['Caption'] = $register["description"];
+												break;
+								}
 
 								$comment = new comments();
 								$noComments = $comment->countComments($register["id_post"]);
@@ -182,23 +181,23 @@ $theme = new themes;
 						$trigger->call('post_content');
 						$theme->set('rows',$rows);
 
-                        $p = new pagination;
-                        $p->Items($tumble->getPostsNumber());
-                        $p->limit($limit);
+						$p = new pagination;
+						$p->Items($tumble->getPostsNumber());
+						$p->limit($limit);
 						if($conf->urlFriendly){
 								$p->urlFriendly('[...]');
 								$p->target($conf->urlGelato."/page/[...]");
-							}else
+							}else{
 								$p->target($conf->urlGelato);
+							}
 
-                        $p->currentPage(isset($page_num) ? $page_num : 1);
-
-                        $theme->set('pagination',$p->getPagination());
-                } else {
-                        $theme->set('error','No posts in this tumblelog.');
-                }
-        } else {
-                $register = $tumble->getPost($id_post);
+						$p->currentPage(isset($page_num) ? $page_num : 1);
+						$theme->set('pagination',$p->getPagination());
+					} else {
+						$theme->set('error','No posts in this tumblelog.');
+					}
+			} else {
+				$register = $tumble->getPost($id_post);
 
 				$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
 				$permalink = $tumble->getPermalink($register["id_post"]);
@@ -208,26 +207,26 @@ $theme = new themes;
 				$register["description"] = $register["description"];
 
 				$register["title"] = stripslashes($register["title"]);
-                $register["description"] = stripslashes($register["description"]);
+				$register["description"] = stripslashes($register["description"]);
 
 				$row['Date_Added'] = $formatedDate;
 				$row['Permalink'] = $permalink;
 				$row['postType'] = type2Text($register["type"]);
 
-                switch ($register['type']) {
-                        case "1":
+				switch ($register['type']) {
+						case "1":
 								$row['Title'] = $register["title"];
 								$row['Body'] = $register["description"];
-                                break;
-                        case "2":
-                                $fileName = "uploads/".getFileName($register["url"]);
+								break;
+						case "2":
+								$fileName = "uploads/".getFileName($register["url"]);
 
-                                $x = @getimagesize($fileName);
-                                if ($x[0] > 500) {
+								$x = @getimagesize($fileName);
+								if ($x[0] > 500) {
                                         $photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
-                                } else {
+								} else {
 										$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
-                                }
+								}
 
 								$effect = " href=\"".str_replace("../", $conf->urlGelato."/", $register["url"])."\" rel=\"lightbox\"";
 
@@ -235,20 +234,20 @@ $theme = new themes;
 								$row['PhotoAlt'] = strip_tags($register["description"]);
 								$row['Caption'] = $register["description"];
 								$row['Effect'] = $effect;
-                                break;
-                        case "3":
+								break;
+						case "3":
 								$row['Quote'] = $register["description"];
-                                $row['Source'] = $register["title"];
-                                break;
-                        case "4":
-                                if($conf->shorten_links){
+								$row['Source'] = $register["title"];
+								break;
+						case "4":
+							if($conf->shorten_links){
 									$register["url"] = _file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
 								}
 								$row['URL'] = $register["url"];
 								$row['Name'] = $register["title"];
 								$row['Description'] = $register["description"];
-                                break;
-                        case "5":
+								break;
+						case "5":
 								$row['Title'] = $register["title"];
 								$row['Conversation'] = $tumble->formatConversation($conversation);
 								break;
@@ -313,6 +312,6 @@ $theme = new themes;
 				$theme->set('rows',$rows);
         }
 
-        $theme->set('URL_Tumble',$conf->urlGelato);
+		$theme->set('URL_Tumble',$conf->urlGelato);
 		$theme->display(Absolute_Path.'themes/'.$conf->template.'/index.htm');
 ?>

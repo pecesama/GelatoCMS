@@ -19,16 +19,16 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	
 		function call($name) {            
 
-            if (!$this->exists($name)) {
-                return false;
+			if (!$this->exists($name)) {
+				return false;
 			}            
-            
-            /*echo "<br />==========<br />";
+
+ 			/*echo "<br />==========<br />";
 			echo $name;
 			echo "<br />";*/
 			
 			$index = 0;
-            foreach (plugins::$instances as $plugin) {
+			foreach (plugins::$instances as $plugin) {
 				if(array_key_exists($index,$this->actions[$name])){
 					$action = $this->actions[$name][$index][1]; 
 					if (is_callable(array($plugin, $action))) {
@@ -64,15 +64,12 @@ if(!defined('entry') || !entry) die('Not a valid page');
             return $this->exists[$name] = false;
         }		
         
-		function & instance()
-        {
-            static $instance;
-
-            if( !isset($instance) ) {
-                $instance = new self();
-            }
-
-            return $instance;
+		function & instance(){
+			static $instance;
+			if( !isset($instance) ) {
+				$instance = new self();
+			}
+			return $instance;
         }
 		
 	}

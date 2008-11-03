@@ -55,17 +55,20 @@ class configuration {
 			$this->shorten_links = $this->get_option("shorten_links");
 			$this->rssImportFrec = $this->get_option("rss_import_frec");
 			$this->check_version = $this->get_option("check_version");
+			$this->active_plugins = $this->get_option("active_plugins");
 			
 			//TODO: Soporte de los plugins desde BD activar/desactivar
-			if ($handle = opendir(Absolute_Path."plugins")) {				
+			//FIXME cambiar esto por el soporte por carpetas, mas organizado.
+			// asi se pueden estandarizar documentacion y thumbnails, 
+			/*if ($handle = opendir(Absolute_Path."plugins")) {
 				while (false !== ($file = readdir($handle))) { 
 					if (substr($file, strlen($file)-4, 4) == ".php") {
 						require_once(Absolute_Path."plugins/{$file}");
-						$this->plugins[] = substr($file, 0, strlen($file)-4);						
+						$this->plugins[] = substr($file, 0, strlen($file)-4);
 					} 
 				} 
 				closedir($handle); 
-			}			
+			}*/			
 		} else {
 			if($isFeed) {
 				header("HTTP/1.0 503 Service Unavailable"); 

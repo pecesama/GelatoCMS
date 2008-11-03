@@ -60,6 +60,7 @@ if ($user->isAdmin()) {
 				<div class="box">
 					<ul class="menu manage">
 					<h3>Manage</h3>
+					<li><a href="<?php echo $conf->urlGelato;?>/admin/plugins.php"><?php echo __("Plugins")?></a></li>
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/settings.php"><?php echo __("Settings")?></a></li>
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/index.php"><?php echo __("Posts")?></a></li>
 					<li><a href="<?php echo $conf->urlGelato;?>/admin/user.php"><?php echo __("Add user")?></a></li>

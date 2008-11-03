@@ -83,3 +83,4 @@ INSERT INTO `gel_options` VALUES ('offset_city', 'Mexico/General');
 INSERT INTO `gel_options` VALUES ('offset_time', '-6');
 INSERT INTO `gel_options` VALUES ('shorten_links', '0');
 INSERT INTO `gel_options` VALUES ('rss_import_frec', '5 minutes');
+INSERT INTO `gel_options` VALUES ('active_plugins', '[{"total":0},[]]');
