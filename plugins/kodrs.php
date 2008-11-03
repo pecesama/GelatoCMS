@@ -1,12 +1,5 @@
 <?php
-/*
-Plugin Name: kodrs
-Plugin URI: http://plugins.gelatocms.com/kodrs/
-Description: Geshify your source codes
-Author: Pedro Santana
-Author URI: http://www.pecesama.net/
-Version: 0.1
-*/ 
+
 class kodrs extends plugins {	
 	
 	function kodrs() {
@@ -15,12 +8,24 @@ class kodrs extends plugins {
 		}
 		$this->addAction('post_content', 'source_code_beautifier');
 	}
+	
+	function info()
+	{
+		return array(
+			'name' => 'kodrs',
+			'version' => '0.1',
+			'url' => 'http://plugins.gelatocms.com/kodrs/',
+			'author' => 'Pedro Santana',
+			'authorurl' => 'http://www.pecesama.net/',
+			'license' => 'MIT License',
+			'description' => 'Geshify your source codes',
+		);
+	}
 
 	function source_code_beautifier() {
 		global $rows;
 		if(count($rows)>0){
 			foreach($rows as $key=>$post){
-				// Si no es tipo 'post' entonces no tiene 'Body' :)
 				if($post["postType"]=="post"){
 					$text = $rows[$key]['Body'];		
 					$result = preg_replace_callback("/<code\s+.*lang\s*=\"(.*)\">(.*)<\/code>/siU", 

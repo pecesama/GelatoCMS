@@ -16,7 +16,7 @@ if(!defined('entry')) define('entry',true);
 require('entry.php');
 global $configFile, $db;
 
-if (!file_exists($configFile) || true) {
+if (!file_exists($configFile) == true) {
 	$mensaje = '
 			<h3 class="importan">'.__("Error reading configuration file").'</h3>
 			<p>'.__("There does not seem to be a <code>config.php</code> file. I need this before we can get started.").'</p>
