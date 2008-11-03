@@ -130,6 +130,7 @@ class Install {
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('shorten_links', '0');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('rss_import_frec', '5 minutes');";
 		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('check_version', '1');";
+		$sqlStr[] = "INSERT INTO `".Table_prefix."options` VALUES ('active_plugins', '[{\"total\":0},[]]');";
 
 		foreach($sqlStr as $key => $query){
 			if(!$db->ejecutarConsulta($query)){

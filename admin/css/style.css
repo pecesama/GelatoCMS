@@ -52,6 +52,7 @@ body{ background: #e0e0e0; text-align:center; font-family:"Trebuchet Ms", Verdan
 .footer-box{background:#fff url(images/bg-foot-box.png) center top no-repeat;}	
 
 .box h3{float:left; color:#444444; font-weight:bold; padding:5px 10px 0 0;}
+.box p{ margin:2px auto auto 15px;}
 .menu{ background:transparent url(images/bg-top-box.png) top center no-repeat; height:40px; width:570px; list-style-type:none; padding-right:30px;}
 .menu li{ display:inline;}
 .menu li.selected a{background: transparent url(images/bg-top-box-hover.png) left top repeat-x; text-decoration:underline;}
