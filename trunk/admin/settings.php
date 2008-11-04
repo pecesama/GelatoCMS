@@ -27,7 +27,7 @@ if ($user->isAdmin()) {
 	<head>
 		<title>gelato :: <?php echo __("settings")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="generator" content="gelato cms <?php echo version();?>" />
+		<meta name="generator" content="gelato cms <?php echo util::version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script type="text/javascript">
@@ -90,7 +90,7 @@ if ($user->isAdmin()) {
 									<li><label for="lang"><?php echo __("Language:")?></label>
 										<select id="lang" name="lang">
 <?php									
-										$langs = getLangs();
+										$langs = util::getLangs();
 										foreach ($langs as $key=>$lang) {
 											$active = ($conf->lang==$key) ? "selected" : "";
 											echo "<option value=\"".$key."\" ".$active.">".$lang."</option>\n";
@@ -102,7 +102,7 @@ if ($user->isAdmin()) {
 									<li><label for="template"><?php echo __("Template:")?></label>
 										<select id="template" name="template">
 <?php
-										$themes = getThemes();
+										$themes = util::getThemes();
 										foreach ($themes as $theme) {
 											$active = ($conf->template==$theme) ? "selected" : "";
 											echo "<option value=\"".$theme."\" ".$active.">".$theme."</option>\n";

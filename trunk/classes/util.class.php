@@ -1,5 +1,5 @@
 <?php
-if(!defined('entry') || !entry) die('Not a valid page');
+if(!defined('entry') || !entry) die('Not a valid page'); 
 /* ===========================
 
   gelato CMS - A PHP based tumblelog CMS
@@ -12,6 +12,8 @@ if(!defined('entry') || !entry) die('Not a valid page');
   =========================== */
 ?>
 <?php
+class util {
+	
 	function version() {
 		return "1.0";
 	}
@@ -34,7 +36,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function isMP3($fileUrl) {
-		if (endsWith($fileUrl, ".mp3")) {
+		if (util::endsWith($fileUrl, ".mp3")) {
 			return true;
 		} else {
 			return false;
@@ -42,15 +44,15 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function getMP3File($remoteFileName) {
-		if (isMP3($remoteFileName)) {
-			if (getFile($remoteFileName)) {
+		if (util::isMP3($remoteFileName)) {
+			if (util::getFile($remoteFileName)) {
 				return true;
 			} else {
 				return false;
 			}
-		} elseif (isGoEar($remoteFileName)) {
+		} elseif (util::isGoEar($remoteFileName)) {
 			return true;
-		} elseif (isOdeo($remoteFileName)) {
+		} elseif (util::isOdeo($remoteFileName)) {
 			return true;
 		} else {
 			return false;
@@ -65,14 +67,14 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function isGoEar($songUrl) {
-		if (beginsWith($songUrl, "http://www.goear.com/listen.php?v=") || beginsWith($songUrl, "http://goear.com/listen.php?v="))
+		if (util::beginsWith($songUrl, "http://www.goear.com/listen.php?v=") || util::beginsWith($songUrl, "http://goear.com/listen.php?v="))
 			return true;
 		else
 			return false;
 	}
 
 	function isOdeo($songUrl){
-		if (beginsWith($songUrl, "http://odeo.com/audio/") || beginsWith($songUrl, "http://www.odeo.com/audio/"))
+		if (util::beginsWith($songUrl, "http://odeo.com/audio/") || util::beginsWith($songUrl, "http://www.odeo.com/audio/"))
 			return true;
 		else
 			return false;
@@ -85,15 +87,15 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function isImageFile($photoUrl) {
-		if (endsWith($photoUrl, ".jpg")) { return true; }
-		elseif (endsWith($photoUrl, ".gif")) { return true; }
-		elseif (endsWith($photoUrl, ".png")) { return true; }
+		if (util::endsWith($photoUrl, ".jpg")) { return true; }
+		elseif (util::endsWith($photoUrl, ".gif")) { return true; }
+		elseif (util::endsWith($photoUrl, ".png")) { return true; }
 		else { return false; }
 	}
 
 	function getPhotoFile($remoteFileName) {
-		if (isImageFile($remoteFileName)) {
-			if (getFile($remoteFileName)) {
+		if (util::isImageFile($remoteFileName)) {
+			if (util::getFile($remoteFileName)) {
 				return true;
 			} else {
 				return false;
@@ -104,8 +106,8 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function getFile($remoteFileName) {
-		$fileName = "../uploads/".sanitizeName(getFileName($remoteFileName));
-		$str = _file_get_contents($remoteFileName);
+		$fileName = "../uploads/".util::sanitizeName(util::getFileName($remoteFileName));
+		$str = util::_file_get_contents($remoteFileName);
 		if (!$handle = fopen($fileName, 'w')) {
 			//die("no se abrio de escritura");
 			return false;
@@ -120,7 +122,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function isVimeoVideo($videoUrl) {
-		if (beginsWith($videoUrl, "http://vimeo.com/") || beginsWith($videoUrl, "http://www.vimeo.com/"))
+		if (util::beginsWith($videoUrl, "http://vimeo.com/") || util::beginsWith($videoUrl, "http://www.vimeo.com/"))
 			return true;
 		else
 			return false;
@@ -135,7 +137,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 
 	function isYoutubeVideo($videoUrl) {
 		$url = explode("?", $videoUrl);
-		if((beginsWith($url[0], "http://") && endsWith($url[0], ".youtube.com/watch")) || beginsWith($url[0], "http://youtube.com/watch"))
+		if((util::beginsWith($url[0], "http://") && util::endsWith($url[0], ".youtube.com/watch")) || util::beginsWith($url[0], "http://youtube.com/watch"))
 			return true;
 		else
 			return false;
@@ -148,7 +150,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 	
 	function isYahooVideo($videoUrl){
-		if (beginsWith($videoUrl, "http://video.yahoo.com/watch/") || beginsWith($videoUrl, "http://www.video.yahoo.com/watch/"))
+		if (util::beginsWith($videoUrl, "http://video.yahoo.com/watch/") || util::beginsWith($videoUrl, "http://www.video.yahoo.com/watch/"))
 			return true;
 		else
 			return false;
@@ -163,7 +165,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function isGoogleVideoUrl($videoUrl){
-		if (beginsWith($videoUrl, "http://video.google.com/videoplay?")){
+		if (util::beginsWith($videoUrl, "http://video.google.com/videoplay?")){
 			return true;
 		} else {
 			return false;
@@ -177,7 +179,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 	
 	function isMTVVideoUrl($videoUrl){
-		if (beginsWith($videoUrl, "http://www.mtvmusic.com/video/?id=") || beginsWith($videoUrl, "http://mtvmusic.com/video/?id=")){
+		if (util::beginsWith($videoUrl, "http://www.mtvmusic.com/video/?id=") || util::beginsWith($videoUrl, "http://mtvmusic.com/video/?id=")){
 			return true;
 		} else {
 			return false;
@@ -191,7 +193,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function isDailymotionVideo($videoUrl) {
-		if (beginsWith($videoUrl, "http://www.dailymotion.com/video/") || beginsWith($videoUrl, "http://dailymotion.com/video/"))
+		if (util::beginsWith($videoUrl, "http://www.dailymotion.com/video/") || util::beginsWith($videoUrl, "http://dailymotion.com/video/"))
 			return true;
 		else
 			return false;
@@ -204,7 +206,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function isSlideSharePresentation($videoUrl) {
-		if (beginsWith($videoUrl, "[slideshare id="))
+		if (util::beginsWith($videoUrl, "[slideshare id="))
 			return true;
 		else
 			return false;
@@ -218,13 +220,13 @@ if(!defined('entry') || !entry) die('Not a valid page');
 	}
 
 	function isVideo($url) {
-		if (isYoutubeVideo($url)) { return true; }
-		elseif (isVimeoVideo($url)) { return true; }
-		elseif (isDailymotionVideo($url)) { return true; }
-		elseif (isYahooVideo($url)) { return true; }
-		elseif (isSlideSharePresentation($url)) { return true; }
-		elseif (isGoogleVideoUrl($url)) { return true; }
-		elseif (isMTVVideoUrl($url)) { return true; }
+		if (util::isYoutubeVideo($url)) { return true; }
+		elseif (util::isVimeoVideo($url)) { return true; }
+		elseif (util::isDailymotionVideo($url)) { return true; }
+		elseif (util::isYahooVideo($url)) { return true; }
+		elseif (util::isSlideSharePresentation($url)) { return true; }
+		elseif (util::isGoogleVideoUrl($url)) { return true; }
+		elseif (util::isMTVVideoUrl($url)) { return true; }
 		else { return false; }
 	}
 
@@ -295,7 +297,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 				return false;
 			}
 		} else {
-			if (extension_loaded('curl') && version_compare(get_curl_version(), '7.10.5', '>=')) {
+			if (extension_loaded('curl') && version_compare(util::get_curl_version(), '7.10.5', '>=')) {
 				$ch = curl_init();
 				$timeout = 5;
 				curl_setopt ($ch, CURLOPT_URL, $path);
@@ -417,7 +419,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 							}
 							if (preg_match('|\.mo$|', $directory2)){
 								if(!in_array($directory2,$dirs)){
-									$dirs[$directory]=displayLanguage(trim($directory));
+									$dirs[$directory]=util::displayLanguage(trim($directory));
 									$i++;
 								}
 							}
@@ -653,29 +655,17 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		$actives = json_decode($conf->active_plugins,1);
 		$actives = $actives[1];
         foreach ($actives as $index => $plugin) {
-			//echo "[".$index."] => ".$plugin."<br />";
             if (!file_exists(Absolute_Path."plugins/".$plugin)) {
-				//echo "\tNo existe el archivo<br />";
                 unset($actives[$index]);
                 continue;
             }else{
 				require_once(Absolute_Path.'plugins/'.$plugin);
-			}
-			//echo "\tSi existe el archivo<br />";
-            
+			}            
 			if (!class_exists($index)) {
-				//echo "\tNo existe la clase<br />";
                 continue;
 			}
-			//echo "\tSi existe la clase<br />";
-
 			plugins::$instances[$index] = new $index;
-			//print_r(plugins::$instances[$index]);
-			//echo "<br />";
         }
-		/*echo "<br /><br />";
-		print_r(plugins::$instances);
-		echo "<br />";
-		die();*/
 	}
-	?>
+}
+?>

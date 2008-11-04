@@ -15,7 +15,6 @@ if(!defined('entry')) define('entry', true);
 require('../entry.php');
 global $user, $conf, $tumble;
 
-$user= new User();
 if ($user->isAdmin()) {
 	$message = '';
 	$f = new feeds();
@@ -40,7 +39,7 @@ if ($user->isAdmin()) {
 	<head>
 		<title>gelato :: <?php echo __("Feeds")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="generator" content="gelato cms <?php echo version();?>" />
+		<meta name="generator" content="gelato cms <?php echo util::version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>

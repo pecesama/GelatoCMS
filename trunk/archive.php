@@ -23,11 +23,11 @@ $regular = array();
 $video = array();
 
 $rs = $tumble->getPosts($tumble->getPostsNumber());
-if ($tumble->contarRegistros()>0) {
+if ($db->contarRegistros()>0) {
     while($register = mysql_fetch_assoc($rs)) {
     	$output = handleNode($register);
     	
-		$theType = type2Text($register["type"]);
+		$theType = util::type2Text($register["type"]);
 		
     	switch($theType) {
 			case 'quote':
@@ -55,13 +55,13 @@ if ($tumble->contarRegistros()>0) {
 function handleNode($node) {
 		global $user, $tumble, $conf;
 		$dateTmp = null;
-		$formatedDate = gmdate("M d", strtotime($node["date"]) + transform_offset($conf->offsetTime));
+		$formatedDate = gmdate("M d", strtotime($node["date"]) + util::transform_offset($conf->offsetTime));
         
 		$output = array();		
 		$output['url'] = $tumble->getPermalink($node["id_post"]);
  		$output['date'] = $formatedDate;
  		
- 		$theType = type2Text($node["type"]);
+ 		$theType = util::type2Text($node["type"]);
  		
 		switch($theType) {
 			case 'quote':
@@ -111,7 +111,7 @@ function handleNode($node) {
 
 	<head>
     	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="generator" content="gelato <?php echo codeName()." (".version().")"; ?>" />
+        <meta name="generator" content="gelato <?php echo util::codeName()." (".util::version().")"; ?>" />
         <link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="<?php echo $conf->urlGelato.($conf->urlFriendly ? "/rss/" : "/rss.php"); ?>"/>
 		<title><?php echo $conf->title." &raquo; ".__(" archive"); ?></title>

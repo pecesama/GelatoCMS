@@ -10,32 +10,32 @@ if(!defined('entry') || !entry) die('Not a valid page');
   Copyright (C) 2007 by Pedro Santana <pecesama at gmail dot com>
 
   =========================== */
-?>
-<?php
-require_once("configuration.class.php");
-require_once("functions.php");
 
-class gelato extends Conexion_Mysql {
+class gelato {
+	var $db;
 	var $conf;
 
 	function gelato() {
-		parent::Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
-		$this->conf = new configuration();
+		global $db;
+		global $conf;
+		
+		$this->db = $db;
+		$this->conf = $conf;
 	}
 
 	function saveSettings($fieldsArray) {
-		if ($this->modificarDeFormulario($this->conf->tablePrefix."config", $fieldsArray)) {
+		if ($this->db->modificarDeFormulario($this->conf->tablePrefix."config", $fieldsArray)) {
 			header("Location: ".$this->conf->urlGelato."/admin/settings.php?modified=true");
 			die();
 		} else {
-			header("Location: ".$this->conf->urlGelato."/admin/settings.php?error=1&des=".$this->merror);
+			header("Location: ".$this->conf->urlGelato."/admin/settings.php?error=1&des=".$this->db->merror);
 			die();
 		}
 	}
 
 	function saveOption($value, $name) {
 		$sqlStr = "UPDATE ".$this->conf->tablePrefix."options SET val='".$value."' WHERE name='".$name."' LIMIT 1";
-		if ($this->ejecutarConsulta($sqlStr)) {
+		if ($this->db->ejecutarConsulta($sqlStr)) {
 			return true;
 		} else {
 			return true;
@@ -43,7 +43,7 @@ class gelato extends Conexion_Mysql {
 	}
 
 	function addPost($fieldsArray) {
-		if ($this->insertarDeFormulario($this->conf->tablePrefix."data", $fieldsArray)) {
+		if ($this->db->insertarDeFormulario($this->conf->tablePrefix."data", $fieldsArray)) {
 			return true;
 		} else {
 			return false;
@@ -51,40 +51,40 @@ class gelato extends Conexion_Mysql {
 	}
 
 	function modifyPost($fieldsArray, $id_post) {
-		if ($this->modificarDeFormulario($this->conf->tablePrefix."data", $fieldsArray, "id_post=$id_post")) {
+		if ($this->db->modificarDeFormulario($this->conf->tablePrefix."data", $fieldsArray, "id_post=$id_post")) {
 			header("Location: ".$this->conf->urlGelato."/admin/index.php?modified=true");
 			die();
 		} else {
-			header("Location: ".$this->conf->urlGelato."/admin/index.php?error=2&des=".$this->merror);
+			header("Location: ".$this->conf->urlGelato."/admin/index.php?error=2&des=".$this->db->merror);
 			die();
 		}
 	}
 
 	function deletePost($idPost) {
-		$this->ejecutarConsulta("DELETE FROM ".$this->conf->tablePrefix."data WHERE id_post=".$idPost);
+		$this->db->ejecutarConsulta("DELETE FROM ".$this->conf->tablePrefix."data WHERE id_post=".$idPost);
 	}
 
 	function getPosts($limit="10", $from="0") {
 		$sqlStr = "select * from ".$this->conf->tablePrefix."data ORDER BY date DESC LIMIT $from,$limit";
-		$this->ejecutarConsulta($sqlStr);
-		return $this->mid_consulta;
+		$this->db->ejecutarConsulta($sqlStr);
+		return $this->db->mid_consulta;
 	}
 
 	function getPost($id="") {
-		$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."data WHERE id_post=".$id);
-		return mysql_fetch_array($this->mid_consulta);
+		$this->db->ejecutarConsulta("select * from ".$this->conf->tablePrefix."data WHERE id_post=".$id);
+		return mysql_fetch_array($this->db->mid_consulta);
 	}
 
 	function getPostsNumber() {
-		$this->ejecutarConsulta("select count(*) as total from ".$this->conf->tablePrefix."data");
-		$row = mysql_fetch_assoc($this->mid_consulta);
+		$this->db->ejecutarConsulta("select count(*) as total from ".$this->conf->tablePrefix."data");
+		$row = mysql_fetch_assoc($this->db->mid_consulta);
 		return $row['total'];
 	}
 
 	function getType($id) {
-		if ($this->ejecutarConsulta("select type from ".$this->conf->tablePrefix."data WHERE id_post=".$id)) {
-			if ($this->contarRegistros()>0) {
-				while($registro = mysql_fetch_array($this->mid_consulta)) {
+		if ($this->db->ejecutarConsulta("select type from ".$this->conf->tablePrefix."data WHERE id_post=".$id)) {
+			if ($this->db->contarRegistros()>0) {
+				while($registro = mysql_fetch_array($this->db->mid_consulta)) {
 					return $registro[0];
 				}
 			}
@@ -185,7 +185,7 @@ class gelato extends Conexion_Mysql {
 	}
 	function getMp3Player($url) {
 		if (isMP3($url)) {
-			$playerUrl = $this->conf->urlGelato."/admin/scripts/player.swf?soundFile=".$url;
+			$playerUrl = $conf->urlGelato."/admin/scripts/player.swf?soundFile=".$url;
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"" . $playerUrl . "\" width=\"290\" height=\"24\"><param name=\"movie\" value=\"" . $playerUrl . "\" /><param name=\"quality\" value=\"high\" /><param name=\"menu\" value=\"false\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} elseif (isGoEar($url)) {
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://www.goear.com/files/external.swf\" width=\"366\" height=\"130\"><param name=\"movie\" value=\"http://www.goear.com/files/external.swf\" /><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"file=".getGoEarCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";

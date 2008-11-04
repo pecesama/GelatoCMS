@@ -22,7 +22,7 @@ $closed = $user->closeSession();
 	<head>
 		<title>gelato :: <?php echo __("logout")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="generator" content="gelato cms <?php echo version();?>" />
+		<meta name="generator" content="gelato cms <?php echo util::version();?>" />
 		<meta http-equiv="Refresh" content="3;URL=../login.php" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<style type="text/css" media="screen">	

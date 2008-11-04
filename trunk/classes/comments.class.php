@@ -11,16 +11,20 @@ if(!defined('entry') || !entry) die('Not a valid page');
 
   =========================== */
 
-class comments extends Conexion_Mysql {
+class comments {
+	var $db;
 	var $conf;
 	
 	function comments() {
-		parent::Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
-		$this->conf = new configuration();
+		global $db;
+		global $conf;
+		
+		$this->db = $db;
+		$this->conf = $conf;
 	}
 	
 	function addComment($fieldsArray) {		
-		if ($this->insertarDeFormulario($this->conf->tablePrefix."comments", $fieldsArray)) {
+		if ($this->db->insertarDeFormulario($this->conf->tablePrefix."comments", $fieldsArray)) {
 			return true;
 		} else {
 			return false;
@@ -55,33 +59,33 @@ class comments extends Conexion_Mysql {
 	
 	function getComments($idPost=null, $limit=null, $from=null, $spam=null) {
 		if (isset($idPost)) {
-			$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE id_post=".$idPost." AND spam=0 order by comment_date ASC");
+			$this->db->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE id_post=".$idPost." AND spam=0 order by comment_date ASC");
 		} else {			
 			if (isset($limit) && isset($from)) {
 				$limit = " LIMIT $from, $limit";
 			} else { ""; }
 			if (isset($spam)) { $sp = "1"; } else { $sp = "0"; } 
-			$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE spam=".$sp." order by comment_date ASC".$limit);
+			$this->db->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE spam=".$sp." order by comment_date ASC".$limit);
 		}
-		return $this->mid_consulta;
+		return $this->db->mid_consulta;
 	}
 	
 	function getComment($id="") {
-		$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE id_comment=".$id);
-		return mysql_fetch_array($this->mid_consulta);
+		$this->db->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE id_comment=".$id);
+		return mysql_fetch_array($this->db->mid_consulta);
 	}
 	
 	function countComments($idPost=null) {
 		if (isset($idPost)) {
-			$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE id_post=".$idPost." AND spam=0");
+			$this->db->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE id_post=".$idPost." AND spam=0");
 		} else {
-			$this->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE spam=0");
+			$this->db->ejecutarConsulta("select * from ".$this->conf->tablePrefix."comments WHERE spam=0");
 		}		
-		return $this->contarRegistros();
+		return $this->db->contarRegistros();
 	}
 	
 	function deleteComment($idComment) {
-		if ($this->ejecutarConsulta("DELETE FROM ".$this->conf->tablePrefix."comments WHERE id_comment=".$idComment)) {
+		if ($this->db->ejecutarConsulta("DELETE FROM ".$this->conf->tablePrefix."comments WHERE id_comment=".$idComment)) {
 			return true;
 		} else {
 			return false;
@@ -89,7 +93,7 @@ class comments extends Conexion_Mysql {
 	}
 	
 	function modifyComment($fieldsArray, $id_comment) {
-		if ($this->modificarDeFormulario($this->conf->tablePrefix."comments", $fieldsArray, "id_comment=$id_comment")) {
+		if ($this->db->modificarDeFormulario($this->conf->tablePrefix."comments", $fieldsArray, "id_comment=$id_comment")) {
 			return true;
 		} else {
 			return false;

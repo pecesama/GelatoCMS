@@ -105,7 +105,7 @@ if ($user->isAuthenticated()) {
 				$admin_includes = "";
 				$trigger->call('admin_includes');
                 $theme->set('admin_includes',$admin_includes);
-                $theme->set('version',version());
+                $theme->set('version',util::version());
                 $theme->set('conf', array(
                         'urlGelato'=>$conf->urlGelato,
                         'richText'=>$conf->richText
@@ -115,8 +115,8 @@ if ($user->isAuthenticated()) {
                 $theme->set('error',false);
 
                 if($conf->check_version){
-                        $present = version();
-                        $lastest = _file_get_contents("http://www.gelatocms.com/vgel.txt");
+                        $present = util::version();
+                        $lastest = util::_file_get_contents("http://www.gelatocms.com/vgel.txt");
                         if ($present < $lastest)
                                 $theme->set('information',__("A new gelato version has been released and is ready <a href=\"http://www.gelatocms.com/\">for download</a>."));
                 }
@@ -225,14 +225,14 @@ if ($user->isAuthenticated()) {
                                 $from = 0;
 
                         $rs = $tumble->getPosts($limit, $from);
-                        $theme->set('Posts_Number',$tumble->contarRegistros());
+                        $theme->set('Posts_Number',$db->contarRegistros());
 
                         $rows = array();
-                        if ($tumble->contarRegistros()>0) {
+                        if ($db->contarRegistros()>0) {
                                 while($register = mysql_fetch_array($rs)) {
-                                        $row['postType'] = type2Text($tumble->getType($register["id_post"]));
+                                        $row['postType'] = util::type2Text($tumble->getType($register["id_post"]));
 
-                                        $formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
+                                        $formatedDate = gmdate("M d", strtotime($register["date"]) + util::transform_offset($conf->offsetTime));
                                         $strEnd=($conf->urlFriendly) ? "/" : "";
 										$permalink = $conf->urlGelato.($conf->urlFriendly?"/post/":"/index.php?post=").$register["id_post"].$strEnd;
 

@@ -22,7 +22,7 @@ if ($user->isAdmin()) {
 	<head>
 		<title>gelato :: <?php echo __("admin users")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="generator" content="gelato cms <?php echo version();?>" />
+		<meta name="generator" content="gelato cms <?php echo util::version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
@@ -108,7 +108,7 @@ if ($user->isAdmin()) {
 <?php
 					$odd=false;
 					$rs = $user->getUsers();
-					if ($user->contarRegistros()>0) {
+					if ($db->contarRegistros()>0) {
 						while($register = mysql_fetch_array($rs)) {
 ?>
 							<tr <?php if ($odd) { echo 'class="odd"'; } $odd=!$odd; ?>>
