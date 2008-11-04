@@ -54,15 +54,15 @@ if(!defined('entry')) define('entry',true);
 			$postType = type2Number($_GET["type"]);
 		}
 		$rs = $tumble->getPosts($total, $start);
-		if ($tumble->contarRegistros()>0) {
+		if ($db->contarRegistros()>0) {
 ?>
 			<posts start="<?php echo $start; ?>" total="<?php echo $total; ?>">
 <?php 
 			while($register = mysql_fetch_array($rs)) {
-				$desc = trimString($register["description"]);				
+				$desc = util::trimString($register["description"]);				
 				$strEnd = ($conf->urlFriendly) ? "/" : "";
 				$url = $conf->urlGelato.($conf->urlFriendly ? "/post/" : "/index.php?post=").$register["id_post"].$strEnd;
-				$formatedDate = gmdate("D, d M Y H:i:s", strtotime($register["date"]) + transform_offset($conf->offsetTime));
+				$formatedDate = gmdate("D, d M Y H:i:s", strtotime($register["date"]) + util::transform_offset($conf->offsetTime));
 				
 				switch ($register["type"]) {
 					case "1":

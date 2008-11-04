@@ -13,7 +13,7 @@ if(!defined('entry'))define('entry', true);
 ?>
 <?php
 
-// Received a valid request, better start setting globals we'll need throughout the app in entry.php
+// Received a valid request
 require_once('entry.php');
 global $user, $tumble, $conf;
 
@@ -50,7 +50,7 @@ $theme = new themes;
 
 		$feed_url = $conf->urlGelato.($conf->urlFriendly?"/rss/":"/rss.php");
 
-		$gelato_includes = "<meta name=\"generator\" content=\"gelato ".codeName()." (".version().")\" />\n";
+		$gelato_includes = "<meta name=\"generator\" content=\"gelato ".util::codeName()." (".util::version().")\" />\n";
 		$gelato_includes .= "\t<link rel=\"shortcut icon\" href=\"".$conf->urlGelato."/images/favicon.ico\" />";
 
 		$page_title = $conf->title;
@@ -100,10 +100,10 @@ $theme = new themes;
 
 				$rs = $tumble->getPosts($limit, $from);
 
-				if ($tumble->contarRegistros()>0) {
+				if ($db->contarRegistros()>0) {
 						$dateTmp = null;
 						while($register = mysql_fetch_assoc($rs)) {
-								$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
+								$formatedDate = gmdate("M d", strtotime($register["date"]) + util::transform_offset($conf->offsetTime));
 								if ( $dateTmp != null && $formatedDate == $dateTmp ) { $formatedDate = ""; } else { $dateTmp = $formatedDate; }
 
 								$permalink = $tumble->getPermalink($register["id_post"]);
@@ -115,7 +115,7 @@ $theme = new themes;
 
 								$row['Date_Added'] = $formatedDate;
 								$row['Permalink'] = $permalink;
-								$row['postType'] = type2Text($register["type"]);
+								$row['postType'] = util::type2Text($register["type"]);
 
 								switch ($register['type']){
 										case "1":
@@ -199,7 +199,7 @@ $theme = new themes;
 			} else {
 				$register = $tumble->getPost($id_post);
 
-				$formatedDate = gmdate("M d", strtotime($register["date"])+transform_offset($conf->offsetTime));
+				$formatedDate = gmdate("M d", strtotime($register["date"]) + util::transform_offset($conf->offsetTime));
 				$permalink = $tumble->getPermalink($register["id_post"]);
 
 				$conversation = $register["description"];
@@ -211,7 +211,7 @@ $theme = new themes;
 
 				$row['Date_Added'] = $formatedDate;
 				$row['Permalink'] = $permalink;
-				$row['postType'] = type2Text($register["type"]);
+				$row['postType'] = util::type2Text($register["type"]);
 
 				switch ($register['type']) {
 						case "1":
@@ -289,7 +289,7 @@ $theme = new themes;
 
 						$answers['Id_Comment'] = $rowComment["id_comment"];
 						$answers['Comment_Author'] = $commentAuthor;
-						$answers['Date'] = gmdate("d.m.y", strtotime($rowComment["comment_date"])+transform_offset($conf->offsetTime));
+						$answers['Date'] = gmdate("d.m.y", strtotime($rowComment["comment_date"]) + util::transform_offset($conf->offsetTime));
 						$answers['Comment'] = nl2br($rowComment["content"]);
 
 						$comments[] = $answers;

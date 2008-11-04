@@ -27,7 +27,7 @@ if(isset($_POST["btnAdd"]))	{
 	$_POST["username"] = strip_tags($_POST["username"]);
 	$_POST["email"] =  strip_tags($_POST["email"]);
 	$_POST["web"] = strip_tags($_POST["web"]);
-	$_POST["content"] = removeBadTags($_POST["content"], true);
+	$_POST["content"] = util::removeBadTags($_POST["content"], true);
 		
 	if (isset($_POST["id_comment"])) {
 		if ($isAdmin) {
@@ -73,7 +73,7 @@ if ($isAdmin) {
 	<head>
 		<title>gelato :: <?php echo __("comments")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="generator" content="gelato cms <?php echo version();?>" />
+		<meta name="generator" content="gelato cms <?php echo util::version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>
@@ -160,7 +160,7 @@ if ($isAdmin) {
 							
 							$rs = $comment->getComments(null, $limit, $from, $sp);
 					
-							if ($comment->contarRegistros()>0) {				
+							if ($db->contarRegistros()>0) {				
 								while($rowComment = mysql_fetch_array($rs)) {	
 							
 									$commentAuthor = ($rowComment["web"]=="") ? $rowComment["username"]." | ".$rowComment["email"]  : "<a href=\"".$rowComment["web"]."\" rel=\"external\">".$rowComment["username"]."</a> | ".$rowComment["email"];

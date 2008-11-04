@@ -40,7 +40,7 @@ if ($user->isAuthenticated()) {
 	<head>
 		<title>gelato :: <?php echo __("login screen")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="generator" content="gelato cms <?php echo version();?>" />
+		<meta name="generator" content="gelato cms <?php echo util::version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.validate.min.js"></script>

@@ -29,11 +29,11 @@ if ($user->isAdmin()) {
 					header("Location: ".$conf->urlGelato."/admin/index.php?photo=false");
 					die();
 				}
-				$_POST["url"] = "../uploads/".sanitizeName($photoName);
+				$_POST["url"] = "../uploads/".util::sanitizeName($photoName);
 			}
 
 			if ( move_uploaded_file( $_FILES['photo']['tmp_name'], "../uploads/".sanitizeName($_FILES['photo']['name']) ) ) {
-				$_POST["url"] = "../uploads/".sanitizeName($_FILES['photo']['name']);
+				$_POST["url"] = "../uploads/".util::sanitizeName($_FILES['photo']['name']);
 			}
 
 			unset($_POST["photo"]);
@@ -80,13 +80,13 @@ if ($user->isAdmin()) {
 		}
 		if (isset($url)) {
 
-			if (isMP3($url)) {
+			if (util::isMP3($url)) {
 				$postType = "mp3";
-			} elseif (isGoEar($url)) {
+			} elseif (util::isGoEar($url)) {
 				$postType = "mp3";
-			} elseif (isImageFile($url)) {
+			} elseif (util::isImageFile($url)) {
 				$postType = "photo";
-			} elseif (isVideo($url)) {
+			} elseif (util::isVideo($url)) {
 				$postType = "video";
 			} else {
 				if (isset($_GET["sel"]) && !$_GET["sel"]=="" ) {
@@ -104,7 +104,7 @@ if ($user->isAdmin()) {
 	<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="generator" content="gelato cms <?php echo version();?>" />
+		<meta name="generator" content="gelato cms <?php echo util::version();?>" />
 		<title>gelato :: <?php echo __("bookmarklet")?></title>
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
         <script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>

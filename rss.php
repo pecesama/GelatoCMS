@@ -28,7 +28,7 @@ if(!defined('entry')) define('entry',true);
 		<title><?php echo htmlspecialchars($conf->title);?></title>
 		<link><?php echo $conf->urlGelato;?></link>
 		<description><?php echo htmlspecialchars($conf->description);?></description>
-		<generator>gelato CMS <?php echo codeName()." (".version().")"; ?></generator>        
+		<generator>gelato CMS <?php echo util::codeName()." (".util::version().")"; ?></generator>        
 		<image>
 			<url><?php echo $conf->urlGelato;?>/images/information.png</url>
 			<title><?php echo htmlspecialchars($conf->description);?></title>
@@ -36,7 +36,7 @@ if(!defined('entry')) define('entry',true);
 		</image>
 <?php
 	$rs = $tumble->getPosts("20");
-	if ($tumble->contarRegistros()>0) {		
+	if ($db->contarRegistros()>0) {		
 
 		while($register = mysql_fetch_array($rs)) {
 			$register["description"] = $register["description"];
@@ -76,10 +76,10 @@ if(!defined('entry')) define('entry',true);
 					$desc = $tumble->getMp3Player($register["url"]);
 					break;
 			}
-			$tit = trimString($tit);
+			$tit = util::trimString($tit);
 			$strEnd = ($conf->urlFriendly) ? "/" : "";
 			$url = $conf->urlGelato.($conf->urlFriendly ? "/post/" : "/index.php?post=").$register["id_post"].$strEnd;
-			$formatedDate = gmdate("r", strtotime($register["date"]) + transform_offset($conf->offsetTime));
+			$formatedDate = gmdate("r", strtotime($register["date"]) + util::transform_offset($conf->offsetTime));
 ?>
 			<item>
 				<title><?php echo $tit;?></title>

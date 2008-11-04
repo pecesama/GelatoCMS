@@ -15,8 +15,6 @@ if(!defined('entry')) define('entry', true);
 require('../entry.php');
 global $user, $conf, $tumble;
 
-$user = new user();
-$conf = new configuration();
 $isEdition = isset($_GET["edit"]);
 $userId = ($isEdition) ? $_GET["edit"] : NULL;
 if ($user->isAdmin()) {
@@ -50,7 +48,7 @@ if ($user->isAdmin()) {
 	<head>
 		<title>gelato :: <?php echo __("add user")?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="generator" content="gelato cms <?php echo version();?>" />
+		<meta name="generator" content="gelato cms <?php echo util::version();?>" />
 		<link rel="shortcut icon" href="<?php echo $conf->urlGelato;?>/images/favicon.ico" />
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/jquery.js"></script>
 		<script language="javascript" type="text/javascript" src="<?php echo $conf->urlGelato;?>/admin/scripts/tools.js"></script>

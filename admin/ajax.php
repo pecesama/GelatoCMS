@@ -19,7 +19,6 @@ if(!defined('entry'))define('entry', true);
 		if ($_GET["action"]) {
 			
 			if ($_GET["action"] == "close") {
-				session_start();
 				if ($user->closeSession()) {
 					echo __("&nbsp;ending session&hellip;");
 				} else {

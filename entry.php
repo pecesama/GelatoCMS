@@ -1,30 +1,7 @@
 <?php
 ob_start();
 if(!defined('entry') || !entry) die('Not a valid page');
-/*
- * Created on Sep 15, 2007
- * Modified on Oct 30, 2008
- *
- * Known Entry Points
- * api.php
- * archive.php
- * install.php
- * index.php
- * login.php
- * update.php
- * rss.php
- * admin/bm.php
- * admin/index.php
- * admin/close.php
- * admin/ajax.php
- * admin/settings.php
- * admin/options.php
- * admin/admin.php
- * admin/comments.php
- * admin/user.php
- * admin/feeds.php
- * classes/imgsize.php
- */
+
 
 error_reporting (E_ALL);
 ini_set('display_errors', '1');
@@ -57,7 +34,8 @@ if($installed) {
 }
 
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'configuration.class.php');
-require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'functions.php');
+require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'util.class.php');
+//require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'functions.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gelato.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'templates.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'themes.class.php');
@@ -76,26 +54,14 @@ if($installed){
 
 	// Globals to be used throughout the application
 	$db = new Conexion_Mysql(DB_name, DB_Server, DB_User, DB_Password);
-	$user = new user();
+	$conf = new configuration();
 	$tumble = new gelato();
-	$conf = new configuration();	
+	$user = new user();
 
 	session_start();
 	
-	//print_r($conf->plugins);
-	//die();
-	init_plugins();
+	util::init_plugins();
 	$trigger = plugin::instance();
-	
-	//echo "plugins.instances: ";
-	//print_r(plugins::$instances);
-	//echo "<br />";
-	//die();
-	
-	//echo "plugin.actions: ";
-	//$plugEngine = plugin::instance();
-	//print_r($plugEngine->actions);
-	//die();
 	
 	$trigger->call('gelato_init');	
 

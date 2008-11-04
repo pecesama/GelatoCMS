@@ -1,20 +1,15 @@
 <?php
- if(!defined('entry') || !entry) die('Not a valid page');
+if(!defined('entry') || !entry) die('Not a valid page'); 
+/* ===========================
 
-/**
- * version 0.0.1
- *
- * Clase plantillas
- *
- * @name Manejo de plantillas.
- * @version 0.0.1
- * @link http://www.pecesama.net/weblog/
- * @copyright MIT Licence
- * @author Pedro Santana [pecesama]
- */
-?>
-<?php
-require_once("functions.php");
+  gelato CMS - A PHP based tumblelog CMS
+  development version
+  http://www.gelatocms.com/
+
+  gelato CMS is a free software licensed under the GPL 2.0
+  Copyright (C) 2007 by Pedro Santana <pecesama at gmail dot com>
+
+  =========================== */
 
 class plantillas {
 
