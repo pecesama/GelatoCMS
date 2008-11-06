@@ -77,7 +77,7 @@ function handleNode($node) {
 				$output['link'] = $node["url"];
 				break;
 			case 'photo':				
-				$fileName = "uploads/".getFileName($node["url"]);
+				$fileName = "uploads/".util::getFileName($node["url"]);
 				$x = @getimagesize($fileName);
                 if ($x[0] > 500) {
 					$photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$node["url"];
