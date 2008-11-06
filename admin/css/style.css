@@ -50,6 +50,8 @@ body{ background: #e0e0e0; text-align:center; font-family:"Trebuchet Ms", Verdan
 	
 .box{ background:#fff url(images/bg-box.png) center top repeat-y; width:600px;}
 .footer-box{background:#fff url(images/bg-foot-box.png) center top no-repeat;}	
+.install_box{padding:20px;}
+.install_box a{ text-decoration:underline;}
 
 .box h3{float:left; color:#444444; font-weight:bold; padding:5px 10px 0 0;}
 .box p{ margin:2px auto auto 15px;}

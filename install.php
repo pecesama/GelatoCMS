@@ -30,7 +30,7 @@ if($install->is_gelato_installed()){
 $install->data = $_POST;
 $install->check_form();
 $theme = new themes;
-$theme->set('version',version());
+$theme->set('version',util::version());
 $theme->set('showForm',$install->showForm);
 
 $theme->set('db_login',isset($install->data['db_login'])? $install->data['db_login'] : '');
@@ -41,7 +41,7 @@ $theme->set('email',isset($install->data['email'])?$install->data['email']:'');
 $theme->set('title',isset($install->data['title'])?$install->data['title']:'');
 $theme->set('description',isset($install->data['description'])?$install->data['description']:'');
 $theme->set('url_installation',isset($_SERVER['SCRIPT_URI'])?substr($_SERVER["SCRIPT_URI"], 0, -12):'');
-$theme->set('themes',getThemes());
+$theme->set('themes',util::getThemes());
 
 for($c=1;$c<=10;$c++)$errores[$c] = $install->mostrarerror($c);
 $theme->set('error',$errores);
