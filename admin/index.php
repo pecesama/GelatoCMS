@@ -40,20 +40,20 @@ if ($user->isAuthenticated()) {
 
         if(isset($_POST["btnAdd"])){
                 unset($_POST["btnAdd"]);
-                $_POST['type'] = type2Number($_POST['type']);
+                $_POST['type'] = util::type2Number($_POST['type']);
 
                 if ($_POST["type"]=="2") { // is Photo type
                         if (isset($_POST["url"]) && $_POST["url"]!="")  {
-                                $photoName = getFileName($_POST["url"]);
+                                $photoName = util::getFileName($_POST["url"]);
                                 if (!$tumble->savePhoto($_POST["url"])) {
                                         header("Location: ".$conf->urlGelato."/admin/index.php?photo=false");
                                         die();
                                 }
-                                $_POST["url"] = "../uploads/".sanitizeName($photoName);
+                                $_POST["url"] = "../uploads/".util::sanitizeName($photoName);
                         }
 
-                        if ( move_uploaded_file( $_FILES['photo']['tmp_name'], "../uploads/".sanitizeName($_FILES['photo']['name']) ) ) {
-                                $_POST["url"] = "../uploads/".sanitizeName($_FILES['photo']['name']);
+                        if ( move_uploaded_file( $_FILES['photo']['tmp_name'], "../uploads/".util::sanitizeName($_FILES['photo']['name']) ) ) {
+                                $_POST["url"] = "../uploads/".util::sanitizeName($_FILES['photo']['name']);
                         }
 
                         unset($_POST["photo"]);
@@ -62,7 +62,7 @@ if ($user->isAuthenticated()) {
 
                 if ($_POST["type"]=="7") { // is MP3 type
                         set_time_limit(300);
-                        $mp3Name = getFileName($_POST["url"]);
+                        $mp3Name = util::getFileName($_POST["url"]);
                         if (!$tumble->saveMP3($_POST["url"])) {
                                 header("Location: ".$conf->urlGelato."/admin/index.php?mp3=false");
                                 die();
@@ -84,8 +84,8 @@ if ($user->isAuthenticated()) {
                 $_POST["description"] = $textile->TextileThis(removeBadTags($_POST["description"]));
                 */
 
-                $_POST["title"] = removeBadTags($_POST["title"],true);
-                $_POST["description"] = removeBadTags($_POST["description"]);
+                $_POST["title"] = util::removeBadTags($_POST["title"],true);
+                $_POST["description"] = util::removeBadTags($_POST["description"]);
 
                 if (isset($_POST["id_post"]) and  is_numeric($_POST["id_post"]) and $_POST["id_post"]>0) {
                         $tumble->modifyPost($_POST, $_POST["id_post"]);
@@ -249,7 +249,7 @@ if ($user->isAuthenticated()) {
                                                         $row['Body'] = $register["description"];
                                                         break;
                                                 case "2":
-                                                        $fileName = "../uploads/".getFileName($register["url"]);
+                                                        $fileName = "../uploads/".util::getFileName($register["url"]);
 
                                                         $x = @getimagesize($fileName);
                                                         if ($x[0] > 100)
@@ -270,7 +270,7 @@ if ($user->isAuthenticated()) {
                                                         break;
                                                 case "4":
                                                         if($conf->shorten_links)
-                                                                $register["url"] = _file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
+                                                                $register["url"] = util::_file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
                                                         $register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
 
                                                         $row['URL'] = $register["url"];

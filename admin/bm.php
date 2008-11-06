@@ -57,8 +57,8 @@ if ($user->isAdmin()) {
 			$_POST["description"] = addslashes($_POST["description"]);
 		}		
 		
-		$_POST["title"] = removeBadTags($_POST["title"],true);
-		$_POST["description"] = removeBadTags($_POST["description"]);
+		$_POST["title"] = util::removeBadTags($_POST["title"],true);
+		$_POST["description"] = util::removeBadTags($_POST["description"]);
 
 		if ($tumble->addPost($_POST)) {
 			$input = array("{type}");

@@ -18,7 +18,7 @@ if ($user->isAdmin()) {
 	
 	if(isset($_POST["btnsubmit"]))	{		
 		unset($_POST["btnsubmit"]);
-		$_POST["url_installation"] = (endsWith($_POST["url_installation"], "/")) ? substr($_POST["url_installation"], 0, strlen($_POST["url_installation"])-1) : $_POST["url_installation"] ;
+		$_POST["url_installation"] = (util::endsWith($_POST["url_installation"], "/")) ? substr($_POST["url_installation"], 0, strlen($_POST["url_installation"])-1) : $_POST["url_installation"] ;
 		$tumble->saveSettings($_POST);
 	} else {
 ?>

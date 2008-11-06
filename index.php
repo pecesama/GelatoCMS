@@ -60,9 +60,9 @@ $theme = new themes;
 			$register = $tumble->getPost($id_post);
 			if (empty($register["title"])) {
 				if (!empty($register["description"])) {
-					$page_title_data = trimString($register["description"], $page_title_len);
+					$page_title_data = util::trimString($register["description"], $page_title_len);
 				} else {
-					$page_title_data =  type2Text($register["type"]);
+					$page_title_data =  util::type2Text($register["type"]);
 				}
 			} else {
 				$page_title_data = $register["title"];
@@ -123,7 +123,7 @@ $theme = new themes;
 											$row['Body'] = $register["description"];
 											break;
 											case "2":
-											$fileName = "uploads/".getFileName($register["url"]);
+											$fileName = "uploads/".util::getFileName($register["url"]);
 											$x = @getimagesize($fileName);
 												if ($x[0] > 500) {
 													$photoPath = $conf->urlGelato."/classes/imgsize.php?w=500&img=".$register["url"];
@@ -144,7 +144,7 @@ $theme = new themes;
 												break;
                                         case "4":
 												if($conf->shorten_links){
-													$register["url"] = _file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
+													$register["url"] = util::_file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
 												}
 												$register["title"] = ($register["title"]=="")? $register["url"] : $register["title"];
 
@@ -219,7 +219,7 @@ $theme = new themes;
 								$row['Body'] = $register["description"];
 								break;
 						case "2":
-								$fileName = "uploads/".getFileName($register["url"]);
+								$fileName = "uploads/".util::getFileName($register["url"]);
 
 								$x = @getimagesize($fileName);
 								if ($x[0] > 500) {
@@ -241,7 +241,7 @@ $theme = new themes;
 								break;
 						case "4":
 							if($conf->shorten_links){
-									$register["url"] = _file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
+									$register["url"] = util::_file_get_contents("http://api.abbrr.com/api.php?out=link&url=".$register["url"]);
 								}
 								$row['URL'] = $register["url"];
 								$row['Name'] = $register["title"];
@@ -268,9 +268,9 @@ $theme = new themes;
 
 					if (empty($register["title"])) {
 						if (!empty($register["description"])) {
-							$postTitle = trimString($register["description"]);
+							$postTitle = util::trimString($register["description"]);
 						} else {
-							$postTitle =  type2Text($register["type"]);
+							$postTitle =  util::type2Text($register["type"]);
 						}
 					} else {
 						$postTitle = $register["title"];
