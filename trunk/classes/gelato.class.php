@@ -142,7 +142,7 @@ class gelato {
 	}
 
 	function saveMP3($remoteFileName) {
-		if (getMP3File($remoteFileName)) {
+		if (util::getMP3File($remoteFileName)) {
 			return true;
 		} else {
 			return false;
@@ -150,7 +150,7 @@ class gelato {
 	}
 
 	function savePhoto($remoteFileName) {
-		if (getPhotoFile($remoteFileName)) {
+		if (util::getPhotoFile($remoteFileName)) {
 			return true;
 		} else {
 			return false;
@@ -158,38 +158,38 @@ class gelato {
 	}
 
 	function getVideoPlayer($url) {
-		if (isYoutubeVideo($url)) {
-			$id_video = getYoutubeVideoUrl($url);
+		if (util::isYoutubeVideo($url)) {
+			$id_video = util::getYoutubeVideoUrl($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.youtube.com/v/".$id_video."\"><param name=\"movie\" value=\"http://www.youtube.com/v/".$id_video."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
-		} elseif (isVimeoVideo($url)) {
-			$id_video = getVimeoVideoUrl($url);
+		} elseif (util::isVimeoVideo($url)) {
+			$id_video = util::getVimeoVideoUrl($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\"><param name=\"movie\" value=\"http://www.vimeo.com/moogaloop.swf?clip_id=".$id_video."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
-		} elseif (isDailymotionVideo($url)) {
-			$id_video = getDailymotionVideoUrl($url);
+		} elseif (util::isDailymotionVideo($url)) {
+			$id_video = util::getDailymotionVideoUrl($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.dailymotion.com/swf/".$id_video."\"><param name=\"movie\" value=\"http://www.dailymotion.com/swf/".$id_video."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
-		} elseif (isYahooVideo($url)) {
-			$id_video = getYahooVideoCode($url);
+		} elseif (util::isYahooVideo($url)) {
+			$id_video = util::getYahooVideoCode($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://d.yimg.com/static.video.yahoo.com/yep/YV_YEP.swf\"><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"event_function=YAHOO.yv.Player.SWFInterface&amp;id=".$id_video[1]."&amp;vid=".$id_video[0]."&amp;onsite=1&amp;site=video.yahoo.com&amp;page=792730258&amp;lang=en-US&amp;intl=us\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
-		} elseif (isSlideSharePresentation($url)) {
-			$id_video = getSlideSharePresentationCode($url);
+		} elseif (util::isSlideSharePresentation($url)) {
+			$id_video = util::getSlideSharePresentationCode($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://www.slideshare.net/swf/player.swf?presentationId=".$id_video[0]."&amp;doc=".$id_video[1]."&amp;inContest=0&amp;startSlide=1\"><param name=\"quality\" value=\"high\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
-		} elseif (isGoogleVideoUrl($url)) {
-			$id_video = getGoogleVideoCode($url);
+		} elseif (util::isGoogleVideoUrl($url)) {
+			$id_video = util::getGoogleVideoCode($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://video.google.com/googleplayer.swf?docid=".$id_video."&amp;hl=es&amp;fs=true\"><param name=\"movie\" value=\"http://video.google.com/googleplayer.swf?docid=".$id_video."&amp;hl=es&amp;fs=true\" /><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowScriptAccess\" value=\"always\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
-		} elseif (isMTVVideoUrl($url)) {
-			$id_video = getMTVVideoCode($url);
+		} elseif (util::isMTVVideoUrl($url)) {
+			$id_video = util::getMTVVideoCode($url);
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" style=\"width:500px;height:393px\" data=\"http://media.mtvnservices.com/mgid:uma:video:mtvmusic.com:".$id_video."\"><param name=\"movie\" value=\"http://media.mtvnservices.com/mgid:uma:video:mtvmusic.com:".$id_video."\" /><param name=\"allowFullScreen\" value=\"true\" /><param name=\"allowScriptAccess\" value=\"never\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";	
 		} else {
 			return "This URL is not a supported video (YouTube, Google Video, Vimeo, DailyMotion, Yahoo Video, MTV or SlideShare)";
 		}
 	}
 	function getMp3Player($url) {
-		if (isMP3($url)) {
+		if (util::isMP3($url)) {
 			$playerUrl = $conf->urlGelato."/admin/scripts/player.swf?soundFile=".$url;
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"" . $playerUrl . "\" width=\"290\" height=\"24\"><param name=\"movie\" value=\"" . $playerUrl . "\" /><param name=\"quality\" value=\"high\" /><param name=\"menu\" value=\"false\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
-		} elseif (isGoEar($url)) {
+		} elseif (util::isGoEar($url)) {
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://www.goear.com/files/external.swf\" width=\"366\" height=\"130\"><param name=\"movie\" value=\"http://www.goear.com/files/external.swf\" /><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"file=".getGoEarCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
-		} elseif (isOdeo($url)) {
+		} elseif (util::isOdeo($url)) {
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://media.odeo.com/flash/odeo_player.swf?v=3\" width=\"366\" height=\"75\"><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"type=audio&amp;id=".getOdeoCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} else {
 			return "This URL is not an MP3 file.";

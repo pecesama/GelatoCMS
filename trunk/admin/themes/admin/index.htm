@@ -113,7 +113,7 @@
 						{if {$Posts_Number}}
 							{block {$rows} as {$row}}
 								<div class="entry">
-									<div class="info"><span class="compact"><a href="{$row.Permalink}">Link</a>&nbsp;<a href="{conf.urlGelato}/admin/index.php?edit={$row.Id_Post}" title="{__('Edit this post')}" class="help"><img src="{conf.urlGelato}/admin/css/images/edit.png" alt=""/></a>&nbsp;<a href="{conf.urlGelato}/admin/index.php?delete={$row.Id_Post}" title="{__('Delete this post')}" class="help"><img src="{conf.urlGelato}/admin/css/images/delete.png" alt="" title="" /></a></span>
+									<div class="info"><span class="compact"><a href="{$row.Permalink}">Link</a>&nbsp;<a href="{conf.urlGelato}/admin/index.php?edit={$row.Id_Post}" title="{__('Edit this post')}" class="help"><img src="{conf.urlGelato}/admin/css/images/edit.png" alt=""/></a>&nbsp;<a href="{conf.urlGelato}/admin/index.php?delete={$row.Id_Post}" title="{__('Delete this post')}" class="help"><img src="{conf.urlGelato}/admin/css/images/delete.png" alt="" title="" onclick="return confirm('{__('Delete this post, really?')}');"/></a></span>
 										<p>{$row.Date_Added}</p>
 									</div>
 									<div class="post">
