@@ -29,7 +29,8 @@ if ($user->isAdmin()) {
 		closedir($handle); 
 	}
 	
-	$actives = json_decode($conf->active_plugins,1);
+	$actives = json_decode($conf->active_plugins,1);	
+	
 	$actives = $actives[1];
 	
 	if(isset($_POST["btnsubmit"]))	{
@@ -40,6 +41,7 @@ if ($user->isAdmin()) {
 				$actives[$plugin] = $file;
 			}
 		}
+		
 		if(!$tumble->saveOption(json_encode(array(array('total'=>count($actives)),$actives)), "active_plugins")){
 			header("Location: ".$conf->urlGelato."/admin/plugins.php?error=1&desc=".$conf->merror);
 			die();

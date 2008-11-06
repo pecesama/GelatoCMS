@@ -33,6 +33,19 @@ if($installed) {
 	require_once($configFile);
 }
 
+if (!extension_loaded('json')) {			
+	require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'JSON.php');
+	$GLOBALS['JSON_OBJECT'] = new Services_JSON();
+	
+	function json_encode($value) {
+		return $GLOBALS['JSON_OBJECT']->encode($value); 
+	}
+	
+	function json_decode($value, $none) {
+		return $GLOBALS['JSON_OBJECT']->decode($value); 
+	}
+}
+
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'configuration.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'util.class.php');
 //require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'functions.php');
@@ -57,7 +70,7 @@ if($installed){
 	$conf = new configuration();
 	$tumble = new gelato();
 	$user = new user();
-
+	
 	session_start();
 	
 	util::init_plugins();

@@ -11,10 +11,9 @@ if(!defined('entry') || !entry) die('Not a valid page');
 
   =========================== */
 ?>
-<?php	
-	class plugins {
-		
-		static $instances = array();
+<?php
+	$GLOBALS['plugins::$instances'] = array(); /* class static property */
+	class plugins {		
 		
 		function addAction($name, $function) {
 	    	$plugEngine = plugin::instance();
