@@ -664,7 +664,8 @@ class util {
 			if (!class_exists($index)) {
                 continue;
 			}
-			plugins::$instances[$index] = new $index;
+			//plugins::$instances[$index] = new $index;
+			$GLOBALS['plugins::$instances'][$index] = new $index;
         }
 	}
 }

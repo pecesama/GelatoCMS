@@ -28,7 +28,8 @@ if(!defined('entry') || !entry) die('Not a valid page');
 			echo "<br />";*/
 			
 			$index = 0;
-			foreach (plugins::$instances as $plugin) {
+			//foreach (plugins::$instances as $plugin) {
+			foreach ($GLOBALS['plugins::$instances'] as $plugin) {
 				if(array_key_exists($index,$this->actions[$name])){
 					$action = $this->actions[$name][$index][1]; 
 					if (is_callable(array($plugin, $action))) {
@@ -45,7 +46,8 @@ if(!defined('entry') || !entry) die('Not a valid page');
                 return $this->exists[$name];
 			}
 
-            foreach (plugins::$instances as $plugin) {
+            //foreach (plugins::$instances as $plugin) {
+			foreach ($GLOBALS['plugins::$instances'] as $plugin) {
 				/*print_r(plugins::$instances);
 				echo "<br />";
 				print_r($plugin);
@@ -67,7 +69,7 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		function & instance(){
 			static $instance;
 			if( !isset($instance) ) {
-				$instance = new self();
+				$instance = new plugin();
 			}
 			return $instance;
         }
