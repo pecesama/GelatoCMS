@@ -233,7 +233,7 @@ if ($user->isAdmin()) {
 											<option value="0" <?php if(!$conf->check_version) echo "selected=\"selected\""; ?>><?php echo __("Deactive")?></option>
 										</select>
 									</li>
-<?php	
+<?php	print_r($trigger);echo "<br>";die("Antes de trigger->call add options panel");
 									$trigger->call('add_options_panel');	
 ?>									
 								</ul>

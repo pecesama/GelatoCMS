@@ -38,7 +38,7 @@ class kodrs extends plugins {
 		}
 	}
 	
-	static function replace_with_geshi($matches) {		
+	function replace_with_geshi($matches) {		
 		$lang = strtolower($matches[1])	;		
 		$code = trim($matches[2]);
 		$geshi = new geshi($code, (isset($lang)) ? $lang : "");    

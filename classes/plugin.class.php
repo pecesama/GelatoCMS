@@ -66,12 +66,14 @@ if(!defined('entry') || !entry) die('Not a valid page');
             return $this->exists[$name] = false;
         }		
         
-		function & instance(){
-			static $instance;
-			if( !isset($instance) ) {
-				$instance = new plugin();
+		function instance(){
+			//$instance;			
+			if( !isset($GLOBALS['$instance']) ) {
+				$GLOBALS['$instance'] = new plugin();
 			}
-			return $instance;
+			//print_r($GLOBALS['$instance']);
+			//die();
+			return $GLOBALS['$instance'];
         }
 		
 	}
