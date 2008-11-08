@@ -12,12 +12,14 @@ if(!defined('entry') || !entry) die('Not a valid page');
   =========================== */
 ?>
 <?php
-	$GLOBALS['plugins::$instances'] = array(); /* class static property */
-	class plugins {		
+	/* Simulating a class static property */
+	$GLOBALS['plugins::$instances'] = array();
+	
+	class plugins {
 		
-		function addAction($name, $function) {
-	    	$plugEngine = plugin::instance();
-	    	$plugEngine->actions[$name][] = array($this, $function);	    	
+		function addAction($name, $function) {	    	
+			$plugEngine =& plugin::instance(); //DO NOT remove the & after the =
+	    	$plugEngine->actions[$name][] = array($this, $function);
 	    }
 		
 	}
