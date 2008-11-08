@@ -11,8 +11,12 @@ Juan del Rio [ http://elcaminante.net/ ]
 = COPYRIGHT NOTICES =
 This product includes code and libraries developed by third parties, which are governed by different licenses.  These components, and their licenses, are listed below.
 
+= XSLT template for sitemap =
+Copyright (c) Arne Brachhold, http://www.arnebrachhold.de/
+XSLT template for sitemap available under GNU General Public License.
+
 = Services_JSON =
-Copyright (c)Michal Migurski, Matt Knapp and Brett Stimmerman, http://mike.teczno.com/JSON/JSON.phps
+Copyright (c) Michal Migurski, Matt Knapp and Brett Stimmerman, http://mike.teczno.com/JSON/JSON.phps
 Services_JSON is available under BSD license.
 
 = Archive based on code from: simple Tumblr API processor =
