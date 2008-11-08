@@ -77,8 +77,8 @@ if(!defined('entry')) define('entry',true);
 					break;
 			}
 			$tit = util::trimString($tit);
-			$strEnd = ($conf->urlFriendly) ? "/" : "";
-			$url = $conf->urlGelato.($conf->urlFriendly ? "/post/" : "/index.php?post=").$register["id_post"].$strEnd;
+			$strEnd = ($conf->urlFriendly) ? "/" : "";			
+			$url = $tumble->getPermalink($register["id_post"]);
 			$formatedDate = gmdate("r", strtotime($register["date"]) + util::transform_offset($conf->offsetTime));
 ?>
 			<item>
