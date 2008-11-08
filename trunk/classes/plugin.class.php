@@ -12,28 +12,23 @@ if(!defined('entry') || !entry) die('Not a valid page');
   =========================== */
 ?>
 <?php
-	class plugin {	
+	class plugin {
 		
 		var $actions = array();
 		var $exists = array();
 	
-		function call($name) {            
-
+		function call($name) {			
+			
 			if (!$this->exists($name)) {
 				return false;
-			}            
-
- 			/*echo "<br />==========<br />";
-			echo $name;
-			echo "<br />";*/
+			} 			
 			
 			$index = 0;
-			//foreach (plugins::$instances as $plugin) {
+			
 			foreach ($GLOBALS['plugins::$instances'] as $plugin) {
 				if(array_key_exists($index,$this->actions[$name])){
 					$action = $this->actions[$name][$index][1]; 
-					if (is_callable(array($plugin, $action))) {
-						//echo "ejecutar: ".$action."()<br/>";					
+					if (is_callable(array($plugin, $action))) {						
 						$plugin->$action();
 						$index++;
 					}
@@ -44,18 +39,9 @@ if(!defined('entry') || !entry) die('Not a valid page');
 		function exists($name) {
             if (isset($this->exists[$name])) {
                 return $this->exists[$name];
-			}
-
-            //foreach (plugins::$instances as $plugin) {
-			foreach ($GLOBALS['plugins::$instances'] as $plugin) {
-				/*print_r(plugins::$instances);
-				echo "<br />";
-				print_r($plugin);
-				echo "<br />";
-				print_r($this->actions[$name]);
-				echo "<br />";
-				echo $this->actions[$name][0][1];
-				echo "<br />";*/
+			}			
+            
+			foreach ($GLOBALS['plugins::$instances'] as $plugin) {				
 				if(array_key_exists($name,$this->actions)){
 					if (is_callable(array($plugin, $this->actions[$name][0][1]))) {
 						return $this->exists[$name] = true;
@@ -65,16 +51,15 @@ if(!defined('entry') || !entry) die('Not a valid page');
 
             return $this->exists[$name] = false;
         }		
-        
-		function instance(){
-			//$instance;			
-			if( !isset($GLOBALS['$instance']) ) {
-				$GLOBALS['$instance'] = new plugin();
+		
+		//I really hate you PHP4's OOP implementation
+		function &instance() {
+			static $instance;
+			if (!isset($instance)) {
+				$instance = new plugin();
 			}
-			//print_r($GLOBALS['$instance']);
-			//die();
-			return $GLOBALS['$instance'];
-        }
+			return $instance;   
+		}
 		
 	}
 ?>

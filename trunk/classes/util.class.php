@@ -654,17 +654,17 @@ class util {
         
 		$actives = json_decode($conf->active_plugins,1);
 		$actives = $actives[1];
+		
         foreach ($actives as $index => $plugin) {
             if (!file_exists(Absolute_Path."plugins/".$plugin)) {
                 unset($actives[$index]);
                 continue;
-            }else{
+            } else {
 				require_once(Absolute_Path.'plugins/'.$plugin);
 			}            
 			if (!class_exists($index)) {
                 continue;
 			}
-			//plugins::$instances[$index] = new $index;
 			$GLOBALS['plugins::$instances'][$index] = new $index;
         }
 	}

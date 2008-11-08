@@ -2,13 +2,12 @@
 ob_start();
 if(!defined('entry') || !entry) die('Not a valid page');
 
-
 error_reporting (E_ALL);
 ini_set('display_errors', '1');
 
 // PHP settings specific to Gelato
 ini_set('pcre.backtrack_limit', '10000');
-// Globals to be used throughout the application
+
 define('Absolute_Path', dirname(__FILE__).DIRECTORY_SEPARATOR);
 $installed = true;
 $configFile = Absolute_Path.'config.php';
@@ -48,7 +47,6 @@ if (!extension_loaded('json')) {
 
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'configuration.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'util.class.php');
-//require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'functions.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'gelato.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'templates.class.php');
 require_once(Absolute_Path.'classes'.DIRECTORY_SEPARATOR.'themes.class.php');
@@ -74,7 +72,7 @@ if($installed){
 	session_start();
 	
 	util::init_plugins();
-	$trigger = plugin::instance();
+	$trigger =& plugin::instance(); //DO NOT remove the & after the =	
 	
 	$trigger->call('gelato_init');	
 
