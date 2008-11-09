@@ -24,17 +24,13 @@ if ($user->isAdmin()) {
 
 		if ($_POST["type"]=="2") { // is Photo type
 			if (isset($_POST["url"]) && $_POST["url"]!="")  {
-				$photoName = getFileName($_POST["url"]);
+				$photoName = util::getFileName($_POST["url"]);
 				if (!$tumble->savePhoto($_POST["url"])) {
 					header("Location: ".$conf->urlGelato."/admin/index.php?photo=false");
 					die();
 				}
 				$_POST["url"] = "../uploads/".util::sanitizeName($photoName);
-			}
-
-			if ( move_uploaded_file( $_FILES['photo']['tmp_name'], "../uploads/".sanitizeName($_FILES['photo']['name']) ) ) {
-				$_POST["url"] = "../uploads/".util::sanitizeName($_FILES['photo']['name']);
-			}
+			} 
 
 			unset($_POST["photo"]);
 			unset($_POST["MAX_FILE_SIZE"]);
@@ -42,7 +38,7 @@ if ($user->isAdmin()) {
 
 		if ($_POST["type"]=="7") { // is MP3 type
 			set_time_limit(300);
-			$mp3Name = getFileName($_POST["url"]);
+			$mp3Name = util::getFileName($_POST["url"]);
 			if (!$tumble->saveMP3($_POST["url"])) {
 				header("Location: ".$conf->urlGelato."/admin/index.php?mp3=false");
 				die();
