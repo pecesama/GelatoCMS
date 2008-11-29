@@ -18,7 +18,7 @@
 		Lightbox.fileLoadingImage = "css/images/loading.gif";
 		Lightbox.fileBottomNavCloseImage = "css/images/closelabel.gif";
 		</script>
-		{if {$conf.richText}}
+		{if $conf.richText}
         	<script src="{conf.urlGelato}/admin/scripts/nicEdit.js" type="text/javascript"></script>
             <script type="text/javascript">
                  bkLib.onDomLoaded(nicEditors.allTextAreas);
@@ -56,23 +56,23 @@
 					<ul class="menu">
 					<h3>{__("New Post")}</h3>
 
-					<li {if {$new}=="conversation"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=conversation"><img src="css/images/comments.png" alt="New chat" /> {__("Chat")}</a></li>
-					<li {if {$new}=="quote"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=quote"><img src="css/images/quote.png" alt="New qoute" /> {__("Quote")}</a></li>
-					<li {if {$new}=="url"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=url"><img src="css/images/world.png" alt="New link" /> {__("Link")}</a></li>
-					<li {if {$new}=="mp3"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=mp3"><img src="css/images/music.png" alt="New audio" /> {__("Audio")}</a></li>
-					<li {if {$new}=="video"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=video"><img src="css/images/film.png" alt="New video" /> {__("Video")}</a></li>
-					<li {if {$new}=="photo"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=photo"><img src="css/images/image.png" alt="New picture" /> {__("Picture")}</a></li>
-					<li {if {$new}=="post" or {$new}==null}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=post"><img src="css/images/page.png" alt="New post" /> {__("Regular")}</a></li>
+					<li {if $new=="conversation"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=conversation"><img src="css/images/comments.png" alt="New chat" /> {__("Chat")}</a></li>
+					<li {if $new=="quote"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=quote"><img src="css/images/quote.png" alt="New qoute" /> {__("Quote")}</a></li>
+					<li {if $new=="url"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=url"><img src="css/images/world.png" alt="New link" /> {__("Link")}</a></li>
+					<li {if $new=="mp3"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=mp3"><img src="css/images/music.png" alt="New audio" /> {__("Audio")}</a></li>
+					<li {if $new=="video"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=video"><img src="css/images/film.png" alt="New video" /> {__("Video")}</a></li>
+					<li {if $new=="photo"}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=photo"><img src="css/images/image.png" alt="New picture" /> {__("Picture")}</a></li>
+					<li {if $new=="post" or $new==null}class="selected"{/if}><a href="{conf.urlGelato}/admin/index.php?new=post"><img src="css/images/page.png" alt="New post" /> {__("Regular")}</a></li>
 					</ul>
 					<p>&nbsp;</p>
 
-					{if {$information}}<div class="information" id="update">{information}</div><br />{/if}
-					{if {$action.deleted} or {$action.modified} or {$action.added}}<div class="exito" id="divMessages">{exito}</div>{/if}
-					{if {$error}}<div class="error"><strong>{error}</div>{/if}
+					{if $information}<div class="information" id="update">{information}</div><br />{/if}
+					{if $action.deleted or $action.modified or $action.added}<div class="exito" id="divMessages">{exito}</div>{/if}
+					{if $error}<div class="error"><strong>{error}</div>{/if}
 
-					<form action="index.php" method="post" {if {$new}=='photo'}enctype="multipart/form-data"{/if} name="frmAdd" id="autosave" class="newpost">
+					<form action="index.php" method="post" {if $new=='photo'}enctype="multipart/form-data"{/if} name="frmAdd" id="autosave" class="newpost">
 						<fieldset>
-							{if {$postId}}<input type="hidden" name="id_post" id="id_post" value="{postId}" />{/if}
+							{if $postId}<input type="hidden" name="id_post" id="id_post" value="{postId}" />{/if}
 							{form}
 							<p>
 								<span style="color: rgb(136, 136, 136); margin-bottom: 10px; font-size: 10px;">
@@ -90,7 +90,7 @@
 									</span>
 								</p>
 							<p>
-								<input class="btn" type="submit" id="publish" name="btnAdd" value="{if {$isEdition}}Modify{else}Create{/if} post" />
+								<input class="btn" type="submit" id="publish" name="btnAdd" value="{if $isEdition}Modify{else}Create{/if} post" />
 							</p>
 						</fieldset>
 					</form>
@@ -109,33 +109,33 @@
 					<li class="selected"><a>{__("Posts")}</a></li>
 					</ul>
 
-					{if !{$isEdition}}
-						{if {$Posts_Number}}
-							{block {$rows} as {$row}}
+					{if !$isEdition}
+						{if $Posts_Number}
+							{block $rows as $row}
 								<div class="entry">
 									<div class="info"><span class="compact"><a href="{$row.Permalink}">Link</a>&nbsp;<a href="{conf.urlGelato}/admin/index.php?edit={$row.Id_Post}" title="{__('Edit this post')}" class="help"><img src="{conf.urlGelato}/admin/css/images/edit.png" alt=""/></a>&nbsp;<a href="{conf.urlGelato}/admin/index.php?delete={$row.Id_Post}" title="{__('Delete this post')}" class="help"><img src="{conf.urlGelato}/admin/css/images/delete.png" alt="" title="" onclick="return confirm('{__('Delete this post, really?')}');"/></a></span>
 										<p>{$row.Date_Added}</p>
 									</div>
 									<div class="post">
-										{if {$row.postType}=='post'}
+										{if $row.postType=='post'}
 											<span class="option"><a href="{$row.Permalink}">{$row.Title}</a></span>
 											<p>{$row.Body}</p>
-										{elseif {$row.postType}=='photo'}
+										{elseif $row.postType=='photo'}
 											<span class="option">{$row.Caption}</span>
 											<p><a {Effect}><img src="{$row.PhotoURL}" alt="{$row.PhotoAlt}" /></a></a></p>
-										{elseif {$row.postType}=='quote'}
+										{elseif $row.postType=='quote'}
 											<span class="option">&mdash; {$row.Source}</span>
 											<p><big class="quote"><a href="{$row.Permalink}">&#147;</a></big> {$row.Quote}</p>
-										{elseif {$row.postType}=='url'}
+										{elseif $row.postType=='url'}
 											<span class="option">&#187; <a href="{$row.URL}">{$row.Name}</a></span>
 											<p>{$row.Description}</p>
-										{elseif {$row.postType}=='conversation'}
+										{elseif $row.postType=='conversation'}
 											<span class="option">{$row.Title}</span>
 											<div class="conversation">{$row.Conversation}</div>
-										{elseif {$row.postType}=='video'}
+										{elseif $row.postType=='video'}
 											<span class="option">{$row.Caption}</span>
 											<p><img src="{conf.urlGelato}/admin/css/images/film.png" alt="Watch video" />&nbsp;<a href="{$row.Permalink}">{__('Watch')}</a></p>
-										{elseif {$row.postType}=='mp3'}
+										{elseif $row.postType=='mp3'}
 											<span class="option">{$row.Caption}</span>
 											<p><img src="{conf.urlGelato}/admin/css/images/music.png" alt="Play song" />&nbsp;<a href="{$row.Permalink}">{__('Play')}</a></p>
 										{/if}
