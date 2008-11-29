@@ -28,7 +28,7 @@
                 {Description}
             </div>
 
-		{if {$isAuthenticated}}
+		{if $isAuthenticated}
 			<div style="padding:4px; border:solid 2px #bbb; display:inline; background-color:#ddd; position:absolute; top:3px; right:3px;">
 				<b>Hi, {User}.</b>&nbsp;&nbsp;
 				<a target="_top" href="{URL_Tumble}/admin/index.php">{__("Add or Edit my posts")}</a>&nbsp;&nbsp;
@@ -36,65 +36,65 @@
 			</div>
 		{/if}
 
-		{if {$error}}
+		{if $error}
 			<div class="error">{$error}</div>
 		{else}
-			{block {$rows} as {$row}}
+			{block $rows as $row}
 				<div class="date">
 					{$row.Date_Added}
 				</div>
 				<div class="post">
 					<a href="{$row.Permalink}"><img src="{URL_Tumble}/themes/tumblr/img/link.gif" class="permalink" alt="Permalink"/></a>
-				{if {$row.postType}=='post'}
+				{if $row.postType=='post'}
 						<div class="regular">
 							<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
 							{$row.Body}
 						</div>
-				{elseif {$row.postType}=='photo'}
+				{elseif $row.postType=='photo'}
 						<div class="photo">
 							<a {$row.Effect}><img src="{$row.PhotoURL}" alt="{$row.PhotoAlt}" /></a><br/>
 							<div class="caption">{$row.Caption}</div>
 						</div>
-				{elseif {$row.postType}=='quote'}
+				{elseif $row.postType=='quote'}
 						<div class="quote">
 							<span class="quote"><big class="quote"><a href="{$row.Permalink}">&#147;</a></big> {$row.Quote}</span>
 							<div class="source">&mdash; {$row.Source}</div>
 						</div>
-				{elseif {$row.postType}=='url'}
+				{elseif $row.postType=='url'}
 						<div class="link">
 							&#187; <a href="{$row.URL}">{$row.Name}</a>
 							<div class="description">{$row.Description}</div>
 						</div>
-				{elseif {$row.postType}=='conversation'}
+				{elseif $row.postType=='conversation'}
 						<div class="conversation">
 							...<h2><a href="{$row.Permalink}">{$row.Title}</a></h2>
 							{$row.Conversation}
 						</div>
-				{elseif {$row.postType}=='video'}
+				{elseif $row.postType=='video'}
 						<div class="video">
 							{$row.Video}
 							<div class="caption">{$row.Caption}</div>
 						</div>
-				{elseif {$row.postType}=='mp3'}
+				{elseif $row.postType=='mp3'}
 						<div class="video">
 							{$row.Mp3}
 							<div class="caption">{$row.Caption}</div>
 						</div>
 				{/if}
 				</div>
-				{if !{$id_post}}
+				{if !$id_post}
 					<div class="totalComments">
-						<h3>{__("Posted by")} {$row.User} {if {$allowComments}}- <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) {__("comments")}{/if}</a></h3>
+						<h3>{__("Posted by")} {$row.User} {if $allowComments}- <a href="{$row.Permalink}#comments">( {$row.Comments_Number} ) {__("comments")}{/if}</a></h3>
 					</div>
 				{/if}
 			{/block}
 
-			{if {$id_post}}
-				{if {$row.Comments_Number}>0}
+			{if $id_post}
+				{if $row.Comments_Number>0}
 					<div class="containerComments">
 						<h3 id="comments">{$row.Comments_Number} {__("answers to")} &#8220;{$row.Post_Title}&#8221;</h3>
 						<ol class="commentlist">
-							{block {$comments} as {$comment}}
+							{block $comments as $comment}
 							<li class="alt" id="comment-{$comment.Id_Comment}">
 								<cite>
 									<a href="#comment-{$comment.Id_Comment}" title="Comment permalink">#</a>&nbsp;&nbsp;
@@ -110,7 +110,7 @@
 					</div>
 				{/if}
 
-				{if {$allowComments}}
+				{if $allowComments}
 					<div class="containerFormComments">
 						<h3 id="respond">{__("Add your comment")}</h3>
 

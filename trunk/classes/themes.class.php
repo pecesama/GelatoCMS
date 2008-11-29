@@ -53,21 +53,41 @@ class themes{
 	}
 
 	function eval_control_structures(){
+		//finding {header *}
+		preg_match_all("/{header ([^}]+?)}/s",$this->output,$out);
+		$headers = '';
+		foreach ($out[1] as $o)
+			$headers .= "header('$o');\n";
+
+		$this->output = preg_replace("/{header [^}]+?}/s","",$this->output);
+
+		//fake scape
+		$this->output = $this->quotemeta($this->output);
+		$this->output = str_replace('\"','\\"',trim($this->output));
+
+		$this->output = "echo \"".str_replace('"','\"',trim($this->output))."\";";
+
+		#$this->output = preg_replace("/\n+/s","\n",$this->output);
+		$this->output = $headers.trim($this->output);
+
 		//finding IFs sentences and converting to php code
-		$this->output = "echo \"".addslashes($this->output)."\";";
-		$this->output = preg_replace_callback("/{if ([^}]+)}/",create_function('$arr','return "\";if(".stripslashes($arr[1])."){echo\"";'),$this->output);
+		#$this->output = preg_replace_callback("/{if ([^}]+)}/",create_function('$arr','return "\";if(".stripslashes($arr[1])."){echo\"";'),$this->output);
+		$this->output = preg_replace_callback("/{if ([^}]+)}/",create_function('$arr','return "\";if(".stripslashes(preg_replace(array("/\\\\$([a-zA-Z0-9_]+)/s","/\\\\\\$this->vars\[\\\'([a-zA-Z0-9_]+)\\\'\]\.([a-zA-Z0-9_]+)/s"),array("\$this->vars[\'\$1\']","\\\\\\$this->vars[\\\'$1\\\'][\\\'$2\\\']"),$arr[1]))."){echo\"";'),$this->output);
 		$this->output = preg_replace("/{else}/","\";}else{echo\"",$this->output);
-		$this->output = preg_replace_callback("/{elseif ([^}]+)}/",create_function('$arr','return "\";}elseif(".stripslashes($arr[1])."){echo\"";'),$this->output);
+		$this->output = preg_replace_callback("/{elseif ([^}]+)}/",create_function('$arr','return "\";}elseif(".stripslashes(preg_replace(array("/\\\\$([a-zA-Z0-9]+)/s","/\\\\\\$this->vars\[\\\'([a-zA-Z0-9]+)\\\'\]\.([a-zA-Z0-9]+)/s"),array("\$this->vars[\'\$1\']","\\\\\\$this->vars[\\\'$1\\\'][\\\'$2\\\']"),$arr[1]))."){echo\"";'),$this->output);
 		$this->output = preg_replace("/{\/if}/","\";} echo \"",$this->output);
 
 		//finding FOREACHs or BLOCKs sentences and converting to php code
-		$this->output = preg_replace_callback("/{block ([^}]+) as ([^}]+)=>[\$]([^}]+)}/",create_function('$arr','return "\";foreach(".stripslashes($arr[1])." as ".stripslashes($arr[2])."=>\$this->vars[\'".stripslashes($arr[3])."\']){echo\"";'),$this->output);
-		$this->output = preg_replace_callback("/{block ([^}]+) as ([^}]+)}/",create_function('$arr','return "\";foreach(".stripslashes($arr[1])." as ".stripslashes($arr[2])."){echo\"";'),$this->output);
+		$this->output = preg_replace_callback("/{block ([^}]+) as ([^}]+)=>[\$]([^}]+)}/",create_function('$arr','return "\";foreach(".stripslashes(preg_replace(array("/\\\\$([a-zA-Z0-9_]+)/s","/\\\\\\$this->vars\[\\\'([a-zA-Z0-9_]+)\\\'\]\.([a-zA-Z0-9_]+)/s"),array("\$this->vars[\'\$1\']","\\\\\\$this->vars[\\\'$1\\\'][\\\'$2\\\']"),$arr[1]))." as ".stripslashes(preg_replace(array("/\\\\$([a-zA-Z0-9_]+)/s","/\\\\\\$this->vars\[\\\'([a-zA-Z0-9_]+)\\\'\]\.([a-zA-Z0-9_]+)/s"),array("\$this->vars[\'\$1\']","\\\\\\$this->vars[\\\'$1\\\'][\\\'$2\\\']"),$arr[2]))."=>\$this->vars[\'".stripslashes(preg_replace(array("/\\\\$([a-zA-Z0-9_]+)/s","/\\\\\\$this->vars\[\\\'([a-zA-Z0-9_]+)\\\'\]\.([a-zA-Z0-9_]+)/s"),array("\$this->vars[\'\$1\']","\\\\\\$this->vars[\\\'$1\\\'][\\\'$2\\\']"),$arr[3]))."\']){echo\"";'),$this->output);
+		$this->output = preg_replace_callback("/{block ([^}]+) as ([^}]+)}/",create_function('$arr','return "\";foreach(".stripslashes(preg_replace(array("/\\\\$([a-zA-Z0-9_]+)/s","/\\\\\\$this->vars\[\\\'([a-zA-Z0-9_]+)\\\'\]\.([a-zA-Z0-9_]+)/s"),array("\$this->vars[\'\$1\']","\\\\\\$this->vars[\\\'$1\\\'][\\\'$2\\\']"),$arr[1]))." as ".stripslashes(preg_replace(array("/\\\\$([a-zA-Z0-9_]+)/s","/\\\\\\$this->vars\[\\\'([a-zA-Z0-9_]+)\\\'\]\.([a-zA-Z0-9_]+)/s"),array("\$this->vars[\'\$1\']","\\\\\\$this->vars[\\\'$1\\\'][\\\'$2\\\']"),$arr[2]))."){echo\"";'),$this->output);
 		$this->output = preg_replace("/{\/block}/","\";} echo \"",$this->output);
 
 		//Converting the $this->vars[\'variable\'] format to {$this->vars['variable']}
-		$this->output = preg_replace("/[\$]this->vars\[\\\'([^ \.\\\]+)\\\'\]\[\\\'([^ \.\\\]+)\\\'\]/","{\$this->vars['$1']['$2']}",$this->output);
+		//$this->output = preg_replace("/[\$]this->vars\[\\\'([^ \.\\\]+)\\\'\]\[\\\'([^ \.\\\]+)\\\'\]/","{\$this->vars['$1']['$2']}",$this->output);
 		$this->output = preg_replace("/[\$]this->vars\[\\\'([^ \.\\\]+)\\\'\]/","{\$this->vars['$1']}",$this->output);
+		
+		//Convertin the {__(\'word\')} format to {__('word')}
+		#$this->output = preg_replace("/[\$]this->vars\[\\\'([^ \.\\\]+)\\\'\]/","{\$this->vars['$1']}",$this->output);
 	}
 
 	//sustituye las variables en el output del template
@@ -88,19 +108,21 @@ class themes{
 		//replacing {$key} format by $this->vars['key']
 		//replacing  {$array.key} format by $this->vars['array']['key']
 		$patrones = array(
-			#'/{\$([^ \.}]+)}/s',
-			#'/{\$([^ \.}]+)\.([^ \.}]+)}/s'
-			'/{\$(\w+)}/s',
-			'/{\$(\w+)\.(\w+)}/s',
-			'/\$(\W)/s'
+			'/{\$([^ \.}]+)}/s',
+			'/{\$([^ \.}]+)\.([^ \.}]+)}/s'
 		);
 		$reemplazos = array(
-			"\$this->vars['$1']",
-			"\$this->vars['$1']['$2']",
-			"\\\\$$1"
+			"{\$this->vars['$1']}",
+			"{\$this->vars['$1']['$2']}"
 		);
-
 		$this->output = preg_replace($patrones, $reemplazos, $this->output);
+	}
+
+	function quotemeta($str){
+		$chars = array(/*'.',*/ "\\", /*'+',*/ /*'*',*/ /*'?',*/ /*'[',*/ /*'^',*/ /*']',*/ /*'(',*/ /* '$' Por el momento no validar este*/);
+		foreach($chars as $char)
+			$this->output = str_replace($char,"\\$char",$this->output);
+		return $this->output;
 	}
 
 	//Utiliza gettext
