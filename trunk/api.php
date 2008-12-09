@@ -42,7 +42,7 @@ if(!defined('entry')) define('entry',true);
 				foreach($actual_feeds as $feed){
 					$error_text = ($feed["error"]>0) ? "false" : "true";
 ?>
-					<feed id="<?php echo $feed["id_feed"];?>" url="<?php echo htmlspecialchars($feed["url"]);?>" import-type="<?php echo type2Text($feed["type"]);?>" next-update-in-seconds="<? echo $f->getNextUpdate($feed["id_feed"]);?>" title="<?php echo htmlspecialchars($feed["title"]);?>" error-text="<? echo $error_text;?>"/>
+					<feed id="<?php echo $feed["id_feed"];?>" url="<?php echo htmlspecialchars($feed["url"]);?>" import-type="<?php echo util::type2Text($feed["type"]);?>" next-update-in-seconds="<? echo $f->getNextUpdate($feed["id_feed"]);?>" title="<?php echo htmlspecialchars($feed["title"]);?>" error-text="<? echo $error_text;?>"/>
 <?php
 				}
 ?>
