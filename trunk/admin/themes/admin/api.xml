@@ -1,0 +1,54 @@
+{header Content-type: text/xml; charset=utf-8}
+<?xml version="1.0" encoding="UTF-8"?>
+	<gelato version="1.0">
+		<tumblelog name="{username}" timezone="{conf.offsetCity}" title="{conf.title}">
+			{conf.description}
+			<feeds>
+			{block $feeds as $feed}
+				<feed id="{$feed.id_feed}" url="{$feed.url}" import-type="{$feed.type}" next-update-in-seconds="{$feed.getNextUpdate}" title="{$feed.title}" error-text="{$feed.error_text}" />
+			{/block}
+			</feeds>
+		</tumblelog>	
+		<posts start="{start}" total="{total}">
+		{block $posts as $post}
+			{if $post.type=='post'}
+			<post id="{$post.id_post}" url="{$post.url}" type="regular" date="{$post.formatedDate}">
+				<regular-title>{$post.tit}</regular-title>
+				<regular-body>{$post.desc}</regular-body>
+			</post>
+			{elseif $post.type=='photo'}
+			<post id="{$post.id_post}" url="{$post.url}" type="photo" date="{$post.formatedDate}">
+				<photo-caption>{$post.tit}</photo-caption>
+				<photo-url>{$post.photoPath}</photo-url>
+			</post>
+			{elseif $post.type=='quote'}
+			<post id="{$post.id_post}" url="{$post.url}" type="quote" date="{$post.formatedDate}">
+				<quote-text>{$post.desc}</quote-text>
+				<quote-source>{$post.title}</quote-source>
+			</post>
+			{elseif $post.type=='url'}
+			<post id="{$post.id_post}" url="{$post.url}" type="link" date="{$post.formatedDate}">
+				<link-text>{$post.tit}</link-text>
+				<link-url>{$post.url}</link-url>
+			</post>
+			{elseif $post.type=='conversation'}
+			<post id="{$post.id_post}" url="{$post.url}" type="conversation" date="{$post.formatedDate}">
+				<conversation-title>{$post.tit}</conversation-title>
+				<conversation-text>{$post.desc}</conversation-text>
+				{$post.descAPIFormat}
+			</post>
+			{elseif $post.type=='video'}
+			<post id="{$post.id_post}" url="{$post.url}" type="video" date="{$post.formatedDate}">
+				<video-caption>{$post.tit}</video-caption>
+				<video-source>{$post.url}</video-source>
+				<video-player>{$post.desc}</video-player>                            
+			</post>
+			{elseif $post.type=='mp3'}
+			<post id="{$post.id_post}" url="{$post.url}" type="audio" date="{$post.formatedDate}">
+				<audio-caption>{$post.tit}</audio-caption>
+				<audio-player>{$post.desc}</audio-player>                            
+			</post>
+			{/if}
+		{/block}
+		</posts>
+	</gelato>
