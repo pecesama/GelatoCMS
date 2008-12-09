@@ -12,17 +12,14 @@ if(!defined('entry')) define('entry',true);
   =========================== */
 ?>
 <?php
-	header("Content-type: text/xml; charset=utf-8");
 	$isFeed = true;
 	
 	require('entry.php');
 	global $user, $conf, $tumble;
 	$f = new feeds();
 	
-	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-?>
-	<gelato version="1.0">
-<?php	
+	$theme = new themes;
+
 	if (isset($_GET["action"]) && $_GET["action"] == "read") {
 		if (isset($_GET["start"])) { $start = $_GET["start"]; } else { $start = 0; }
 		if (isset($_GET["total"])) { $total = $_GET["total"]; } else { $total = 20; }
@@ -31,121 +28,78 @@ if(!defined('entry')) define('entry',true);
 		$user = new user();
 		$userData = $user->getUserByID(1);
 		$username = ($userData["name"] == "") ? "gelato" : $userData["name"];
-?>		
-		<tumblelog name="<?php echo $username;?>" timezone="<?php echo $conf->offsetCity;?>" title="<?php echo $conf->title;?>">
-<?php 	
-		echo "\n\t".$conf->description."\n";
-?>
-			<feeds>
-<?php
-				$actual_feeds = $f->getFeedList();
-				foreach($actual_feeds as $feed){
-					$error_text = ($feed["error"]>0) ? "false" : "true";
-?>
-					<feed id="<?php echo $feed["id_feed"];?>" url="<?php echo htmlspecialchars($feed["url"]);?>" import-type="<?php echo util::type2Text($feed["type"]);?>" next-update-in-seconds="<? echo $f->getNextUpdate($feed["id_feed"]);?>" title="<?php echo htmlspecialchars($feed["title"]);?>" error-text="<? echo $error_text;?>"/>
-<?php
-				}
-?>
-            </feeds>
-        </tumblelog>	
 
-<?php
+		$theme->set("username",$username);
+		$theme->set("conf",array(
+			"offsetCity"=>$conf->offsetCity,
+			"title"=>$conf->title,
+			"description"=>$conf->description
+		));
+
+		$feeds = array();		$actual_feeds = $f->getFeedList();
+		foreach($actual_feeds as $feed){
+			$error_text = ($feed["error"]>0) ? "false" : "true";
+			$feed['url'] = htmlspecialchars($feed['url']);
+			$feed['type'] = util::type2Text($feed['type']);
+			$feed['getNextUpdate'] = $f->getNextUpdate($feed['id_feed']);
+			$feed['title'] = htmlspecialchars($feed['title']);
+			$feed['error_text'] = $error_text;
+			$feeds[] = $feed;
+		}
+		
+		$theme->set("feeds",$feeds);
+
 		if ($hasType) {
 			$postType = type2Number($_GET["type"]);
 		}
 		$rs = $tumble->getPosts($total, $start);
 		if ($db->contarRegistros()>0) {
-?>
-			<posts start="<?php echo $start; ?>" total="<?php echo $total; ?>">
-<?php 
-			while($register = mysql_fetch_array($rs)) {
-				$desc = util::trimString($register["description"]);				
-				$strEnd = ($conf->urlFriendly) ? "/" : "";
-				$url = $conf->urlGelato.($conf->urlFriendly ? "/post/" : "/index.php?post=").$register["id_post"].$strEnd;
-				$formatedDate = gmdate("D, d M Y H:i:s", strtotime($register["date"]) + util::transform_offset($conf->offsetTime));
-				
-				switch ($register["type"]) {
-					case "1":
+			$theme->set("start",$start);
+			$theme->set("total",$total);
 
-						$tit = (empty($register["title"])) ? $desc : strip_tags($register["title"]);
-?>						
-						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="regular" date="<?php echo $formatedDate;?>">
-							<regular-title><?php echo $tit;?></regular-title>
-							<regular-body><?php echo $desc;?></regular-body>
-						</post>
-<?php						
+			while($post = mysql_fetch_assoc($rs)){
+				$post['desc'] = util::trimString($post["description"]);				
+				$strEnd = ($conf->urlFriendly) ? "/" : "";
+				$post['url'] = $conf->urlGelato.($conf->urlFriendly ? "/post/" : "/index.php?post=").$post["id_post"].$strEnd;
+				$post['formatedDate'] = gmdate("D, d M Y H:i:s", strtotime($post["date"]) + util::transform_offset($conf->offsetTime));
+				
+				$post['type'] = util::type2Text($post["type"]);
+
+				switch ($post["type"]) {
+					case "post":
+						$post['tit'] = (empty($post["title"])) ? $desc : strip_tags($post["title"]);
 						break;
-					case "2":
-						$tit = (empty($register["description"])) ? "Photo" : $desc;
-?>
-						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="photo" date="<?php echo $formatedDate;?>">
-<?php
-							$photoPath = str_replace("../", $conf->urlGelato."/", $register["url"]);
-?>
-                            <photo-caption><?php echo stripslashes($tit);?></photo-caption>
-                            <photo-url><?php echo $photoPath;?></photo-url>                            
-                        </post>
-<?php
+					case "photo":
+						$post['photoPath'] = str_replace("../", $conf->urlGelato."/", $post["url"]);
+						$post['tit'] = stripslashes(((empty($post["description"])) ? "Photo" : $post['desc']));
 						break;
-					case "3":						
-?>
-						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="quote" date="<?php echo $formatedDate;?>">
-							<quote-text><?php echo $desc; ?></quote-text>
-							<quote-source><?php echo strip_tags($register["title"]); ?></quote-source>
-						</post>
-<?php
+					case "quote":
+						$post['title'] = strip_tags($post["title"]);
 						break;
-					case "4":
-						$tit = (empty($register["title"])) ? $register["url"] : strip_tags($register["title"]);
-?>
-						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="link" date="<?php echo $formatedDate;?>">
-                            <link-text><?php echo $tit; ?></link-text>
-                            <link-url><?php echo $register["url"]; ?></link-url>
-                        </post>
-<?php
+					case "url":
+						$post['tit'] = (empty($post["title"])) ? $post["url"] : strip_tags($post["title"]);
 						break;
-					case "5":
+					case "conversation":
 						$lines = explode("\n", $desc);
 						$line = $lines[0];
-						$tit = (empty($register["title"])) ? trimString($line) : $register["title"];
-						$desc = $tumble->formatConversation($desc);
-?>
-						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="conversation" date="<?php echo $formatedDate;?>">
-                            <conversation-title><?php echo $tit; ?></conversation-title>
-                            <conversation-text><?php echo $desc; ?></conversation-text>
-                            <?php echo $tumble->formatApiConversation($desc); ?>
-                        </post>
-<?php
+						$post['tit'] = (empty($post["title"])) ? trimString($line) : $post["title"];
+						$post['desc'] = $tumble->formatConversation($desc);
+						$post['descAPIFormat'] = $tumble->formatConversation($desc);
 						break;
-					case "6":
-						$tit = (empty($register["description"])) ? "Video" : $desc;
-						$desc = $tumble->getVideoPlayer($register["url"]);
-?>
-						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="video" date="<?php echo $formatedDate;?>">
-                            <video-caption><?php echo $tit; ?></video-caption>
-                            <video-source><?php echo $register["url"]; ?></video-source>
-                            <video-player><?php echo htmlspecialchars($desc); ?></video-player>                            
-                        </post>
-<?php
+					case "video":
+						$post['tit'] = (empty($post["description"])) ? "Video" : $desc;
+						$post['desc'] = htmlspecialchars($tumble->getVideoPlayer($post["url"]));
 						break;
-
-					case "7":
-						$tit = (empty($register["description"])) ? "Audio" : $desc;
-						$desc = $tumble->getMp3Player($register["url"]);
-?>
-						<post id="<?php echo $register["id_post"]; ?>" url="<?php echo $url;?>" type="audio" date="<?php echo $formatedDate;?>">
-                            <audio-caption><?php echo $tit; ?></audio-caption>
-                            <audio-player><?php echo htmlspecialchars($desc); ?></audio-player>                            
-                        </post>
-<?php
+					case "mp3":
+						$post['tit'] = (empty($post["description"])) ? "Audio" : $desc;
+						$desc = htmlspecialchars($tumble->getMp3Player($post["url"]));
 						break;
-
 				}				
-			} 
-?>
-				</posts>
-<?php	
+				$posts[] = $post;
+			}
+			$theme->set("posts",$posts);
 		}
 	}
+
+$theme->display(Absolute_Path.'admin/themes/admin/api.xml');
 ?>
-		</gelato>
