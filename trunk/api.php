@@ -99,7 +99,6 @@ if(!defined('entry')) define('entry',true);
 			}
 			$theme->set("posts",$posts);
 		}
+		$theme->display(Absolute_Path.'admin/themes/admin/api.xml');
 	}
-
-$theme->display(Absolute_Path.'admin/themes/admin/api.xml');
 ?>
