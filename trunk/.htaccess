@@ -1,5 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
+RewriteRule ^api/read/?$ api.php?action=read [L]
 RewriteRule ^page/([0-9]+)/?$ index.php?page=$1 [L]
 RewriteRule ^post/([0-9]+)/?$ index.php?post=$1 [L]
 RewriteRule ^rss/?$ rss.php [L]
