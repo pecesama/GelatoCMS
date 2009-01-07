@@ -67,7 +67,7 @@ $(function(){
 			if($("#context_help").get().length < 1){
 				$('.box:last').append('<div id="context_help"></div>');
 			}
-			$('#context_help').hide().html(t).css({left:e.pageX, top:e.pageY + 20}).fadeIn('slow');
+			$('#context_help').hide().html(t).css({left:e.pageX, top:e.pageY + 20}).fadeIn(300);
 		});
 	},function(){
 		$(this).stop().attr('title',t);
