@@ -87,7 +87,7 @@ if(!defined('entry')) define('entry',true);
 					case "conversation":
 						$lines = explode("\n", $post['desc']);
 						$line = $lines[0];
-						$post['tit'] = (empty($post["title"])) ? trimString($line) : $post["title"];
+						$post['tit'] = (empty($post["title"])) ? util::trimString($line) : $post["title"];
 						$post['desc'] = $tumble->formatConversation($post['desc']);
 						$post['descAPIFormat'] = $tumble->formatConversation($post['desc']);
 						break;

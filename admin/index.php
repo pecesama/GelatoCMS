@@ -67,7 +67,7 @@ if ($user->isAuthenticated()) {
                                 header("Location: ".$conf->urlGelato."/admin/index.php?mp3=false");
                                 die();
                         }
-                        if (isMP3($remoteFileName)) {
+                        if (util::isMP3($remoteFileName)) {
                                 $_POST["url"] = $conf->urlGelato."/uploads/".$mp3Name;
                         }
                 }
