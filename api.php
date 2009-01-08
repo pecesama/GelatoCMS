@@ -57,7 +57,7 @@ if(!defined('entry')) define('entry',true);
 		$totalRegistros = $db->contarRegistros();
 		$theme->set("totalRegistros",$totalRegistros);
 
-		if ($totalRegistros()>0) {
+		if ($db->contarRegistros()>0) {
 			$theme->set("start",$start);
 			$theme->set("total",$total);
 
