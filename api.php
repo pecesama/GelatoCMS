@@ -36,7 +36,8 @@ if(!defined('entry')) define('entry',true);
 			"description"=>$conf->description
 		));
 
-		$feeds = array();		$actual_feeds = $f->getFeedList();
+		$feeds = array();
+		$actual_feeds = $f->getFeedList();
 		foreach($actual_feeds as $feed){
 			$error_text = ($feed["error"]>0) ? "false" : "true";
 			$feed['url'] = htmlspecialchars($feed['url']);
@@ -67,11 +68,11 @@ if(!defined('entry')) define('entry',true);
 				$post['url'] = $conf->urlGelato.($conf->urlFriendly ? "/post/" : "/index.php?post=").$post["id_post"].$strEnd;
 				$post['formatedDate'] = gmdate("D, d M Y H:i:s", strtotime($post["date"]) + util::transform_offset($conf->offsetTime));
 				
-				$post['type'] = util::type2Text($post["type"]);
-
-				switch ($post["type"]) {
+				$post["type"] = util::type2Text($post["type"]);
+				
+				switch ($post["type"]) {				
 					case "post":
-						$post['tit'] = (empty($post["title"])) ? $desc : strip_tags($post["title"]);
+						$post['tit'] = (empty($post["title"])) ? $post['desc'] : strip_tags($post["title"]);
 						break;
 					case "photo":
 						$post['photoPath'] = str_replace("../", $conf->urlGelato."/", $post["url"]);
@@ -84,19 +85,19 @@ if(!defined('entry')) define('entry',true);
 						$post['tit'] = (empty($post["title"])) ? $post["url"] : strip_tags($post["title"]);
 						break;
 					case "conversation":
-						$lines = explode("\n", $desc);
+						$lines = explode("\n", $post['desc']);
 						$line = $lines[0];
 						$post['tit'] = (empty($post["title"])) ? trimString($line) : $post["title"];
-						$post['desc'] = $tumble->formatConversation($desc);
-						$post['descAPIFormat'] = $tumble->formatConversation($desc);
+						$post['desc'] = $tumble->formatConversation($post['desc']);
+						$post['descAPIFormat'] = $tumble->formatConversation($post['desc']);
 						break;
 					case "video":
-						$post['tit'] = (empty($post["description"])) ? "Video" : $desc;
+						$post['tit'] = (empty($post["description"])) ? "Video" : $post['desc'];
 						$post['desc'] = htmlspecialchars($tumble->getVideoPlayer($post["url"]));
 						break;
 					case "mp3":
-						$post['tit'] = (empty($post["description"])) ? "Audio" : $desc;
-						$desc = htmlspecialchars($tumble->getMp3Player($post["url"]));
+						$post['tit'] = (empty($post["description"])) ? "Audio" : $post['desc'];
+						$post['desc'] = htmlspecialchars($tumble->getMp3Player($post["url"]));
 						break;
 				}				
 				$posts[] = $post;
