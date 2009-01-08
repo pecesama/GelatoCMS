@@ -289,9 +289,14 @@ function handleNode($node) {
 				<div id='photo_content' style='display:none;'>
 					<ul class='item_list'>
 						<?php foreach($photo as $item) { ?>
-								<?php echo "<pre>";
+								
+								<?php 
+								/*
+								echo "<pre>";
 								print_r($item);
-								echo "</pre>"; ?>
+								echo "</pre>"; 
+								*/
+								?>                                
 						<li>
 							<div class='item' style="background-image:url('<?php echo $item['photo']; ?>')"  rel='<?php echo $item['full_date'] ?>' title="<?php echo strftime("%b %d, %G", strtotime($item['date'])); ?>" onclick="location.href='<?php echo $item['url'] ?>';"></div>
 						</li>
