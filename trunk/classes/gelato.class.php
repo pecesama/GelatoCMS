@@ -188,9 +188,9 @@ class gelato {
 			$playerUrl = $conf->urlGelato."/admin/scripts/player.swf?soundFile=".$url;
 			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"" . $playerUrl . "\" width=\"290\" height=\"24\"><param name=\"movie\" value=\"" . $playerUrl . "\" /><param name=\"quality\" value=\"high\" /><param name=\"menu\" value=\"false\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} elseif (util::isGoEar($url)) {
-			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://www.goear.com/files/external.swf\" width=\"366\" height=\"130\"><param name=\"movie\" value=\"http://www.goear.com/files/external.swf\" /><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"file=".getGoEarCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://www.goear.com/files/external.swf\" width=\"366\" height=\"130\"><param name=\"movie\" value=\"http://www.goear.com/files/external.swf\" /><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"file=".util::getGoEarCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} elseif (util::isOdeo($url)) {
-			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://media.odeo.com/flash/odeo_player.swf?v=3\" width=\"366\" height=\"75\"><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"type=audio&amp;id=".getOdeoCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
+			return "\t\t\t<object type=\"application/x-shockwave-flash\" data=\"http://media.odeo.com/flash/odeo_player.swf?v=3\" width=\"366\" height=\"75\"><param name=\"quality\" value=\"high\" /><param name=\"FlashVars\" value=\"type=audio&amp;id=".util::getOdeoCode($url)."\" /><param name=\"wmode\" value=\"transparent\" /></object>\n";
 		} else {
 			return "This URL is not an MP3 file.";
 		}
