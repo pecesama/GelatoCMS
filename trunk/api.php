@@ -53,6 +53,10 @@ if(!defined('entry')) define('entry',true);
 			$postType = type2Number($_GET["type"]);
 		}
 		$rs = $tumble->getPosts($total, $start);
+
+		$totalRegistros = $db->contarRegistros();
+		$theme->set("totalRegistros",$totalRegistros);
+
 		if ($db->contarRegistros()>0) {
 			$theme->set("start",$start);
 			$theme->set("total",$total);

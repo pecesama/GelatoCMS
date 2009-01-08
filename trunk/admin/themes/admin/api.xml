@@ -9,6 +9,7 @@
 			{/block}
 			</feeds>
 		</tumblelog>	
+		{if $totalRegistros}
 		<posts start="{start}" total="{total}">
 		{block $posts as $post}
 			{if $post.type=='post'}
@@ -51,4 +52,5 @@
 			{/if}
 		{/block}
 		</posts>
+		{/if}
 	</gelato>
