@@ -439,7 +439,7 @@ class util {
 			$validTags ='<p><ol><ul><li><a><abbr><acronym><blockquote><code><pre><em><i><strong><b><del><br><span><div><img>';
 		}
 		$source = strip_tags($source, $validTags);
-		return preg_replace('/<(.*?)>/ie', "'<'.removeBadAtributes('\\1').'>'", $source);
+		return preg_replace('/<(.*?)>/ie', "'<'.util::removeBadAtributes('\\1').'>'", $source);
 	}
 
 	function removeBadAtributes($sourceTag) {
