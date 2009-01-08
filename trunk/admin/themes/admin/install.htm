@@ -16,7 +16,7 @@
 	</div>
 
 	<div id="main">
-	{if {$showForm}}
+	{if $showForm}
 		<div class="box">
 			<ul class="menu manage">
 			<h3>gelato :: installation</h3>
@@ -72,7 +72,7 @@
 							</li>
 							<li><label for="template">Template:</label>
 								<select id="template" name="template">
-									{block {$themes} as {$theme}}
+									{block $themes as $theme}
 										<option value="{$theme}">{$theme}</option>
 									{/block}
 								</select>
