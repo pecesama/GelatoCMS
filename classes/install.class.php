@@ -9,44 +9,36 @@ class Install {
 	var $errors_d = array();
 
 	function Install(){
-		$this->errors_d[1]="The login field cannot be empty";
-		$this->errors_d[2]="The password field cannot be empty";
-		$this->errors_d[3]="Password does not match the confirm password";
-		$this->errors_d[4]="The e-mail field cannot be empty";
-		$this->errors_d[5]="The installation URL field cannot be empty";
-		$this->errors_d[6]="Error establishing a database connection";
-		$this->errors_d[7]="Please add a hostname for the database server";
-		$this->errors_d[8]="Please name the database";
-		$this->errors_d[9]="Password does not match the confirm password";
-		$this->errors_d[10]="The login field cannot be empty";
+		$this->errors_d[1]='The login field cannot be empty';
+		$this->errors_d[2]='The password field cannot be empty';
+		$this->errors_d[3]='Password does not match the confirm password';
+		$this->errors_d[4]='The e-mail field cannot be empty';
+		$this->errors_d[5]='The installation URL field cannot be empty';
+		$this->errors_d[6]='Error establishing a database connection';
+		$this->errors_d[9]='For security reasons this field is required. It is the same information that in the config.php file';
+		$this->errors_d[10]='The login field cannot be empty';
 	}
 
     function run() {
-
     	if (empty($this->data)) false;
-
     	$this->create_db();
-
     	if (!$this->install_db()) return false;
-
 		return true;
     }
 
-    function create_db(){
+	function create_db(){
+		$link =  mysql_connect(DB_Server, DB_User, DB_Password);
+		if(!$link)
+			die('Could not connect: '.mysql_error());
 
-	    $link =  mysql_connect($this->data['db_host'], $this->data['db_login'], $this->data['db_password']);
-		if (!$link) {
-		    die('Could not connect: ' . mysql_error());
-		}
+		$sql = 'CREATE DATABASE '.DB_name;
 
-		$sql = 'CREATE DATABASE ' . $this->data['db_name'];
-		if (!mysql_query($sql, $link)) {
+		if(!mysql_query($sql, $link)){
 			$link = mysql_close($link);
 			return false;
-		}
-
+		}
 		return true;
-    }
+	}
 
 	function install_db(){
 		require_once(Absolute_Path.'config.php');
@@ -191,7 +183,6 @@ class Install {
 	}
 
 	function check_form(){
-
 		$action="";
 
 		if (isset($this->data['action'])){
@@ -207,12 +198,12 @@ class Install {
 				$sep_err="";
 				$this->errors = false;
 
-				if (!$this->data['login']) {
-					$this->errors =$this->errors.$sep_err."1";
+				if (!isset($this->data['db_login']) or $this->data['db_login']!=DB_User) {
+					$this->errors =$this->errors.$sep_err."9"; //7,8
 					$sep_err="|";
 				}
-				if (!$this->data['db_login']) {
-					$this->errors =$this->errors.$sep_err."10";
+				if (!$this->data['login']) { 
+					$this->errors =$this->errors.$sep_err."1";
 					$sep_err="|";
 				}
 				if (!$this->data['password']) {
@@ -227,20 +218,8 @@ class Install {
 					$this->errors=$this->errors.$sep_err."5";
 					$sep_err="|";
 				}
-				if (!$this->data['db_host'] ) {
-					$this->errors=$this->errors.$sep_err."7";
-					$sep_err="|";
-				}
-				if (!$this->data['db_name'] ) {
-					$this->errors=$this->errors.$sep_err."8";
-					$sep_err="|";
-				}
 				if ($this->data['password']!=$_POST['password2']) {
 					$this->errors=$this->errors.$sep_err."3";
-					$sep_err="|";
-				}
-				if ( $_POST['db_password']!=$_POST['db_password2']) {
-					$this->errors=$this->errors.$sep_err."9";
 					$sep_err="|";
 				}
 
@@ -249,18 +228,16 @@ class Install {
 				$this->data['offset_city'] = $off_r[1];
 				unset($this->data['time_offsets']);
 
-				if (!$this->errors) {
-
-					if ($this->run($this->data)) {
+				if(!$this->errors){
+					if($this->run($this->data))
 						$this->showForm=false;
-					} else {
+					else{
 						$this->errors=$this->errors.$sep_err."6";
 						$sep_err="|";
 						$this->showForm=true;
 					}
-				} else {
+				}else
 					$this->showForm=true;
-				}
 			}
 		}
 	}
