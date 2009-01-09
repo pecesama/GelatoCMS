@@ -24,7 +24,9 @@ function initLang($lang = "en") {
 
 function __($text) {
 	global $l10n;
-	return $l10n->translate($text);
+	if($l10n)
+		return $l10n->translate($text);
+	return $text;	
 }
 
 function T_ngettext($single, $plural, $number) {
