@@ -28,19 +28,23 @@ if($install->is_gelato_installed()){
 	exit;
 }
 $install->data = $_POST;
+
 $install->check_form();
 $theme = new themes;
 $theme->set('version',util::version());
 $theme->set('showForm',$install->showForm);
 
+#db_password
+#db_password2
 $theme->set('db_login',isset($install->data['db_login'])? $install->data['db_login'] : '');
-$theme->set('db_host',(!empty($install->data['db_host']))? $install->data['db_host'] : 'localhost');
-$theme->set('db_name',(!empty($install->data['db_name']))?  $install->data['db_name'] : 'gelatocms');
+#$theme->set('db_host',(!empty($install->data['db_host']))? $install->data['db_host'] : 'localhost');
+#$theme->set('db_name',(!empty($install->data['db_name']))?  $install->data['db_name'] : 'gelatocms');
 $theme->set('login',isset($install->data['login'])?$install->data['login']:'');
 $theme->set('email',isset($install->data['email'])?$install->data['email']:'');
 $theme->set('title',isset($install->data['title'])?$install->data['title']:'');
 $theme->set('description',isset($install->data['description'])?$install->data['description']:'');
-$theme->set('url_installation',isset($_SERVER['SCRIPT_URI'])?substr($_SERVER["SCRIPT_URI"], 0, -12):'');
+
+$theme->set('url_installation',(isset($install->data['url_installation']) and $install->data['url_installation'])?$install->data['url_installation']:(isset($_SERVER['SCRIPT_URI'])?substr($_SERVER["SCRIPT_URI"], 0, -12):''));
 $theme->set('themes',util::getThemes());
 
 for($c=1;$c<=10;$c++)$errores[$c] = $install->mostrarerror($c);
