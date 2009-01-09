@@ -402,11 +402,10 @@ class util {
  		$dir = (substr(PHP_OS, 0, 3) == 'WIN') ? $path."\\".$langs_dir : $path."/".$langs_dir;
 		$dir = str_replace("admin\\", "", $dir);
 		$dir = str_replace("admin/", "", $dir);
- 		$i=0;
+ 		$i=0; 
 		$cls_lang_dir = @ dir($dir);
 		while (($directory = $cls_lang_dir->read()) !== false) {
 			if($directory != "." && $directory != "..") {
-
 				$dir2 = (substr(PHP_OS, 0, 3) == 'WIN') ? $path."\\".$langs_dir."\\".$directory : $path."/".$langs_dir."/".$directory;
 				$dir2 = str_replace("admin\\", "", $dir2);
 				$dir2 = str_replace("admin/", "", $dir2);

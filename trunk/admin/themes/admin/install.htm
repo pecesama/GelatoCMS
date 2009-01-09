@@ -29,7 +29,7 @@
 					<fieldset class="install">
 						<legend class="install">Database Settings</legend>
 						<ul>
-							<li><label for="login">Are you the admin? please write the database name User</label>
+							<li><label for="login">Are you the admin? Write the same data that "DB_User" in config.php</label>
 								<input type="text" name="db_login" id="db_login" value="{db_login}" class="txt"/>{error.9}</li>
 						</ul>
 					</fieldset><br  />
@@ -59,7 +59,9 @@
 								<input type="text" name="posts_limit" id="posts_limit" value="10" class="txt"/></li>
 							<li><label for="lang">Language:</label>
 								<select id="lang" name="lang">
-									<option value="en" selected="selected">english</option>
+									{block $langs as $k=>$v}
+										<option value="{$k}" {if $k=='en'}selected="selected"{/if}>{$v}</option>
+									{/block}
 								</select>
 							</li>
 							<li><label for="template">Template:</label>

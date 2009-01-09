@@ -42,6 +42,7 @@ $theme->set('description',isset($install->data['description'])?$install->data['d
 
 $theme->set('url_installation',(isset($install->data['url_installation']) and $install->data['url_installation'])?$install->data['url_installation']:(isset($_SERVER['SCRIPT_URI'])?substr($_SERVER["SCRIPT_URI"], 0, -12):''));
 $theme->set('themes',util::getThemes());
+$theme->set('langs',util::getLangs());
 
 for($c=1;$c<=10;$c++)$errores[$c] = $install->mostrarerror($c);
 $theme->set('error',$errores);
