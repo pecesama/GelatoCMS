@@ -1,3 +1,11 @@
+⛔️ DEPRECATED
+
+Thanks so much for being interested in this project!
+
+The project’s code is provided as-is, and is not actively maintained.
+
+![No Maintenance Intended](http://unmaintained.tech/badge.svg)
+
 ==== How to install gelato CMS =====
 
 1) Download and unzip the gelato package, if you haven't already.
